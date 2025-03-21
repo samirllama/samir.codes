@@ -3,14 +3,16 @@ import { withContentlayer } from 'next-contentlayer'; // If using MDX
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   experimental: {
+    mdxRs: true,
+    optimizePackageImports: ['gsap'],
     turbo: {
       loaders: {
         // Needed for GSAP SVG animations
         '.svg': ['@svgr/webpack']
       }
     },
-    optimizePackageImports: ['gsap']
   },
   webpack: (config) => {
     config.module.rules.push({
