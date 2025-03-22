@@ -4,7 +4,7 @@ import MobileMenu from "./mobile-menu"
 
 export default async function Header() {
   //  const data = await getContentForHeaderNav()
-  //  const linkss = data.navigationCollection.items[0].linksCollection.items
+  //  const links = data.navigationCollection.items[0].linksCollection.items
   const links = [
     { link: "/services", label: "Discover Our Services" },
     { link: "/contact", label: "Contact Us" },

@@ -5,7 +5,6 @@ import { withContentlayer } from 'next-contentlayer'; // If using MDX
 const nextConfig = {
 
   experimental: {
-    mdxRs: true,
     optimizePackageImports: ['gsap'],
     turbo: {
       loaders: {
@@ -13,6 +12,20 @@ const nextConfig = {
         '.svg': ['@svgr/webpack']
       }
     },
+  },
+  // Add content security for MDX
+  headers: async () => {
+    return [
+      {
+        source: '/posts/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline';"
+          }
+        ]
+      }
+    ]
   },
   webpack: (config) => {
     config.module.rules.push({

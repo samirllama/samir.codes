@@ -1,16 +1,24 @@
-import { notFound } from 'next/navigation'
-import { useMDXComponent } from 'next-contentlayer/hooks'
-import { allPosts } from 'contentlayer/generated'
+// app/posts/[slug]/page.tsx
+import { notFound } from "next/navigation";
+import { allPosts } from "contentlayer/generated";
+import MDXRenderer from "@/components/MDXRenderer";
+import { Callout } from "@/components/mdx/Callout";
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({ slug: post.slug }))
+  return allPosts.map((post) => ({ slug: post.slug }));
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post.slug === params.slug)
-  if (!post) notFound()
+export default async function PostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  // Get the post data
+  const post = allPosts.find((p) => p.slug === params.slug);
 
-  const MDXContent = useMDXComponent(post.body.code)
+  if (!post) {
+    notFound();
+  }
 
   return (
     <article className="max-w-3xl mx-auto py-12 px-4">
@@ -29,12 +37,14 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </header>
-
       <div className="prose dark:prose-invert max-w-none">
-        <MDXContent components={{
-          Callout: require('@/components/mdx/Callout').Callout
-        }} />
+        <MDXRenderer
+          code={post.body.code}
+          components={{
+            Callout: Callout
+          }}
+        />
       </div>
     </article>
-  )
+  );
 }

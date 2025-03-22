@@ -1,7 +1,7 @@
 Directory Structure (Optimized for your needs):
 
-Copy
-/my-website
+```json
+/samir.coder
 ├── app/
 │   ├── (home)/
 │   │   └── page.tsx         # Landing page
@@ -28,9 +28,11 @@ Copy
 │   └── globals.css          # Global Tailwind imports
 ├── next.config.js           # MDX config
 └── package.json
-Core Code Samples:
+```
 
-Dynamic Post Page (app/posts/[postId]/page.tsx):
+### Core Code Samples:
+
+#### Dynamic Post Page (app/posts/[postId]/page.tsx):
 
 ```typescript
 interface PostParams {
@@ -52,7 +54,7 @@ export default async function PostPage({ params }: PostParams) {
 }
 ```
 
-Project Card Component (components/sections/ProjectCard.tsx):
+#### Project Card Component (components/sections/ProjectCard.tsx)
 
 ```typescript
 export default function ProjectCard({
@@ -80,9 +82,9 @@ export default function ProjectCard({
 }
 ```
 
-Recommended README Structure (Killer Showcase):
+Recommended README Structure :
 
-# [Your Name] - Portfolio & Technical Blog 🚀
+# Samir Coder - Portfolio & Technical Blog 🚀
 
 [![CI/CD](https://github.com/yourusername/yourportfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/yourportfolio/actions)
 [![Next.js](https://img.shields.io/badge/Next.js-13.5-blue?logo=next.js)](https://nextjs.org/)
@@ -116,14 +118,16 @@ git clone https://github.com/yourusername/yourportfolio.git
 cd yourportfolio
 pnpm install
 pnpm dev
+```
+
 🌐 Deployment
 Vercel (Recommended):
 Deploy with Vercel
 
-Static Export:
+**Static Export:**
 
-bash
-Copy
+```bash
+
 pnpm build && pnpm export
 🖼️ Screenshots
 Light Mode	Dark Mode
@@ -138,17 +142,8 @@ Type-safe patterns
 Mobile-first approach
 
 📄 License
-MIT © [Your Name]
-
-5. **Pro Tips**:
-- Add `next-themes` for dark mode support
-- Use `contentlayer` for MDX processing
-- Implement `next-mdx-remote` for dynamic content
-- Add GitHub Actions for automated testing
-- Include loading states with Suspense boundaries
-- Use `next/image` for optimized images
-- Implement `rehype-prism-plus` for code highlighting
-
+MIT © Samir Lama
+```
 
 5. MDX Content Structure:
 
@@ -159,18 +154,22 @@ MIT © [Your Name]
       index.mdx
     /advanced-animations-with-gsap
       index.mdx
-Example post (content/posts/getting-started-with-nextjs/index.mdx):
 ```
 
----
+**Example post (content/posts/getting-started-with-nextjs/index.mdx):**
 
+
+```json
 title: "Getting Started with Next.js 15"
 date: 2024-03-20
 summary: "A comprehensive guide to building modern web applications with Next.js"
 tags:
-   - nextjs
-  - web development
-   - tutorial
+
+- nextjs
+- web development
+- tutorial
+```
+
 ---
 
 ```ts
@@ -178,6 +177,7 @@ import { Callout } from '@/components/mdx/Callout'
 ```
 
 ## Introduction to Next.js Features
+
 ```ts
 <Callout type="info">
   Next.js 15 introduces major performance improvements with Turbopack!
@@ -187,6 +187,7 @@ export const featured = true
 ```
 
 6. Create MDX Components (components/mdx/Callout.tsx):
+
 ```tsx
 
 export function Callout({ type = 'info', children }: {
@@ -204,7 +205,7 @@ export function Callout({ type = 'info', children }: {
   )
 }
 ```
-
+****
 7. Blog Listing Page (app/posts/page.tsx)
 
 
@@ -281,7 +282,17 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 ```
 
-1. Add Syntax Highlighting
+1. **Pro Tips**:
+- Add `next-themes` for dark mode support
+- Use `contentlayer` for MDX processing
+- Implement `next-mdx-remote` for dynamic content
+- Add GitHub Actions for automated testing
+- Include loading states with Suspense boundaries
+- Use `next/image` for optimized images
+- Implement `rehype-prism-plus` for code highlighting
+
+
+2. Add Syntax Highlighting
 For better code presentation in the MDX files, use a library like prism-react-renderer:
 
 ```bash
@@ -316,7 +327,7 @@ const components = {
 };
 ```
 
-1. Organizing Content
+3. Organizing Content
 For scalability, we can create a content folder in the src directory to store all `.mdx` files, e.g.:
 
 ```json

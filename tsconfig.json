@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "types": ["gsap"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,8 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "@/*": ["./*"],
+      "contentlayer/generated": ["./.contentlayer/generated"],
+      "@types/*": ["./types/*"]
     },
     "baseUrl": "."
   },
@@ -30,8 +30,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.mjs",
-    ".contentlayer/generated"
+    ".contentlayer/generated",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
