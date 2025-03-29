@@ -1,0 +1,74 @@
+/* components/FibonacciSpiral/FibonacciSpiral.module.css */
+
+/* Container for the whole component */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f4f4f4; /* Or inherit from global styles */
+    color: #333;
+    min-height: 80vh; /* Ensure it takes up some space */
+}
+
+.heading {
+    margin-bottom: 20px;
+}
+
+/* Style the controls section */
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+}
+
+/* Style the input field and button */
+.input, .button {
+    padding: 8px 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the canvas */
+.canvas {
+    border: 1px solid #999;
+    background-color: #fff;
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    /* Set explicit initial dimensions matching canvas attributes if needed */
+    /* width: 600px; */
+    /* height: 600px; */
+    display: block; /* Prevents extra space below canvas */
+    margin: 0 auto; /* Center canvas if container is wider */
+}
+
+/* Simple responsiveness for smaller screens */
+@media (max-width: 650px) {
+    .heading {
+        font-size: 1.5em;
+    }
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .canvas {
+       /* Adjust width as needed for smaller screens */
+       max-width: 95%;
+    }
+}

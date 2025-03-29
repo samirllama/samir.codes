@@ -9,18 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@types/mdx": "^2.0.13",
+    "gray-matter": "^4.0.3",
+    "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.3"
+    "rehype-pretty-code": "^0.14.1",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@next/mdx": "^15.2.4",
+    "@types/hast": "^3.0.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   },
   "packageManager": "pnpm@8.15.3+sha512.dd85cd6eca6417c6f73db32ba1eb4767ffb4cba4f5bf0727846722c92b6b9e56a2cc218b11385bbc2b21f18a16a67da77aceae9b61a0f56a1643b25e1fb6a605"
 }
