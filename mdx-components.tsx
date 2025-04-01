@@ -1,7 +1,7 @@
 // mdx-components.tsx
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
-// Import custom components here later if needed
+import styles from './app/blog/blog.module.css';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -9,6 +9,19 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...components,
 
     // Custom Component Overrides ---
+
+    // Add custom heading components
+    h2: ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => (
+      <h2 className={styles.gradientHeading} {...props}>
+        {children}
+      </h2>
+    ),
+
+    h3: ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => (
+      <h3 className={styles.gradientSubheading} {...props}>
+        {children}
+      </h3>
+    ),
 
     // Override the default 'a' (link) element - STILL VALID & USEFUL
     a: ({ children, href, ...props }: ComponentPropsWithoutRef<"a">) => {
@@ -35,6 +48,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </a>
       );
     },
+
+    hr: (props: ComponentPropsWithoutRef<"hr">) => (
+      <hr className={styles.neonHr} {...props} />
+    ),
 
     // NOTE: Overriding 'pre' or 'code' is generally NOT needed now
     // because rehype-pretty-code handles their rendering.

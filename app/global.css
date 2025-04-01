@@ -1,16 +1,39 @@
 /* global.css */
 :root {
+  /* Dark theme base colors */
+  --background: #0F172A;      /* Dark blue-gray */
+  --foreground: #F1F5F9;      /* Light gray */
+  --primary: #A855F7;         /* Purple */
+  --secondary: #6366F1;       /* Indigo */
+  --accent: #C084FC;          /* Light purple */
+
+  /* Slate variations */
+  --color-slate-900: #1E293B;
+  --color-slate-800: #334155;
+  --color-slate-700: #475569;
+  --color-slate-400: #94A3B8;
+
+  /* Purple variations */
+  --color-purple-500: #A855F7;
+  --color-purple-400: #C084FC;
+
+  /* HSL version for dark background (for opacity/alpha operations) */
+  --background-dark-value: 288 23% 20%;
+  --background-dark-color: hsl(var(--background-dark-value));
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(to right, var(--primary), var(--secondary));
+  --gradient-secondary: linear-gradient(to right, var(--accent), var(--primary));
+
+  /* Light theme defaults */
   --background: #ffffff;
   --foreground: #171717;
 
-  --background-dark-value: 288 23% 20%;
-  --background-dark-color: hsl(var(--background-dark-value));
-  --text-dark-value: 19 71% 97%;
-  --text-dark-color: hsl(var(--text-dark-value));
-  --primary-dark-value: 315 60% 82%;
-  --primary-dark-color: hsl(var(--primary-dark-value));
-  --secondary-dark-value: 211 63% 83%;
-  --secondary-dark-color: hsl(var(--secondary-dark-value));
+  /* Dark theme values */
+  --background-dark: hsl(288 23% 20%); /* Dark purple */
+  --foreground-dark: hsl(19 71% 97%); /* Off-white */
+  --accent-primary: hsl(315 60% 82%); /* Light purple/pink */
+  --accent-secondary: hsl(211 63% 83%); /* Light blue */
 
   /* sizes */
   --spacing: 16px;
@@ -19,8 +42,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
   }
 }
 
@@ -56,6 +79,14 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.dark {
+  --background: var(--background-dark-color);
+  --foreground: var(--foreground);
+  --accent-primary: hsl(315 60% 82%);    /* Light purple/pink */
+  --accent-secondary: hsl(211 63% 83%);   /* Light blue */
+  color-scheme: dark;
 }
 
 header {

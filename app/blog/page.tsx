@@ -7,15 +7,15 @@ import styles from "./blog.module.css";
 import { Route } from 'next';
 
 export const metadata: Metadata = {
-  title: "Blog page",
+  title: "Blog",
+  description: "Thoughts and learnings on web development, security, and technology",
 };
-// This page is rendered on the server (or at build time)
+
 export default async function BlogIndexPage() {
-  // Fetch metadata for all posts using our helper function
   const posts: PostMeta[] = getAllPostsMeta();
 
   return (
-    <div>
+    <>
       <h1>My Blog</h1>
       <p className={styles.subtitle}>
         Thoughts and learnings on web development, security, and technology.
@@ -28,8 +28,6 @@ export default async function BlogIndexPage() {
           {posts.map((post) => (
             <li key={post.slug} className={styles.postItem}>
               <article>
-                {" "}
-                {/* Use article tag for semantics */}
                 <Link href={`/blog/${post.slug}` as Route} className={styles.postLink}>
                   <h2 className={styles.postTitle}>{post.title}</h2>
                 </Link>
@@ -44,10 +42,7 @@ export default async function BlogIndexPage() {
                   {post.author && ` by ${post.author}`}
                 </p>
                 <p className={styles.postDescription}>{post.description}</p>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className={styles.readMoreLink}
-                >
+                <Link href={`/blog/${post.slug}`} className={styles.readMoreLink}>
                   Read more →
                 </Link>
               </article>
@@ -55,6 +50,6 @@ export default async function BlogIndexPage() {
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 }

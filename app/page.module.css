@@ -5,17 +5,20 @@
   --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
+  --button-primary-hover: var(--primary-dark-color);
+  --button-secondary-hover: var(--background-dark-color);
 
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background); /* Use the CSS variable instead */
+  color: var(--foreground);
   align-items: center;
   justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
+  padding: 40px;
   gap: 64px;
   font-family: var(--font-geist-sans);
+  margin-left: 200px; /* Add this to account for nav width */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,14 +27,21 @@
     --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
     --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
 
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
+    --button-primary-hover: var(--accent-primary);
+    --button-secondary-hover: var(--accent-secondary);
   }
 }
 
 .main {
+  flex: 1;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
   gap: 32px;
   grid-row-start: 2;
 }
@@ -92,15 +102,25 @@ a.secondary {
 }
 
 .footer {
-  grid-row-start: 3;
+  padding: 2rem;
   display: flex;
-  gap: 24px;
+  gap: 2rem;
+  justify-content: center;
+  border-top: 1px solid var(--gray-alpha-200);
+  grid-row-start: 3;
 }
 
 .footer a {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-primary);
 }
 
 .footer img {
@@ -157,6 +177,14 @@ a.secondary {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    margin-left: 0;
+    padding-bottom: 80px; /* Space for mobile nav */
+    min-height: calc(100vh - 60px);
   }
 }
 
