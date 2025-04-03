@@ -1,0 +1,118 @@
+@layer utilities {
+  /* Pulsing animation */
+  @keyframes pulseLoop {
+    0% {
+      opacity: var(--opacity-none);
+      transform: scale(0.25) translateZ(0);
+    }
+    30% {
+      opacity: 0.4;
+    }
+    70% {
+      opacity: var(--opacity-none);
+    }
+    80% {
+      transform: scale(1) translateZ(0);
+    }
+  }
+
+  .pulse {
+    opacity: var(--opacity-none);
+    transform-origin: center;
+    animation: pulseLoop var(--animation-duration-slow)
+      var(--animation-timing-linear) var(--animation-iteration-infinite);
+  }
+
+  .pulse-1 {
+    animation-delay: calc(var(--animation-duration-fast) * -1);
+  }
+
+  .pulse-2 {
+    animation-delay: calc(var(--animation-duration-medium) * -1);
+  }
+
+  /* Basic Animations */
+  @keyframes endless {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-245px);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      top: 0;
+      transform: translateY(-100%) scaleY(10);
+      opacity: var(--opacity-none);
+    }
+    2% {
+      opacity: var(--opacity-low);
+    }
+    40% {
+      top: 100%;
+      transform: translateY(0) scaleY(200);
+      opacity: var(--opacity-none);
+    }
+    100% {
+      top: 100%;
+      transform: translateY(0) scaleY(1);
+      opacity: var(--opacity-none);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(3%);
+    }
+    50% {
+      transform: translateY(-3%);
+    }
+    100% {
+      transform: translateY(3%);
+    }
+  }
+
+  /* Animation Classes */
+  .animation-endless {
+    animation: endless var(--animation-duration-slow)
+      var(--animation-timing-linear) var(--animation-iteration-infinite);
+  }
+
+  .animation-shine {
+    animation: shine var(--animation-duration-medium)
+      var(--animation-timing-linear) 500ms var(--animation-iteration-infinite);
+  }
+
+  .animation-float {
+    animation: float 2s ease-in-out var(--animation-iteration-infinite);
+  }
+}
+
+/* Custom AOS Animations */
+@media screen {
+  html:not(.no-js) body [data-aos="fade-up"] {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-down"] {
+    transform: translate3d(0, -14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-right"] {
+    transform: translate3d(-14px, 0, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-left"] {
+    transform: translate3d(14px, 0, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-up-right"] {
+    transform: translate3d(-14px, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-up-left"] {
+    transform: translate3d(14px, 14px, 0);
+  }
+}

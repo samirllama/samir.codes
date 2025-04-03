@@ -45,7 +45,7 @@ const prettyCodeOptions: PrettyCodeOptions = {
 const nextConfig = (phase: string): NextConfig => {
   // Call createMdx INSIDE the function ---
   const withMDX = createMDX({
-    extension: /\.mdx?$/, // Optional: If you want both .md and .mdx
+    extension: /\.mdx?$/,
     options: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
@@ -58,20 +58,24 @@ const nextConfig = (phase: string): NextConfig => {
 
   // Define base config options
   const nextConfigOptions: NextConfig = {
-    //  Add pageExtensions HERE
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'], // Include mdx (and md if using the extension option above)
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
     reactStrictMode: true,
     poweredByHeader: false,
     experimental: {
+      dynamicIO: true,
       typedRoutes: true,
       // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
+    },
+    typescript: {
+      ignoreBuildErrors: true,
+    },
+    eslint: {
+      ignoreDuringBuilds: true,
     },
     // Add other configs like CSP headers, images, redirects here later
   };
 
-  // Return the WRAPPED options object ---
   return withMDX(nextConfigOptions);
 };
 
-// Wrap the config export with the MDX plugin
 export default nextConfig

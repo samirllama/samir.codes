@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPostsMeta, PostMeta } from "@/lib/posts";
-import styles from "./blog.module.css";
+import styles from "./playbook.module.css";
 import { Route } from 'next';
 
 export const metadata: Metadata = {

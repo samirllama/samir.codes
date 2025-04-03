@@ -10,7 +10,7 @@ export default function Nav() {
   const links = [
     { href: '/', label: 'Home' },
     { href: '/projects', label: 'Projects' },
-    { href: '/blog', label: 'Outlet' },
+    { href: '/playbook', label: 'Playbook' },
   ];
 
   return (

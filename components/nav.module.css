@@ -13,8 +13,8 @@
 }
 
 .logo {
-  font-family: var(--font-geist-mono);
-  font-size: 18px;
+  font-family: "geosanslight-nmsregular", Helvetica, Arial, sans-serif;
+  font-size: 1.8rem;
   font-weight: 600;
 }
 
@@ -25,10 +25,15 @@
 }
 
 .link {
-  font-family: var(--font-geist-sans);
-  font-size: 16px;
-  transition: color 0.2s;
+  /* font-family: var(--font-geist-sans);
+  font-size: 16px; */
+
   position: relative;
+  transition: color 0.2s;
+
+  font-family: geosanslight-nmsregular, Helvetica, Arial, sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.2em;
 }
 
 .link:hover {

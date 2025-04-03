@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import styles from "./blog.module.css";
+import styles from "./playbook.module.css";
 
 export const metadata: Metadata = {
   title: {
