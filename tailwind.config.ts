@@ -10,25 +10,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-            },
             colors: {
                 background: 'var(--background)',
                 foreground: 'var(--foreground)',
-                // primary: {
-                //     50: '#faf5ff',
-                //     100: '#f3e8ff',
-                //     200: '#e9d5ff',
-                //     300: '#d8b4fe',
-                //     400: '#c084fc',
-                //     500: '#a855f7',
-                //     600: '#9333ea',
-                //     700: '#7e22ce',
-                //     800: '#6b21a8',
-                //     900: '#581c87',
-                //     950: '#3b0764',
-                // },
                 primary: "#1e3a8a",
                 dark: {
                     base: '#121212',
@@ -47,12 +31,22 @@ const config: Config = {
                     500: "#64748b", // Placeholder color
                 },
                 purple: {
+                    200: '#e9d5ff',
+                    300: '#d8b4fe',
                     500: "#8b5cf6", // Focus ring color
                     600: "#7c3aed", // Checkbox and radio button colors
+                    400: '#c084fc',
+                    700: '#7e22ce',
+                    800: '#6b21a8',
+                    900: '#581c87',
+                    950: '#3b0764',
                 },
             },
             boxShadow: {
                 mode: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+            },
+            fontFamily: {
+                sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
             },
             fontSize: {
                 xs: ['0.75rem', { lineHeight: '1.5' }],
@@ -66,6 +60,9 @@ const config: Config = {
                 '5xl': ['2.75rem', { lineHeight: '1.1', letterSpacing: '-0.017em' }],
                 '6xl': ['3.5rem', { lineHeight: '1', letterSpacing: '-0.017em' }],
                 '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.017em' }],
+            },
+            fontWeight: {
+                extrabold: '800',
             },
             letterSpacing: {
                 tighter: '-0.02em',
@@ -97,13 +94,10 @@ const config: Config = {
                     '100%': { transform: 'translateY(3%)' }
                 },
             },
-            fontWeight: {
-                extrabold: '800',
-            },
         }
     },
     plugins: [forms, typography],
     darkMode: 'media',
-}satisfies Config
+} satisfies Config
 
 export default config

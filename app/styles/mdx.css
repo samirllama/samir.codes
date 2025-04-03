@@ -1,6 +1,8 @@
 /* MDX Content Styling */
 .prose {
   max-width: 75ch;
+  font-size: var(--fontSize-base);
+  line-height: var(--lineHeight-relaxed);
 }
 
 /* Basic Elements */
@@ -9,13 +11,44 @@
   line-height: var(--lineHeight-relaxed);
 }
 
-/* Headings */
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
+/* Headings - These take precedence for MDX content */
+.prose h1 {
+  font-size: var(--mdx-fontSize-h1);
+  line-height: var(--lineHeight-tight);
+  margin-block: 0 1em;
+}
+
+.prose h2 {
+  font-size: var(--mdx-fontSize-h2);
+  line-height: var(--lineHeight-tight);
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.prose h3 {
+  font-size: var(--mdx-fontSize-h3);
+  line-height: var(--lineHeight-tight);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+.prose h4 {
+  font-size: var(--mdx-fontSize-h4);
+  line-height: var(--lineHeight-tight);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+.prose h5 {
+  font-size: var(--mdx-fontSize-h5);
+  line-height: var(--lineHeight-normal);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
 .prose h6 {
+  font-size: var(--mdx-fontSize-h6);
+  line-height: var(--lineHeight-normal);
   margin-top: 1.8em;
   margin-bottom: 0.8em;
 }
@@ -101,7 +134,7 @@
 }
 
 .prose .word--highlighted {
-  background-color: hsl(from var(--secondary-dark-color) h s l / 0.2);
+  background-color: hsl(from var (--secondary-dark-color) h s l / 0.2);
   padding: 0.1em 0.2em;
   border-radius: 3px;
 }

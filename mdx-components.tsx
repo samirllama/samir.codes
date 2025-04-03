@@ -1,7 +1,7 @@
 // mdx-components.tsx
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
-import styles from './app/blog/blog.module.css';
+import styles from './app/playbook/playbook.module.css';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

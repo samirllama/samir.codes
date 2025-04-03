@@ -31,6 +31,7 @@
   /* Layout */
   --spacing: 1rem; /* was 16px */
   --maxWidth: 70rem; /* was 1120px */
+  --nav-height: 3.75rem; /* was 60px */
 
   /* Other variables from your original CSS */
   --gray-rgb: 0, 0, 0;
@@ -38,32 +39,6 @@
   --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
   --button-primary-hover: var(--primary-dark-color);
   --button-secondary-hover: var(--background-dark-color);
-
-  /* Typography Scale */
-  --font-size-base: 1.125rem; /* 18px base font size */
-  --line-height-base: 1.75; /* 28px for better readability */
-  --heading-line-height: 1.2; /* Tighter for headings */
-
-  /* Vertical Rhythm */
-  --spacing-vertical-sm: 1rem; /* 16px */
-  --spacing-vertical-md: 1.5rem; /* 24px */
-  --spacing-vertical-lg: 2rem; /* 32px */
-
-  /* Content Width */
-  --content-width: 42.5rem; /* was 680px */
-  --content-width-wide: 57.5rem; /* was 920px */
-
-  /* Spacing Scale */
-  --spacing-xs: 0.5rem; /* was 8px */
-  --spacing-sm: 0.75rem; /* was 12px */
-  --spacing-md: 1rem; /* was 16px */
-  --spacing-lg: 1.5rem; /* was 24px */
-  --spacing-xl: 2rem; /* was 32px */
-  --spacing-2xl: 3rem; /* was 48px */
-
-  /* Fixed values */
-  --nav-height: 3.75rem; /* was 60px */
-  --blur-2xl: 2.5rem; /* was 40px */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -211,20 +186,6 @@ h4,
 h5,
 h6 {
   margin-block: 1.5em 1em;
-}
-
-@layer base {
-  /* Existing base styles */
-  h1 {
-    font-size: 6rem;
-    line-height: 1.167;
-    margin-block: 0 1em;
-  }
-
-  h2 {
-    font-size: 3.75rem;
-    line-height: 1.2;
-  }
 }
 
 .hero-illustration {

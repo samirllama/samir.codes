@@ -31,8 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={true}
+        >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
             <Animate />
             <Nav />
@@ -84,8 +88,8 @@ export default function RootLayout({
               </a>
             </footer>
           </div>
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

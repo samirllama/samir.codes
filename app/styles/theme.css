@@ -1,19 +1,19 @@
 :root {
   /* Base Values */
-  --fontSizeBase: 1.125rem; /* 18px - your current base size */
-  --spacingBase: 1rem; /* 16px - your current spacing */
-  --lineHeightBase: 1.75; /* your current base line height */
+  --fontSizeBase: 1.125rem; /* 18px */
+  --spacingBase: 1rem; /* 16px */
+  --lineHeightBase: 1.75;
 
-  /* Type Scale Multipliers */
-  --scale-sm: 0.875; /* Small text */
-  --scale-base: 1; /* Base size */
-  --scale-md: 1.25; /* Medium */
-  --scale-lg: 1.5; /* Large */
-  --scale-xl: 2; /* Extra Large */
-  --scale-2xl: 2.5; /* 2X Large */
-  --scale-3xl: 3; /* 3X Large */
+  /* General Typography Scale */
+  --scale-sm: 0.875;    /* 15.75px */
+  --scale-base: 1;      /* 18px */
+  --scale-md: 1.25;     /* 22.5px */
+  --scale-lg: 1.5;      /* 27px */
+  --scale-xl: 2;        /* 36px */
+  --scale-2xl: 2.5;     /* 45px */
+  --scale-3xl: 3;       /* 54px */
 
-  /* Typography Scale */
+  /* General Font Sizes */
   --fontSize-sm: calc(var(--fontSizeBase) * var(--scale-sm));
   --fontSize-base: var(--fontSizeBase);
   --fontSize-md: calc(var(--fontSizeBase) * var(--scale-md));
@@ -29,6 +29,22 @@
   --fontSize-h4: var(--fontSize-lg);
   --fontSize-h5: var(--fontSize-md);
   --fontSize-h6: var(--fontSize-base);
+
+  /* MDX Typography Scale - Precise pixel values */
+  --mdx-scale-sm: 0.875;    /* 15.75px */
+  --mdx-scale-base: 1;      /* 18px */
+  --mdx-scale-lg: 1.111;    /* 20px */
+  --mdx-scale-xl: 1.333;    /* 24px */
+  --mdx-scale-2xl: 1.555;   /* 28px */
+  --mdx-scale-3xl: 2.444;   /* 33px */
+
+  /* MDX Font Sizes */
+  --mdx-fontSize-h1: calc(var(--fontSizeBase) * var(--mdx-scale-3xl));
+  --mdx-fontSize-h2: calc(var(--fontSizeBase) * var(--mdx-scale-2xl));
+  --mdx-fontSize-h3: calc(var(--fontSizeBase) * var(--mdx-scale-xl));
+  --mdx-fontSize-h4: calc(var(--fontSizeBase) * var(--mdx-scale-lg));
+  --mdx-fontSize-h5: calc(var(--fontSizeBase) * var(--mdx-scale-base));
+  --mdx-fontSize-h6: calc(var(--fontSizeBase) * var(--mdx-scale-sm));
 
   /* Spacing Scale */
   --spacing-xs: calc(var(--spacingBase) * 0.5); /* 8px */
