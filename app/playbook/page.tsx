@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllPostsMeta, PostMeta } from "@/lib/posts";
 import styles from "./playbook.module.css";
-import { Route } from 'next';
+import { Route } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Thoughts and learnings on web development, security, and technology",
+  title: "Engineering Playbook",
+  description: "Insights on web development, security, and technology",
 };
 
 export default async function BlogIndexPage() {
@@ -16,9 +16,9 @@ export default async function BlogIndexPage() {
 
   return (
     <>
-      <h1>My Blog</h1>
+      <h1>Engineering Playbook</h1>
       <p className={styles.subtitle}>
-        Thoughts and learnings on web development, security, and technology.
+        Insights and learnings on web development, security, and technology.
       </p>
 
       {posts.length === 0 ? (
@@ -28,7 +28,10 @@ export default async function BlogIndexPage() {
           {posts.map((post) => (
             <li key={post.slug} className={styles.postItem}>
               <article>
-                <Link href={`/blog/${post.slug}` as Route} className={styles.postLink}>
+                <Link
+                  href={`/blog/${post.slug}` as Route}
+                  className={styles.postLink}
+                >
                   <h2 className={styles.postTitle}>{post.title}</h2>
                 </Link>
                 <p className={styles.postMeta}>
@@ -42,7 +45,10 @@ export default async function BlogIndexPage() {
                   {post.author && ` by ${post.author}`}
                 </p>
                 <p className={styles.postDescription}>{post.description}</p>
-                <Link href={`/blog/${post.slug}`} className={styles.readMoreLink}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className={styles.readMoreLink}
+                >
                   Read more →
                 </Link>
               </article>
