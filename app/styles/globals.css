@@ -28,14 +28,6 @@
   --accent-primary: hsl(315 60% 82%);
   --accent-secondary: hsl(211 63% 83%);
 
-  /* Slate & Purple variations */
-  --color-slate-900: #1e293b;
-  --color-slate-800: #334155;
-  --color-slate-700: #475569;
-  --color-slate-400: #94a3b8;
-  --color-purple-500: #a855f7;
-  --color-purple-400: #c084fc;
-
   /* Layout */
   --spacing: 1rem; /* was 16px */
   --maxWidth: 70rem; /* was 1120px */
@@ -130,7 +122,6 @@ a {
   --accent-primary: hsl(315 60% 82%); /* Light purple/pink */
   --accent-secondary: hsl(211 63% 83%); /* Light blue */
   color-scheme: dark;
-
 }
 
 header {

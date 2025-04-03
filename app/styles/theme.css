@@ -59,8 +59,16 @@
   --animation-iteration-infinite: infinite;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(to right, var(--primary), var(--secondary));
-  --gradient-secondary: linear-gradient(to right, var(--accent), var(--primary));
+  --gradient-primary: linear-gradient(
+    to right,
+    var(--primary),
+    var(--secondary)
+  );
+  --gradient-secondary: linear-gradient(
+    to right,
+    var(--accent),
+    var(--primary)
+  );
   --gradient-radial: radial-gradient(
     circle,
     rgba(168, 85, 247, 0.3) 0%,
@@ -71,7 +79,6 @@
   --blur-2xl: 40px;
 
   /* Slate color palette */
-  --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
   --color-slate-300: #cbd5e1;
   --color-slate-400: #94a3b8;
@@ -80,6 +87,10 @@
   --color-slate-700: #334155;
   --color-slate-800: #1e293b;
   --color-slate-900: #0f172a;
+
+  /*  Purple variations */
+  --color-purple-500: #a855f7;
+  --color-purple-400: #c084fc;
 }
 
 .form-input:focus,
@@ -161,7 +172,8 @@
 
 .from-purple-500 {
   --tw-gradient-from: var(--color-purple-500);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(168, 85, 247, 0));
+  --tw-gradient-stops: var(--tw-gradient-from),
+    var(--tw-gradient-to, rgba(168, 85, 247, 0));
 }
 
 .to-purple-200 {
