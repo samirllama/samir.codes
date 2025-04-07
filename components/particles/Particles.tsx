@@ -1,32 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
-
-interface MousePosition {
-  x: number;
-  y: number;
-}
-
-export function useMousePosition(): MousePosition {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({
-    x: 0,
-    y: 0,
-  });
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  return mousePosition;
-}
+import React, { useRef, useEffect } from "react";
+import useMousePosition from "../hooks/mouse-position";
 
 interface ParticlesProps {
   className?: string;
@@ -59,7 +34,7 @@ export default function Particles({
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const circles = useRef<Particle[]>([]);
-  const mousePosition = MousePosition();
+  const mousePosition = useMousePosition();
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;

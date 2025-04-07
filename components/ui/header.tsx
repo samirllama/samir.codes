@@ -1,38 +1,46 @@
-import Link from "next/link"
-import { Suspense } from "react"
-import Button from "@/components/ui/Button"
-import DashboardButton from "@/components/DashboardButton"
+import Link from "next/link";
+import { Suspense } from "react";
+import Button from "@/components/ui/Button";
+import DashboardButton from "@/components/DashboardButton";
+import Logo from "./logo"
+import styles from "./ui.module.css"
+
+const LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/notes", label: "Notes" },
+  { href: "/playbook", label: "Playbook" },
+  { href: "/today-i-learned", label: "TIL" },
+];
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-dark-base">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="text-xl font-bold">
-            Mode
-          </Link>
-          <nav className="hidden md:flex gap-6">
-            <Link
-              href="/features"
-              className="text-sm font-medium hover:text-purple-600"
-            >
-              Features
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-sm font-medium hover:text-purple-600"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/faq"
-              className="text-sm font-medium hover:text-purple-600"
-            >
-              FAQ
-            </Link>
-          </nav>
+    <header className={styles.header}>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div  className={styles.header__inner}>
+        {/* Site branding */}
+        <div className="flex-1">
+          <Logo />
         </div>
-        <div className="flex items-center gap-4">
+
+        {/* Desktop navigation */}
+        <nav className="md:flex md:grow">
+          {/* Desktop menu links */}
+          <ul className={styles.nav}>
+            {LINKS.map((link) => (
+              <li key={link.label} className="navItem">
+                <Link
+                  className={styles.navItem}
+                  href={link.href}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Sign in links */}
+        <div className="hidden flex items-center gap-4">
           <Suspense
             fallback={
               <div className="flex items-center space-x-4">
@@ -49,6 +57,7 @@ export default function Header() {
           </Suspense>
         </div>
       </div>
+      </div>
     </header>
-  )
+  );
 }

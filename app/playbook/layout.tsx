@@ -3,10 +3,11 @@ import styles from "./playbook.module.css";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Samir's Blog",
-    default: "Blog",
+    template: "%s | Samir's Playbook",
+    default: "Playbook",
   },
-  description: "Personal blog about web development, security, and technology",
+  description:
+    "Engineering Playbook with insights on web development, security, and technology",
 };
 
 export default function BlogLayout({
@@ -16,9 +17,7 @@ export default function BlogLayout({
 }) {
   return (
     <main className={styles.blogContainer}>
-      <div className={styles.content}>
-        {children}
-      </div>
+      <div className={styles.content}>{children}</div>
     </main>
   );
 }

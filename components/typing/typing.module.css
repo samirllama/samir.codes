@@ -1,0 +1,68 @@
+/* @/components/typing.module.css */
+
+.gradientText {
+  /* Gradient Text Effect - Stays the same */
+  display: inline-block;
+  font-weight: 700;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgb(170, 51, 255) 0%, /* Purple */
+    rgb(255, 51, 221) 100% /* Pink */
+  );
+
+  /* Ensure caret pseudo-element is positioned relative to this */
+  position: relative;
+  /* Add padding ONLY if caret is inside, otherwise it pushes text */
+  /* padding-right: 0.3em; */
+  vertical-align: bottom; /* Align nicely */
+  white-space: nowrap; /* Prevent wrapping during typing */
+}
+
+/* New class for potential container-specific styles if needed */
+.dynamicTextContainer {
+   min-height: 1.2em; /* Prevent layout shift if text becomes empty */
+   /* Add a min-width if desired */
+   /* min-width: 1ch; */
+}
+
+
+/* Blinking Caret using a pseudo-element */
+/* Apply directly to the gradientText span */
+.blinkingCaret::after {
+  content: '|'; /* Caret character */
+  position: absolute;
+  /* Position it right after the text content */
+  right: -0.1em; /* Adjust slightly for better visual positioning */
+  top: 0;
+  bottom: 0;
+  /* Make caret solid color or gradient */
+  /* Option 1: Solid color (simpler) */
+  /* color: rgb(255, 51, 221); /* Use end color of gradient */
+
+  /* Option 2: Gradient (like before) */
+   background-image: linear-gradient(
+     to right,
+     rgb(170, 51, 255) 0%,
+     rgb(255, 51, 221) 100%
+   );
+   background-clip: text;
+   -webkit-background-clip: text;
+   text-fill-color: transparent;
+   -webkit-text-fill-color: transparent;
+
+  /* Blinking animation */
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  /* If using solid color caret: */
+  /* from, to { opacity: 0; }
+  50% { opacity: 1; } */
+
+  /* If using gradient caret: */
+  from, to { text-fill-color: transparent; -webkit-text-fill-color: transparent; }
+  50% { text-fill-color: inherit; -webkit-text-fill-color: inherit; }
+}

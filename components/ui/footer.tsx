@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Timestamp } from "@/components/Timestamp"
 
 export default function Footer() {

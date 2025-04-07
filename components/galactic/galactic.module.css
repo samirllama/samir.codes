@@ -1,0 +1,77 @@
+/* app/Galactic/Galactic.module.css */
+
+.effectLayer {
+  /* Base styles if needed, mostly handled by Tailwind */
+  will-change: transform, opacity; /* Performance hint */
+}
+
+.contentWrapper {
+  will-change: transform; /* Performance hint */
+  transform-origin: center;
+}
+
+/* Animation 1: Slow, large drift (like effect 'b') */
+@keyframes drift1 {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(20px, 15px) rotate(1deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-10px, 5px) rotate(-0.5deg);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(5px, -15px) rotate(0.5deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+.animateDrift1 {
+  animation: drift1 45s linear infinite; /* Longer duration */
+}
+
+/* Animation 2: Different drift/pattern movement (like effect 'c') */
+@keyframes drift2 {
+  0% {
+    /* Example: Animate background position for repeating patterns */
+    background-position: 0% 0%;
+    transform: rotate(0deg);
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.4;
+    transform: rotate(0.5deg);
+  }
+  100% {
+    background-position: 100% 100%; /* Adjust based on pattern size */
+    transform: rotate(0deg);
+    opacity: 0.25;
+  }
+}
+.animateDrift2 {
+  /* Using background-position animation */
+  animation: drift2 35s linear infinite alternate; /* Alternate direction */
+}
+
+/* Animation 3: Subtle floating effect for content (like effect 'a') */
+@keyframes float {
+  0% {
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: translateZ(5px) rotateX(0.5deg) rotateY(-0.5deg) scale(1.01);
+  }
+  100% {
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+}
+.animateFloat {
+  animation: float 25s ease-in-out infinite;
+}

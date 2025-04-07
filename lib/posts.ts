@@ -3,15 +3,14 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-// Define the structure of the metadata we expect from frontmatter
+// The metadata structure we expect from frontmatter
 export interface PostMeta {
-  slug: string; // The URL slug derived from the folder name
+  slug: string; // URL slug derived from the folder name
   title: string;
   date: string; // Keep as string for sorting, format YYYY-MM-DD
   description: string;
   tags?: string[]; // Optional tags
   author?: string; // Optional author
-  // Add any other frontmatter fields you expect
 }
 
 // Define the structure for the full post including content
@@ -27,7 +26,6 @@ const postsDirectory = path.join(process.cwd(), 'app/playbook');
 export function getAllPostsMeta(): PostMeta[] {
   let postFolders: string[] = [];
   try {
-    // Read directory names under app/blog
     postFolders = fs.readdirSync(postsDirectory).filter((item) => {
       const itemPath = path.join(postsDirectory, item);
       // Ensure it's a directory and NOT the blog index page itself or other special files/folders
@@ -36,13 +34,14 @@ export function getAllPostsMeta(): PostMeta[] {
     });
   } catch (error) {
     console.error('Error reading blog directory:', postsDirectory, error);
-    return []; // Return empty array on error
+    return [];
   }
 
   const allPostsData = postFolders.map((slug): PostMeta | null => {
     const fullPath = path.join(postsDirectory, slug, 'page.mdx'); // follows `page.mdx` convention
 
     console.log("Parsing Posts Data, PostMeta:", slug)
+
 
     if (!fs.existsSync(fullPath)) {
       // console.warn(`MDX file not found for slug: ${slug}`);
