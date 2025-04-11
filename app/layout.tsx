@@ -1,10 +1,9 @@
 // app/layout.tsx
 export const metadata: Metadata = {
-  title: "Samir Llama",
+  title: "Samir.Codes",
   description: "Personal website and portfolio",
 };
 
-import Image from "next/image";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -26,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} font-inter antialiased bg-slate-900 text-slate-100 tracking-tight`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900 text-slate-100 tracking-tight`}
       >
         <ThemeProvider
           attribute="class"

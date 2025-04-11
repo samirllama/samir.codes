@@ -23,12 +23,12 @@
     pointer-events: none;
     transition: opacity 500ms;
     transform: translate(var(--mouse-x), var(--mouse-y));
-    z-index: 30;/
+    z-index: 30;
     filter: blur(100px);
 }
 
 .highlighterItem:hover::before {
-    opacity: 0.2;/
+    opacity: 0.2;
 }
 
 .highlighterItem::after {

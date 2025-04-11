@@ -1,134 +1,39 @@
-@tailwind base;
-@tailwind components;
+/* app/styles/globals.css */
+
+/* === Tailwind Layers (v4 Syntax - Correct Order) === */
+@import "tailwindcss/preflight"; /* Import base styles (replaces @tailwind base) */
+/* @tailwind components; */ /* REMOVED - No longer available in v4 */
+
+/* === Custom Style Imports === */
+/* Import these files BEFORE @tailwind utilities */
+@import "./theme.css"; /* Contains variables and specific overrides */
+@import "./utility-patterns.css"; /* Contains theme() calls and @apply classes */
+@import "./animations.css"; /* Contains animations */
+@import "./mdx.css"; /* Contains MDX prose styles */
+/* Import any other global custom CSS files here */
+
+/* === Tailwind Utilities Layer (Handles Utilities + Components in v4) === */
+/* Inject utilities AFTER custom files have been processed */
 @tailwind utilities;
 
-/* Custom style imports */
-@import "./utility.css";
-@import "./theme.css";
-@import "./animations.css";
-@import "./mdx.css";
-
-/* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
-@layer utilities {
-  .rtl {
-    direction: rtl;
-  }
-}
-
-/* global.css */
-:root {
-  /* Dark theme base colors */
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #a855f7;
-  --secondary: #6366f1;
-  --accent: #c084fc;
-  --background-dark: hsl(288 23% 20%);
-  --foreground-dark: hsl(19 71% 97%);
-  --accent-primary: hsl(315 60% 82%);
-  --accent-secondary: hsl(211 63% 83%);
-
-  /* Layout */
-  --spacing: 1rem; /* 16px */
-  --spacing-wide: 2.125rem; /* 32px */
-  --spacer: 40px;
-  --spacer-small: 20px;
-  --maxWidth: 70rem; /* 1120px */
-  --nav-height: 3.75rem; /*  60px */
-
-  --font-body: "Poppins", system-ui;
-  --font-size-medium: clamp(1.3rem, 3vw, 1.65rem);
-  --anim-transition: 0.15s;
-
-  --gray-light: hsl(238.2 53.1% 12.5% / 0.25);
-  --gray-lighter: hsl(238.2 53.1% 12.5% / 0.15);
-
-  /* Other variables from your original CSS */
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-  --button-primary-hover: var(--primary-dark-color);
-  --button-secondary-hover: var(--background-dark-color);
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x: ;
-  --tw-pan-y: ;
-  --tw-pinch-zoom: ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position: ;
-  --tw-gradient-via-position: ;
-  --tw-gradient-to-position: ;
-  --tw-ordinal: ;
-  --tw-slashed-zero: ;
-  --tw-numeric-figure: ;
-  --tw-numeric-spacing: ;
-  --tw-numeric-fraction: ;
-  --tw-ring-inset: ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur: ;
-  --tw-brightness: ;
-  --tw-contrast: ;
-  --tw-grayscale: ;
-  --tw-hue-rotate: ;
-  --tw-invert: ;
-  --tw-saturate: ;
-  --tw-sepia: ;
-  --tw-drop-shadow: ;
-  --tw-backdrop-blur: ;
-  --tw-backdrop-brightness: ;
-  --tw-backdrop-contrast: ;
-  --tw-backdrop-grayscale: ;
-  --tw-backdrop-hue-rotate: ;
-  --tw-backdrop-invert: ;
-  --tw-backdrop-opacity: ;
-  --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia: ;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--color-slate-900);
-    --foreground: var(--foreground-dark);
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-    --button-primary-hover: var(--accent-primary);
-    --button-secondary-hover: var(--accent-secondary);
-    color-scheme: dark;
-  }
-}
-
+/* === Base HTML/Body Styles === */
+/* These run last */
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; applied via class in layout.tsx */
 }
 
 body {
-  /* color: var(--foreground);
-  background: var(--background); */
-  font-family: var(--font-geist-sans), system-ui, -apple-system;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  /* compensate for the fixed navigation height */
-  padding-top: var(--nav-height);
+  /* Ensure these are applied (Tailwind base might handle some) */
+  /* font-family set via variable in layout.tsx */
+  /* background/color set via Tailwind classes in layout.tsx */
+  padding-top: var(--nav-height); /* Compensate for fixed header */
   font-size: var(--fontSize-base);
   line-height: var(--lineHeight-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -142,69 +47,12 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
-
-.dark {
-  --background: var(--color-slate-900);
-  --foreground: var(--foreground);
-  --accent-primary: hsl(315 60% 82%); /* Light purple/pink */
-  --accent-secondary: hsl(211 63% 83%); /* Light blue */
-  color-scheme: dark;
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x: ;
-  --tw-pan-y: ;
-  --tw-pinch-zoom: ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position: ;
-  --tw-gradient-via-position: ;
-  --tw-gradient-to-position: ;
-  --tw-ordinal: ;
-  --tw-slashed-zero: ;
-  --tw-numeric-figure: ;
-  --tw-numeric-spacing: ;
-  --tw-numeric-fraction: ;
-  --tw-ring-inset: ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur: ;
-  --tw-brightness: ;
-  --tw-contrast: ;
-  --tw-grayscale: ;
-  --tw-hue-rotate: ;
-  --tw-invert: ;
-  --tw-saturate: ;
-  --tw-sepia: ;
-  --tw-drop-shadow: ;
-  --tw-backdrop-blur: ;
-  --tw-backdrop-brightness: ;
-  --tw-backdrop-contrast: ;
-  --tw-backdrop-grayscale: ;
-  --tw-backdrop-hue-rotate: ;
-  --tw-backdrop-invert: ;
-  --tw-backdrop-opacity: ;
-  --tw-backdrop-saturate: ;
-  --tw-backdrop-sepia: ;
-}
-
+/* === Custom @layer utilities (Optional - can also live in utility-patterns.css) === */
 @layer utilities {
   .rtl {
     direction: rtl;
   }
+  /* Example: If scrollbar utilities were moved here */
+  /* .scrollbar-thin { ... } */
+  /* .no-scrollbar { ... } */
 }

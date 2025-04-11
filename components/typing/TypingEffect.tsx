@@ -1,103 +1,93 @@
 // /components/typing/TypingEffect.tsx
-
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./typing.module.css";
+import { calculateNextTypingStep } from "@/lib/typing-logic";
 
 interface TypingEffectProps {
+  /** The static text to display before the typing animation. */
+  staticPrefix?: string;
+  /** Array of the dynamic text parts to cycle through. */
   items: string[];
-  interval?: number; // Time *between* finishing one word and starting the next
-  typingSpeed?: number; // Milliseconds per character
+  typingSpeed?: number;
+  deletingSpeed?: number;
+  pauseDuration?: number;
   paragraphClassName?: string;
-  staticTextClassName?: string;
+  // staticTextClassName prop is removed as staticPrefix handles it more directly
 }
 
-const defaultItems = ["Coding", "Design", "Learning", "Exploring", "Creating"];
+// Default dynamic parts
+const defaultItems = ["gaming.", "reading.", "coding."];
 
 const TypingEffect: React.FC<TypingEffectProps> = ({
+  staticPrefix = "", // Default to empty string
   items = defaultItems,
-  interval = 2000, // Wait 2s after finishing a word before starting next
-  typingSpeed = 100, // Type one character every 100ms
+  typingSpeed = 100,
+  deletingSpeed = 50,
+  pauseDuration = 1500,
   paragraphClassName = "text-2xl md:text-3xl font-semibold my-8",
-  staticTextClassName = "",
 }) => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
-  // State for the text currently visible on screen
+  // **** IMPORTANT: displayedText now ONLY stores the DYNAMIC part ****
   const [displayedText, setDisplayedText] = useState("");
-  // Ref to manage the character typing interval/timeout
-  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  // Ref to manage the interval between words
-  const wordIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to handle the typing animation for a single word
-  const typeWord = (word: string) => {
-    let charIndex = 0;
-    setDisplayedText(""); // Clear previous text immediately
-
-    // Clear any existing character typing timeout
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-    }
-
-    const typeCharacter = () => {
-      if (charIndex < word.length) {
-        setDisplayedText((prev) => prev + word[charIndex]);
-        charIndex++;
-        typingTimeoutRef.current = setTimeout(typeCharacter, typingSpeed);
-      } else {
-        // Word finished typing, schedule the next word change
-        scheduleNextWord();
-      }
-    };
-
-    // Start typing the first character
-    typingTimeoutRef.current = setTimeout(typeCharacter, typingSpeed);
-  };
-
-  // Function to schedule the next word after the interval
-  const scheduleNextWord = () => {
-    // Clear previous word interval if any
-    if (wordIntervalRef.current) {
-      clearTimeout(wordIntervalRef.current);
-    }
-    wordIntervalRef.current = setTimeout(() => {
-      setCurrentItemIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, interval);
-  };
-
-  // Effect to start typing when the currentItemIndex changes
   useEffect(() => {
-    if (items && items.length > 0) {
-      const wordToType = items[currentItemIndex];
-      typeWord(wordToType);
-    }
+    // Ensure items array is valid before starting
+    if (!items || items.length === 0) return;
 
-    // Cleanup function: Clear all timers when component unmounts or dependencies change
-    return () => {
-      if (typingTimeoutRef.current) {
-        clearTimeout(typingTimeoutRef.current);
+    // The helper function works correctly as it operates on the items array
+    // which now contains only the dynamic parts.
+    const step = calculateNextTypingStep(
+      { items, currentItemIndex, displayedText, isDeleting },
+      { typingSpeed, deletingSpeed, pauseDuration }
+    );
+
+    timeoutRef.current = setTimeout(() => {
+      // Update the state for the dynamic part
+      setDisplayedText(step.nextText);
+      setIsDeleting(step.nextIsDeleting);
+
+      // If we just finished deleting the dynamic part (it became empty)
+      if (isDeleting && step.nextText === "") {
+        // Move to the next item in the list
+        setCurrentItemIndex((prevIndex) => (prevIndex + 1) % items.length);
+        // isDeleting will be set to false in the next effect run via step.nextIsDeleting
       }
-      if (wordIntervalRef.current) {
-        clearTimeout(wordIntervalRef.current);
+    }, step.delay);
+
+    // Cleanup function
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
     };
-    // Rerun effect when the index changes (or items/speed changes)
-  }, [currentItemIndex, items, typingSpeed, interval]);
+  }, [
+    items,
+    currentItemIndex,
+    displayedText,
+    isDeleting,
+    typingSpeed,
+    deletingSpeed,
+    pauseDuration,
+  ]);
 
   return (
     <p className={`${paragraphClassName}`}>
-      <span className={staticTextClassName}>I like </span>
-      {/* The dynamic span now just holds the text being built up */}
+      {/* Render the static prefix if provided */}
+      {staticPrefix && <span>{staticPrefix}</span>}
+      {/* Render the dynamic part within the styled span */}
       <span
         className={`
           ${styles.gradientText}
           ${styles.blinkingCaret}
-          ${styles.dynamicTextContainer} /* Added class for potential styling */
+          ${styles.dynamicTextContainer}
         `}
-        // The key prop is removed as JS now controls the reveal
       >
-        {displayedText}
+        {/* Render a non-breaking space if dynamic text is empty for layout/caret */}
+        {displayedText || "\u00A0"}
       </span>
     </p>
   );

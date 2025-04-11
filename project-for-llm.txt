@@ -1,0 +1,5435 @@
+Directory Tree:
+.
+├── .gitignore
+├── README.md
+├── app
+│   ├── (auth)
+│   │   ├── signin
+│   │   │   └── page.tsx
+│   │   └── signup
+│   │       └── page.tsx
+│   ├── (default)
+│   │   ├── default.module.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── actions
+│   │   └── auth.ts
+│   ├── layout.tsx
+│   ├── page.module.css
+│   ├── playbook
+│   │   ├── first_mdx
+│   │   │   └── page.mdx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── playbook.module.css
+│   │   └── web-security
+│   │       └── page.mdx
+│   ├── posts
+│   │   ├── fibonacci-spiral
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── posts.module.css
+│   └── styles
+│       ├── animations.css
+│       ├── globals.css
+│       ├── mdx.css
+│       ├── theme.css
+│       └── utility.css
+├── components
+│   ├── DashboardButton.tsx
+│   ├── ThemeToggle.tsx
+│   ├── Timestamp.tsx
+│   ├── animate.tsx
+│   ├── feature
+│   │   ├── feature.module.css
+│   │   └── feature.tsx
+│   ├── fibonacci-spiral
+│   │   ├── FibonacciSpiral.module.css
+│   │   └── FibonacciSpiral.tsx
+│   ├── galactic
+│   │   ├── galactic.module.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── hero
+│   │   ├── Hero.tsx
+│   │   └── hero.module.css
+│   ├── highlight
+│   │   ├── highlight.module.css
+│   │   └── highlighter.tsx
+│   ├── hooks
+│   │   └── mouse-position.ts
+│   ├── particles
+│   │   ├── Particles.tsx
+│   │   └── particles.module.css
+│   ├── projects
+│   │   ├── project.module.css
+│   │   └── projects.tsx
+│   ├── typing
+│   │   ├── TypingEffect.tsx
+│   │   └── typing.module.css
+│   └── ui
+│       ├── Button.tsx
+│       ├── footer.tsx
+│       ├── header.tsx
+│       ├── logo.tsx
+│       ├── mobile-menu.tsx
+│       └── ui.module.css
+├── db
+│   ├── index.ts
+│   └── schema.ts
+├── eslint.config.mjs
+├── mdx-components.tsx
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
+
+
+================================================================================
+FILE: .gitignore
+================================================================================
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# notes
+notes*
+
+
+================================================================================
+FILE: README.md
+================================================================================
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+================================================================================
+FILE: app/(auth)/signin/page.tsx
+================================================================================
+
+const Signin = () => {
+    return 'Signin'
+  }
+
+  export default Signin
+
+
+================================================================================
+FILE: app/(auth)/signup/page.tsx
+================================================================================
+
+const Signup = () => {
+    return 'signup'
+  }
+
+  export default Signup
+
+
+================================================================================
+FILE: app/(default)/default.module.css
+================================================================================
+
+/* default.module.css */
+
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: var(--primary-dark-color);
+  --button-secondary-hover: var(--background-dark-color);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background); /* Use the CSS variable instead */
+  color: var(--foreground);
+  align-items: center;
+  justify-items: center;
+  padding: 40px;
+  gap: 64px;
+  font-family: var(--font-geist-sans);
+  margin-left: 200px; /* Add this to account for nav width */
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: var(--accent-primary);
+    --button-secondary-hover: var(--accent-secondary);
+  }
+}
+
+.main {
+  flex-grow: 1;
+
+}
+
+.main ol {
+  font-family: var(--font-geist-mono);
+  padding-left: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  list-style-position: inside;
+}
+
+.main li:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.main code {
+  font-family: inherit;
+  background: var(--gray-alpha-100);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+}
+
+.ctas a {
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+a.primary {
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+}
+
+a.secondary {
+  border-color: var(--gray-alpha-200);
+  min-width: 158px;
+}
+
+.footer {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  border-top: 1px solid var(--gray-alpha-200);
+  grid-row-start: 3;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-primary);
+}
+
+.footer img {
+  flex-shrink: 0;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 32px;
+    padding-bottom: 80px;
+  }
+
+  .main {
+    align-items: center;
+  }
+
+  .main ol {
+    text-align: center;
+  }
+
+  .ctas {
+    flex-direction: column;
+  }
+
+  .ctas a {
+    font-size: 14px;
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  a.secondary {
+    min-width: auto;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    margin-left: 0;
+    padding-bottom: 80px; /* Space for mobile nav */
+    min-height: calc(100vh - 60px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert();
+  }
+}
+
+
+================================================================================
+FILE: app/(default)/layout.tsx
+================================================================================
+
+import "aos/dist/aos.css";
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
+import Animate from "@/components/animate";
+import styles from "./default.module.css";
+
+export default function DefaultLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <Animate />
+      <Header />
+
+      <main className="grow">{children}</main>
+      {/* <main className={styles.main}>{children}</main> */}
+      <Footer />
+    </>
+  );
+}
+
+
+================================================================================
+FILE: app/(default)/page.tsx
+================================================================================
+
+// app/page.tsx
+
+import Hero from "@/components/hero/Hero";
+import TypingEffect from "@/components/typing/TypingEffect";
+import Features from "@/components/feature/feature";
+import ProjectsCarousel from "@/components/projects/projects";
+import Img04 from "@/public/assets/img-4.png";
+
+const myHobbies = [
+  "Web Development",
+  "Movies",
+  "Hiking",
+  "Walks with doggo",
+  "Cooking",
+];
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      {/* <TypingEffect
+        items={myHobbies}
+        interval={4000}
+        paragraphClassName="text-3xl md:text-4xl font-light mt-4 text-center"
+      /> */}
+      <Features />
+      <ProjectsCarousel />
+    </>
+  );
+}
+
+
+================================================================================
+FILE: app/actions/auth.ts
+================================================================================
+
+'use server'
+
+import { z } from 'zod'
+import {
+  verifyPassword,
+  createSession,
+  createUser,
+  deleteSession,
+} from '@/lib/session'
+import { getUserByEmail } from '@/lib/dal'
+import { mockDelay } from '@/lib/utils'
+import { redirect } from 'next/navigation'
+
+// Define Zod schema for signin validation
+const SignInSchema = z.object({
+  email: z.string().min(1, 'Email is required').email('Invalid email format'),
+  password: z.string().min(1, 'Password is required'),
+})
+
+// Define Zod schema for signup validation
+const SignUpSchema = z
+  .object({
+    email: z.string().min(1, 'Email is required').email('Invalid email format'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  })
+
+export type SignInData = z.infer<typeof SignInSchema>
+export type SignUpData = z.infer<typeof SignUpSchema>
+
+export type ActionResponse = {
+  success: boolean
+  message: string
+  errors?: Record<string, string[]>
+  error?: string
+}
+
+export async function signIn(formData: FormData): Promise<ActionResponse> {
+  try {
+    // Add a small delay to simulate network latency
+    await mockDelay(700)
+
+    // Extract data from form
+    const data = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    }
+
+    // Validate with Zod
+    const validationResult = SignInSchema.safeParse(data)
+    if (!validationResult.success) {
+      return {
+        success: false,
+        message: 'Validation failed',
+        errors: validationResult.error.flatten().fieldErrors,
+      }
+    }
+
+    // Find user by email
+    const user = await getUserByEmail(data.email)
+    if (!user) {
+      return {
+        success: false,
+        message: 'Invalid email or password',
+        errors: {
+          email: ['Invalid email or password'],
+        },
+      }
+    }
+
+    // Verify password
+    const isPasswordValid = await verifyPassword(data.password, user.password)
+    if (!isPasswordValid) {
+      return {
+        success: false,
+        message: 'Invalid email or password',
+        errors: {
+          password: ['Invalid email or password'],
+        },
+      }
+    }
+
+    // Create session
+    await createSession(user.id)
+
+    return {
+      success: true,
+      message: 'Signed in successfully',
+    }
+  } catch (error) {
+    console.error('Sign in error:', error)
+    return {
+      success: false,
+      message: 'An error occurred while signing in',
+      error: 'Failed to sign in',
+    }
+  }
+}
+
+export async function signUp(formData: FormData): Promise<ActionResponse> {
+  try {
+    // Add a small delay to simulate network latency
+    await mockDelay(700)
+
+    // Extract data from form
+    const data = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      confirmPassword: formData.get('confirmPassword') as string,
+    }
+
+    // Validate with Zod
+    const validationResult = SignUpSchema.safeParse(data)
+    if (!validationResult.success) {
+      return {
+        success: false,
+        message: 'Validation failed',
+        errors: validationResult.error.flatten().fieldErrors,
+      }
+    }
+
+    // Check if user already exists
+    const existingUser = await getUserByEmail(data.email)
+    if (existingUser) {
+      return {
+        success: false,
+        message: 'User with this email already exists',
+        errors: {
+          email: ['User with this email already exists'],
+        },
+      }
+    }
+
+    // Create new user
+    const user = await createUser(data.email, data.password)
+    if (!user) {
+      return {
+        success: false,
+        message: 'Failed to create user',
+        error: 'Failed to create user',
+      }
+    }
+
+    // Create session for the newly registered user
+    await createSession(user.id)
+
+    return {
+      success: true,
+      message: 'Account created successfully',
+    }
+  } catch (error) {
+    console.error('Sign up error:', error)
+    return {
+      success: false,
+      message: 'An error occurred while creating your account',
+      error: 'Failed to create account',
+    }
+  }
+}
+
+export async function signOut(): Promise<void> {
+  try {
+    await mockDelay(300)
+    await deleteSession()
+  } catch (error) {
+    console.error('Sign out error:', error)
+    throw new Error('Failed to sign out')
+  } finally {
+    redirect('/signin')
+  }
+}
+
+
+================================================================================
+FILE: app/layout.tsx
+================================================================================
+
+// app/layout.tsx
+export const metadata: Metadata = {
+  title: "Samir Llama",
+  description: "Personal website and portfolio",
+};
+
+import Image from "next/image";
+import { ThemeProvider } from "next-themes";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./styles/globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} font-inter antialiased bg-slate-900 text-slate-100 tracking-tight`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={true}
+        >
+          <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
+            {children}
+          </div>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+
+================================================================================
+FILE: app/page.module.css
+================================================================================
+
+/* page.module.css */
+
+
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: var(--primary-dark-color);
+  --button-secondary-hover: var(--background-dark-color);
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--background); /* Use the CSS variable instead */
+  color: var(--foreground);
+  align-items: center;
+  justify-items: center;
+  padding: 40px;
+  gap: 64px;
+  font-family: var(--font-geist-sans);
+  margin-left: 200px; /* Add this to account for nav width */
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: var(--accent-primary);
+    --button-secondary-hover: var(--accent-secondary);
+  }
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 32px;
+  grid-row-start: 2;
+}
+
+.main ol {
+  font-family: var(--font-geist-mono);
+  padding-left: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  list-style-position: inside;
+}
+
+.main li:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.main code {
+  font-family: inherit;
+  background: var(--gray-alpha-100);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+}
+
+.ctas a {
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border: 1px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+a.primary {
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+}
+
+a.secondary {
+  border-color: var(--gray-alpha-200);
+  min-width: 158px;
+}
+
+.footer {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  border-top: 1px solid var(--gray-alpha-200);
+  grid-row-start: 3;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--accent-primary);
+}
+
+.footer img {
+  flex-shrink: 0;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 32px;
+    padding-bottom: 80px;
+  }
+
+  .main {
+    align-items: center;
+  }
+
+  .main ol {
+    text-align: center;
+  }
+
+  .ctas {
+    flex-direction: column;
+  }
+
+  .ctas a {
+    font-size: 14px;
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  a.secondary {
+    min-width: auto;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    margin-left: 0;
+    padding-bottom: 80px; /* Space for mobile nav */
+    min-height: calc(100vh - 60px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert();
+  }
+}
+
+
+
+================================================================================
+FILE: app/playbook/first_mdx/page.mdx
+================================================================================
+
+/app/blog/first_mdx_page/page.mdx
+
+export const metadata = {
+  title: "First MDX Page",
+  description: "First MDX page on my website",
+  author: "Samir Coder",
+  date: "2025-03-22",
+};
+
+# Hello 👋 with MDX!
+
+## headline 2nd level
+
+text in _italic_
+
+text in **bold**
+
+text in **_bold and italic_**
+
+> a quote
+
+[link to Next.js](https://nextjs.org)
+
+- foo
+- bar
+- baz
+
+![This is an octocat image](https://myoctocat.com/assets/images/base-octocat.svg "I'm the title of the octocat image")
+
+
+================================================================================
+FILE: app/playbook/layout.tsx
+================================================================================
+
+import type { Metadata } from "next";
+import styles from "./playbook.module.css";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Samir's Playbook",
+    default: "Playbook",
+  },
+  description:
+    "Engineering Playbook with insights on web development, security, and technology",
+};
+
+export default function BlogLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <main className={styles.blogContainer}>
+      <div className={styles.content}>{children}</div>
+    </main>
+  );
+}
+
+
+================================================================================
+FILE: app/playbook/page.tsx
+================================================================================
+
+// app/blog/page.tsx
+
+import type { Metadata } from "next";
+import Link from "next/link";
+import { getAllPostsMeta, PostMeta } from "@/lib/posts";
+import styles from "./playbook.module.css";
+import { Route } from "next";
+
+export const metadata: Metadata = {
+  title: "Engineering Playbook",
+  description: "Insights on web development, security, and technology",
+};
+
+export default async function BlogIndexPage() {
+  const posts: PostMeta[] = getAllPostsMeta();
+
+  return (
+    <>
+      <h1>Engineering Playbook</h1>
+      <p className={styles.subtitle}>
+        Insights and learnings on web development, security, and technology.
+      </p>
+
+      {posts.length === 0 ? (
+        <p>No posts published yet. Check back soon!</p>
+      ) : (
+        <ul className={styles.postList}>
+          {posts.map((post) => (
+            <li key={post.slug} className={styles.postItem}>
+              <article>
+                <Link
+                  href={`/blog/${post.slug}` as Route}
+                  className={styles.postLink}
+                >
+                  <h2 className={styles.postTitle}>{post.title}</h2>
+                </Link>
+                <p className={styles.postMeta}>
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  {post.author && ` by ${post.author}`}
+                </p>
+                <p className={styles.postDescription}>{post.description}</p>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className={styles.readMoreLink}
+                >
+                  Read more →
+                </Link>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
+}
+
+
+================================================================================
+FILE: app/playbook/playbook.module.css
+================================================================================
+
+/* Blog layout container */
+.blogContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  padding: calc(var(--spacing) * 2);
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 75ch; /* Optimal reading width */
+  margin: 0 auto;
+}
+
+/* Add these new styles for MDX headers */
+.content :global(h2) {
+  font-size: 2.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.content :global(h3) {
+  font-size: 1.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Neon HR styles */
+.content :global(hr) {
+  border: none;
+  height: 2px;
+  margin: 3rem 0;
+  background: var(--primary);
+  position: relative;
+  border-radius: 4px;
+  box-shadow:
+    0 0 10px var(--primary),
+    0 0 20px var(--primary),
+    0 0 30px var(--accent);
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Gradient Headings */
+.gradientHeading {
+  font-size: 2.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradientSubheading {
+  font-size: 1.875rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Blog index page styles */
+.subtitle {
+  font-size: 1.1rem;
+  color: hsl(from var(--foreground) h s l / 0.8);
+  margin-bottom: var(--spacing-lg);
+}
+
+.postList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.postItem {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid hsl(from var(--foreground) h s l / 0.1);
+}
+
+.postItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.postLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.postTitle {
+  font-size: 1.75rem;
+  color: var(--primary);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  transition: color 0.2s ease-out;
+}
+
+.postLink:hover .postTitle {
+  color: var(--secondary);
+}
+
+.postMeta {
+  font-size: 0.9rem;
+  color: hsl(from var(--foreground) h s l / 0.7);
+  margin-bottom: var(--spacing-md);
+}
+
+.postDescription {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.7;
+}
+
+.readMoreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.readMoreLink:hover {
+  color: var(--secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .blogContainer {
+    padding: var(--spacing);
+  }
+
+  .postTitle {
+    font-size: 1.5rem;
+  }
+
+  .content :global(h2) {
+    font-size: 2rem;
+  }
+
+  .content :global(h3) {
+    font-size: 1.5rem;
+  }
+
+  .gradientHeading {
+    font-size: 2rem;
+  }
+
+  .gradientSubheading {
+    font-size: 1.5rem;
+  }
+}
+
+
+================================================================================
+FILE: app/playbook/web-security/page.mdx
+================================================================================
+
+export const metadata = {
+  title: "Web Security Fundamentals: Protecting Your Digital Fortress",
+  description: "An introduction to the core concepts of web security...",
+  author: "Samir Coder",
+  date: "2025-03-29",
+};
+
+<article className="prose">
+<h1>{metadata.title}</h1>
+
+Welcome to the first technical post on my new site! As web engineers, we build the digital world brick by brick. But just like physical structures, our digital creations need strong foundations and defenses. Today, we're diving into a topic crucial for every developer: **Web Security**.
+
+This isn't about becoming a penetration tester overnight. It's about understanding the fundamental principles and common threats so we can build more resilient, trustworthy applications from the ground up.
+
+----
+
+## Why Does Web Security Matter So Much?
+
+In an era where data breaches make headlines weekly, the stakes have never been higher. Insecure web applications can lead to:
+
+- **Compromised User Data:** Sensitive personal information (passwords, credit cards, emails) stolen and misused.
+- **Financial Loss:** Direct theft, regulatory fines (like GDPR), and costs associated with incident response.
+- **Reputation Damage:** Users lose trust in platforms that can't protect them, leading to customer churn.
+- **Service Disruption:** Attacks can take your website or application offline, impacting users and business.
+
+Security isn't just a feature; it's a fundamental requirement for any modern web application.
+
+## Core Pillars of Web Security
+
+Web security is vast, but many principles revolve around a few core ideas:
+
+### 1. Protect Data in Transit: HTTPS Everywhere
+
+- **What:** Using HTTPS (HyperText Transfer Protocol Secure) encrypts the connection between a user's browser and your server.
+- **Why:** Prevents eavesdroppers ("man-in-the-middle" attacks) from reading or modifying data like login credentials or personal information sent over the network.
+- **Action:** Always configure your servers to use HTTPS and redirect HTTP traffic to HTTPS. Services like Vercel often handle this automatically. Look for the padlock!
+
+### 2. Never Trust User Input: Validation & Sanitization
+
+- **What:** Treat _any_ data coming from the client-side (forms, URL parameters, API requests) as potentially malicious. Validate its format, type, length, and content before using it. Sanitize it by removing or encoding dangerous characters.
+- **Why:** This is the primary defense against **Injection Attacks** (like SQL Injection and Cross-Site Scripting).
+- **Action:** Implement robust server-side validation for all inputs. Use parameterized queries or ORMs for database interactions.
+
+Simplified pseudo-code example of server-side validation:
+
+```javascript
+// validate-input.js
+function handleFormSubmit(formData) {
+  const email = formData.get("email");
+  const comment = formData.get("comment");
+
+  // 1. Validate Email Format
+  if (!isValidEmail(email)) {
+    throw new Error("Invalid email format");
+  }
+
+  // 2. Validate Comment Length (Example)
+  if (comment.length > 500) {
+    throw new Error("Comment too long");
+  }
+
+  // 3. Sanitize Comment (Example - VERY basic, use libraries!)
+  const sanitizedComment = sanitizeHtml(comment); // Use a proper library!
+
+  // 4. Use validated & sanitized data (e.g., save to DB)
+  saveCommentToDatabase(email, sanitizedComment);
+
+  console.log("Data processed securely (example)");
+}
+```
+
+### 3. Encode Output Correctly: Defeating XSS
+
+- **What:** When displaying user-provided data back in the browser, ensure it's treated as plain text, not executable code. This involves encoding special HTML characters (like `<`, `>`, `&`).
+- **Why:** Prevents **Cross-Site Scripting (XSS)**, where attackers inject malicious scripts that run in _other_ users' browsers, potentially stealing session cookies or performing actions on their behalf.
+- **Action:** Use templating engines or framework features that automatically encode output by default (React does this well for content within JSX tags). Be extra careful when using methods like `dangerouslySetInnerHTML`.
+
+### 4. Control Access: Authentication & Authorization
+
+- **Authentication (AuthN):** Verifying _who_ a user is (e.g., login with password, OAuth, magic links).
+- **Authorization (AuthZ):** Determining _what_ an authenticated user is allowed to do (e.g., admin vs. regular user permissions).
+- **Why:** Ensures only legitimate users can access specific data or perform sensitive actions.
+- **Action:** Implement secure authentication mechanisms (avoid rolling your own crypto!). Enforce authorization checks on the server-side for every sensitive request. Apply the **Principle of Least Privilege** (users/systems should only have the minimum permissions necessary).
+
+### 5. Configure Server & Browser Defenses: Security Headers
+
+- **What:** HTTP headers sent from your server that instruct the browser on how to behave securely.
+- **Why:** Mitigate various attacks like clickjacking, XSS, and MIME-type sniffing.
+- **Action:** Implement headers like:
+  - `Content-Security-Policy` (CSP): Defines allowed sources for scripts, styles, images, etc. (We set this up in the project foundation!)
+  - `Strict-Transport-Security` (HSTS): Forces browsers to use HTTPS.
+  - `X-Content-Type-Options: nosniff`: Prevents browsers from guessing MIME types.
+  - `X-Frame-Options: DENY` or `SAMEORIGIN`: Prevents clickjacking.
+  - `Referrer-Policy`: Controls how much referrer information is sent.
+
+### 6. Keep Dependencies Updated
+
+- **What:** Regularly update your frameworks, libraries, and server software.
+- **Why:** Attackers actively exploit known vulnerabilities in outdated software. Updates often contain critical security patches.
+- **Action:** Use package manager tools (`pnpm audit`, `npm audit`, `yarn audit`) to check for known vulnerabilities and update dependencies promptly.
+
+## Common Threats to Be Aware Of
+
+While there are many, here are three classics:
+
+- **Cross-Site Scripting (XSS):** Injecting malicious scripts into web pages viewed by other users. (Defense: Output Encoding, CSP).
+- **SQL Injection (SQLi):** Injecting malicious SQL code via input fields to manipulate database queries. (Defense: Input Validation, Parameterized Queries/ORMs).
+- **Cross-Site Request Forgery (CSRF):** Tricking a logged-in user's browser into sending an unintended, malicious request to your application. (Defense: Anti-CSRF Tokens, SameSite Cookies).
+
+## Your Role as a Developer
+
+Security isn't someone else's problem – it's an integral part of web engineering. Adopt a security mindset:
+
+- **Think Adversarially:** How could this feature be abused?
+- **Validate Everything:** Especially data from external sources.
+- **Encode Appropriately:** When displaying data back to the user.
+- **Use Secure Defaults:** Leverage the security features of your framework.
+- **Stay Updated:** Keep libraries and your own knowledge current.
+- **Learn Continuously:** Resources like the [OWASP Top 10](https://owasp.org/www-project-top-ten/) are invaluable.
+
+## The Journey Continues
+
+This post merely scratches the surface of web security. It's a deep, ever-evolving field. But understanding these fundamentals provides a solid base for building safer applications.
+
+In future posts, we might dive deeper into specific vulnerabilities, explore secure coding practices in Next.js, or look at advanced security headers. Stay tuned!
+
+---
+
+</article>
+
+
+================================================================================
+FILE: app/posts/fibonacci-spiral/page.tsx
+================================================================================
+
+// app/post/[slug]/fibonacci-spiral/page.tsx
+import FibonacciSpiral from '@/components'; // Adjust import path if needed
+
+// This page component can remain a Server Component because all the
+// browser-specific logic is encapsulated within the FibonacciSpiral Client Component.
+// It receives the dynamic 'slug' parameter, although we don't use it in this example.
+export default function FibonacciSpiralPage({ params }: { params: { slug: string } }) {
+  return (
+    <div>
+      {/* You could add content here related to the specific 'post' using params.slug */}
+      {/* <h1>Fibonacci Spiral for Post: {params.slug}</h1> */}
+
+      {/* Render the Client Component that handles the animation */}
+      <FibonacciSpiral />
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: app/posts/page.tsx
+================================================================================
+
+// app/posts/page.tsx
+
+import type { Metadata } from "next";
+import Link from "next/link";
+import { getAllPostsMeta, PostMeta } from "@/lib/posts";
+import styles from "./posts.module.css";
+// app//posts/page.tsx
+
+import { Route } from "next";
+
+export const metadata: Metadata = {
+  title: "Posts page",
+};
+// This page is rendered on the server (or at build time)
+export default async function PostsIndexPage() {
+  // Fetch metadata for all posts using our helper function
+  const posts: PostMeta[] = getAllPostsMeta();
+
+  return (
+    <div>
+      <h1>My Posts</h1>
+      <p className={styles.subtitle}>
+        Thoughts and learnings on web development, security, and technology.
+      </p>
+
+      {posts.length === 0 ? (
+        <p>No posts published yet. Check back soon!</p>
+      ) : (
+        <ul className={styles.postList}>
+          {posts.map((post) => (
+            <li key={post.slug} className={styles.postItem}>
+              <article>
+                {" "}
+                {/* Use article tag for semantics */}
+                <Link
+                  href={`/posts/${post.slug}` as Route}
+                  className={styles.postLink}
+                >
+                  <h2 className={styles.postTitle}>{post.title}</h2>
+                </Link>
+                <p className={styles.postMeta}>
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  {post.author && ` by ${post.author}`}
+                </p>
+                <p className={styles.postDescription}>{post.description}</p>
+                <Link
+                  href={`/posts/${post.slug}`}
+                  className={styles.readMoreLink}
+                >
+                  Read more →
+                </Link>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: app/posts/posts.module.css
+================================================================================
+
+/* app/posts/posts.module.css */
+.subtitle {
+    font-size: 1.1rem;
+    color: hsl(from var(--color-text) h s l / 0.8); /* Slightly dimmer */
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .postList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .postItem {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .postItem:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .postLink {
+    color: inherit; /* Inherit text color */
+    text-decoration: none;
+  }
+
+  .postTitle {
+    font-size: 1.75rem; /* Adjust size */
+    color: var(--color-primary); /* Use primary color for title */
+    margin-top: 0;
+    margin-bottom: var(--spacing-xs);
+    transition: color 0.2s ease-out;
+  }
+  .postLink:hover .postTitle {
+     color: var(--color-secondary); /* Change title color on hover */
+  }
+
+
+  .postMeta {
+    font-size: 0.9rem;
+    color: hsl(from var(--color-text) h s l / 0.7);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .postDescription {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.7; /* Slightly more line height for readability */
+  }
+
+  .readMoreLink {
+      display: inline-block;
+      font-weight: 500;
+      color: var(--color-primary);
+      text-decoration: none;
+  }
+  .readMoreLink:hover {
+      color: var(--color-secondary);
+      text-decoration: underline;
+  }
+
+
+================================================================================
+FILE: app/styles/animations.css
+================================================================================
+
+@layer utilities {
+  /* Pulsing animation */
+  @keyframes pulseLoop {
+    0% {
+      opacity: var(--opacity-none);
+      transform: scale(0.25) translateZ(0);
+    }
+    30% {
+      opacity: 0.4;
+    }
+    70% {
+      opacity: var(--opacity-none);
+    }
+    80% {
+      transform: scale(1) translateZ(0);
+    }
+  }
+
+  .pulse {
+    opacity: var(--opacity-none);
+    transform-origin: center;
+    animation: pulseLoop var(--animation-duration-slow)
+      var(--animation-timing-linear) var(--animation-iteration-infinite);
+  }
+
+  .pulse-1 {
+    animation-delay: calc(var(--animation-duration-fast) * -1);
+  }
+
+  .pulse-2 {
+    animation-delay: calc(var(--animation-duration-medium) * -1);
+  }
+
+  /* Basic Animations */
+  @keyframes endless {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-245px);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      top: 0;
+      transform: translateY(-100%) scaleY(10);
+      opacity: var(--opacity-none);
+    }
+    2% {
+      opacity: var(--opacity-low);
+    }
+    40% {
+      top: 100%;
+      transform: translateY(0) scaleY(200);
+      opacity: var(--opacity-none);
+    }
+    100% {
+      top: 100%;
+      transform: translateY(0) scaleY(1);
+      opacity: var(--opacity-none);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(3%);
+    }
+    50% {
+      transform: translateY(-3%);
+    }
+    100% {
+      transform: translateY(3%);
+    }
+  }
+
+  /* Animation Classes */
+  .animation-endless {
+    animation: endless var(--animation-duration-slow)
+      var(--animation-timing-linear) var(--animation-iteration-infinite);
+  }
+
+  .animation-shine {
+    animation: shine var(--animation-duration-medium)
+      var(--animation-timing-linear) 500ms var(--animation-iteration-infinite);
+  }
+
+  .animation-float {
+    animation: float 2s ease-in-out var(--animation-iteration-infinite);
+  }
+}
+
+/* Custom AOS Animations */
+@media screen {
+  html:not(.no-js) body [data-aos="fade-up"] {
+    transform: translate3d(0, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-down"] {
+    transform: translate3d(0, -14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-right"] {
+    transform: translate3d(-14px, 0, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-left"] {
+    transform: translate3d(14px, 0, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-up-right"] {
+    transform: translate3d(-14px, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-up-left"] {
+    transform: translate3d(14px, 14px, 0);
+  }
+}
+
+
+================================================================================
+FILE: app/styles/globals.css
+================================================================================
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom style imports */
+@import "./utility.css";
+@import "./theme.css";
+@import "./animations.css";
+@import "./mdx.css";
+
+/* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+}
+
+/* global.css */
+:root {
+  /* Dark theme base colors */
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary: #a855f7;
+  --secondary: #6366f1;
+  --accent: #c084fc;
+  --background-dark: hsl(288 23% 20%);
+  --foreground-dark: hsl(19 71% 97%);
+  --accent-primary: hsl(315 60% 82%);
+  --accent-secondary: hsl(211 63% 83%);
+
+  /* Layout */
+  --spacing: 1rem; /* 16px */
+  --spacing-wide: 2.125rem; /* 32px */
+  --spacer: 40px;
+  --spacer-small: 20px;
+  --maxWidth: 70rem; /* 1120px */
+  --nav-height: 3.75rem; /*  60px */
+
+  --font-body: "Poppins", system-ui;
+  --font-size-medium: clamp(1.3rem, 3vw, 1.65rem);
+  --anim-transition: 0.15s;
+
+  --gray-light: hsl(238.2 53.1% 12.5% / 0.25);
+  --gray-lighter: hsl(238.2 53.1% 12.5% / 0.15);
+
+  /* Other variables from your original CSS */
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+  --button-primary-hover: var(--primary-dark-color);
+  --button-secondary-hover: var(--background-dark-color);
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-slate-900);
+    --foreground: var(--foreground-dark);
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+    --button-primary-hover: var(--accent-primary);
+    --button-secondary-hover: var(--accent-secondary);
+    color-scheme: dark;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* color: var(--foreground);
+  background: var(--background); */
+  font-family: var(--font-geist-sans), system-ui, -apple-system;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* compensate for the fixed navigation height */
+  padding-top: var(--nav-height);
+  font-size: var(--fontSize-base);
+  line-height: var(--lineHeight-normal);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.dark {
+  --background: var(--color-slate-900);
+  --foreground: var(--foreground);
+  --accent-primary: hsl(315 60% 82%); /* Light purple/pink */
+  --accent-secondary: hsl(211 63% 83%); /* Light blue */
+  color-scheme: dark;
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+}
+
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+}
+
+
+================================================================================
+FILE: app/styles/mdx.css
+================================================================================
+
+/* MDX Content Styling */
+.prose {
+  max-width: 75ch;
+  font-size: var(--fontSize-base);
+  line-height: var(--lineHeight-relaxed);
+}
+
+/* Basic Elements */
+.prose p {
+  margin-block: var(--spacing-md);
+  line-height: var(--lineHeight-relaxed);
+}
+
+/* Headings - These take precedence for MDX content */
+.prose h1 {
+  font-size: var(--mdx-fontSize-h1);
+  line-height: var(--lineHeight-tight);
+  margin-block: 0 1em;
+}
+
+.prose h2 {
+  font-size: var(--mdx-fontSize-h2);
+  line-height: var(--lineHeight-tight);
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.prose h3 {
+  font-size: var(--mdx-fontSize-h3);
+  line-height: var(--lineHeight-tight);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+.prose h4 {
+  font-size: var(--mdx-fontSize-h4);
+  line-height: var(--lineHeight-tight);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+.prose h5 {
+  font-size: var(--mdx-fontSize-h5);
+  line-height: var(--lineHeight-normal);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+.prose h6 {
+  font-size: var(--mdx-fontSize-h6);
+  line-height: var(--lineHeight-normal);
+  margin-top: 1.8em;
+  margin-bottom: 0.8em;
+}
+
+/* Links */
+.prose .prose-a {
+  color: var(--primary-dark-color);
+  text-decoration: underline;
+  text-decoration-color: hsl(from var(--primary-dark-color) h s l / 0.4);
+  text-underline-offset: 2px;
+  transition: all 0.2s ease-out;
+}
+
+.prose .prose-a:hover {
+  color: var(--secondary-dark-color);
+  text-decoration-color: hsl(from var(--secondary-dark-color) h s l / 0.6);
+}
+
+/* External Links */
+.prose .prose-a-external::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.8em;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  margin-block: 1.25em;
+  padding-left: 1.8em;
+}
+
+.prose li {
+  margin-bottom: 0.5em;
+}
+
+.prose ul li::marker {
+  color: var(--primary-dark-color);
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+/* Code Blocks */
+.prose :not(pre) > code {
+  background-color: hsl(from var(--foreground) h s l / 0.1);
+  color: var(--secondary-dark-color);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: var(--fontSize-sm);
+  font-family: var(--font-geist-mono), monospace;
+}
+
+/* Rehype Pretty Code Styling */
+.prose figure[data-rehype-pretty-code-figure] {
+  margin-block: 1.5em;
+}
+
+.prose figure[data-rehype-pretty-code-figure] > pre {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.prose figure[data-rehype-pretty-code-figure] > pre > code {
+  display: grid;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+/* Code Highlights */
+.prose .line--highlighted {
+  background-color: hsl(from var(--primary-dark-color) h s l / 0.1);
+  box-shadow: inset 3px 0 0 0 var(--primary-dark-color);
+}
+
+.prose .word--highlighted {
+  background-color: hsl(from var (--secondary-dark-color) h s l / 0.2);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+/* Code Block Titles */
+.prose [data-rehype-pretty-code-title] {
+  font-size: 0.85em;
+  font-family: var(--font-geist-mono), monospace;
+  color: hsl(from var(--foreground) h s l / 0.7);
+  background-color: hsl(from var(--foreground) h s l / 0.08);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-bottom: 0;
+}
+
+
+================================================================================
+FILE: app/styles/theme.css
+================================================================================
+
+:root {
+  /* Base Values */
+  --fontSizeBase: 1.125rem; /* 18px */
+  --spacingBase: 1rem; /* 16px */
+  --lineHeightBase: 1.75;
+
+  /* General Typography Scale */
+  --scale-sm: 0.875; /* 15.75px */
+  --scale-base: 1; /* 18px */
+  --scale-md: 1.25; /* 22.5px */
+  --scale-lg: 1.5; /* 27px */
+  --scale-xl: 2; /* 36px */
+  --scale-2xl: 2.5; /* 45px */
+  --scale-3xl: 3; /* 54px */
+
+  /* General Font Sizes */
+  --fontSize-sm: calc(var(--fontSizeBase) * var(--scale-sm));
+  --fontSize-base: var(--fontSizeBase);
+  --fontSize-md: calc(var(--fontSizeBase) * var(--scale-md));
+  --fontSize-lg: calc(var(--fontSizeBase) * var(--scale-lg));
+  --fontSize-xl: calc(var(--fontSizeBase) * var(--scale-xl));
+  --fontSize-2xl: calc(var(--fontSizeBase) * var(--scale-2xl));
+  --fontSize-3xl: calc(var(--fontSizeBase) * var(--scale-3xl));
+
+  /* Heading Sizes */
+  --fontSize-h1: var(--fontSize-3xl);
+  --fontSize-h2: var(--fontSize-2xl);
+  --fontSize-h3: var(--fontSize-xl);
+  --fontSize-h4: var(--fontSize-lg);
+  --fontSize-h5: var(--fontSize-md);
+  --fontSize-h6: var(--fontSize-base);
+
+  /* MDX Typography Scale - Precise pixel values */
+  --mdx-scale-sm: 0.875; /* 15.75px */
+  --mdx-scale-base: 1; /* 18px */
+  --mdx-scale-lg: 1.111; /* 20px */
+  --mdx-scale-xl: 1.333; /* 24px */
+  --mdx-scale-2xl: 1.555; /* 28px */
+  --mdx-scale-3xl: 2.444; /* 33px */
+
+  /* MDX Font Sizes */
+  --mdx-fontSize-h1: calc(var(--fontSizeBase) * var(--mdx-scale-3xl));
+  --mdx-fontSize-h2: calc(var(--fontSizeBase) * var(--mdx-scale-2xl));
+  --mdx-fontSize-h3: calc(var(--fontSizeBase) * var(--mdx-scale-xl));
+  --mdx-fontSize-h4: calc(var(--fontSizeBase) * var(--mdx-scale-lg));
+  --mdx-fontSize-h5: calc(var(--fontSizeBase) * var(--mdx-scale-base));
+  --mdx-fontSize-h6: calc(var(--fontSizeBase) * var(--mdx-scale-sm));
+
+  /* Spacing Scale */
+  --spacing-xs: calc(var(--spacingBase) * 0.5); /* 8px */
+  --spacing-sm: calc(var(--spacingBase) * 0.75); /* 12px */
+  --spacing-md: var(--spacingBase); /* 16px */
+  --spacing-lg: calc(var(--spacingBase) * 1.5); /* 24px */
+  --spacing-xl: calc(var(--spacingBase) * 2); /* 32px */
+  --spacing-2xl: calc(var(--spacingBase) * 3); /* 48px */
+
+  /* Line Heights */
+  --lineHeight-tight: 1.2;
+  --lineHeight-normal: var(--lineHeightBase);
+  --lineHeight-relaxed: 1.85;
+
+  /* Opacity Scale */
+  --opacity-none: 0;
+  --opacity-low: 0.5;
+  --opacity-medium: 0.8;
+  --opacity-full: 1;
+
+  /* Animation Timing */
+  --animation-duration-slow: 12s;
+  --animation-duration-medium: 8s;
+  --animation-duration-fast: 4s;
+
+  /* Animation Properties */
+  --animation-timing-linear: linear;
+  --animation-iteration-infinite: infinite;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    to right,
+    var(--primary),
+    var(--secondary)
+  );
+  --gradient-secondary: linear-gradient(
+    to right,
+    var(--accent),
+    var(--primary)
+  );
+  --gradient-radial: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.3) 0%,
+    rgba(168, 85, 247, 0) 70%
+  );
+
+  /* Blur Effects */
+  --blur-2xl: 40px;
+
+  /* Slate color palette */
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  /*  Purple variations */
+  --color-purple-500: #a855f7;
+  --color-purple-400: #c084fc;
+
+  --swiper-theme-color: #007aff;
+
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-multiselect:focus,
+.form-select:focus,
+.form-checkbox:focus,
+.form-radio:focus {
+  @apply ring-0;
+}
+
+/* Custom Swiper styles */
+.swiper-button-disabled {
+  opacity: var(--opacity-low);
+  pointer-events: none;
+}
+
+.stellar-carousel .swiper-slide {
+  opacity: var(--opacity-medium);
+}
+
+.stellar-carousel .swiper-slide.swiper-slide-active {
+  opacity: var(--opacity-full);
+}
+
+.translate-z-0 {
+  transform: translateZ(0);
+}
+
+/* Common utility classes */
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-purple-500 {
+  --tw-gradient-from: var(--color-purple-500);
+  --tw-gradient-stops: var(--tw-gradient-from),
+    var(--tw-gradient-to, rgba(168, 85, 247, 0));
+}
+
+.to-purple-200 {
+  --tw-gradient-to: #c4b5fd;
+}
+
+.radial-gradient {
+  background: var(--gradient-radial);
+}
+
+.blur-2xl {
+  filter: blur(var(--blur-2xl));
+}
+
+.translate-z-0 {
+  transform: translateZ(0);
+}
+
+
+================================================================================
+FILE: app/styles/utility.css
+================================================================================
+
+@tailwind utilities;
+
+@layer components {
+  /* Typography Components */
+  .heading-1 {
+    font-size: 6rem;
+    line-height: 1.167;
+    font-weight: 800;
+  }
+
+  .heading-2 {
+    font-size: 3.75rem;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  .heading-3 {
+    font-size: 3rem;
+    line-height: 1.167;
+    font-weight: 800;
+  }
+
+  .heading-4 {
+    font-size: 2.125rem;
+    line-height: 1.235;
+    font-weight: 800;
+  }
+
+  /* Button Components */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 150ms ease-in-out;
+  }
+
+  .btn-sm {
+    padding: 0.25rem 0.75rem;
+  }
+
+  /* Form Components */
+  .form-input {
+    background-color: var(--color-slate-800);
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-slate-200);
+  }
+
+  .form-input:focus {
+    border-color: var(--color-purple-500);
+  }
+}
+
+@layer utilities {
+  /* Scrollbar Utilities */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Hide Scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Remove Search Input Styles */
+  .no-search-decoration::-webkit-search-decoration,
+  .no-search-decoration::-webkit-search-cancel-button,
+  .no-search-decoration::-webkit-search-results-button,
+  .no-search-decoration::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+
+================================================================================
+FILE: components/DashboardButton.tsx
+================================================================================
+
+// import { getCurrentUser } from "@/lib/dal"
+import Button from "./ui/Button"
+import Link from "next/link"
+
+// const DashboardButtonSignedIn = async () => {
+//   const user = await getCurrentUser()
+//   return (
+//     <>
+//       {user ? (
+//         <Link href="/dashboard">
+//           <Button>Go to Dashboard</Button>
+//         </Link>
+//       ) : (
+//         <div className="flex items-center space-x-4">
+//           <Link href="/signin">
+//             <Button variant="outline">Sign in</Button>
+//           </Link>
+//           <Link href="/signup">
+//             <Button>Sign up</Button>
+//           </Link>
+//         </div>
+//       )}
+//     </>
+//   )
+// }
+
+const DashboardButton = () => {
+  return (
+    <div className="flex items-center space-x-4">
+      <Link href="/signin">
+        <Button variant="outline">Sign in</Button>
+      </Link>
+      <Link href="/signup">
+        <Button>Sign up</Button>
+      </Link>
+    </div>
+  )
+}
+
+export default DashboardButton
+
+
+================================================================================
+FILE: components/ThemeToggle.tsx
+================================================================================
+
+'use client'
+
+import { useTheme } from 'next-themes'
+
+export default function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+
+  return (
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+    >
+      {theme === 'dark' ? '🌙' : '☀️'}
+    </button>
+  )
+}
+
+
+================================================================================
+FILE: components/Timestamp.tsx
+================================================================================
+
+'use client'
+
+import { useState, useLayoutEffect } from 'react'
+
+export function Timestamp() {
+  const [time, setTime] = useState<number | null>(null)
+  useLayoutEffect(() => {
+    // You can determine when and how often to update
+    // the time here. In this example we update it only once
+    setTime(new Date().getFullYear())
+  }, [])
+  if (time) {
+    return time
+  }
+  return null
+}
+
+
+================================================================================
+FILE: components/animate.tsx
+================================================================================
+
+"use client"
+import AOS from "aos"
+import { useEffect } from "react"
+
+const Animate = () => {
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      disable: "phone",
+      duration: 1000,
+      easing: "ease-out-cubic",
+    })
+  })
+
+  return null
+}
+
+export default Animate
+
+
+================================================================================
+FILE: components/feature/feature.module.css
+================================================================================
+
+.section {
+    position: relative;
+}
+
+.featureBox {
+    max-width: var(--maxWidth);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.contentWrapper {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgb(30, 41, 59);
+}
+
+@media (min-width: 768px) {
+    .contentWrapper {
+        padding-top: 8rem;
+        padding-bottom: 5rem;
+    }
+}
+
+.header {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+    .header {
+        padding-bottom: 5rem;
+    }
+}
+
+.title {
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, rgba(226, 232, 240, 0.6), rgb(226, 232, 240), rgba(226, 232, 240, 0.6));
+    padding-bottom: 1rem;
+    font-weight: 600; /* Missing from Tailwind's font-semibold */
+}
+
+.description {
+    font-size: 1.125rem;
+    color: rgb(148, 163, 184);
+}
+
+.imageContainer {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imageWrapper {
+    position: relative;
+    height: 100%;
+    background-color: rgb(15, 23, 42);
+    border-radius: inherit;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.radialGradient {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    pointer-events: none;
+    z-index: -10;
+    width: 50%;
+    aspect-ratio: 1;
+}
+
+.gradientCircle {
+    position: absolute;
+    inset: 0;
+    transform: translateZ(0);
+    background-color: rgb(168, 85, 247);
+    border-radius: 9999px;
+    filter: blur(120px);
+
+}
+
+.h2 {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+
+    @media (min-width: 768px) {
+        font-size: 3rem; /* text-5xl */
+        line-height: 1;
+    }
+}
+
+
+================================================================================
+FILE: components/feature/feature.tsx
+================================================================================
+
+import Image from "next/image";
+import Highlighter, { HighlighterItem } from "../highlight/highlighter";
+import Img04 from "@/public/assets/img-4.png";
+import styles from "./feature.module.css";
+
+export default function Features() {
+  return (
+    <section className={styles.section}>
+      <div className={styles.featureBox}>
+        <div className={styles.contentWrapper}>
+          {/* Section header */}
+          <div className={styles.header}>
+            <h2 className={styles.h2}>More than a login box</h2>
+            <p className={styles.description}>
+              There are many variations available, but the majority have
+              suffered alteration in some form, by injected humour, or
+              randomized words which don&apos;t look even slightly believable.
+            </p>
+          </div>
+
+          <div className={styles.imageContainer}>
+            <div data-aos="fade-down">
+              <Highlighter className="group">
+                <HighlighterItem>
+                  <div className={styles.imageWrapper}>
+                    {/* Radial gradient */}
+                    <div className={styles.radialGradient} aria-hidden="true">
+                      <div className={styles.gradientCircle} />
+                    </div>
+                    <Image
+                      src={Img04}
+                      width={768}
+                      height={400}
+                      alt="Feature 04"
+                    />
+                  </div>
+                </HighlighterItem>
+              </Highlighter>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+================================================================================
+FILE: components/fibonacci-spiral/FibonacciSpiral.module.css
+================================================================================
+
+/* components/FibonacciSpiral/FibonacciSpiral.module.css */
+
+/* Container for the whole component */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: sans-serif;
+    background-color: #f4f4f4; /* Or inherit from global styles */
+    color: #333;
+    min-height: 80vh; /* Ensure it takes up some space */
+}
+
+.heading {
+    margin-bottom: 20px;
+}
+
+/* Style the controls section */
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+}
+
+/* Style the input field and button */
+.input, .button {
+    padding: 8px 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the canvas */
+.canvas {
+    border: 1px solid #999;
+    background-color: #fff;
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    /* Set explicit initial dimensions matching canvas attributes if needed */
+    /* width: 600px; */
+    /* height: 600px; */
+    display: block; /* Prevents extra space below canvas */
+    margin: 0 auto; /* Center canvas if container is wider */
+}
+
+/* Simple responsiveness for smaller screens */
+@media (max-width: 650px) {
+    .heading {
+        font-size: 1.5em;
+    }
+    .controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .canvas {
+       /* Adjust width as needed for smaller screens */
+       max-width: 95%;
+    }
+}
+
+
+================================================================================
+FILE: components/fibonacci-spiral/FibonacciSpiral.tsx
+================================================================================
+
+// components/FibonacciSpiral/FibonacciSpiral.tsx
+"use client"; // ** IMPORTANT: Mark as a Client Component **
+
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import styles from './FibonacciSpiral.module.css'; // Import CSS Module
+
+// Default number of terms if input is invalid or not provided
+const DEFAULT_TERMS = 12;
+const MAX_TERMS = 25; // Practical limit
+
+// * Fibonacci Calculation (Pure function, can stay outside component)
+/**
+ * Generates an array containing the first n Fibonacci numbers.
+ * @param {number} n - The number of Fibonacci terms to generate.
+ * @returns {number[]} An array of Fibonacci numbers.
+ */
+const generateFibonacci = (n: number): number[] => {
+    if (n <= 0) return [];
+    if (n === 1) return [0];
+
+    const sequence = [0, 1];
+    for (let i = 2; i < n; i++) {
+        sequence.push(sequence[i - 1] + sequence[i - 2]);
+    }
+    return sequence;
+};
+
+
+const FibonacciSpiral: React.FC = () => {
+    // --- State ---
+    // State for the number of terms input field
+    const [numTerms, setNumTerms] = useState<number>(DEFAULT_TERMS);
+    // State to hold the sequence (optional, could regenerate each time)
+    // const [fibSequence, setFibSequence] = useState<number[]>(() => generateFibonacci(DEFAULT_TERMS));
+
+    // --- Refs ---
+    // Ref to access the canvas DOM element
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    // Ref to store the drawing context (avoids retrieving it repeatedly)
+    const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+    // Ref to store the animation timeout ID for cancellation
+    const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
+     // Ref to store the current scale factor
+    const scaleRef = useRef<number>(10);
+
+
+    // --- Helper Function to Adjust Scale ---
+    const adjustScale = (terms: number) => {
+        if (terms > 15) {
+            scaleRef.current = 3;
+        } else if (terms > 10) {
+            scaleRef.current = 6;
+        } else {
+            scaleRef.current = 10;
+        }
+    };
+
+    // --- Drawing Logic (using useCallback to memoize) ---
+    const drawSpiralAnimated = useCallback((fibNumbers: number[]) => {
+        if (!canvasRef.current) {
+            console.error("Canvas element not found");
+            return;
+        }
+        // Ensure we have the drawing context
+        if (!ctxRef.current) {
+            ctxRef.current = canvasRef.current.getContext('2d');
+        }
+        if (!ctxRef.current) {
+            console.error("Could not get 2D context");
+            return;
+        }
+
+        const ctx = ctxRef.current;
+        const canvas = canvasRef.current;
+        const scale = scaleRef.current; // Use the scale from the ref
+        const animationDelay = 150; // Milliseconds
+
+        // --- Stop any previous animation ---
+        if (timeoutIdRef.current) {
+            clearTimeout(timeoutIdRef.current);
+            timeoutIdRef.current = null;
+        }
+
+        // --- Clear Canvas and Setup ---
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+        let direction = 0; // 0: R, 1: D, 2: L, 3: U
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#003366';
+
+        let currentIndex = 1; // Start with the second number (usually 1)
+
+        // --- Recursive function for animation steps ---
+        function drawSegment() {
+            if (currentIndex >= fibNumbers.length || !ctx) {
+                timeoutIdRef.current = null; // Clear ref when done
+                console.log("Spiral drawing complete.");
+                return;
+            }
+
+            const radius = fibNumbers[currentIndex] * scale;
+
+            // Skip 0-radius segments (handles fib[0]=0 and potentially fib[1]=0 if sequence starts differently)
+             if (radius <= 0 && currentIndex < 2) {
+                 currentIndex++;
+                 timeoutIdRef.current = setTimeout(drawSegment, 5); // Tiny delay
+                 return;
+             }
+             if (radius <= 0) { // Should not happen for index >= 2 but good check
+                 currentIndex++;
+                 timeoutIdRef.current = setTimeout(drawSegment, animationDelay);
+                 return;
+             }
+
+
+            ctx.beginPath();
+            // Calculate arc parameters based on direction
+            switch (direction) {
+                case 0: ctx.arc(x, y + radius, radius, -Math.PI / 2, 0); x += radius; break;
+                case 1: ctx.arc(x - radius, y, radius, 0, Math.PI / 2); y += radius; break;
+                case 2: ctx.arc(x, y - radius, radius, Math.PI / 2, Math.PI); x -= radius; break;
+                case 3: ctx.arc(x + radius, y, radius, Math.PI, Math.PI * 1.5); y -= radius; break;
+            }
+            ctx.stroke();
+
+            currentIndex++;
+            direction = (direction + 1) % 4;
+
+            // Schedule next segment
+            timeoutIdRef.current = setTimeout(drawSegment, animationDelay);
+        }
+
+        // Start the animation chain
+        drawSegment();
+
+    }, []); // No dependencies needed if it reads refs and receives fibNumbers as arg
+
+    // --- Effect for Initial Draw and Resizing ---
+    useEffect(() => {
+        // Ensure canvas and context are ready
+        if (!canvasRef.current) return;
+        ctxRef.current = canvasRef.current.getContext('2d');
+        if (!ctxRef.current) return;
+
+        // Adjust scale based on initial terms
+        adjustScale(numTerms);
+
+        // Generate sequence and draw initially
+        const initialFibSequence = generateFibonacci(numTerms);
+        drawSpiralAnimated(initialFibSequence);
+
+        // --- Cleanup function ---
+        // This runs when the component unmounts or before the effect re-runs
+        return () => {
+            if (timeoutIdRef.current) {
+                clearTimeout(timeoutIdRef.current);
+                console.log("Cleared animation timeout on unmount/redraw.");
+            }
+        };
+        // Run effect only when drawSpiralAnimated function reference changes (which it shouldn't due to useCallback)
+        // Or potentially add numTerms if you want initial draw to re-run if default changes (unlikely)
+    }, [drawSpiralAnimated]); // Re-run initial draw if draw function changes (it shouldn't)
+
+
+    // --- Event Handlers ---
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let value = parseInt(event.target.value, 10);
+        // Handle NaN or invalid input, potentially clamping or resetting
+        if (isNaN(value) || value <= 0) {
+            value = 1; // Or keep previous valid value, or show error
+        } else if (value > MAX_TERMS) {
+            value = MAX_TERMS; // Clamp to max
+        }
+        setNumTerms(value);
+    };
+
+    const handleDrawClick = () => {
+        // Validate terms again before drawing
+        let termsToDraw = numTerms;
+        if (isNaN(termsToDraw) || termsToDraw <= 0 || termsToDraw > MAX_TERMS) {
+            console.warn(`Invalid number of terms: ${numTerms}. Using default: ${DEFAULT_TERMS}`);
+            termsToDraw = DEFAULT_TERMS;
+            setNumTerms(DEFAULT_TERMS); // Update state/input field as well
+        }
+
+        // Adjust scale based on the selected terms
+        adjustScale(termsToDraw);
+
+        // Generate the sequence
+        const sequence = generateFibonacci(termsToDraw);
+        console.log("Generated Fibonacci Sequence:", sequence);
+
+        // Start the drawing animation
+        drawSpiralAnimated(sequence);
+    };
+
+    // --- Render JSX ---
+    return (
+        <div className={styles.container}>
+            <h1 className={styles.heading}>Fibonacci Spiral Animation</h1>
+
+            <div className={styles.controls}>
+                <label htmlFor="termsInput">Number of Terms:</label>
+                <input
+                    type="number"
+                    id="termsInput"
+                    value={numTerms}
+                    onChange={handleInputChange}
+                    min="1"
+                    max={MAX_TERMS} // Use constant for max
+                    className={styles.input}
+                />
+                <button onClick={handleDrawClick} className={styles.button}>
+                    Draw Spiral
+                </button>
+            </div>
+
+            <canvas
+                ref={canvasRef}
+                width="600" // Set initial canvas dimensions
+                height="600" // These can be adjusted
+                className={styles.canvas}
+            >
+                Your browser does not support the HTML canvas element.
+            </canvas>
+        </div>
+    );
+};
+
+export default FibonacciSpiral;
+
+
+================================================================================
+FILE: components/galactic/galactic.module.css
+================================================================================
+
+/* app/Galactic/Galactic.module.css */
+
+.effectLayer {
+  /* Base styles if needed, mostly handled by Tailwind */
+  will-change: transform, opacity; /* Performance hint */
+}
+
+.contentWrapper {
+  will-change: transform; /* Performance hint */
+  transform-origin: center;
+}
+
+/* Animation 1: Slow, large drift (like effect 'b') */
+@keyframes drift1 {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(20px, 15px) rotate(1deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-10px, 5px) rotate(-0.5deg);
+    opacity: 0.65;
+  }
+  75% {
+    transform: translate(5px, -15px) rotate(0.5deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+.animateDrift1 {
+  animation: drift1 45s linear infinite; /* Longer duration */
+}
+
+/* Animation 2: Different drift/pattern movement (like effect 'c') */
+@keyframes drift2 {
+  0% {
+    /* Example: Animate background position for repeating patterns */
+    background-position: 0% 0%;
+    transform: rotate(0deg);
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.4;
+    transform: rotate(0.5deg);
+  }
+  100% {
+    background-position: 100% 100%; /* Adjust based on pattern size */
+    transform: rotate(0deg);
+    opacity: 0.25;
+  }
+}
+.animateDrift2 {
+  /* Using background-position animation */
+  animation: drift2 35s linear infinite alternate; /* Alternate direction */
+}
+
+/* Animation 3: Subtle floating effect for content (like effect 'a') */
+@keyframes float {
+  0% {
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+  50% {
+    transform: translateZ(5px) rotateX(0.5deg) rotateY(-0.5deg) scale(1.01);
+  }
+  100% {
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg) scale(1);
+  }
+}
+.animateFloat {
+  animation: float 25s ease-in-out infinite;
+}
+
+
+================================================================================
+FILE: components/galactic/layout.tsx
+================================================================================
+
+// app/galactic/layout.tsx
+import React from "react";
+import styles from "./galactic.module.css";
+
+interface GalacticViewLayoutProps {
+  children: React.ReactNode;
+}
+
+const GalacticViewLayout: React.FC<GalacticViewLayoutProps> = ({
+  children,
+}) => {
+  return (
+    // Outermost container: relative positioning context, overflow hidden, full height
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Effect Layer 1 (Inspired by galaxy-map__effect1) */}
+      {/* Slightly larger than viewport, slower drift animation */}
+      <div
+        className={`
+          ${styles.effectLayer} ${styles.animateDrift1}
+          absolute -inset-10 z-10
+          bg-[radial-gradient(ellipse_at_center,_rgba(30,60,150,0.3)_0%,_rgba(10,20,80,0.5)_70%,_rgba(5,10,40,0.8)_100%)]
+          opacity-70
+          pointer-events-none
+        `}
+      />
+
+      {/* Effect Layer 2 (Inspired by galaxy-map__effect2) */}
+      {/* Fits viewport, different/faster animation, maybe different visual */}
+      <div
+        className={`
+          ${styles.effectLayer} ${styles.animateDrift2}
+          absolute inset-0 z-2
+          bg-[url('/assets/spiral-galaxy-4k.png')]
+          bg-repeat opacity-30
+          mix-blend-mode-screen
+          pointer-events-none
+        `}
+      />
+
+      {/* Optional: Subtle Vignette Effect */}
+      <div className="absolute inset-0 z-25 pointer-events-none bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0)_60%,_rgba(0,0,0,0.7)_100%)]" />
+
+      {/* Content Wrapper (Inspired by .content and .galaxy-map container) */}
+      {/* Sits above effects, handles content layout, subtle float animation */}
+      <div
+        className={`
+          ${styles.contentWrapper} ${styles.animateFloat} relative z-30 min-h-screen w-full
+          flex flex-col items-center justify-center text-slate-200  p-4 sm:p-8 perspective-[200px]
+        `}
+      >
+        {children} {/* Where the actual page content will be rendered */}
+      </div>
+    </div>
+  );
+};
+
+export default GalacticViewLayout;
+
+
+================================================================================
+FILE: components/galactic/page.tsx
+================================================================================
+
+// app/galactic/page.tsx
+import Link from "next/link";
+
+export default function GalacticPage() {
+  return (
+    <div className="text-center backdrop-blur-sm bg-black/30 p-8 rounded-lg shadow-xl">
+      <h1 className="text-4xl sm:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 animate-pulse">
+        Welcome to the Galactic View
+      </h1>
+      <p className="text-lg sm:text-xl mb-6 max-w-2xl mx-auto">
+        This page demonstrates the layered, animated background effect, creating
+        an atmospheric space theme. Replace this content with your interactive
+        map or other elements.
+      </p>
+      <div className="space-x-4">
+        <Link
+          href="/"
+          className="bg-gradient-to-r from-blue-500 to-teal-500 hover:from-blue-600 hover:to-teal-600 text-white font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Go Home
+        </Link>
+        <button
+          type="button"
+          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        >
+          Explore (Placeholder)
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: components/hero/Hero.tsx
+================================================================================
+
+import Image from "next/image";
+import Particles from "../particles/Particles";
+import Illustration from "@/public/glow-bottom.svg";
+import styles from "./hero.module.css"
+
+const Intro = [
+  "Hi, I’m a software engineer passionate about solving complex problems and creating technology that improves lives. Welcome to my website, where I share my projects and insights on building impactful software.",
+  "my digital playground—a space where I stash notes, articles, and code snippets to revisit later. I’m a software engineer who thinks out loud here, mostly about dev challenges, with some rants, self-care musings, and mental health sprinkled in. Dive in and explore!",
+  "Hey, I’m a coder hooked on crafting speedy, open-for-all web magic—welcome to my wild dev playground!",
+  "Hey, I’m a dev who thrives on crafting code to fix user headaches and build speedy, open-for-all web magic!",
+];
+
+export default function Hero() {
+  return (
+    <section>
+      <div className={styles.heroSection}>
+        {/* Particles animation */}
+        <Particles className={styles.heroParticles} />
+
+        {/* Illustration */}
+        <div
+          className={styles.illustrationBox}
+          aria-hidden="true"
+        >
+          <div className={styles.illustrationInnerBox}>
+            <Image
+              src={Illustration}
+              className="max-w-none"
+              width={2146}
+              priority
+              alt="Hero Illustration"
+            />
+          </div>
+        </div>
+
+        <div className="pt-32 pb-16 md:pt-52 md:pb-32">
+          {/* Hero content */}
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="mb-6" data-aos="fade-down">
+              <div className="inline-flex relative before:absolute before:inset-0 before:bg-purple-500 before:blur-md">
+                <a
+                  className="btn-sm py-0.5 text-slate-300 hover:text-white transition duration-150 ease-in-out group [background:linear-gradient(theme(colors.purple.500),_theme(colors.purple.500))_padding-box,_linear-gradient(theme(colors.purple.500),_theme(colors.purple.200)_75%,_theme(colors.transparent)_100%)_border-box] relative before:absolute before:inset-0 before:bg-slate-800/50 before:rounded-full before:pointer-events-none shadow"
+                  href="#0"
+                >
+                  <span className="relative inline-flex items-center">
+                    API Studio is now in beta{" "}
+                    <span className="tracking-normal text-purple-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+                      -&gt;
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <h1
+              className="h1 bg-clip-text text-transparent bg-gradient-to-r from-slate-200/60 via-slate-200 to-slate-200/60 pb-4"
+              data-aos="fade-down"
+            >
+              The API Security Framework
+            </h1>
+            <p
+              className="text-lg text-slate-300 mb-8"
+              data-aos="fade-down"
+              data-aos-delay="200"
+            >
+              Our landing page template works on all devices, so you only have
+              to set it up once, and get beautiful results forever.
+            </p>
+            <div
+              className="max-w-xs mx-auto sm:max-w-none sm:inline-flex sm:justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+              data-aos="fade-down"
+              data-aos-delay="400"
+            >
+              <div>
+                <a
+                  className="btn text-slate-900 bg-gradient-to-r from-white/80 via-white to-white/80 hover:bg-white w-full transition duration-150 ease-in-out group"
+                  href="#0"
+                >
+                  Get Started{" "}
+                  <span className="tracking-normal text-purple-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+                    -&gt;
+                  </span>
+                </a>
+              </div>
+              <div>
+                <a
+                  className="btn text-slate-200 hover:text-white bg-slate-900 bg-opacity-25 hover:bg-opacity-30 w-full transition duration-150 ease-in-out"
+                  href="#0"
+                >
+                  <svg
+                    className="shrink-0 fill-slate-300 mr-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                  >
+                    <path d="m1.999 0 1 2-1 2 2-1 2 1-1-2 1-2-2 1zM11.999 0l1 2-1 2 2-1 2 1-1-2 1-2-2 1zM11.999 10l1 2-1 2 2-1 2 1-1-2 1-2-2 1zM6.292 7.586l2.646-2.647L11.06 7.06 8.413 9.707zM0 13.878l5.586-5.586 2.122 2.121L2.12 16z" />
+                  </svg>
+                  <span>Read the docs</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+================================================================================
+FILE: components/hero/hero.module.css
+================================================================================
+
+.heroSection {
+  position: relative;
+  max-width: var(--maxWidth);
+
+  /* max-width: 72rem; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.illustrationBox {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  margin-left: -7rem;
+  margin-right: -7rem;
+  border-radius: 0 0 3rem 3rem;
+  pointer-events: none;
+  overflow: hidden;
+  border-bottom-right-radius: 3rem;
+  border-bottom-left-radius: 3rem;
+  overflow: hidden;
+}
+
+.illustrationInnerBox {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  --swiper-theme-color: #007aff;
+  line-height: inherit;
+  --tw-bg-opacity: 1;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
+  -webkit-font-smoothing: antialiased;
+  --font-inter: "__Inter_d65c78", "__Inter_Fallback_d65c78";
+  pointer-events: none;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  z-index: -10;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.heroContent {
+  padding-block: calc(var(--spacing) * 8) calc(var(--spacing) * 4);
+  text-align: center;
+}
+
+/* Add responsive styles */
+@media (min-width: 640px) {
+  .heroSection {
+    padding: calc(var(--spacing) * 6) calc(var(--spacing) * 1.5);
+  }
+
+  .heroContent {
+    padding-block: calc(var(--spacing) * 13) calc(var(--spacing) * 8);
+  }
+}
+
+.heroParticles {
+  z-index: -10;
+  position: absolute;
+  inset: 0;
+}
+
+
+================================================================================
+FILE: components/highlight/highlight.module.css
+================================================================================
+
+.highlighterItem {
+    position: relative;
+    height: 100%;
+    background-color: rgb(30, 41, 59); /* bg-slate-800 */
+    border-radius: 1.5rem; /* rounded-3xl */
+    padding: 1px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    overflow: hidden;
+}
+
+.highlighterItem::before {
+    content: '';
+    position: absolute;
+    width: 24rem; /* w-96 */
+    height: 24rem; /* h-96 */
+    left: -12rem; /*\ -left-48 */
+    top: -12rem; /*\ -top-48 */
+    background-color: rgb(168, 85, 247); /* bg-purple-500 */
+    border-radius: 9999px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 500ms;
+    transform: translate(var(--mouse-x), var(--mouse-y));
+    z-index: 30;/
+    filter: blur(100px);
+}
+
+.highlighterItem:hover::before {
+    opacity: 0.2;/
+}
+
+.highlighterItem::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 500ms;
+    background: radial-gradient(
+        250px circle at var(--mouse-x) var(--mouse-y),
+        rgb(148, 163, 184),
+        transparent
+    );
+    z-index: 10;
+}
+
+/* Group hover effects */
+:global(.group:hover) .highlighterItem::before {
+    opacity: 0.2;
+}
+
+:global(.group:hover) .highlighterItem::after {
+    opacity: 1;
+}
+
+:global(.group:hover) .highlighterItem {
+    background-color: rgb(51, 65, 85); /* hover:bg-slate-700 */
+    transition: background-color 150ms ease-in-out;
+}
+
+/* HighlighterItem02 specific styles */
+.highlighterItem02 {
+    /* Copy all highlighterItem base styles */
+    position: relative;
+    height: 100%;
+    background-color: rgb(30, 41, 59);
+    border-radius: 1.5rem;
+    padding: 1px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    overflow: hidden;
+
+    /* Add highlighterItem02 specific styles */
+    margin: -1px;
+}
+
+.highlighterItem02::before {
+    width: 16rem; /* w-64 */
+    height: 16rem; /* h-64 */
+    left: -8rem; /*\ -left-32 */
+    top: -8rem; /*\ -top-32 */
+    background-color: rgb(99, 102, 241); /* bg-indigo-500 */
+    filter: blur(64px);
+    z-index: 30;
+}
+
+.highlighterItem02:hover::before {
+    opacity: 0.3;
+}
+
+.highlighterItem02::after {
+    background: radial-gradient(
+        250px circle at var(--mouse-x) var(--mouse-y),
+        rgb(148, 163, 184), /* Use exact slate-400 color */
+        transparent
+    );
+}
+
+.highlighterItem02:global(.group:hover)::before {
+    opacity: 0.3;
+}
+
+
+================================================================================
+FILE: components/highlight/highlighter.tsx
+================================================================================
+
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
+import MousePosition from "../hooks/mouse-position";
+import styles from "./highlight.module.css";
+
+type HighlighterProps = {
+  children: React.ReactNode;
+  className?: string;
+  refresh?: boolean;
+};
+
+export default function Highlighter({
+  children,
+  className = "",
+  refresh = false,
+}: HighlighterProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mousePosition = MousePosition();
+  const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const containerSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+  const [boxes, setBoxes] = useState<Array<HTMLElement>>([]);
+
+  useEffect(() => {
+    containerRef.current &&
+      setBoxes(
+        Array.from(containerRef.current.children).map((el) => el as HTMLElement)
+      );
+  }, []);
+
+  useEffect(() => {
+    initContainer();
+    window.addEventListener("resize", initContainer);
+
+    return () => {
+      window.removeEventListener("resize", initContainer);
+    };
+  }, [setBoxes]);
+
+  useEffect(() => {
+    onMouseMove();
+  }, [mousePosition]);
+
+  useEffect(() => {
+    initContainer();
+  }, [refresh]);
+
+  const initContainer = () => {
+    if (containerRef.current) {
+      containerSize.current.w = containerRef.current.offsetWidth;
+      containerSize.current.h = containerRef.current.offsetHeight;
+    }
+  };
+
+  const onMouseMove = () => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const { w, h } = containerSize.current;
+      const x = mousePosition.x - rect.left;
+      const y = mousePosition.y - rect.top;
+      const inside = x < w && x > 0 && y < h && y > 0;
+      if (inside) {
+        mouse.current.x = x;
+        mouse.current.y = y;
+        boxes.forEach((box) => {
+          const boxX =
+            -(box.getBoundingClientRect().left - rect.left) + mouse.current.x;
+          const boxY =
+            -(box.getBoundingClientRect().top - rect.top) + mouse.current.y;
+          box.style.setProperty("--mouse-x", `${boxX}px`);
+          box.style.setProperty("--mouse-y", `${boxY}px`);
+        });
+      }
+    }
+  };
+
+  return (
+    <div className={className} ref={containerRef}>
+      {children}
+    </div>
+  );
+}
+
+type HighlighterItemProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+export function HighlighterItem({
+  children,
+  className = "",
+}: HighlighterItemProps) {
+  return (
+    <div
+      className={`${styles.highlighterItem} ${className}`}
+      style={{ '--mouse-x': '0px', '--mouse-y': '0px' } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+}
+
+export function HighlighterItem02({
+  children,
+  className = "",
+}: HighlighterItemProps) {
+  return (
+    <div
+      className={`${styles.highlighterItem02} ${className}`}
+      style={{ '--mouse-x': '0px', '--mouse-y': '0px' } as React.CSSProperties}
+    >
+      {children}
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: components/hooks/mouse-position.ts
+================================================================================
+
+import { useState, useEffect } from 'react';
+
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+export default function useMousePosition(): MousePosition {
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
+  return mousePosition;
+}
+
+
+================================================================================
+FILE: components/particles/Particles.tsx
+================================================================================
+
+"use client";
+
+import React, { useRef, useEffect } from "react";
+import useMousePosition from "../hooks/mouse-position";
+
+interface ParticlesProps {
+  className?: string;
+  quantity?: number;
+  staticity?: number;
+  ease?: number;
+  refresh?: boolean;
+}
+
+interface Particle {
+  x: number;
+  y: number;
+  originalX: number;
+  originalY: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  color?: string;
+  range?: number;
+}
+
+export default function Particles({
+  className = "",
+  quantity = 30,
+  staticity = 50,
+  ease = 50,
+  refresh = false,
+}: ParticlesProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const context = useRef<CanvasRenderingContext2D | null>(null);
+  const circles = useRef<Particle[]>([]);
+  const mousePosition = useMousePosition();
+  const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+  const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      context.current = canvasRef.current.getContext("2d");
+    }
+    initCanvas();
+    animate();
+    window.addEventListener("resize", initCanvas);
+
+    return () => {
+      window.removeEventListener("resize", initCanvas);
+    };
+  }, []);
+
+  useEffect(() => {
+    onMouseMove();
+  }, [mousePosition.x, mousePosition.y]);
+
+  useEffect(() => {
+    initCanvas();
+  }, [refresh]);
+
+  const initCanvas = () => {
+    resizeCanvas();
+    drawParticles();
+  };
+
+  const onMouseMove = () => {
+    if (canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const { w, h } = canvasSize.current;
+      const x = mousePosition.x - rect.left - w / 2;
+      const y = mousePosition.y - rect.top - h / 2;
+      const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2;
+      if (inside) {
+        mouse.current.x = x;
+        mouse.current.y = y;
+      }
+    }
+  };
+
+  type Circle = {
+    x: number;
+    y: number;
+    translateX: number;
+    translateY: number;
+    size: number;
+    alpha: number;
+    targetAlpha: number;
+    dx: number;
+    dy: number;
+    magnetism: number;
+  };
+
+  const resizeCanvas = () => {
+    if (canvasContainerRef.current && canvasRef.current && context.current) {
+      circles.current.length = 0;
+      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
+      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+      canvasRef.current.width = canvasSize.current.w * dpr;
+      canvasRef.current.height = canvasSize.current.h * dpr;
+      canvasRef.current.style.width = canvasSize.current.w + "px";
+      canvasRef.current.style.height = canvasSize.current.h + "px";
+      context.current.scale(dpr, dpr);
+    }
+  };
+
+  const circleParams = (): Circle => {
+    const x = Math.floor(Math.random() * canvasSize.current.w);
+    const y = Math.floor(Math.random() * canvasSize.current.h);
+    const translateX = 0;
+    const translateY = 0;
+    const size = Math.floor(Math.random() * 2) + 1;
+    const alpha = 0;
+    const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
+    const dx = (Math.random() - 0.5) * 0.2;
+    const dy = (Math.random() - 0.5) * 0.2;
+    const magnetism = 0.1 + Math.random() * 4;
+    return {
+      x,
+      y,
+      translateX,
+      translateY,
+      size,
+      alpha,
+      targetAlpha,
+      dx,
+      dy,
+      magnetism,
+    };
+  };
+
+  const drawCircle = (circle: Circle, update = false) => {
+    if (context.current) {
+      const { x, y, translateX, translateY, size, alpha } = circle;
+      context.current.translate(translateX, translateY);
+      context.current.beginPath();
+      context.current.arc(x, y, size, 0, 2 * Math.PI);
+      context.current.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      context.current.fill();
+      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (!update) {
+        circles.current.push(circle);
+      }
+    }
+  };
+
+  const clearContext = () => {
+    if (context.current) {
+      context.current.clearRect(
+        0,
+        0,
+        canvasSize.current.w,
+        canvasSize.current.h
+      );
+    }
+  };
+
+  const drawParticles = () => {
+    clearContext();
+    const particleCount = quantity;
+    for (let i = 0; i < particleCount; i++) {
+      const circle = circleParams();
+      drawCircle(circle);
+    }
+  };
+
+  const remapValue = (
+    value: number,
+    start1: number,
+    end1: number,
+    start2: number,
+    end2: number
+  ): number => {
+    const remapped =
+      ((value - start1) * (end2 - start2)) / (end1 - start1) + start2;
+    return remapped > 0 ? remapped : 0;
+  };
+
+  const animate = () => {
+    clearContext();
+    circles.current.forEach((circle: Circle, i: number) => {
+      // Handle the alpha value
+      const edge = [
+        circle.x + circle.translateX - circle.size, // distance from left edge
+        canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
+        circle.y + circle.translateY - circle.size, // distance from top edge
+        canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+      ];
+      const closestEdge = edge.reduce((a, b) => Math.min(a, b));
+      const remapClosestEdge = parseFloat(
+        remapValue(closestEdge, 0, 20, 0, 1).toFixed(2)
+      );
+      if (remapClosestEdge > 1) {
+        circle.alpha += 0.02;
+        if (circle.alpha > circle.targetAlpha)
+          circle.alpha = circle.targetAlpha;
+      } else {
+        circle.alpha = circle.targetAlpha * remapClosestEdge;
+      }
+      circle.x += circle.dx;
+      circle.y += circle.dy;
+      circle.translateX +=
+        (mouse.current.x / (staticity / circle.magnetism) - circle.translateX) /
+        ease;
+      circle.translateY +=
+        (mouse.current.y / (staticity / circle.magnetism) - circle.translateY) /
+        ease;
+      // circle gets out of the canvas
+      if (
+        circle.x < -circle.size ||
+        circle.x > canvasSize.current.w + circle.size ||
+        circle.y < -circle.size ||
+        circle.y > canvasSize.current.h + circle.size
+      ) {
+        // remove the circle from the array
+        circles.current.splice(i, 1);
+        // create a new circle
+        const newCircle = circleParams();
+        drawCircle(newCircle);
+        // update the circle position
+      } else {
+        drawCircle(
+          {
+            ...circle,
+            x: circle.x,
+            y: circle.y,
+            translateX: circle.translateX,
+            translateY: circle.translateY,
+            alpha: circle.alpha,
+          },
+          true
+        );
+      }
+    });
+    window.requestAnimationFrame(animate);
+  };
+
+  return (
+    <div className={className} ref={canvasContainerRef} aria-hidden="true">
+      <canvas ref={canvasRef} />
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: components/particles/particles.module.css
+================================================================================
+
+.particles-container {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+}
+
+.particles-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+
+================================================================================
+FILE: components/projects/project.module.css
+================================================================================
+
+.projectsBox {
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+
+  line-height: inherit;
+  --font-inter: "__Inter_d65c78", "__Inter_Fallback_d65c78";
+  --tw-bg-opacity: 1;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 72rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.projectsInnerBox {
+  padding-top: 3rem;
+  @media (min-width: 768px) {
+    .md\:pt-20 {
+      padding-top: 5rem;
+    }
+  }
+}
+
+.projectsHeaderBox {
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  --swiper-theme-color: #007aff;
+  line-height: inherit;
+  --tw-bg-opacity: 1;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 48rem;
+  text-align: center;
+  padding-bottom: 5rem;
+}
+
+.titleGradient {
+  tab-size: 4;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
+  --swiper-theme-color: #007aff;
+  line-height: inherit;
+  --font-inter: "__Inter_d65c78", "__Inter_Fallback_d65c78";
+  --tw-bg-opacity: 1;
+  font-family: var(--font-inter), sans-serif;
+  letter-spacing: -0.01em;
+  --tw-text-opacity: 1;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+
+  display: inline-flex;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+
+  background-clip: text;
+  padding-bottom: 0.75rem;
+  font-weight: 500;
+  color: transparent;
+}
+
+.header {
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+  margin: 0;
+  font-weight: 800;
+  font-size: 2.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.017em;
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+  --tw-gradient-from: rgb(226 232 240 / 0.6) var(--tw-gradient-from-position);
+  --tw-gradient-stops: var(--tw-gradient-from),
+    #e2e8f0 var(--tw-gradient-via-position), var(--tw-gradient-to);
+  --tw-gradient-to: rgb(226 232 240 / 0.6) var(--tw-gradient-to-position);
+  background-clip: text;
+  padding-bottom: 1rem;
+  color: transparent;
+}
+
+.carouselWrapper {
+  /* Wrapper class */
+  position: relative; /* Establish relative positioning for pseudo-elements */
+
+  /* Before pseudo-element */
+  &::before {
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    z-index: 20;
+    background-image: linear-gradient(
+      to left,
+      transparent,
+      #334155
+    ); /* slate-900 */
+    background-position: 20%; /* `before:to-20%` equivalent */
+    content: "";
+  }
+
+  /* After pseudo-element */
+  &::after {
+    position: absolute;
+    inset: 0;
+    transform: translateX(100%);
+    z-index: 20;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      #334155
+    ); /* slate-900 */
+    background-position: 20%; /* `after:to-20%` equivalent */
+    content: "";
+  }
+}
+
+.swiperWrapper {
+  touch-action: pan-y;
+  cursor: grab;
+  transform: translate3d(-568px, 0px, 0px);
+  transition-duration: 0ms;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.slide {
+  height: auto;
+}
+
+.slideContent {
+  position: relative;
+  height: 100%;
+  background-color: rgb(15, 23, 42); /* bg-slate-900 */
+  border-radius: inherit;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.particlesWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.activeSlide .particlesWrapper,
+.slide:hover .particlesWrapper {
+  opacity: 1;
+}
+
+.radialGradient {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  pointer-events: none;
+  z-index: -10;
+  width: 33.333333%;
+  aspect-ratio: 1;
+}
+
+.gradientCircle {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0);
+  border-radius: 9999px;
+  background-color: rgb(30, 41, 59); /* bg-slate-800 */
+  transition: background-color 500ms ease-in-out;
+  filter: blur(60px);
+}
+
+.activeSlide .gradientCircle {
+  background-color: rgb(168, 85, 247); /* bg-purple-500 */
+}
+
+.slideInner {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.projectImage {
+  margin-bottom: 0.75rem;
+}
+
+.projectContent {
+  flex-grow: 1;
+}
+
+.projectTitle {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.projectDescription {
+  color: rgb(148, 163, 184); /* text-slate-400 */
+  margin-bottom: 0.75rem;
+}
+
+.learnMoreLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(203, 213, 225); /* text-slate-300 */
+  transition: color 150ms ease-in-out;
+}
+
+.learnMoreLink:hover {
+  color: rgb(255, 255, 255);
+}
+
+.learnMoreArrow {
+  margin-left: 0.25rem;
+  color: rgb(168, 85, 247); /* text-purple-500 */
+  transition: transform 150ms ease-in-out;
+}
+
+.learnMoreLink:hover .learnMoreArrow {
+  transform: translateX(2px);
+}
+
+.navigationButtons {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.carouselButton {
+  position: relative;
+  z-index: 20;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carouselIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: rgb(100, 116, 139); /* fill-slate-500 */
+  transition: fill 150ms ease-in-out;
+}
+
+.carouselButton:hover .carouselIcon {
+  fill: rgb(168, 85, 247); /* fill-purple-500 */
+}
+
+
+================================================================================
+FILE: components/projects/projects.tsx
+================================================================================
+
+"use client";
+
+import { useEffect, useState, useRef } from "react"; // Add useRef
+import Image from "next/image";
+import Particles from "../particles/Particles";
+import Highlighter, { HighlighterItem } from "../highlight/highlighter";
+
+import CarouselImg01 from "@/public/assets/img-1.png";
+import CarouselImg05 from "@/public/assets/img-5.png";
+import CarouselImg03 from "@/public/assets/img-3.png";
+import CarouselImg04 from "@/public/assets/img-4.png";
+import styles from "./project.module.css";
+
+import Swiper from "swiper";
+import { Navigation } from "swiper/modules";
+// Import Swiper
+import "swiper/css";
+import "swiper/css/navigation";
+Swiper.use([Navigation]);
+
+export default function ProjectsCarousel() {
+  const [swiperInitialized, setSwiperInitialized] = useState<boolean>(false);
+  const swiperRef = useRef<HTMLDivElement>(null); // Add ref for Swiper container
+
+  useEffect(() => {
+    if (!swiperRef.current) return; // Guard clause
+
+    const carousel = new Swiper(swiperRef.current, {
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+      grabCursor: true,
+      loop: false,
+      centeredSlides: false,
+      initialSlide: 0,
+      spaceBetween: 24,
+      navigation: {
+        nextEl: ".carousel-next",
+        prevEl: ".carousel-prev",
+      },
+    });
+
+    setSwiperInitialized(true);
+
+    return () => {
+      carousel.destroy(true, true); // Cleanup
+    };
+  }, []);
+
+  return (
+    <section>
+      <div className={styles.projectsBox}>
+        <div className={styles.projectsInnerBox}>
+          {/* Section header */}
+          <div className={styles.projectsHeaderBox}>
+            <div>
+              <div className={styles.titleGradient}>Some of my projects</div>
+            </div>
+            <h2 className={styles.header}>My Projects</h2>
+            <p className="text-lg text-slate-400">
+              Some of my projects that are live and working in some corner of
+              the Internet.
+            </p>
+          </div>
+
+          {/* Carousel built with Swiper.js [https://swiperjs.com/] */}
+          {/* * Custom styles in src/css/additional-styles/theme.scss */}
+          <div className={styles.carouselWrapper}>
+            {/* Change this div to use ref */}
+            <div ref={swiperRef} className={`swiper ${styles.swiperContainer}`}>
+              <Highlighter
+                className={`swiper-wrapper ${styles.swiperWrapper}`}
+                refresh={swiperInitialized}
+              >
+                {/* Carousel items */}
+                <HighlighterItem className={`swiper-slide ${styles.slide}`}>
+                  <div className={styles.slideContent}>
+                    <Particles
+                      className={styles.particlesWrapper}
+                      quantity={3}
+                      refresh={swiperInitialized}
+                    />
+                    <div className={styles.radialGradient} aria-hidden="true">
+                      <div className={styles.gradientCircle} />
+                    </div>
+                    <div className={styles.slideInner}>
+                      <Image
+                        className={styles.projectImage}
+                        src={CarouselImg01}
+                        width={56}
+                        height={56}
+                        alt="Icon 01"
+                      />
+                      <div className={styles.projectContent}>
+                        <div className={styles.projectTitle}>
+                          Anonymous User
+                        </div>
+                        <div className={styles.projectDescription}>
+                          Incorporate rich user profiling, and facilitate more
+                          transactions.
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <a href="#0" className={styles.learnMoreLink}>
+                          Learn More
+                          <span className={styles.learnMoreArrow}>-&gt;</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </HighlighterItem>
+                <HighlighterItem className={`swiper-slide ${styles.slide}`}>
+                  <div className={styles.slideContent}>
+                    <Particles
+                      className={styles.particlesWrapper}
+                      quantity={3}
+                      refresh={swiperInitialized}
+                    />
+                    <div className={styles.radialGradient} aria-hidden="true">
+                      <div className={styles.gradientCircle} />
+                    </div>
+                    <div className={styles.slideInner}>
+                      <Image
+                        className={styles.projectImage}
+                        src={CarouselImg05}
+                        width={56}
+                        height={56}
+                        alt="Icon 05"
+                      />
+                      <div className={styles.projectContent}>
+                        <div className={styles.projectTitle}>Bot Detection</div>
+                        <div className={styles.projectDescription}>
+                          Incorporate rich user profiling, and facilitate more
+                          transactions.
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <a href="#0" className={styles.learnMoreLink}>
+                          Learn More
+                          <span className={styles.learnMoreArrow}>-&gt;</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </HighlighterItem>
+                <HighlighterItem className={`swiper-slide ${styles.slide}`}>
+                  <div className={styles.slideContent}>
+                    <Particles
+                      className={styles.particlesWrapper}
+                      quantity={3}
+                      refresh={swiperInitialized}
+                    />
+                    <div className={styles.radialGradient} aria-hidden="true">
+                      <div className={styles.gradientCircle} />
+                    </div>
+                    <div className={styles.slideInner}>
+                      <Image
+                        className={styles.projectImage}
+                        src={CarouselImg03}
+                        width={56}
+                        height={56}
+                        alt="Icon 01"
+                      />
+                      <div className={styles.projectContent}>
+                        <div className={styles.projectTitle}>
+                          Social integrations
+                        </div>
+                        <div className={styles.projectDescription}>
+                          Incorporate rich user profiling, and facilitate more
+                          transactions.
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <a href="#0" className={styles.learnMoreLink}>
+                          Learn More
+                          <span className={styles.learnMoreArrow}>-&gt;</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </HighlighterItem>
+                <HighlighterItem className={`swiper-slide ${styles.slide}`}>
+                  <div className={styles.slideContent}>
+                    <Particles
+                      className={styles.particlesWrapper}
+                      quantity={3}
+                      refresh={swiperInitialized}
+                    />
+                    <div className={styles.radialGradient} aria-hidden="true">
+                      <div className={styles.gradientCircle} />
+                    </div>
+                    <div className={styles.slideInner}>
+                      <Image
+                        className={styles.projectImage}
+                        src={CarouselImg04}
+                        width={56}
+                        height={56}
+                        alt="Icon 01"
+                      />
+                      <div className={styles.projectContent}>
+                        <div className={styles.projectTitle}>
+                          Progressive Profiling
+                        </div>
+                        <div className={styles.projectDescription}>
+                          Incorporate rich user profiling, and facilitate more
+                          transactions.
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <a href="#0" className={styles.learnMoreLink}>
+                          Learn More
+                          <span className={styles.learnMoreArrow}>-&gt;</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </HighlighterItem>
+              </Highlighter>
+            </div>
+          </div>
+
+          {/* Update navigation buttons */}
+          <div className={styles.navigationButtons}>
+            <button className={`carousel-prev ${styles.carouselButton}`}>
+              <span className="sr-only">Previous</span>
+              <svg
+                className={styles.carouselIcon}
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.7 14.7l1.4-1.4L3.8 9H16V7H3.8l4.3-4.3-1.4-1.4L0 8z" />
+              </svg>
+            </button>
+            <button className={`carousel-next ${styles.carouselButton}`}>
+              <span className="sr-only">Next</span>
+              <svg
+                className={styles.carouselIcon}
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.3 14.7l-1.4-1.4L12.2 9H0V7h12.2L7.9 2.7l1.4-1.4L16 8z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+================================================================================
+FILE: components/typing/TypingEffect.tsx
+================================================================================
+
+// /components/typing/TypingEffect.tsx
+
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
+import styles from "./typing.module.css";
+
+interface TypingEffectProps {
+  items: string[];
+  interval?: number; // Time *between* finishing one word and starting the next
+  typingSpeed?: number; // Milliseconds per character
+  paragraphClassName?: string;
+  staticTextClassName?: string;
+}
+
+const defaultItems = ["Coding", "Design", "Learning", "Exploring", "Creating"];
+
+const TypingEffect: React.FC<TypingEffectProps> = ({
+  items = defaultItems,
+  interval = 2000, // Wait 2s after finishing a word before starting next
+  typingSpeed = 100, // Type one character every 100ms
+  paragraphClassName = "text-2xl md:text-3xl font-semibold my-8",
+  staticTextClassName = "",
+}) => {
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  // State for the text currently visible on screen
+  const [displayedText, setDisplayedText] = useState("");
+  // Ref to manage the character typing interval/timeout
+  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // Ref to manage the interval between words
+  const wordIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Function to handle the typing animation for a single word
+  const typeWord = (word: string) => {
+    let charIndex = 0;
+    setDisplayedText(""); // Clear previous text immediately
+
+    // Clear any existing character typing timeout
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    const typeCharacter = () => {
+      if (charIndex < word.length) {
+        setDisplayedText((prev) => prev + word[charIndex]);
+        charIndex++;
+        typingTimeoutRef.current = setTimeout(typeCharacter, typingSpeed);
+      } else {
+        // Word finished typing, schedule the next word change
+        scheduleNextWord();
+      }
+    };
+
+    // Start typing the first character
+    typingTimeoutRef.current = setTimeout(typeCharacter, typingSpeed);
+  };
+
+  // Function to schedule the next word after the interval
+  const scheduleNextWord = () => {
+    // Clear previous word interval if any
+    if (wordIntervalRef.current) {
+      clearTimeout(wordIntervalRef.current);
+    }
+    wordIntervalRef.current = setTimeout(() => {
+      setCurrentItemIndex((prevIndex) => (prevIndex + 1) % items.length);
+    }, interval);
+  };
+
+  // Effect to start typing when the currentItemIndex changes
+  useEffect(() => {
+    if (items && items.length > 0) {
+      const wordToType = items[currentItemIndex];
+      typeWord(wordToType);
+    }
+
+    // Cleanup function: Clear all timers when component unmounts or dependencies change
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+      if (wordIntervalRef.current) {
+        clearTimeout(wordIntervalRef.current);
+      }
+    };
+    // Rerun effect when the index changes (or items/speed changes)
+  }, [currentItemIndex, items, typingSpeed, interval]);
+
+  return (
+    <p className={`${paragraphClassName}`}>
+      <span className={staticTextClassName}>I like </span>
+      {/* The dynamic span now just holds the text being built up */}
+      <span
+        className={`
+          ${styles.gradientText}
+          ${styles.blinkingCaret}
+          ${styles.dynamicTextContainer} /* Added class for potential styling */
+        `}
+        // The key prop is removed as JS now controls the reveal
+      >
+        {displayedText}
+      </span>
+    </p>
+  );
+};
+
+export default TypingEffect;
+
+
+================================================================================
+FILE: components/typing/typing.module.css
+================================================================================
+
+/* @/components/typing.module.css */
+
+.gradientText {
+  /* Gradient Text Effect - Stays the same */
+  display: inline-block;
+  font-weight: 700;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgb(170, 51, 255) 0%, /* Purple */
+    rgb(255, 51, 221) 100% /* Pink */
+  );
+
+  /* Ensure caret pseudo-element is positioned relative to this */
+  position: relative;
+  /* Add padding ONLY if caret is inside, otherwise it pushes text */
+  /* padding-right: 0.3em; */
+  vertical-align: bottom; /* Align nicely */
+  white-space: nowrap; /* Prevent wrapping during typing */
+}
+
+/* New class for potential container-specific styles if needed */
+.dynamicTextContainer {
+   min-height: 1.2em; /* Prevent layout shift if text becomes empty */
+   /* Add a min-width if desired */
+   /* min-width: 1ch; */
+}
+
+
+/* Blinking Caret using a pseudo-element */
+/* Apply directly to the gradientText span */
+.blinkingCaret::after {
+  content: '|'; /* Caret character */
+  position: absolute;
+  /* Position it right after the text content */
+  right: -0.1em; /* Adjust slightly for better visual positioning */
+  top: 0;
+  bottom: 0;
+  /* Make caret solid color or gradient */
+  /* Option 1: Solid color (simpler) */
+  /* color: rgb(255, 51, 221); /* Use end color of gradient */
+
+  /* Option 2: Gradient (like before) */
+   background-image: linear-gradient(
+     to right,
+     rgb(170, 51, 255) 0%,
+     rgb(255, 51, 221) 100%
+   );
+   background-clip: text;
+   -webkit-background-clip: text;
+   text-fill-color: transparent;
+   -webkit-text-fill-color: transparent;
+
+  /* Blinking animation */
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  /* If using solid color caret: */
+  /* from, to { opacity: 0; }
+  50% { opacity: 1; } */
+
+  /* If using gradient caret: */
+  from, to { text-fill-color: transparent; -webkit-text-fill-color: transparent; }
+  50% { text-fill-color: inherit; -webkit-text-fill-color: inherit; }
+}
+
+
+================================================================================
+FILE: components/ui/Button.tsx
+================================================================================
+
+import React from 'react'
+// import { cn } from '@/lib/utils'
+
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+// Utility function for combining Tailwind classes
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
+  size?: 'sm' | 'md' | 'lg'
+  isLoading?: boolean
+}
+
+export default function Button({
+  className,
+  children,
+  variant = 'primary',
+  size = 'md',
+  isLoading = false,
+  disabled,
+  ...props
+}: ButtonProps) {
+  const baseStyles =
+    'font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none'
+
+  const variants = {
+    primary:
+      'bg-purple-600 text-white hover:bg-purple-700 active:bg-purple-800',
+    secondary:
+      'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600',
+    outline:
+      'border border-gray-300 bg-transparent hover:bg-gray-100 dark:border-dark-border-medium dark:hover:bg-gray-800 dark:hover:text-gray-100 dark:text-gray-100',
+    ghost:
+      'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-100 dark:text-gray-100',
+    danger: 'bg-red-600 text-white hover:bg-red-700',
+  }
+
+  const sizes = {
+    sm: 'h-8 px-3 text-xs rounded-md',
+    md: 'h-10 px-4 py-2 text-sm rounded-md',
+    lg: 'h-12 px-6 py-3 text-base rounded-lg',
+  }
+
+  return (
+    <button
+      className={cn(
+        baseStyles,
+        variants[variant],
+        sizes[size],
+        isLoading && 'opacity-70 cursor-not-allowed',
+        className
+      )}
+      disabled={disabled || isLoading}
+      {...props}
+    >
+      {isLoading ? (
+        <div className="flex items-center justify-center">
+          <svg
+            className="animate-spin -ml-1 mr-2 h-4 w-4 text-current"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          <span>Loading...</span>
+        </div>
+      ) : (
+        children
+      )}
+    </button>
+  )
+}
+
+
+================================================================================
+FILE: components/ui/footer.tsx
+================================================================================
+
+import { Timestamp } from "@/components/Timestamp"
+
+export default function Footer() {
+  return (
+    <footer className="border-t border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-dark-base">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+          {/* ...existing footer content... */}
+          <div className="mt-8 border-t pt-8 text-center">
+            <p className="text-sm text-gray-600">
+              &copy; <Timestamp /> Mode. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+
+================================================================================
+FILE: components/ui/header.tsx
+================================================================================
+
+import Link from "next/link";
+import { Suspense } from "react";
+import Button from "@/components/ui/Button";
+import DashboardButton from "@/components/DashboardButton";
+import Logo from "./logo"
+import styles from "./ui.module.css"
+
+const LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/notes", label: "Notes" },
+  { href: "/playbook", label: "Playbook" },
+  { href: "/today-i-learned", label: "TIL" },
+];
+
+export default function Header() {
+  return (
+    <header className={styles.header}>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div  className={styles.header__inner}>
+        {/* Site branding */}
+        <div className="flex-1">
+          <Logo />
+        </div>
+
+        {/* Desktop navigation */}
+        <nav className="md:flex md:grow">
+          {/* Desktop menu links */}
+          <ul className={styles.nav}>
+            {LINKS.map((link) => (
+              <li key={link.label} className="navItem">
+                <Link
+                  className={styles.navItem}
+                  href={link.href}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Sign in links */}
+        <div className="hidden flex items-center gap-4">
+          <Suspense
+            fallback={
+              <div className="flex items-center space-x-4">
+                <Link href="/signin">
+                  <Button variant="outline">Sign in</Button>
+                </Link>
+                <Link href="/signup">
+                  <Button>Sign up</Button>
+                </Link>
+              </div>
+            }
+          >
+            <DashboardButton />
+          </Suspense>
+        </div>
+      </div>
+      </div>
+    </header>
+  );
+}
+
+
+================================================================================
+FILE: components/ui/logo.tsx
+================================================================================
+
+import Link from "next/link"
+import Image from "next/image"
+import LogoImg from "@/public/logo.svg"
+
+export default function Logo() {
+  return (
+    <Link className="inline-flex" href="/" aria-label="ai.com">
+      <Image
+        className="max-w-none"
+        src={LogoImg}
+        width={38}
+        height={38}
+        priority
+        alt="Stellar"
+      />
+    </Link>
+  )
+}
+
+
+================================================================================
+FILE: components/ui/mobile-menu.tsx
+================================================================================
+
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import styles from "./ui.module.css";
+
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/notes", label: "Notes" },
+  { href: "/playbook", label: "Playbook" },
+  { href: "/today-i-learned", label: "TIL" },
+];
+
+export default function MobileMenu() {
+  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
+
+  const trigger = useRef<HTMLButtonElement>(null);
+  const mobileNav = useRef<HTMLDivElement>(null);
+
+  // close the mobile menu on click outside
+  useEffect(() => {
+    const clickHandler = ({ target }: { target: EventTarget | null }): void => {
+      if (!mobileNav.current || !trigger.current) return;
+      if (
+        !mobileNavOpen ||
+        mobileNav.current.contains(target as Node) ||
+        trigger.current.contains(target as Node)
+      )
+        return;
+      setMobileNavOpen(false);
+    };
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
+  });
+
+  // close the mobile menu if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }: { keyCode: number }): void => {
+      if (!mobileNavOpen || keyCode !== 27) return;
+      setMobileNavOpen(false);
+    };
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
+  });
+
+  return (
+    <div className="md:display-none flex items-center ml-4">
+      {/* Hamburger button */}
+      <button
+        ref={trigger}
+        className={`${styles.hamburger}${mobileNavOpen && "active"}`}
+        type="button"
+        aria-controls="mobile-nav"
+        aria-expanded={mobileNavOpen}
+        onClick={() => setMobileNavOpen(!mobileNavOpen)}
+      >
+        <span className="sr-only">Menu</span>
+        <svg
+          className="w-5 h-5 fill-current text-slate-300 hover:text-white transition duration-150 ease-in-out"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect y="2" width="20" height="2" rx="1" />
+          <rect y="9" width="20" height="2" rx="1" />
+          <rect y="16" width="20" height="2" rx="1" />
+        </svg>
+      </button>
+
+      {/*Mobile navigation */}
+      <nav
+        id="mobile-nav"
+        ref={mobileNav}
+        className="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out"
+        style={
+          mobileNavOpen
+            ? { maxHeight: mobileNav.current?.scrollHeight, opacity: 1 }
+            : { maxHeight: 0, opacity: 0.8 }
+        }
+      >
+        <ul className="border border-transparent [background:linear-gradient(theme(colors.slate.900),_theme(colors.slate.900))_padding-box,_conic-gradient(theme(colors.slate.400),_theme(colors.slate.700)_25%,_theme(colors.slate.700)_75%,_theme(colors.slate.400)_100%)_border-box] rounded-lg px-4 py-1.5">
+          {LINKS.map((link: { href: string; label: string }) => (
+            <li key={link.label}>
+              <Link
+                className="flex font-medium text-sm text-slate-300 hover:text-white py-1.5"
+                href={link.href}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: components/ui/ui.module.css
+================================================================================
+
+/* Main header container */
+.header {
+  box-sizing: content-box;
+  background: var(--background);
+  border-block-start: 10px solid var(--primary-color);
+  border-block-end: 1px solid var(--gray-lighter);
+  box-shadow: 0 2px 10px var(--gray-light);
+  position: sticky;
+  inset-block-start: 0;
+  height: var(--spacer);
+  padding-inline: var(--spacer-small);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-medium);
+  color: var(--text-color);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inner header container */
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-medium);
+  font-weight: 400;
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding-inline-start: 0;
+  gap: 20px;
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-small);
+  color: var(--text-color);
+}
+
+/* List item */
+.navItem {
+  display: grid;
+  place-items: center;
+  margin: 0;
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-small);
+  color: var(--text-color);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hamburger button */
+.hamburger svg > *:nth-child(1),
+.hamburger svg > *:nth-child(2),
+.hamburger svg > *:nth-child(3) {
+  transform-origin: center;
+  transform: rotate(0deg);
+}
+
+.hamburger svg > *:nth-child(1) {
+  transition: y 0.1s 0.25s ease-in,
+    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.1s ease-in;
+}
+
+.hamburger svg > *:nth-child(2) {
+  transition: transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.hamburger svg > *:nth-child(3) {
+  transition: y 0.1s 0.25s ease-in,
+    transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19),
+    width 0.1s 0.25s ease-in;
+}
+
+.hamburger.active svg > *:nth-child(1) {
+  opacity: 0;
+  y: 9;
+  transform: rotate(225deg);
+  transition: y 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity 0.1s 0.12s ease-out;
+}
+
+.hamburger.active svg > *:nth-child(2) {
+  transform: rotate(225deg);
+  transition: transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hamburger.active svg > *:nth-child(3) {
+  y: 9;
+  transform: rotate(135deg);
+  transition: y 0.1s ease-out,
+    transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1),
+    width 0.1s ease-out;
+}
+
+
+================================================================================
+FILE: db/index.ts
+================================================================================
+
+import { drizzle as drizzleNeon } from 'drizzle-orm/neon-http'
+import { drizzle as drizzlePostgres } from 'drizzle-orm/node-postgres'
+import { neon } from '@neondatabase/serverless'
+
+import * as schema from './schema'
+
+export const db = process.env.VERCEL
+  ? drizzleNeon({
+      client: neon(process.env.DATABASE_URL!),
+      schema,
+      casing: 'snake_case',
+    })
+  : drizzlePostgres(process.env.DATABASE_URL!, { schema, casing: 'snake_case' })
+
+
+================================================================================
+FILE: db/schema.ts
+================================================================================
+
+import { InferSelectModel, relations } from 'drizzle-orm'
+import { pgTable, serial, text, timestamp, pgEnum } from 'drizzle-orm/pg-core'
+
+// Enums for issue status and priority
+export const statusEnum = pgEnum('status', [
+  'backlog',
+  'todo',
+  'in_progress',
+  'done',
+])
+export const priorityEnum = pgEnum('priority', ['low', 'medium', 'high'])
+
+// Issues table
+export const issues = pgTable('issues', {
+  id: serial('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  status: statusEnum('status').default('backlog').notNull(),
+  priority: priorityEnum('priority').default('medium').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  userId: text('user_id').notNull(),
+})
+
+// Users table
+export const users = pgTable('users', {
+  id: text('id').primaryKey(),
+  email: text('email').notNull().unique(),
+  password: text('password').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+})
+
+// Relations between tables
+export const issuesRelations = relations(issues, ({ one }) => ({
+  user: one(users, {
+    fields: [issues.userId],
+    references: [users.id],
+  }),
+}))
+
+export const usersRelations = relations(users, ({ many }) => ({
+  issues: many(issues),
+}))
+
+// Types
+export type Issue = InferSelectModel<typeof issues>
+export type User = InferSelectModel<typeof users>
+
+// Status and priority labels for display
+export const ISSUE_STATUS = {
+  backlog: { label: 'Backlog', value: 'backlog' },
+  todo: { label: 'Todo', value: 'todo' },
+  in_progress: { label: 'In Progress', value: 'in_progress' },
+  done: { label: 'Done', value: 'done' },
+}
+
+export const ISSUE_PRIORITY = {
+  low: { label: 'Low', value: 'low' },
+  medium: { label: 'Medium', value: 'medium' },
+  high: { label: 'High', value: 'high' },
+}
+
+
+================================================================================
+FILE: eslint.config.mjs
+================================================================================
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+];
+
+export default eslintConfig;
+
+
+================================================================================
+FILE: mdx-components.tsx
+================================================================================
+
+// mdx-components.tsx
+import type { MDXComponents } from "mdx/types";
+import type { ComponentPropsWithoutRef } from "react";
+import styles from './app/playbook/playbook.module.css';
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    // Pass through all default components first
+    ...components,
+
+    // Custom Component Overrides ---
+
+    // Add custom heading components
+    h2: ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => (
+      <h2 className={styles.gradientHeading} {...props}>
+        {children}
+      </h2>
+    ),
+
+    h3: ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => (
+      <h3 className={styles.gradientSubheading} {...props}>
+        {children}
+      </h3>
+    ),
+
+    // Override the default 'a' (link) element - STILL VALID & USEFUL
+    a: ({ children, href, ...props }: ComponentPropsWithoutRef<"a">) => {
+      const isExternal =
+        href && (href.startsWith("http") || href.startsWith("//"));
+      if (isExternal) {
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="prose-a prose-a-external" // Use classes defined in global.css
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      return (
+        <a href={href} className="prose-a prose-a-internal" {...props}>
+          {" "}
+          {/* Use classes defined in global.css */}
+          {children}
+        </a>
+      );
+    },
+
+    hr: (props: ComponentPropsWithoutRef<"hr">) => (
+      <hr className={styles.neonHr} {...props} />
+    ),
+
+    // NOTE: Overriding 'pre' or 'code' is generally NOT needed now
+    // because rehype-pretty-code handles their rendering.
+    // Styling for code blocks should be done via CSS targeting the
+    // elements generated by rehype-pretty-code (e.g., figure[data-rehype-pretty-code-figure] > pre)
+
+    // You can still override other elements like ul, blockquote etc. if needed
+    // ul: ({ children, ...props }) => <ul className="my-custom-list" {...props}>{children}</ul>,
+  };
+}
+
+
+================================================================================
+FILE: next.config.ts
+================================================================================
+
+// next.config.ts
+import type { NextConfig } from "next";
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
+import createMDX from '@next/mdx';
+
+// Import MDX Plugins ---
+import remarkGfm from 'remark-gfm';
+import rehypePrettyCode from 'rehype-pretty-code';
+import type { Element } from 'hast';
+import type { Options as PrettyCodeOptions } from 'rehype-pretty-code'; //
+
+//  Configure rehype-pretty-code
+const prettyCodeOptions: PrettyCodeOptions = {
+  theme: 'github-dark', // Or 'one-dark-pro', 'poimandres', etc.
+  onVisitLine(node: Element) {
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }];
+    }
+  },
+  onVisitHighlightedLine(node: Element) {
+    node.properties = node.properties || {};
+    const currentClasses = node.properties.className;
+
+    if (Array.isArray(currentClasses)) {
+      // Already an array, push the new class
+      currentClasses.push('line--highlighted');
+    } else if (typeof currentClasses === 'string') {
+      // It's a string, create a new array containing the existing class and the new one
+      node.properties.className = [currentClasses, 'line--highlighted'];
+    } else {
+      // It's null, undefined, or something else - create a new array with just our class
+      node.properties.className = ['line--highlighted'];
+    }
+  },
+
+  onVisitHighlightedChars(node: Element) {
+    node.properties = node.properties || {};
+    node.properties.className = ['word--highlighted'];
+  },
+
+};
+
+
+//  Main Next.js Config Function ---
+const nextConfig = (phase: string): NextConfig => {
+  // Call createMdx INSIDE the function ---
+  const withMDX = createMDX({
+    extension: /\.mdx?$/,
+    options: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+    },
+  });
+
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    console.log('happy building session ;)');
+  }
+
+  // Define base config options
+  const nextConfigOptions: NextConfig = {
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+    reactStrictMode: true,
+    poweredByHeader: false,
+    experimental: {
+      dynamicIO: true,
+      typedRoutes: true,
+      // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
+    },
+    typescript: {
+      ignoreBuildErrors: true,
+    },
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
+    // Add other configs like CSP headers, images, redirects here later
+  };
+
+  return withMDX(nextConfigOptions);
+};
+
+export default nextConfig
+
+
+================================================================================
+FILE: package.json
+================================================================================
+
+{
+  "name": "samir.codes",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/postcss": "^4.1.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/mdx": "^2.0.13",
+    "@types/uuid": "^10.0.0",
+    "aos": "^2.3.4",
+    "autoprefixer": "^10.4.21",
+    "bcrypt": "^5.1.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.3",
+    "gray-matter": "^4.0.3",
+    "jose": "^6.0.6",
+    "lucide-react": "^0.475.0",
+    "nanoid": "^5.1.2",
+    "next": "15.3.0-canary.29",
+    "next-themes": "^0.4.6",
+    "pg": "^8.13.3",
+    "postgres": "^3.4.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
+    "rehype-pretty-code": "^0.14.1",
+    "remark-gfm": "^4.0.1",
+    "swiper": "^11.2.6",
+    "tailwind-merge": "^3.0.2",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@next/mdx": "^15.2.4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/aos": "^3.0.7",
+    "@types/bcrypt": "^5.0.2",
+    "@types/hast": "^3.0.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.3.4",
+    "drizzle-kit": "^0.30.4",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.0-canary.29",
+    "jsdom": "^26.0.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.19.3",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1"
+  },
+  "packageManager": "pnpm@8.15.3+sha512.dd85cd6eca6417c6f73db32ba1eb4767ffb4cba4f5bf0727846722c92b6b9e56a2cc218b11385bbc2b21f18a16a67da77aceae9b61a0f56a1643b25e1fb6a605"
+}
+
+
+================================================================================
+FILE: postcss.config.mjs
+================================================================================
+
+/* eslint-disable import/no-anonymous-default-export */
+
+/** @type {import('postcss-load-config').Config} */
+const config = {
+  // plugins: {
+  //   tailwindcss: {},
+  //   autoprefixer: {},
+  // },
+
+  plugins: [
+    "@tailwindcss/postcss",
+    "autoprefixer", // Adding autoprefixer for cross-browser compatibility
+  ],
+};
+
+export default config;
+
+
+================================================================================
+FILE: tailwind.config.ts
+================================================================================
+
+import type { Config } from 'tailwindcss'
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
+
+const config: Config = {
+    content: [
+        './pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './components/**/*.{js,ts,jsx,tsx,mdx}',
+        './app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    theme: {
+        extend: {
+            colors: {
+                background: 'var(--background)',
+                foreground: 'var(--foreground)',
+                primary: "#1e3a8a",
+                dark: {
+                    base: '#121212',
+                    elevated: '#1A1A1A',
+                    high: '#222222',
+                    border: {
+                        subtle: '#2A2A2A',
+                        default: '#333333',
+                        medium: '#444444',
+                        strong: '#555555',
+                    },
+                },
+                slate: {
+                    800: "#1e293b", // Background and form colors
+                    200: "#e2e8f0", // Text and light theme colors
+                    500: "#64748b", // Placeholder color
+                },
+                purple: {
+                    200: '#e9d5ff',
+                    300: '#d8b4fe',
+                    500: "#8b5cf6", // Focus ring color
+                    600: "#7c3aed", // Checkbox and radio button colors
+                    400: '#c084fc',
+                    700: '#7e22ce',
+                    800: '#6b21a8',
+                    900: '#581c87',
+                    950: '#3b0764',
+                },
+            },
+            boxShadow: {
+                mode: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+            },
+            fontFamily: {
+                sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+            },
+            fontSize: {
+                xs: ['0.75rem', { lineHeight: '1.5' }],
+                sm: ['0.875rem', { lineHeight: '1.5715' }],
+                base: ['1rem', { lineHeight: '1.5', letterSpacing: '-0.017em' }],
+                lg: ['1.125rem', { lineHeight: '1.5', letterSpacing: '-0.017em' }],
+                xl: ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.017em' }],
+                '2xl': ['1.5rem', { lineHeight: '1.415', letterSpacing: '-0.017em' }],
+                '3xl': ['1.875rem', { lineHeight: '1.333', letterSpacing: '-0.017em' }],
+                '4xl': ['2.25rem', { lineHeight: '1.277', letterSpacing: '-0.017em' }],
+                '5xl': ['2.75rem', { lineHeight: '1.1', letterSpacing: '-0.017em' }],
+                '6xl': ['3.5rem', { lineHeight: '1', letterSpacing: '-0.017em' }],
+                '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.017em' }],
+            },
+            fontWeight: {
+                extrabold: '800',
+            },
+            letterSpacing: {
+                tighter: '-0.02em',
+                tight: '-0.01em',
+                normal: '0',
+                wide: '0.01em',
+                wider: '0.02em',
+                widest: '0.4em',
+            },
+            animation: {
+                'endless': 'endless 20s linear infinite',
+                'shine': 'shine 5s linear 500ms infinite',
+                'float': 'float 2s ease-in-out infinite',
+            },
+            keyframes: {
+                'endless': {
+                    '0%': { transform: 'translateY(0)' },
+                    '100%': { transform: 'translateY(-245px)' }
+                },
+                'shine': {
+                    '0%': { top: '0', transform: 'translateY(-100%) scaleY(10)', opacity: '0' },
+                    '2%': { opacity: '.5' },
+                    '40%': { top: '100%', transform: 'translateY(0) scaleY(200)', opacity: '0' },
+                    '100%': { top: '100%', transform: 'translateY(0) scaleY(1)', opacity: '0' },
+                },
+                'float': {
+                    '0%': { transform: 'translateY(3%)' },
+                    '50%': { transform: 'translateY(-3%)' },
+                    '100%': { transform: 'translateY(3%)' }
+                },
+            },
+        }
+    },
+    plugins: [forms, typography],
+    darkMode: 'media',
+} satisfies Config
+
+export default config
+
+
+================================================================================
+FILE: tsconfig.json
+================================================================================
+
+// tsconfig.json
+
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
