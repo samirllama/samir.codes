@@ -64,7 +64,7 @@ export function getAllPostsMeta(): PostMeta[] {
         date: data.date,
         description: data.description,
         tags: data.tags || [],
-        author: data.author || 'Your Name', // Default author
+        author: data.author || 'Samir Lama', // Default author
       };
     } catch (error) {
       console.error(`Error processing file ${fullPath}:`, error);

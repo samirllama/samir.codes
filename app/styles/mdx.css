@@ -152,3 +152,107 @@
   border-top-right-radius: 6px;
   margin-bottom: 0;
 }
+
+/* Base link style within prose */
+.prose .prose-a,
+.prose .prose-a-internal {
+  /* Use CSS variables directly */
+  color: var(--primary);
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--primary) 50%,
+    transparent
+  ); /* Use color-mix for alpha */
+  text-underline-offset: 2px;
+  transition: color 150ms ease-in-out, text-decoration-color 150ms ease-in-out; /* Add transition */
+}
+.prose .prose-a:hover,
+.prose .prose-a-internal:hover {
+  /* Use CSS variables directly */
+  color: var(--secondary);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--secondary) 70%,
+    transparent
+  ); /* Use color-mix for alpha */
+}
+
+.prose .prose-a-external::after {
+  content: "↗";
+  /* Use @apply for standard utilities if needed, but avoid for custom theme colors */
+  /* @apply inline-block ml-1 text-xs opacity-70; */
+  /* Equivalent standard CSS:    */
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  opacity: 0.7;
+}
+
+/* === Code Block Styling (Keep existing rules) === */
+.prose :not(pre) > code {
+  /* Use variables or direct colors */
+  background-color: var(--gray-alpha-100); /* Example using alpha gray */
+  color: var(--secondary); /* Example using secondary color */
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: var(--fontSize-sm); /* Use font size variable */
+  font-family: var(--font-geist-mono), monospace; /* Use font variable */
+}
+
+/* Rehype Pretty Code Styling */
+.prose figure[data-rehype-pretty-code-figure] {
+  margin-block: 1.5em;
+}
+
+.prose figure[data-rehype-pretty-code-figure] > pre {
+  /* Use variables or direct colors */
+  border: 1px solid var(--dark-border-subtle, #2a2a2a); /* Example */
+  border-radius: 6px;
+  padding: var(--spacing-md); /* Use spacing variable */
+  overflow-x: auto;
+  font-size: 0.9em; /* Or use var(--fontSize-sm) */
+  line-height: 1.6;
+}
+
+.prose figure[data-rehype-pretty-code-figure] > pre > code {
+  display: grid;
+  font-family: var(--font-geist-mono), monospace;
+}
+
+/* Code Highlights */
+.prose .line--highlighted {
+  /* Use variables or direct colors */
+  background-color: color-mix(
+    in srgb,
+    var(--primary) 10%,
+    transparent
+  ); /* Example */
+  box-shadow: inset 3px 0 0 0 var(--primary); /* Use variable */
+}
+
+.prose .word--highlighted {
+  /* Use variables or direct colors */
+  background-color: color-mix(
+    in srgb,
+    var(--secondary) 20%,
+    transparent
+  ); /* Example */
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+}
+
+/* Code Block Titles */
+.prose [data-rehype-pretty-code-title] {
+  font-size: 0.85em;
+  font-family: var(--font-geist-mono), monospace;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent); /* Example */
+  background-color: var(--gray-alpha-100); /* Example */
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--dark-border-subtle, #2a2a2a); /* Example */
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-bottom: 0;
+}

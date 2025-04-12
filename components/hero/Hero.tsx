@@ -12,16 +12,21 @@ const Intro = [
   "Hey, I’m a dev who thrives on crafting code to fix user headaches and build speedy, open-for-all web magic!",
 ];
 
-
 // Dynamic parts
-const dynamicHobbies = ["gaming.", "reading.", "coding.", "hiking.", "cooking."]; // Example list
+const dynamicHobbies = [
+  "gaming.",
+  "reading.",
+  "coding.",
+  "hiking.",
+  "cooking.",
+]; // Example list
 
 export default function Hero() {
   return (
     <section>
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         {/* Background Elements (Particles & Illustration) */}
-        <Particles className="absolute inset-0 -z-10" quantity={15} />
+        <Particles className="absolute inset-0 -z-10" />
         <div
           className="absolute inset-0 -z-10 overflow-hidden rounded-b-[3rem] pointer-events-none -ml-28 -mr-28"
           aria-hidden="true"

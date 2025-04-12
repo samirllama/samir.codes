@@ -1,97 +1,131 @@
-@layer utilities {
-  /* Pulsing animation */
-  @keyframes pulseLoop {
-    0% {
-      opacity: var(--opacity-none);
-      transform: scale(0.25) translateZ(0);
-    }
-    30% {
-      opacity: 0.4;
-    }
-    70% {
-      opacity: var(--opacity-none);
-    }
-    80% {
-      transform: scale(1) translateZ(0);
-    }
-  }
+/* app/styles/animations.css */
 
-  .pulse {
-    opacity: var(--opacity-none);
-    transform-origin: center;
-    animation: pulseLoop var(--animation-duration-slow)
-      var(--animation-timing-linear) var(--animation-iteration-infinite);
-  }
+/* === Keyframe Definitions (Moved to Top Level) === */
 
-  .pulse-1 {
-    animation-delay: calc(var(--animation-duration-fast) * -1);
+@keyframes neonPulse {
+  0%,
+  100% {
+    opacity: 1;
   }
-
-  .pulse-2 {
-    animation-delay: calc(var(--animation-duration-medium) * -1);
-  }
-
-  /* Basic Animations */
-  @keyframes endless {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-245px);
-    }
-  }
-
-  @keyframes shine {
-    0% {
-      top: 0;
-      transform: translateY(-100%) scaleY(10);
-      opacity: var(--opacity-none);
-    }
-    2% {
-      opacity: var(--opacity-low);
-    }
-    40% {
-      top: 100%;
-      transform: translateY(0) scaleY(200);
-      opacity: var(--opacity-none);
-    }
-    100% {
-      top: 100%;
-      transform: translateY(0) scaleY(1);
-      opacity: var(--opacity-none);
-    }
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(3%);
-    }
-    50% {
-      transform: translateY(-3%);
-    }
-    100% {
-      transform: translateY(3%);
-    }
-  }
-
-  /* Animation Classes */
-  .animation-endless {
-    animation: endless var(--animation-duration-slow)
-      var(--animation-timing-linear) var(--animation-iteration-infinite);
-  }
-
-  .animation-shine {
-    animation: shine var(--animation-duration-medium)
-      var(--animation-timing-linear) 500ms var(--animation-iteration-infinite);
-  }
-
-  .animation-float {
-    animation: float 2s ease-in-out var(--animation-iteration-infinite);
+  50% {
+    opacity: 0.7;
   }
 }
 
-/* Custom AOS Animations */
+@keyframes pulseLoop {
+  0% {
+    opacity: var(--opacity-none, 0); /* Added fallback */
+    transform: scale(0.25) translateZ(0);
+  }
+  30% {
+    opacity: 0.4;
+  }
+  70% {
+    opacity: var(--opacity-none, 0); /* Added fallback */
+  }
+  80% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes endless {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    /* Consider using a relative unit or variable if possible */
+    transform: translateY(-245px);
+  }
+}
+
+@keyframes shine {
+  0% {
+    top: 0;
+    transform: translateY(-100%) scaleY(10);
+    opacity: var(--opacity-none, 0); /* Added fallback */
+  }
+  2% {
+    opacity: var(--opacity-low, 0.5); /* Added fallback */
+  }
+  40% {
+    top: 100%;
+    transform: translateY(0) scaleY(200);
+    opacity: var(--opacity-none, 0); /* Added fallback */
+  }
+  100% {
+    top: 100%;
+    transform: translateY(0) scaleY(1);
+    opacity: var(--opacity-none, 0); /* Added fallback */
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(3%);
+  }
+  50% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(3%);
+  }
+}
+
+/* === Utility Classes (Correctly Placed in Layer) === */
+@layer utilities {
+  .animate-neonPulse {
+    /* Applies the globally defined neonPulse keyframes */
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+
+  .pulse {
+    opacity: var(--opacity-none, 0); /* Base opacity before animation starts */
+    transform-origin: center;
+    /* References globally defined pulseLoop keyframes and theme variables */
+    animation: pulseLoop var(--animation-duration-slow, 12s)
+      /* Fallback added */ var(--animation-timing-linear, linear)
+      /* Fallback added */ var(--animation-iteration-infinite, infinite); /* Fallback added */
+  }
+
+  .pulse-1 {
+    /* References theme variables */
+    animation-delay: calc(
+      var(--animation-duration-fast, 4s) * -1
+    ); /* Fallback added */
+  }
+
+  .pulse-2 {
+    /* References theme variables */
+    animation-delay: calc(
+      var(--animation-duration-medium, 8s) * -1
+    ); /* Fallback added */
+  }
+
+  .animation-endless {
+    /* References globally defined endless keyframes and theme variables */
+    animation: endless var(--animation-duration-slow, 12s)
+      var(--animation-timing-linear, linear)
+      var(--animation-iteration-infinite, infinite);
+  }
+
+  .animation-shine {
+    /* References globally defined shine keyframes and theme variables */
+    animation: shine var(--animation-duration-medium, 8s)
+      var(--animation-timing-linear, linear) 500ms /* Initial delay */
+      var(--animation-iteration-infinite, infinite);
+  }
+
+  .animation-float {
+    /* References globally defined float keyframes and theme variables */
+    animation: float 2s ease-in-out
+      var(--animation-iteration-infinite, infinite);
+  }
+}
+
+/* === Custom AOS Animations (Correctly Placed Outside Layer) === */
 @media screen {
+  /* Ensures styles only apply if JS is enabled (AOS adds 'aos-animate') */
+  /* And targets elements processed by AOS */
   html:not(.no-js) body [data-aos="fade-up"] {
     transform: translate3d(0, 14px, 0);
   }
@@ -107,7 +141,6 @@
   html:not(.no-js) body [data-aos="fade-left"] {
     transform: translate3d(14px, 0, 0);
   }
-
   html:not(.no-js) body [data-aos="fade-up-right"] {
     transform: translate3d(-14px, 14px, 0);
   }
@@ -115,4 +148,7 @@
   html:not(.no-js) body [data-aos="fade-up-left"] {
     transform: translate3d(14px, 14px, 0);
   }
+  /* Add other AOS overrides if present in original file */
 }
+
+/* Removed duplicate @keyframes neonPulse from here */

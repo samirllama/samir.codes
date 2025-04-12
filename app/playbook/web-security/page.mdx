@@ -1,129 +1,201 @@
-export const metadata = {
-  title: "Web Security Fundamentals: Protecting Your Digital Fortress",
-  description: "An introduction to the core concepts of web security...",
-  author: "Samir Coder",
-  date: "2025-03-29",
-};
-
-<article className="prose">
-<h1>{metadata.title}</h1>
-
-Welcome to the first technical post on my new site! As web engineers, we build the digital world brick by brick. But just like physical structures, our digital creations need strong foundations and defenses. Today, we're diving into a topic crucial for every developer: **Web Security**.
-
-This isn't about becoming a penetration tester overnight. It's about understanding the fundamental principles and common threats so we can build more resilient, trustworthy applications from the ground up.
-
-----
-
-## Why Does Web Security Matter So Much?
-
-In an era where data breaches make headlines weekly, the stakes have never been higher. Insecure web applications can lead to:
-
-- **Compromised User Data:** Sensitive personal information (passwords, credit cards, emails) stolen and misused.
-- **Financial Loss:** Direct theft, regulatory fines (like GDPR), and costs associated with incident response.
-- **Reputation Damage:** Users lose trust in platforms that can't protect them, leading to customer churn.
-- **Service Disruption:** Attacks can take your website or application offline, impacting users and business.
-
-Security isn't just a feature; it's a fundamental requirement for any modern web application.
-
-## Core Pillars of Web Security
-
-Web security is vast, but many principles revolve around a few core ideas:
-
-### 1. Protect Data in Transit: HTTPS Everywhere
-
-- **What:** Using HTTPS (HyperText Transfer Protocol Secure) encrypts the connection between a user's browser and your server.
-- **Why:** Prevents eavesdroppers ("man-in-the-middle" attacks) from reading or modifying data like login credentials or personal information sent over the network.
-- **Action:** Always configure your servers to use HTTPS and redirect HTTP traffic to HTTPS. Services like Vercel often handle this automatically. Look for the padlock!
-
-### 2. Never Trust User Input: Validation & Sanitization
-
-- **What:** Treat _any_ data coming from the client-side (forms, URL parameters, API requests) as potentially malicious. Validate its format, type, length, and content before using it. Sanitize it by removing or encoding dangerous characters.
-- **Why:** This is the primary defense against **Injection Attacks** (like SQL Injection and Cross-Site Scripting).
-- **Action:** Implement robust server-side validation for all inputs. Use parameterized queries or ORMs for database interactions.
-
-Simplified pseudo-code example of server-side validation:
-
-```javascript
-// validate-input.js
-function handleFormSubmit(formData) {
-  const email = formData.get("email");
-  const comment = formData.get("comment");
-
-  // 1. Validate Email Format
-  if (!isValidEmail(email)) {
-    throw new Error("Invalid email format");
-  }
-
-  // 2. Validate Comment Length (Example)
-  if (comment.length > 500) {
-    throw new Error("Comment too long");
-  }
-
-  // 3. Sanitize Comment (Example - VERY basic, use libraries!)
-  const sanitizedComment = sanitizeHtml(comment); // Use a proper library!
-
-  // 4. Use validated & sanitized data (e.g., save to DB)
-  saveCommentToDatabase(email, sanitizedComment);
-
-  console.log("Data processed securely (example)");
-}
-```
-
-### 3. Encode Output Correctly: Defeating XSS
-
-- **What:** When displaying user-provided data back in the browser, ensure it's treated as plain text, not executable code. This involves encoding special HTML characters (like `<`, `>`, `&`).
-- **Why:** Prevents **Cross-Site Scripting (XSS)**, where attackers inject malicious scripts that run in _other_ users' browsers, potentially stealing session cookies or performing actions on their behalf.
-- **Action:** Use templating engines or framework features that automatically encode output by default (React does this well for content within JSX tags). Be extra careful when using methods like `dangerouslySetInnerHTML`.
-
-### 4. Control Access: Authentication & Authorization
-
-- **Authentication (AuthN):** Verifying _who_ a user is (e.g., login with password, OAuth, magic links).
-- **Authorization (AuthZ):** Determining _what_ an authenticated user is allowed to do (e.g., admin vs. regular user permissions).
-- **Why:** Ensures only legitimate users can access specific data or perform sensitive actions.
-- **Action:** Implement secure authentication mechanisms (avoid rolling your own crypto!). Enforce authorization checks on the server-side for every sensitive request. Apply the **Principle of Least Privilege** (users/systems should only have the minimum permissions necessary).
-
-### 5. Configure Server & Browser Defenses: Security Headers
-
-- **What:** HTTP headers sent from your server that instruct the browser on how to behave securely.
-- **Why:** Mitigate various attacks like clickjacking, XSS, and MIME-type sniffing.
-- **Action:** Implement headers like:
-  - `Content-Security-Policy` (CSP): Defines allowed sources for scripts, styles, images, etc. (We set this up in the project foundation!)
-  - `Strict-Transport-Security` (HSTS): Forces browsers to use HTTPS.
-  - `X-Content-Type-Options: nosniff`: Prevents browsers from guessing MIME types.
-  - `X-Frame-Options: DENY` or `SAMEORIGIN`: Prevents clickjacking.
-  - `Referrer-Policy`: Controls how much referrer information is sent.
-
-### 6. Keep Dependencies Updated
-
-- **What:** Regularly update your frameworks, libraries, and server software.
-- **Why:** Attackers actively exploit known vulnerabilities in outdated software. Updates often contain critical security patches.
-- **Action:** Use package manager tools (`pnpm audit`, `npm audit`, `yarn audit`) to check for known vulnerabilities and update dependencies promptly.
-
-## Common Threats to Be Aware Of
-
-While there are many, here are three classics:
-
-- **Cross-Site Scripting (XSS):** Injecting malicious scripts into web pages viewed by other users. (Defense: Output Encoding, CSP).
-- **SQL Injection (SQLi):** Injecting malicious SQL code via input fields to manipulate database queries. (Defense: Input Validation, Parameterized Queries/ORMs).
-- **Cross-Site Request Forgery (CSRF):** Tricking a logged-in user's browser into sending an unintended, malicious request to your application. (Defense: Anti-CSRF Tokens, SameSite Cookies).
-
-## Your Role as a Developer
-
-Security isn't someone else's problem – it's an integral part of web engineering. Adopt a security mindset:
-
-- **Think Adversarially:** How could this feature be abused?
-- **Validate Everything:** Especially data from external sources.
-- **Encode Appropriately:** When displaying data back to the user.
-- **Use Secure Defaults:** Leverage the security features of your framework.
-- **Stay Updated:** Keep libraries and your own knowledge current.
-- **Learn Continuously:** Resources like the [OWASP Top 10](https://owasp.org/www-project-top-ten/) are invaluable.
-
-## The Journey Continues
-
-This post merely scratches the surface of web security. It's a deep, ever-evolving field. But understanding these fundamentals provides a solid base for building safer applications.
-
-In future posts, we might dive deeper into specific vulnerabilities, explore secure coding practices in Next.js, or look at advanced security headers. Stay tuned!
-
+---
+title: "Web Security Fundamentals: Protecting Your Digital Fortress"
+description: "An introduction to the core concepts of web security, essential for every developer building for the modern web."
+author: "Samir Coder"
+date: "2025-03-29"
+tags:
+  - security
+  - web development
+  - fundamentals
 ---
 
-</article>
+import ArticleLayout from '@/components/layouts/ArticleLayout'; // Assuming path is correct
+
+{/* Keep the metadata export for Next.js */}
+export const metadata = {
+  title: "Web Security Fundamentals: Protecting Your Digital Fortress",
+  description: "An introduction to the core concepts of web security, essential for every developer building for the modern web.",
+  author: "Samir Coder",
+  date: "2025-03-29",
+  tags: ["security", "web development", "fundamentals"],
+  // category: "Security"
+};
+
+{/* Wrap content in ArticleLayout, passing metadata for the sidebar */}
+
+<ArticleLayout meta={metadata}>
+  <article className="prose prose-invert max-w-none">
+    {/* Explicitly render title */}
+    <h1>{metadata.title}</h1>
+
+    {/* Introduction */}
+    <p>Welcome to the first technical post on my new site! As web engineers, we build the digital world brick by brick. But just like physical structures, our digital creations need strong foundations and defenses. Today, we're diving into a topic crucial for every developer: <strong>Web Security</strong>.</p>
+    <p>This isn't about becoming a penetration tester overnight. It's about understanding the fundamental principles and common threats so we can build more resilient, trustworthy applications from the ground up. Let's secure our digital fortresses.</p>
+
+    {/* Table of Contents */}
+    <nav className="my-8 p-5 rounded-lg border border-gray-alpha-200 bg-slate-800/30">
+      <h2 className="text-xl font-semibold text-slate-200 mb-3 !mt-0">Table of Contents</h2> {/* Use !mt-0 to override prose margin */}
+      <ul className="list-none !pl-0 space-y-1"> {/* Use !pl-0 to override prose padding */}
+        <li><a href="#why-it-matters" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Why Does Web Security Matter?</a></li>
+        <li>
+          <a href="#core-pillars" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Core Pillars of Web Security</a>
+          <ul className="list-none !pl-4 mt-1 space-y-1">
+             <li><a href="#pillar-https" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">1. HTTPS Everywhere</a></li>
+             <li><a href="#pillar-input" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">2. Never Trust User Input</a></li>
+             <li><a href="#pillar-output" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">3. Encode Output Correctly</a></li>
+             <li><a href="#pillar-access" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">4. Control Access (AuthN/AuthZ)</a></li>
+             <li><a href="#pillar-headers" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">5. Security Headers</a></li>
+             <li><a href="#pillar-dependencies" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">6. Keep Dependencies Updated</a></li>
+          </ul>
+        </li>
+        <li><a href="#common-threats" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Common Threats to Be Aware Of</a></li>
+        <li><a href="#developer-role" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Your Role as a Developer</a></li>
+        <li><a href="#journey-continues" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">The Journey Continues</a></li>
+      </ul>
+    </nav>
+
+    {/* Use custom HR component */}
+    <hr />
+
+    {/* Section: Why It Matters */}
+    <h2 id="why-it-matters">Why Does Web Security Matter So Much?</h2>
+    <p>In an era where data breaches make headlines almost weekly, and regulations like GDPR and CCPA impose hefty fines, the stakes have never been higher. Insecure web applications aren't just technical flaws; they are significant business risks leading to:</p>
+    <ul>
+      <li><strong>Compromised User Data:</strong> Sensitive personal information (passwords, credit cards, emails) stolen and misused, leading to identity theft and fraud.</li>
+      <li><strong>Financial Loss:</strong> Direct theft, regulatory fines, incident response costs, and potential lawsuits.</li>
+      <li><strong>Reputation Damage:</strong> Users lose trust in platforms that can't protect them, leading to customer churn and difficulty acquiring new users.</li>
+      <li><strong>Service Disruption:</strong> Attacks like DDoS can take your website or application offline, impacting users and business operations.</li>
+      <li><strong>Intellectual Property Theft:</strong> Source code, proprietary algorithms, or sensitive business data can be stolen.</li>
+    </ul>
+    <p>Security isn't just a feature or an afterthought; it's a fundamental requirement for building and maintaining trust in the digital age.</p>
+
+    {/* Section: Core Pillars */}
+    <h2 id="core-pillars">Core Pillars of Web Security</h2>
+    <p>Web security is vast, but many defensive principles revolve around these core ideas:</p>
+
+    <h3 id="pillar-https">1. Protect Data in Transit: HTTPS Everywhere</h3>
+    <ul>
+      <li><strong>What:</strong> Using HTTPS (HyperText Transfer Protocol Secure) encrypts the data exchanged between a user's browser and your server using TLS/SSL protocols.</li>
+      <li><strong>Why:</strong> Prevents eavesdroppers ("man-in-the-middle" attacks) from reading or modifying sensitive data like login credentials, session cookies, or personal information sent over potentially insecure networks (like public Wi-Fi).</li>
+      <li><strong>Action:</strong> Always configure your servers to enforce HTTPS. Use services like Let's Encrypt for free certificates. Most modern hosting platforms (Vercel, Netlify, etc.) handle this automatically. Ensure HTTP traffic is permanently redirected (301) to HTTPS. Look for the padlock!</li>
+    </ul>
+
+    <h3 id="pillar-input">2. Never Trust User Input: Validation & Sanitization</h3>
+    <ul>
+      <li><strong>What:</strong> Treat <em>any</em> data originating from the client-side (forms, URL parameters, API requests, headers, cookies) as potentially malicious until proven otherwise. Validate its format, type, length, and content against strict rules on the <strong>server-side</strong>. Sanitize data by removing or encoding potentially dangerous characters based on the context where it will be used.</li>
+      <li><strong>Why:</strong> This is the primary defense against <strong>Injection Attacks</strong> (like SQL Injection, NoSQL Injection, Command Injection, and Cross-Site Scripting).</li>
+      <li><strong>Action:</strong> Implement robust server-side validation using libraries like Zod (as seen in this project's actions!) or built-in framework validators. Use allow-lists (defining what *is* permitted) rather than block-lists (trying to guess what's bad). Use parameterized queries or ORMs (like Drizzle!) for database interactions to prevent SQLi.</li>
+    </ul>
+    <pre><code className="language-javascript">
+    {`// Simplified Zod Example (Server-Side)
+    import { z } from 'zod';
+
+    const CommentSchema = z.object({
+      email: z.string().email("Invalid email format"),
+      comment: z.string().min(1, "Comment cannot be empty").max(500, "Comment too long"),
+      // Example: Validate against known safe characters if needed
+      // safeComment: z.string().regex(/^[\\w\\s.,!?'"-]*$/),
+    });
+
+    function handleCommentSubmit(formData) {
+      const result = CommentSchema.safeParse({
+        email: formData.get("email"),
+        comment: formData.get("comment"),
+      });
+
+      if (!result.success) {
+        // Handle validation errors (e.g., return errors to user)
+        console.error("Validation failed:", result.error.flatten());
+        throw new Error("Invalid input");
+      }
+
+      // Data is validated, proceed with sanitized data
+      const validatedData = result.data;
+      // Further sanitization might be needed depending on usage
+      // e.g., using a library to strip unwanted HTML if displaying comment
+      saveCommentToDatabase(validatedData.email, validatedData.comment);
+    }`}
+    </code></pre>
+
+    <h3 id="pillar-output">3. Encode Output Correctly: Defeating XSS</h3>
+    <ul>
+      <li><strong>What:</strong> When displaying user-provided data back in the browser (or any client), ensure it's treated as plain text, not as executable code (HTML, JavaScript, CSS). This involves encoding special characters (like <code>{'<'}</code> becoming <code>{'<'}</code>, <code>{'>'}</code> becoming <code>{'>'}</code>) appropriate for the context (HTML body, HTML attributes, JS variables, etc.).</li>
+      <li><strong>Why:</strong> Prevents <strong>Cross-Site Scripting (XSS)</strong>, where attackers inject malicious scripts that execute in <em>other</em> users' browsers, potentially stealing session cookies, performing actions on their behalf, or defacing the site.</li>
+      <li><strong>Action:</strong> Use modern frameworks/libraries (like React, Vue, Angular) that automatically encode data rendered within standard templating syntax (e.g., `{data}` in JSX). Be extremely cautious when using mechanisms that bypass this encoding (like React's `dangerouslySetInnerHTML`). Use context-aware encoding libraries if manually constructing output.</li>
+    </ul>
+
+    <h3 id="pillar-access">4. Control Access: Authentication & Authorization (AuthN/AuthZ)</h3>
+    <ul>
+      <li><strong>Authentication (AuthN):</strong> Verifying <em>who</em> a user is (e.g., login with password, OAuth, magic links, biometrics). Implement secure password hashing (like bcrypt) and consider Multi-Factor Authentication (MFA).</li>
+      <li><strong>Authorization (AuthZ):</strong> Determining <em>what</em> an authenticated user is allowed to do (e.g., admin vs. regular user permissions, accessing specific resources). Enforce checks on the <strong>server-side</strong> for every sensitive request.</li>
+      <li><strong>Why:</strong> Ensures only legitimate users can access specific data or perform sensitive actions, preventing unauthorized access and privilege escalation.</li>
+      <li><strong>Action:</strong> Use robust authentication libraries/services (avoid rolling your own crypto!). Implement secure session management (e.g., HttpOnly, Secure, SameSite=Lax/Strict cookies). Apply the <strong>Principle of Least Privilege</strong> (users/systems should only have the minimum permissions necessary). Consider Role-Based Access Control (RBAC) or Attribute-Based Access Control (ABAC) models.</li>
+    </ul>
+
+    <h3 id="pillar-headers">5. Configure Server & Browser Defenses: Security Headers</h3>
+    <ul>
+      <li><strong>What:</strong> HTTP response headers sent from your server that instruct the browser on how to behave more securely.</li>
+      <li><strong>Why:</strong> Mitigate various attacks like clickjacking, XSS, data injection, MIME-type sniffing, and enforce HTTPS.</li>
+      {/* === CORRECTED THIS LIST ITEM === */}
+      <li>
+        <p><strong>Action:</strong> Implement essential headers (often configurable in frameworks like Next.js or via edge functions/reverse proxies):</p>
+
+        {/* Keep blank line before nested list */}
+        <ul>
+          <li><code>Content-Security-Policy</code> (CSP): Defines allowed sources for scripts, styles, images, fonts, etc. Reduces XSS risk significantly. Start strict and loosen as needed.</li>
+          <li><code>Strict-Transport-Security</code> (HSTS): Forces browsers to use HTTPS for subsequent requests, preventing downgrade attacks.</li>
+          <li><code>X-Content-Type-Options: nosniff</code>: Prevents browsers from interpreting files as a different MIME type than declared.</li>
+          <li><code>X-Frame-Options: DENY</code> or <code>SAMEORIGIN</code>: Prevents clickjacking by controlling if the site can be embedded in an iframe.</li>
+          <li><code>Referrer-Policy: strict-origin-when-cross-origin</code> or <code>no-referrer</code>: Controls how much referrer information is sent with requests.</li>
+          <li><code>Permissions-Policy</code>: Controls access to browser features (camera, microphone, geolocation, etc.).</li>
+        </ul>
+        {/* Keep blank line after nested list */}
+
+      </li>
+      {/* --- Modification End --- */}
+    </ul>
+
+    <h3 id="pillar-dependencies">6. Keep Dependencies Updated</h3>
+    {/* ... rest of the file ... */}
+    <ul>
+      <li><strong>What:</strong> Regularly update your frameworks, libraries, OS, and server software.</li>
+      <li><strong>Why:</strong> Attackers actively scan for and exploit known vulnerabilities (CVEs) in outdated software. Updates often contain critical security patches.</li>
+      <li><strong>Action:</strong> Use package manager tools (`pnpm audit`, `npm audit`, `yarn audit`) and services like GitHub Dependabot or Snyk to identify vulnerable dependencies. Update promptly, testing thoroughly after updates. Maintain a Software Bill of Materials (SBOM) for better visibility.</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Common Threats */}
+    <h2 id="common-threats">Common Threats to Be Aware Of</h2>
+    <p>While the pillars provide defense, understanding common attack vectors helps focus efforts:</p>
+    <ul>
+      <li><strong>Cross-Site Scripting (XSS):</strong> Injecting malicious scripts into web pages viewed by other users. Can be Stored (in database), Reflected (in URL), or DOM-based. (Defense: Output Encoding, CSP).</li>
+      <li><strong>SQL Injection (SQLi):</strong> Injecting malicious SQL code via input fields to manipulate database queries, potentially stealing or corrupting data. (Defense: Input Validation, Parameterized Queries/ORMs).</li>
+      <li><strong>Cross-Site Request Forgery (CSRF):</strong> Tricking a logged-in user's browser into sending an unintended, malicious request to your application using their existing session. (Defense: Anti-CSRF Tokens, SameSite Cookies).</li>
+      <li><strong>Broken Access Control:</strong> Flaws allowing users to access data or perform actions they shouldn't be authorized for (e.g., viewing another user's profile via URL manipulation - IDOR). (Defense: Robust server-side authorization checks on every request).</li>
+      <li><strong>Security Misconfiguration:</strong> Default credentials, overly verbose error messages revealing internal details, unnecessary features enabled, missing security headers. (Defense: Secure configuration practices, hardening guides, regular audits).</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Developer Role */}
+    <h2 id="developer-role">Your Role as a Developer</h2>
+    <p>Security isn't solely the responsibility of a dedicated security team – it's an integral part of web engineering. Adopt a security mindset ("Shift-Left Security"):</p>
+    <ul>
+      <li><strong>Think Adversarially:</strong> How could this feature be misused or broken? Consider potential threats during design and implementation (basic threat modeling).</li>
+      <li><strong>Validate Everything:</strong> Especially data crossing trust boundaries (client -> server, external API -> server).</li>
+      <li><strong>Encode Appropriately:</strong> When displaying data back to any client.</li>
+      <li><strong>Use Secure Defaults:</strong> Leverage the security features built into your framework and libraries.</li>
+      <li><strong>Stay Updated:</strong> Keep libraries, tools, and your own knowledge current. Follow security news and vulnerability disclosures.</li>
+      <li><strong>Learn Continuously:</strong> Resources like the <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>, framework-specific security guides, and security blogs are invaluable.</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Conclusion */}
+    <h2 id="journey-continues">The Journey Continues</h2>
+    <p>This post merely scratches the surface of web security. It's a deep, complex, and ever-evolving field. However, understanding and consistently applying these fundamental principles provides a solid foundation for building significantly safer and more trustworthy applications.</p>
+    <p>In future posts, we might dive deeper into specific vulnerabilities like XSS or CSRF, explore secure coding practices within Next.js, implement advanced security headers like CSP, or look at API security best practices. Stay tuned, and keep building securely!</p>
+
+  </article>
+</ArticleLayout>
