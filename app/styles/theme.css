@@ -142,7 +142,7 @@
   :root {
     /* Set fallbacks for OS preference */
     --background: var(--color-slate-900);
-    --foreground: var(--color-slate-100);
+    --foreground: var(--color-slate-200);
     --gray-rgb: 255, 255, 255;
     --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
     --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
@@ -158,7 +158,7 @@
 .dark {
   /* These overrides take precedence when .dark class is applied */
   --background: var(--color-slate-900);
-  --foreground: var(--color-slate-100);
+  --foreground: var(--color-slate-200);
   --gray-rgb: 255, 255, 255;
   --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
   --gray-alpha-100: rgba(var(--gray-rgb), 0.06);

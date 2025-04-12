@@ -1,13 +1,14 @@
 // app/layout.tsx
-export const metadata: Metadata = {
-  title: "Samir.Codes",
-  description: "Personal website and portfolio",
-};
-
+import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./styles/globals.css";
+import "./styles/globals.css"; // Ensure globals.css is imported
+import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Samir Llama",
+  description: "Personal website and portfolio",
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,14 +26,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-900 text-slate-100 tracking-tight`}
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          "antialiased",
+          // REMOVED: "bg-slate-900",
+          // REMOVED: "text-slate-100", // Or text-slate-200
+          "tracking-tight"
+          // Add any other layout-specific, non-color body classes here
+        )}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
+          defaultTheme="dark" // Ensures .dark is applied initially if no preference
+          enableSystem={true} // Allows respecting OS preference
         >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
             {children}

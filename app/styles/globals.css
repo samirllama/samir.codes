@@ -17,23 +17,25 @@
 @tailwind utilities;
 
 /* === Base HTML/Body Styles === */
-/* These run last */
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  /* scroll-behavior: smooth; applied via class in layout.tsx */
 }
 
 body {
-  /* Ensure these are applied (Tailwind base might handle some) */
-  /* font-family set via variable in layout.tsx */
-  /* background/color set via Tailwind classes in layout.tsx */
-  padding-top: var(--nav-height); /* Compensate for fixed header */
+  /*  Apply background and foreground using CSS variables --- */
+  background-color: var(--background);
+  color: var(--foreground);
+  /* --- End variable application --- */
+
+  /* Keep other essential body styles */
+  padding-top: var(--nav-height);
   font-size: var(--fontSize-base);
   line-height: var(--lineHeight-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Font family is applied via variable in layout.tsx */
 }
 
 * {

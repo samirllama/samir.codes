@@ -3,7 +3,6 @@
 import Hero from "@/components/hero/Hero";
 import Features from "@/components/feature/feature";
 import ProjectsCarousel from "@/components/projects/projects";
-import Img04 from "@/public/assets/img-4.png";
 
 export default function Home() {
   return (
