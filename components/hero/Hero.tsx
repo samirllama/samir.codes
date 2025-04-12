@@ -23,40 +23,43 @@ const dynamicHobbies = [
 
 export default function Hero() {
   return (
-    <section>
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Background Elements (Particles & Illustration) */}
-        <Particles className="absolute inset-0 -z-10" />
-        <div
-          className="absolute inset-0 -z-10 overflow-hidden rounded-b-[3rem] pointer-events-none -ml-28 -mr-28"
-          aria-hidden="true"
-        >
-          <div className="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2">
-            <Image
-              src={Illustration}
-              className="max-w-none"
-              width={2146}
-              priority
-              alt="Hero Illustration"
-            />
-          </div>
-        </div>
-
+    <section className="relative min-h-screen">
+      {/* Add relative positioning here */}
+      {/* Background Elements - Now relative to the full-width section */}
+      <Particles className="absolute inset-0 -z-10" quantity={40} />
+      {/* Optional: Add Nebula background here too if desired */}
+      {/* <div className="absolute inset-0 -z-20 opacity-40 overflow-hidden pointer-events-none">
+        <RotatingNebula textureUrl="/textures/nebula-blue-purple.jpg" rotationSpeed={0.0015} className="w-full h-full" />
+    </div> */}
+      {/* Glow Illustration (Positioned relative to section) */}
+      <div
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none -z-10" // Simplified positioning for bottom glow
+        aria-hidden="true"
+      >
+        <Image
+          src={Illustration} // The glow image
+          className="max-w-none"
+          width={2146} // Original width
+          // height might not be needed if width controls aspect ratio
+          alt="Hero Background Glow"
+        />
+      </div>
+      {/* Centered Content Container - No longer needs relative positioning */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Content Section */}
         <div className="pt-32 pb-16 md:pt-40 md:pb-20">
           <div className="max-w-3xl mx-auto text-center">
             {/* Personalized Content using TypingEffect */}
             <div data-aos="fade-down" data-aos-delay="200">
               <TypingEffect
-                staticPrefix="I like " // Provide the fixed text here
-                items={dynamicHobbies} // Provide only the dynamic parts
+                staticPrefix="I like "
+                items={dynamicHobbies}
                 paragraphClassName="text-2xl md:text-3xl text-slate-300 mb-8"
-                typingSpeed={120} // Slightly slower typing? Adjust as needed
+                typingSpeed={120}
                 deletingSpeed={60}
                 pauseDuration={1800}
               />
             </div>
-
             {/* Optional Buttons Section */}
             {/* ... */}
           </div>
