@@ -1,0 +1,52 @@
+---
+title: "Visualizing the Fibonacci Spiral with React & Canvas"
+description: "An interactive exploration of the Fibonacci sequence visualized as a growing spiral using React Client Components and the HTML Canvas API."
+date: "2025-04-15" # Adjust date as needed (YYYY-MM-DD)
+author: "Samir Llama" # Adjust author if needed
+tags:
+  [
+    "React",
+    "Canvas",
+    "JavaScript",
+    "Animation",
+    "Fibonacci",
+    "Client Component",
+  ]
+---
+
+{/_
+NO MORE IMPORTS OR EXPORTS NEEDED HERE!
+The content below is automatically passed as 'children' to the layout.
+Frontmatter above is read by gray-matter in lib/blog.ts.
+_/}
+
+import FibonacciSpiral from "@/components/interactive/FibonacciSpiral"; // Keep imports for components used *in* the content
+
+## The Beauty of the Fibonacci Sequence
+
+The Fibonacci sequence is a fascinating mathematical concept where each number is the sum of the two preceding ones, usually starting with 0 and 1. So, it goes: 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on.
+
+One of the most visually appealing representations of this sequence is the **Fibonacci spiral**. We can create this by drawing squares whose side lengths correspond to the Fibonacci numbers and then drawing quarter-circle arcs connecting the corners of these squares. The result is a beautiful logarithmic spiral that appears frequently in nature, from seashells to galaxies.
+
+## Interactive Visualization
+
+Below is an interactive visualization of the Fibonacci spiral built using React and the HTML Canvas API. It's a **Client Component** because it needs access to browser features (like the canvas) and uses React hooks (`useState`, `useEffect`) to manage the animation and user interaction.
+
+You can adjust the number of terms in the Fibonacci sequence used to generate the spiral and watch it draw segment by segment.
+
+{/* Embed the interactive Client Component here */}
+
+<div className="my-8 flex justify-center">
+  {/* Optional centering container */}
+  <FibonacciSpiral />
+</div>
+
+### How it Works
+
+1.  **Fibonacci Generation:** A simple function generates the required number of Fibonacci terms.
+2.  **Canvas Setup:** A `canvas` element is rendered, and we get its 2D drawing context using `useRef`.
+3.  **Drawing Logic:** The `drawSpiralAnimated` function calculates the position and radius for each arc based on the Fibonacci numbers and the current drawing direction (right, down, left, up). It uses `setTimeout` to create the animation effect, drawing one arc segment at a time.
+4.  **Scaling:** The drawing scale is adjusted based on the number of terms to keep the spiral reasonably centered and visible within the canvas.
+5.  **Client Component:** The `use client` directive at the top of the component file tells Next.js to handle this component differently, allowing it to use browser-specific APIs and hooks.
+
+This example demonstrates how you can seamlessly integrate interactive, client-side components directly into your server-rendered MDX blog posts within the Next.js App Router.

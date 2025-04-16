@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import Image from 'next/image';
-import Illustration from "@/public/assets/page-illustration.svg";
+import Illustration from "@/public/page-illustration.svg";
 import Particles from '@/components/particles/Particles';
 import PostItem from '@/components/PostItem';
 import { getAllPostsMeta } from '@/lib/posts';
@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   description: "About Samir and his experience.",
 };
 
-export default async function ChangelogPage() {
-  // Fetch posts using your function (modify if needed for 'changelog' dir)
-  const posts = getAllPostsMeta(); // Or getAllPostsMeta('changelog')
+export default async function AboutPage() {
+  // Fetch posts using your function (modify if needed for 'About' dir)
+  const posts = getAllPostsMeta();
 
   return (
     <>

@@ -11,7 +11,13 @@ import type { Options as PrettyCodeOptions } from 'rehype-pretty-code'; //
 
 //  Configure rehype-pretty-code
 const prettyCodeOptions: PrettyCodeOptions = {
-  theme: 'github-dark', // Or 'one-dark-pro', 'poimandres', etc.
+  theme: {
+    // Match dark theme base (slate-900)
+    dark: 'github-dark', // Example: Use GitHub Dark theme
+    // Add light theme if desired
+    light: 'github-light', // Example: Use GitHub Light theme
+  },
+
   onVisitLine(node: Element) {
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }];

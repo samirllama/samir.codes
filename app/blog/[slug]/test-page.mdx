@@ -1,0 +1,51 @@
+---
+title: "Test Blog Post"
+description: "Exploring the setup of this new MDX blog."
+date: "2025-04-15" # Use YYYY-MM-DD format
+author: "Samir Llama"
+tags: ["Next.js", "MDX", "Web Development", "Meta"]
+---
+
+## Welcome to the Blog!
+
+This is the first post written in MDX for this Next.js 15 project. It leverages the App Router's built-in MDX capabilities.
+
+### Features
+
+- **Markdown:** All your favorite Markdown syntax works.
+- **JSX:** You can embed React components directly!
+- **Styling:** Content is styled using `@tailwindcss/typography` via the `.mdx-prose` class defined in `mdx.css` and `theme.css`.
+- **Syntax Highlighting:** Code blocks are highlighted using `rehype-pretty-code`.
+
+### Code Example (JavaScript)
+
+```javascript
+function greet(name) {
+  // This line should be highlighted if configured
+  console.log(`Hello, ${name}! Welcome to MDX.`);
+  return `Hello, ${name}!`;
+}
+
+const message = greet("Developer");
+// Check the console!
+```
+
+### Code Example (CSS)
+
+```css
+/* Check theme.css and mdx.css for actual styles */
+.mdx-prose {
+  color: rgb(var(--foreground));
+}
+
+.mdx-prose a {
+  color: rgb(var(--primary));
+  text-decoration: underline;
+}
+
+/* Highlighted line style from mdx.css */
+.line--highlighted {
+  background-color: rgba(var(--primary), 0.1);
+  box-shadow: inset 3px 0 0 0 rgb(var(--primary));
+}
+```

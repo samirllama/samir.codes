@@ -4,7 +4,6 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { PostMeta } from '@/lib/posts'; // Import your PostMeta interface
 import { Route } from 'next';
-import { cn } from '@/lib/utils';
 
 // Assuming a PostDate component exists or you format date directly
 // import PostDate from '@/components/PostDate'; // Example path

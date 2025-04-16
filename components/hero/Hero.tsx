@@ -24,29 +24,23 @@ const dynamicHobbies = [
 export default function Hero() {
   return (
     <section className="relative min-h-screen">
-      {/* Add relative positioning here */}
-      {/* Background Elements - Now relative to the full-width section */}
+      {/* Relative positioning */}
       <Particles className="absolute inset-0 -z-10" quantity={40} />
-      {/* Optional: Add Nebula background here too if desired */}
-      {/* <div className="absolute inset-0 -z-20 opacity-40 overflow-hidden pointer-events-none">
-        <RotatingNebula textureUrl="/textures/nebula-blue-purple.jpg" rotationSpeed={0.0015} className="w-full h-full" />
-    </div> */}
       {/* Glow Illustration (Positioned relative to section) */}
       <div
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none -z-10" // Simplified positioning for bottom glow
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none -z-10"
         aria-hidden="true"
       >
         <Image
-          src={Illustration} // The glow image
+          src={Illustration} // glow image
           className="max-w-none"
-          width={2146} // Original width
-          // height might not be needed if width controls aspect ratio
+          width={2146} // height might not be needed if width controls aspect ratio
           alt="Hero Background Glow"
         />
       </div>
-      {/* Centered Content Container - No longer needs relative positioning */}
+
+      {/* Centered Content Container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Content Section */}
         <div className="pt-32 pb-16 md:pt-40 md:pb-20">
           <div className="max-w-3xl mx-auto text-center">
             {/* Personalized Content using TypingEffect */}
@@ -60,8 +54,8 @@ export default function Hero() {
                 pauseDuration={1800}
               />
             </div>
+
             {/* Optional Buttons Section */}
-            {/* ... */}
           </div>
         </div>
       </div>

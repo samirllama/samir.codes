@@ -1,6 +1,6 @@
 {
   "cSpell.words": ["nmsregular"],
-  "workbench.colorTheme": "Cobalt2",
+  "workbench.colorTheme": "Halcyon",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -1,0 +1,116 @@
+/* app/styles/theme.css (Corrected for v3 - Removed @layer wrappers) */
+
+/* ========== Core CSS Variable Definitions ========== */
+:root {
+  /* Core Spacing & Typography Tokens  */
+  --spacing-base: 1rem;
+  --spacing-xs: calc(var(--spacing-base) * 0.5);
+  --spacing-sm: calc(var(--spacing-base) * 0.75);
+  --spacing-md: var(--spacing-base);
+  --spacing-lg: calc(var(--spacing-base) * 1.5);
+  --spacing-xl: calc(var(--spacing-base) * 2);
+  --spacing-2xl: calc(var(--spacing-base) * 3);
+
+  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
+  --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
+  --fontSize-xs: clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem);
+
+  --fontSize-h1: clamp(2.5rem, 5vw, 3.5rem);
+  --fontSize-h2: clamp(2rem, 4vw, 3rem);
+  --fontSize-h3: clamp(1.75rem, 3vw, 2.5rem);
+  --fontSize-h4: clamp(1.5rem, 2.5vw, 2rem);
+
+  --lineHeight-tight: 1.25;
+  --lineHeight-normal: 1.75;
+  --lineHeight-relaxed: 1.85;
+
+  /* Layout Tokens  */
+  --nav-height: 3.75rem;
+  --max-width: 70rem;
+  --slide-height: 100vh;
+
+  /*  Color Tokens (Light Theme - RGB values)  */
+  --background-rgb: 255 255 255;
+  --foreground-rgb: 23 23 23;
+  --primary-rgb: 168 85 247; /* Corresponds to purple-500 */
+  --secondary-rgb: 99 102 241; /* Corresponds to indigo-500 */
+  --accent-rgb: 219 39 119; /* Corresponds to pink-600 (example) */
+  --border-subtle-rgb: 226 232 240; /* slate-200 */
+  --border-medium-rgb: 203 213 225; /* slate-300 */
+  --gray-alpha-100: rgba(var(--foreground-rgb), 0.06);
+  --gray-alpha-200: rgba(var(--foreground-rgb), 0.1);
+}
+
+/* Dark Theme Overrides  */
+.dark {
+  --background-rgb: 15 23 42; /* slate-900 */
+  --foreground-rgb: 241 245 249; /* slate-100 (Brighter) */
+  --primary-rgb: 192 132 252;
+  --secondary-rgb: 129 140 248;
+  --accent-rgb: 216 180 254;
+  --border-subtle-rgb: 51 65 85;
+  --border-medium-rgb: 71 85 105;
+  --button-primary-hover-rgb: 216 180 254;
+  --button-secondary-hover-rgb: 99 102 241;
+  --dark-base-rgb: 15 23 42;
+  --dark-elevated-rgb: 30 41 59;
+  --gray-alpha-100: rgba(var(--foreground-rgb), 0.08);
+  --gray-alpha-200: rgba(var(--foreground-rgb), 0.12);
+}
+
+/* Global HTML Styles  */
+html {
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+/* Body styles applied in globals.css */
+
+/* Styles for Swiper carousel */
+.stellar-carousel .swiper-slide {
+  opacity: 0.8;
+  transition-property: opacity;
+  transition-timing-function: theme(
+    "transitionTimingFunction.DEFAULT",
+    cubic-bezier(0.4, 0, 0.2, 1)
+  );
+  transition-duration: theme("transitionDuration.150", 150ms);
+  &.swiper-slide-active {
+    opacity: 1;
+  }
+}
+
+/* Styles for scroll controls */
+.scroll-controls {
+  position: sticky;
+  bottom: theme("spacing.8", "2rem");
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
+}
+
+/* ==========================================================================
+   Utility Overrides & Prose Styles (No @layer needed)
+   ========================================================================== */
+
+/* Layout Utilities  */
+.content-grid {
+  display: grid;
+  grid-template-columns: 40fr 5fr 5fr 40fr;
+  grid-template-rows: minmax(var(--slide-height), auto);
+}
+
+.sticky-col {
+  position: sticky;
+  top: 0; /* Adjust if needed, e.g., top-[var(--nav-height)] */
+  height: var(--slide-height);
+  scroll-snap-align: start;
+}
+
+/* Scroll Utilities  */
+[data-scroll-section] {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}

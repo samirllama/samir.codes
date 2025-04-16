@@ -4,24 +4,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./typing.module.css";
 import { calculateNextTypingStep } from "@/lib/typing-logic";
+import { cn } from "@/lib/utils";
 
 interface TypingEffectProps {
-  /** The static text to display before the typing animation. */
-  staticPrefix?: string;
-  /** Array of the dynamic text parts to cycle through. */
+  staticPrefix?: string /** Static text to display before typing animation. */;
   items: string[];
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseDuration?: number;
   paragraphClassName?: string;
-  // staticTextClassName prop is removed as staticPrefix handles it more directly
 }
 
-// Default dynamic parts
 const defaultItems = ["gaming.", "reading.", "coding."];
 
 const TypingEffect: React.FC<TypingEffectProps> = ({
-  staticPrefix = "", // Default to empty string
+  staticPrefix = "",
   items = defaultItems,
   typingSpeed = 100,
   deletingSpeed = 50,
@@ -29,7 +26,6 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   paragraphClassName = "text-2xl md:text-3xl font-semibold my-8",
 }) => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
-  // **** IMPORTANT: displayedText now ONLY stores the DYNAMIC part ****
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -75,16 +71,36 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   ]);
 
   return (
-    <p className={`${paragraphClassName}`}>
-      {/* Render the static prefix if provided */}
+    <p className={cn(paragraphClassName)}>
+      {/* Static prefix */}
       {staticPrefix && <span>{staticPrefix}</span>}
-      {/* Render the dynamic part within the styled span */}
+
+      {/* Dynamic part within styled span */}
       <span
-        className={`
-          ${styles.gradientText}
-          ${styles.blinkingCaret}
-          ${styles.dynamicTextContainer}
-        `}
+        className={cn(
+          // Core Tailwind utilities for gradient text
+          "bg-gradient-to-r",
+          // Colors based on tailwind.config.ts mapping
+          "from-primary-500",
+          "to-secondary-500",
+          "dark:from-primary-400",
+          "dark:to-secondary-400",
+          "bg-clip-text",
+          "text-transparent", // ESSENTIAL: Makes text transparent for gradient bg
+
+          // Layout/Appearance utilities (from old CSS module)
+          "inline-block",
+          "font-bold", // font-weight: 700
+          "relative", // For caret positioning
+          "align-bottom", // Or align-baseline if preferred
+          "whitespace-nowrap",
+
+          // Add min-height using arbitrary value to prevent collapse
+          "min-h-[1.2em]",
+
+          // Custom class for the blinking caret (styles in global CSS)
+          "blinkingCaret"
+        )}
       >
         {/* Render a non-breaking space if dynamic text is empty for layout/caret */}
         {displayedText || "\u00A0"}

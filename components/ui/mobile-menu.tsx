@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import styles from "./ui.module.css";
+import { cn } from "@/lib/utils";
 
 const LINKS = [
   { href: "/", label: "Home" },
@@ -14,7 +14,6 @@ const LINKS = [
 
 export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
-
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLDivElement>(null);
 
@@ -45,11 +44,14 @@ export default function MobileMenu() {
   });
 
   return (
-    <div className="md:display-none flex items-center ml-4">
+    <div className="md:hidden flex items-center ml-4">
       {/* Hamburger button */}
       <button
         ref={trigger}
-        className={`${styles.hamburger}${mobileNavOpen && "active"}`}
+        className={cn(
+          "hamburger", // Keep base class if needed for JS/CSS targeting
+          mobileNavOpen && "active"
+        )}
         type="button"
         aria-controls="mobile-nav"
         aria-expanded={mobileNavOpen}
@@ -78,12 +80,14 @@ export default function MobileMenu() {
             : { maxHeight: 0, opacity: 0.8 }
         }
       >
+        {/* Keep complex background/border for now, or simplify later */}
         <ul className="border border-transparent [background:linear-gradient(theme(colors.slate.900),_theme(colors.slate.900))_padding-box,_conic-gradient(theme(colors.slate.400),_theme(colors.slate.700)_25%,_theme(colors.slate.700)_75%,_theme(colors.slate.400)_100%)_border-box] rounded-lg px-4 py-1.5">
-          {LINKS.map((link: { href: string; label: string }) => (
+          {LINKS.map((link) => (
             <li key={link.label}>
               <Link
                 className="flex font-medium text-sm text-slate-300 hover:text-white py-1.5"
                 href={link.href}
+                onClick={() => setMobileNavOpen(false)}
               >
                 {link.label}
               </Link>

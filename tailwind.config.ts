@@ -1,204 +1,77 @@
-// tailwind.config.ts
+// tailwind.config.ts (samir.codes - Downgraded to v3 style)
 import type { Config } from 'tailwindcss'
-import typography from '@tailwindcss/typography';
-import forms from '@tailwindcss/forms';
+import colors from 'tailwindcss/colors' // Import default colors for mapping
+// Import necessary v3 plugins
+import typography from '@tailwindcss/typography'
+import forms from '@tailwindcss/forms'
+import aspectRatio from '@tailwindcss/aspect-ratio'
+import containerQueries from '@tailwindcss/container-queries'
+// NOTE: tailwindcss-animate is removed for now
 
 const config: Config = {
     content: [
-        './pages/**/*.{js,ts,jsx,tsx,mdx}', // Keep for potential future use
-        './components/**/*.{js,ts,jsx,tsx,mdx}',
-        './app/**/*.{js,ts,jsx,tsx,mdx}',
+        './components/**/*.{js,ts,jsx,tsx,mdx,css}',
+        './app/**/*.{js,ts,jsx,tsx,mdx,css}',
     ],
-    // IMPORTANT: Changed darkMode strategy to 'class' to match next-themes setup in RootLayout
-    darkMode: 'class',
+    darkMode: 'class', // Keep using class-based dark mode
     theme: {
         extend: {
-            // * Color Integration ---
+            // Color Palette Definition (Mapped to Tailwind v3 defaults) ---
             colors: {
-                // Map core semantic colors from globals.css (:root and .dark)
-                background: 'var(--background)', // Handles light/dark via CSS
-                foreground: 'var(--foreground)', // Handles light/dark via CSS
-                primary: 'var(--primary)',       // #a855f7 (from globals.css)
-                secondary: 'var(--secondary)',   // #6366f1 (from globals.css)
-                accent: 'var(--accent)',         // #c084fc (from globals.css)
+                // Map semantic names to Tailwind scales based on your theme.css values
+                primary: colors.purple,    // primary: 168 85 247; -> purple-500 is #a855f7
+                secondary: colors.indigo,  // secondary: 99 102 241; -> indigo-500 is #6366f1
+                accent: colors.pink, // Changed accent mapping for variety
+                gray: colors.slate, // Use slate consistently
 
-                // Map dark mode specific accents (defined in globals.css .dark / prefers-color-scheme)
-                'accent-primary': 'var(--accent-primary)', // hsl(315 60% 82%)
-                'accent-secondary': 'var(--accent-secondary)', // hsl(211 63% 83%)
+                // Basic placeholders - actual colors from CSS vars on body
+                background: colors.white,
+                foreground: colors.slate[900],
 
-                // Map specific color palettes defined in theme.css
-                slate: {
-                    200: 'var(--color-slate-200, #e2e8f0)',
-                    300: 'var(--color-slate-300, #cbd5e1)',
-                    400: 'var(--color-slate-400, #94a3b8)',
-                    500: 'var(--color-slate-500, #64748b)',
-                    600: 'var(--color-slate-600, #475569)',
-                    700: 'var(--color-slate-700, #334155)',
-                    800: 'var(--color-slate-800, #1e293b)',
-                    900: 'var(--color-slate-900, #0f172a)',
-                },
-                purple: {
-                    200: 'var(--color-purple-200, #e9d5ff)',
-                    300: 'var(--color-purple-300, #d8b4fe)',
-                    400: 'var(--color-purple-400, #c084fc)', // Same as --accent
-                    500: 'var(--color-purple-500, #a855f7)', // Same as --primary
-                    600: 'var(--color-purple-600, #9333ea)', // Example fallback if var not defined
-                    700: 'var(--color-purple-700, #7e22ce)',
-                    800: 'var(--color-purple-800, #6b21a8)',
-                    900: 'var(--color-purple-900, #581c87)',
-                    950: 'var(--color-purple-950, #3b0764)', // Example fallback
-                },
-
-                // Map alpha grays (useful for borders/backgrounds)
-                'gray-alpha-100': 'var(--gray-alpha-100)',
-                'gray-alpha-200': 'var(--gray-alpha-200)',
-
-                // Map dark theme specific UI colors if needed directly
-                'dark-base': 'var(--dark-base, #121212)', // Example mapping
-                'dark-elevated': 'var(--dark-elevated, #1A1A1A)', // Example mapping
-                'dark-border-subtle': 'var(--dark-border-subtle, #2A2A2A)', // Example mapping
-                'dark-border-medium': 'var(--dark-border-medium, #444444)', // Example mapping
+                // Explicitly include needed default colors
+                red: colors.red,
+                // Add blue, green etc. if used border-blue-500 etc.
             },
 
-            // * Spacing Integration ---
-            spacing: {
-                // Map calculated spacing scale from theme.css (already in rem)
-                xs: 'var(--spacing-xs)',   // 0.5rem (8px)
-                sm: 'var(--spacing-sm)',   // 0.75rem (12px)
-                md: 'var(--spacing-md)',   // 1rem (16px)
-                lg: 'var(--spacing-lg)',   // 1.5rem (24px)
-                xl: 'var(--spacing-xl)',   // 2rem (32px)
-                '2xl': 'var(--spacing-2xl)', // 3rem (48px)
-
-                // Map specific layout spacers from globals.css
-                // Keep original units defined in CSS variables unless refactoring CSS too
-                spacer: 'var(--spacer)',     // 40px (or 2.5rem if CSS var is updated)
-                'spacer-small': 'var(--spacer-small)', // 20px (or 1.25rem if CSS var is updated)
-                wide: 'var(--spacing-wide)', // 2.125rem (34px)
-            },
-
-            // * Font Size Integration ---
-            fontSize: {
-                // Map calculated font size scale from theme.css (already in rem)
-                // This replaces the previous Tailwind scale for better consistency
-                sm: ['var(--fontSize-sm)', { lineHeight: 'var(--lineHeight-normal)' }], // ~0.98rem
-                base: ['var(--fontSize-base)', { lineHeight: 'var(--lineHeight-normal)' }], // 1.125rem (18px)
-                md: ['var(--fontSize-md)', { lineHeight: 'var(--lineHeight-normal)' }], // ~1.4rem
-                lg: ['var(--fontSize-lg)', { lineHeight: 'var(--lineHeight-tight)' }], // ~1.68rem
-                xl: ['var(--fontSize-xl)', { lineHeight: 'var(--lineHeight-tight)' }], // ~2.25rem
-                '2xl': ['var(--fontSize-2xl)', { lineHeight: 'var(--lineHeight-tight)' }], // ~2.8rem
-                '3xl': ['var(--fontSize-3xl)', { lineHeight: 'var(--lineHeight-tight)' }], // ~3.37rem
-
-                // Optionally map heading variables if direct usage is desired
-                h1: ['var(--fontSize-h1)', { lineHeight: 'var(--lineHeight-tight)' }], // ~3.37rem
-                h2: ['var(--fontSize-h2)', { lineHeight: 'var(--lineHeight-tight)' }], // ~2.8rem
-                h3: ['var(--fontSize-h3)', { lineHeight: 'var(--lineHeight-tight)' }], // ~2.25rem
-                h4: ['var(--fontSize-h4)', { lineHeight: 'var(--lineHeight-tight)' }], // ~1.68rem
-                h5: ['var(--fontSize-h5)', { lineHeight: 'var(--lineHeight-normal)' }], // ~1.4rem
-                h6: ['var(--fontSize-h6)', { lineHeight: 'var(--lineHeight-normal)' }], // 1.125rem
-            },
-
-            // * Font Family Integration ---
             fontFamily: {
-                // Use variables set in RootLayout
-                sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-                mono: ['var(--font-geist-mono)', 'monospace'],
-                // Define body font if explicitly needed (Poppins defined in globals.css)
-                body: ['var(--font-body)', 'Poppins', 'system-ui', 'sans-serif'],
+                sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui'],
+                mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
             },
-
-            // * Layout Integration ---
-            maxWidth: {
-                DEFAULT: 'var(--maxWidth)', // 70rem (1120px)
-                // Add other max-widths if needed
+            position: {
+                sticky: 'sticky',
+                fixed: 'fixed',
+                absolute: 'absolute',
+                relative: 'relative',
+                static: 'static',
             },
-            height: {
-                // Make nav height available as a utility (e.g., h-nav)
-                nav: 'var(--nav-height)' // 3.75rem (60px)
-            },
-            lineHeight: {
-                tight: 'var(--lineHeight-tight)', // 1.2
-                normal: 'var(--lineHeight-normal)', // 1.75
-                relaxed: 'var(--lineHeight-relaxed)', // 1.85
-            },
-
-            // * Other Theme Values ---
             boxShadow: {
-                // Keep existing custom shadow or map from variables if defined
-                mode: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+                'clay-dark': `
+                  inset 4px 4px 8px rgba(0,0,0,0.3),
+                  inset -4px -4px 8px rgba(51, 65, 85, 0.5),
+                  5px 5px 10px rgba(0,0,0,0.4),
+                  -5px -5px 10px rgba(51, 65, 85, 0.3)`,
             },
-            fontWeight: {
-                // Keep existing or map from variables
-                extrabold: '800',
+            fontSize: {
+                'xs': 'clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem)',
+                'sm': 'clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem)',
+                'base': 'clamp(1rem, 1.05cqw + 0.8rem, 1.25rem)',
+                // Add lg, xl, etc. if needed
             },
-            letterSpacing: {
-                // Keep existing scale
-                tighter: '-0.02em',
-                tight: '-0.01em',
-                normal: '0',
-                wide: '0.01em',
-                wider: '0.02em',
-                widest: '0.4em',
+            scrollSnapType: {
+                y: 'y mandatory',
             },
-
-            // * REMOVED Animations/Keyframes ---
-            // Removed animation and keyframes definitions here.
-            // Keep animations defined in animations.css and apply via classes.
-            // This avoids conflicts and keeps animation logic centralized there.
-
-            opacity: {
-                // Map opacity scale from theme.css
-                none: 'var(--opacity-none, 0)',
-                low: 'var(--opacity-low, 0.5)',
-                medium: 'var(--opacity-medium, 0.8)',
-                full: 'var(--opacity-full, 1)',
+            gridTemplateColumns: {
+                'scroll-slide': '40fr 5fr 5fr 40fr',
             },
-
-            blur: {
-                // Map blur value from theme.css
-                '2xl': 'var(--blur-2xl, 40px)', // Keep original unit from CSS variable
-            }
-        }
+        },
     },
     plugins: [
+        aspectRatio,
+        containerQueries,
         forms,
-        typography // Keep typography plugin for `.prose` base styles
+        typography({
+            className: 'mdx-prose',
+        })
     ],
-} satisfies Config
-
+}
 export default config
-
-/*
-Explanation:
-> darkMode: 'class': Changed to align with next-themes configuration in app/layout.tsx.
-
-> colors: Mapped --background, --foreground, --primary, --secondary, --accent, dark mode accents, and the full slate and purple palettes using var(--variableName, fallbackValue).
-
-> spacing: Mapped the calculated scale (--spacing-xs to 2xl) and specific layout spacers (wide, spacer, spacer-small).
-
-> fontSize: Kept the granular Tailwind scale but updated base, sm, lg, xl, 2xl, 3xl to use the corresponding CSS variables (--fontSizeBase, --fontSize-sm, etc.) and the --lineHeight-normal variable for the base size.
-
-> fontFamily: Mapped --font-geist-sans, --font-geist-mono, and --font-body.
-
-> lineHeight: Added mapping for --lineHeight-tight, normal, relaxed.
-
-> maxWidth: Set the DEFAULT max-width using --maxWidth.
-
-> Animations/Keyframes Removed: Removed the animation and keyframes sections to rely solely on animations.css, preventing duplication.
-
-
-*What to do now:
->1 Ensure we have replaced tailwind.config.ts with the new version.
->2 Restart development server (pnpm dev).
->3 Open application in the browser.
->4 Visually inspect: Does the site look largely the same? It should, as the underlying CSS variables haven't changed, and the components are still using their original styling methods (CSS Modules, global CSS).
-
-*Use Dev Tools:
->1 Find an element that should be styled by a variable (e.g., the main page background using --background, a button using --primary).
->2 In the "Styles" or "Computed" tab, check the value being applied. It should match the value from the globals.css/theme.css.
->3 Optionally, find an element where it might have already tried using a Tailwind class (like text-primary). See if that class now correctly applies the style defined by the corresponding CSS variable. If you haven't used any conflicting Tailwind classes yet, this might not yield much info, but the visual check and computed style check are key.
->4 Once you've confirmed that the site looks correct and the computed styles reflect your CSS variables, we can confidently move on to Phase 2: incrementally converting component styles to use Tailwind utilities.
-
-*/
-
-

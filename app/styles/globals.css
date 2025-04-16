@@ -1,43 +1,46 @@
-/* app/styles/globals.css */
+/* app/styles/globals.css (Updated for Tailwind v3) */
 
-/* === Tailwind Layers (v4 Syntax - Correct Order) === */
-@import "tailwindcss/preflight"; /* Import base styles (replaces @tailwind base) */
-/* @tailwind components; */ /* REMOVED - No longer available in v4 */
-
-/* === Custom Style Imports === */
-/* Import these files BEFORE @tailwind utilities */
-@import "./theme.css"; /* Contains variables and specific overrides */
-@import "./utility-patterns.css"; /* Contains theme() calls and @apply classes */
-@import "./animations.css"; /* Contains animations */
-@import "./mdx.css"; /* Contains MDX prose styles */
-/* Import any other global custom CSS files here */
-
-/* === Tailwind Utilities Layer (Handles Utilities + Components in v4) === */
-/* Inject utilities AFTER custom files have been processed */
+/* === Tailwind v3 Directives (Import base, components, and utilities) === */
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
+/* === Custom Style Imports (AFTER Tailwind directives for v3 JIT) === */
+@import "./theme.css"; /* Defines CSS variables, custom component styles */
+/* @import "./utility-patterns.css";
+@import "./animations.css";
+@import "./mdx.css"; */
+
 /* === Base HTML/Body Styles === */
+/* Apply base styles using variables defined in theme.css */
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 body {
-  /*  Apply background and foreground using CSS variables --- */
-  background-color: var(--background);
-  color: var(--foreground);
-  /* --- End variable application --- */
+  /* Use CSS variables defined in theme.css */
+  background-color: rgb(var(--background-rgb)); /* Use -rgb variables */
+  color: rgb(var(--foreground-rgb)); /* Use -rgb variables */
 
-  /* Keep other essential body styles */
-  padding-top: var(--nav-height);
+  /* Apply font variables if defined in theme.css or layout.tsx */
+  /* Example: font-family: var(--font-geist-sans); */
+
+  /* Apply base typography variables from theme.css */
   font-size: var(--fontSize-base);
+  font-family: var(--font-geist-sans);
   line-height: var(--lineHeight-normal);
+
+  /* Remove padding-top for now if header is sticky */
+  /* padding-top: var(--nav-height); */
+
+  /* Standard browser normalization */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Font family is applied via variable in layout.tsx */
 }
 
+/* Basic reset (also handled by @tailwind base) */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -49,12 +52,25 @@ a {
   text-decoration: none;
 }
 
-/* === Custom @layer utilities (Optional - can also live in utility-patterns.css) === */
+/* === Custom @layer definitions (Keep if you have them) === */
+/* Example:  scrollbar utilities defined here */
 @layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Add other custom utilities if needed */
   .rtl {
     direction: rtl;
   }
-  /* Example: If scrollbar utilities were moved here */
-  /* .scrollbar-thin { ... } */
-  /* .no-scrollbar { ... } */
 }

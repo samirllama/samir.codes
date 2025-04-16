@@ -32,10 +32,7 @@ export default function RootLayout({
           geistSans.variable,
           geistMono.variable,
           "antialiased",
-          // REMOVED: "bg-slate-900",
-          // REMOVED: "text-slate-100", // Or text-slate-200
           "tracking-tight"
-          // Add any other layout-specific, non-color body classes here
         )}
       >
         <ThemeProvider

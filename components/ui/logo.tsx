@@ -11,7 +11,7 @@ export default function Logo() {
         width={38}
         height={38}
         priority
-        alt="Stellar"
+        alt="logo"
       />
     </Link>
   )

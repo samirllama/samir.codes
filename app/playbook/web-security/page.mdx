@@ -1,58 +1,127 @@
 ---
-title: "Web Security Fundamentals: Protecting Your Digital Fortress"
-description: "An introduction to the core concepts of web security, essential for every developer building for the modern web."
+title: "Web Security Fundamentals"
+description: "Core security concepts for modern web"
 author: "Samir Coder"
-date: "2025-03-29"
-tags:
-  - security
-  - web development
-  - fundamentals
+date: "2025-03-30"
+tags: [security, web-development, fundamentals]
 ---
 
-import ArticleLayout from '@/components/layouts/ArticleLayout'; // Assuming path is correct
+import ArticleLayout from "@/components/layouts/ArticleLayout";
 
-{/* Keep the metadata export for Next.js */}
-export const metadata = {
-  title: "Web Security Fundamentals: Protecting Your Digital Fortress",
-  description: "An introduction to the core concepts of web security, essential for every developer building for the modern web.",
-  author: "Samir Coder",
-  date: "2025-03-29",
-  tags: ["security", "web development", "fundamentals"],
-  // category: "Security"
-};
-
-{/* Wrap content in ArticleLayout, passing metadata for the sidebar */}
-
-<ArticleLayout meta={metadata}>
-  <article className="prose prose-invert max-w-none">
-    {/* Explicitly render title */}
-    <h1>{metadata.title}</h1>
-
-    {/* Introduction */}
-    <p>Welcome to the first technical post on my new site! As web engineers, we build the digital world brick by brick. But just like physical structures, our digital creations need strong foundations and defenses. Today, we're diving into a topic crucial for every developer: <strong>Web Security</strong>.</p>
-    <p>This isn't about becoming a penetration tester overnight. It's about understanding the fundamental principles and common threats so we can build more resilient, trustworthy applications from the ground up. Let's secure our digital fortresses.</p>
-
-    {/* Table of Contents */}
-    <nav className="my-8 p-5 rounded-lg border border-gray-alpha-200 bg-slate-800/30">
-      <h2 className="text-xl font-semibold text-slate-200 mb-3 !mt-0">Table of Contents</h2> {/* Use !mt-0 to override prose margin */}
-      <ul className="list-none !pl-0 space-y-1"> {/* Use !pl-0 to override prose padding */}
-        <li><a href="#why-it-matters" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Why Does Web Security Matter?</a></li>
+{/* Table of Contents Component */}
+export const toc = (
+<nav>
+  {/* Removed h2 - the layout adds "On this page" */}
+  <ul className="list-none !pl-0 space-y-1">
+    <li>
+      <a
+        href="#why-it-matters"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Why Does Web Security Matter?
+      </a>
+    </li>
+    <li>
+      <a
+        href="#core-pillars"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Core Pillars of Web Security
+      </a>
+      <ul className="list-none !pl-4 mt-1 space-y-1">
         <li>
-          <a href="#core-pillars" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Core Pillars of Web Security</a>
-          <ul className="list-none !pl-4 mt-1 space-y-1">
-             <li><a href="#pillar-https" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">1. HTTPS Everywhere</a></li>
-             <li><a href="#pillar-input" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">2. Never Trust User Input</a></li>
-             <li><a href="#pillar-output" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">3. Encode Output Correctly</a></li>
-             <li><a href="#pillar-access" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">4. Control Access (AuthN/AuthZ)</a></li>
-             <li><a href="#pillar-headers" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">5. Security Headers</a></li>
-             <li><a href="#pillar-dependencies" className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">6. Keep Dependencies Updated</a></li>
-          </ul>
+          <a
+            href="#pillar-https"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            1. HTTPS Everywhere
+          </a>
         </li>
-        <li><a href="#common-threats" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Common Threats to Be Aware Of</a></li>
-        <li><a href="#developer-role" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">Your Role as a Developer</a></li>
-        <li><a href="#journey-continues" className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline">The Journey Continues</a></li>
+        <li>
+          <a
+            href="#pillar-input"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            2. Never Trust User Input
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-output"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            3. Encode Output Correctly
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-access"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            4. Control Access (AuthN/AuthZ)
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-headers"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            5. Security Headers
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-dependencies"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            6. Keep Dependencies Updated
+          </a>
+        </li>
       </ul>
-    </nav>
+    </li>
+    <li>
+      <a
+        href="#common-threats"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Common Threats to Be Aware Of
+      </a>
+    </li>
+    <li>
+      <a
+        href="#developer-role"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Your Role as a Developer
+      </a>
+    </li>
+    <li>
+      <a
+        href="#journey-continues"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        The Journey Continues
+      </a>
+    </li>
+  </ul>
+</nav>
+);
+
+<ArticleLayout tableOfContents={toc}>
+
+<h1>Web Security Fundamentals: Protecting Your Digital Fortress</h1>
+
+{/* Introduction */}
+
+Welcome to the first technical post on my new site! As web engineers, we build
+the digital world brick by brick. But just like physical structures, our
+digital creations need strong foundations and defenses. Today, we're diving
+into a topic crucial for every developer: <strong>Web Security</strong>.
+
+This isn't about becoming a penetration tester overnight. It's about
+understanding the fundamental principles and common threats so we can build
+more resilient, trustworthy applications from the ground up. Let's secure our
+digital fortresses.
 
     {/* Use custom HR component */}
     <hr />
@@ -86,6 +155,9 @@ export const metadata = {
       <li><strong>Why:</strong> This is the primary defense against <strong>Injection Attacks</strong> (like SQL Injection, NoSQL Injection, Command Injection, and Cross-Site Scripting).</li>
       <li><strong>Action:</strong> Implement robust server-side validation using libraries like Zod (as seen in this project's actions!) or built-in framework validators. Use allow-lists (defining what *is* permitted) rather than block-lists (trying to guess what's bad). Use parameterized queries or ORMs (like Drizzle!) for database interactions to prevent SQLi.</li>
     </ul>
+
+      {/* <<<=== ADD A BLANK LINE HERE ===>>> */}
+
     <pre><code className="language-javascript">
     {`// Simplified Zod Example (Server-Side)
     import { z } from 'zod';
@@ -156,7 +228,6 @@ export const metadata = {
     </ul>
 
     <h3 id="pillar-dependencies">6. Keep Dependencies Updated</h3>
-    {/* ... rest of the file ... */}
     <ul>
       <li><strong>What:</strong> Regularly update your frameworks, libraries, OS, and server software.</li>
       <li><strong>Why:</strong> Attackers actively scan for and exploit known vulnerabilities (CVEs) in outdated software. Updates often contain critical security patches.</li>
@@ -197,5 +268,4 @@ export const metadata = {
     <p>This post merely scratches the surface of web security. It's a deep, complex, and ever-evolving field. However, understanding and consistently applying these fundamental principles provides a solid foundation for building significantly safer and more trustworthy applications.</p>
     <p>In future posts, we might dive deeper into specific vulnerabilities like XSS or CSRF, explore secure coding practices within Next.js, implement advanced security headers like CSP, or look at API security best practices. Stay tuned, and keep building securely!</p>
 
-  </article>
 </ArticleLayout>

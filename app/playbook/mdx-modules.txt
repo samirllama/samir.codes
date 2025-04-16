@@ -1,0 +1,646 @@
+================================================================================
+FILE: first_mdx/page.mdx
+================================================================================
+
+---
+title: "First MDX Pages"
+description: "First MDX page on my website"
+author: "Samir Coder"
+date: "2025-03-29"
+tags:
+  - web development
+  - fundamentals
+---
+
+/app/blog/first_mdx_page/page.mdx
+
+export const metadata = {
+  title: "First MDX Page",
+  description: "First MDX page on my website",
+  author: "Samir Coder",
+  date: "2025-03-22",
+};
+
+# Hello 👋 with MDX!
+
+## headline 2nd level
+
+text in _italic_
+
+text in **bold**
+
+text in **_bold and italic_**
+
+> a quote
+
+[link to Next.js](https://nextjs.org)
+
+- foo
+- bar
+- baz
+
+![This is an octocat image](https://myoctocat.com/assets/images/base-octocat.svg "I'm the title of the octocat image")
+
+
+================================================================================
+FILE: layout.tsx
+================================================================================
+
+// app/playbook/layout.tsx
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Samir's Playbook",
+    default: "Playbook",
+  },
+  description:
+    "Engineering Playbook with insights on web development, security, and technology",
+};
+
+// This layout now simply renders its children.
+// The overall site structure (header/footer/main padding) comes from app/(default)/layout.tsx
+// The specific two-column layout for articles comes from ArticleLayout used within the .mdx files.
+export default function PlaybookLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>; // Render children directly
+}
+
+
+================================================================================
+FILE: layout/ArticleLayout.tsx
+================================================================================
+
+// components/layouts/ArticleLayout.tsx
+import React from "react";
+import { cn } from "@/lib/utils"; // Assuming your utility path
+
+interface ArticleLayoutProps {
+  children: React.ReactNode; // The main MDX content
+  tableOfContents?: React.ReactNode; // New prop for the ToC
+  meta?: {
+    // Optional metadata object for the sidebar
+    title?: string;
+    author?: string;
+    date?: string;
+    // Add other fields you might have: tags, category, readingTime etc.
+  };
+  className?: string; // Allow passing additional classes
+}
+
+export default function ArticleLayout({
+  children,
+  tableOfContents,
+  meta,
+  className,
+}: ArticleLayoutProps) {
+  // --- DEBUGGING ---
+  console.log("--- Rendering ArticleLayout ---");
+  // Check what's actually being passed as children on the server
+  // Note: This might log complex React structures
+  console.log("Children type:", typeof children);
+  console.log("Children received:", children);
+  // --- END DEBUGGING ---
+
+  // Temporarily return a very simple structure to isolate the children
+  return (
+    <div className={cn("border-4 border-red-500 p-4", className)}>
+      <h2 className="text-red-600 font-bold">
+        --- ArticleLayout Boundary (Start) ---
+      </h2>
+      <div className="border border-dashed border-blue-500 p-2">
+        <h3 className="text-blue-600">Children Prop Content:</h3>
+        {children ? (
+          children
+        ) : (
+          <p className="text-red-500 font-bold">
+            CHILDREN PROP IS EMPTY/FALSY!
+          </p>
+        )}
+      </div>
+      <h2 className="text-red-600 font-bold">
+        --- ArticleLayout Boundary (End) ---
+      </h2>
+      {/* Keep sidebar minimal or remove temporarily if needed */}
+      <aside className="border border-green-500 p-2 mt-4">
+        <h3 className="text-green-600">Sidebar Area</h3>
+        {/* Render ToC/Meta conditionally */}
+        {meta && <div>Meta Info Placeholder</div>}
+        {tableOfContents && <div>Table of Contents Placeholder</div>}
+      </aside>
+    </div>
+  );
+}
+
+// Original Layout Component (Commented Out) ---
+// function ArticleLayout_({
+//   children,
+//   tableOfContents, // Destructure the new prop
+//   meta,
+//   className,
+// }: ArticleLayoutProps) {
+//   return (
+//     // Container with overall padding and max-width
+//     <div
+//       className={cn(
+//         "w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12",
+//         className
+//       )}
+//       {/* --- Core layout div --- */}
+//       <div className="lg:flex lg:flex-row lg:gap-8 xl:gap-12">
+//         {/* --- Main Content Area --- */}
+//         {/* Apply mdx-prose styles here */}
+//         <main className="flex-1 w-full lg:max-w-4xl xl:max-w-5xl mdx-prose dark:mdx-prose max-w-none">
+//           {/* The main MDX content ({children}) goes here */}
+//           {children}
+//         </main>
+
+//         {/* --- Sidebar --- */}
+//         <aside className="w-full lg:w-64 xl:w-72 lg:shrink-0 mt-12 lg:mt-0">
+//           {/* Sticky container for sidebar */}
+//           <div className="lg:sticky lg:top-20 space-y-6">
+//             {meta && (
+//               <div className="p-5 rounded-2xl border border-slate-700/50 bg-slate-800/30 shadow-md">
+//                 {/* Adjusted border/bg */}
+//                 <h3 className="text-lg font-semibold text-slate-200 mb-3">
+//                   Article Info
+//                 </h3>
+//                 <ul className="text-sm space-y-2">
+//                   {meta.date && (
+//                     <li className="flex justify-between">
+//                       <span className="text-slate-400">Published:</span>
+//                       <span className="text-slate-300">
+//                         {new Date(meta.date).toLocaleDateString("en-US", {
+//                           year: "numeric",
+//                           month: "long",
+//                           day: "numeric",
+//                         })}
+//                       </span>
+//                     </li>
+//                   )}
+//                   {meta.author && (
+//                     <li className="flex justify-between">
+//                       <span className="text-slate-400">Author:</span>
+//                       <span className="text-slate-300">{meta.author}</span>
+//                     </li>
+//                   )}
+//                   {/* Add more meta items here */}
+//                 </ul>
+//               </div>
+//             )}
+
+//             {/* Render the Table of Contents if provided */}
+//             {tableOfContents && (
+//               // You might want a similar container style as the metadata
+//               <div className="p-5 rounded-2xl border border-slate-700/50 bg-slate-800/30 shadow-md">
+//                 {" "}
+//                 {/* Adjusted border/bg */}
+//                 <h3 className="text-lg font-semibold text-slate-200 mb-3">
+//                   On this page
+//                 </h3>
+//                 {/* Render the actual ToC node passed in */}
+//                 {tableOfContents}
+//               </div>
+//             )}
+
+//             {/*
+//             <div className="p-5 rounded-2xl border border-gray-alpha-200 bg-slate-800/30 shadow-md">
+//               ... old placeholder ...
+//             </div>
+//             */}
+//           </div>
+//         </aside>
+//       </div>
+//     </div>
+//   );
+// }
+//
+
+
+================================================================================
+FILE: page.tsx
+================================================================================
+
+// app/playbook/page.tsx
+
+import type { Metadata } from "next";
+import Link from "next/link";
+import { getAllPostsMeta, PostMeta } from "@/lib/posts";
+import { Route } from "next"; // Keep for typed links
+import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Engineering Playbook",
+  description: "Insights on web development, security, and technology",
+};
+
+export default async function PlaybookIndexPage() {
+  // Fetch metadata for all posts from the hardcoded 'app/playbook' directory
+  // NOTE: Removed the ("playbook") argument as the function doesn't accept it
+  const posts: PostMeta[] = getAllPostsMeta();
+
+  return (
+    // Container with consistent padding/width
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      {/* Page Title */}
+      <h1 className="h1 mb-4 text-center md:text-left">Engineering Playbook</h1>
+      {/* Subtitle */}
+      <p className="text-lg text-slate-400 mb-10 md:mb-12 text-center md:text-left">
+        Insights and learnings on web development, security, and technology.
+      </p>
+
+      {/* Post List */}
+      {posts.length === 0 ? (
+        <p className="text-center text-slate-400">
+          No playbook entries published yet. Check back soon!
+        </p>
+      ) : (
+        // List container
+        <ul className="list-none p-0 m-0 space-y-10">
+          {posts.map((post) => (
+            // List item with separator
+            <li
+              key={post.slug}
+              className="pb-10 border-b border-gray-alpha-200 last:pb-0 last:border-none"
+            >
+              <article>
+                {/* Post Title */}
+                <Link
+                  href={`/playbook/${post.slug}` as Route}
+                  className="block mb-2"
+                >
+                  <h2 className="h3 text-primary hover:text-secondary transition-colors duration-150 ease-in-out">
+                    {post.title}
+                  </h2>
+                </Link>
+
+                {/* Post Metadata (Date/Author) */}
+                <p className="text-sm text-slate-500 mb-3">
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  {post.author && (
+                    <span className="text-slate-600"> by {post.author}</span>
+                  )}
+                </p>
+
+                {/* --- Tags Section --- */}
+                {post.tags && post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {post.tags.map((tag) => (
+                      // Render each tag as a styled span (or Link later)
+                      <span
+                        key={tag}
+                        className={cn(
+                          "inline-block text-xs font-medium rounded-full",
+                          "px-2.5 py-0.5", // Padding
+                          "bg-slate-700/50 text-primary", // Background and text color
+                          // Optional hover effect:
+                          "hover:bg-slate-600/70"
+                        )}
+                      >
+                        {tag}
+                      </span>
+                      /* --- If linking later ---
+                      <Link
+                        key={tag}
+                        href={`/playbook/tags/${encodeURIComponent(tag.toLowerCase().replace(/\s+/g, '-'))}` as Route} // Example slug generation
+                        className={cn(
+                          "inline-block text-xs font-medium rounded-full",
+                          "px-2.5 py-0.5",
+                          "bg-slate-700/50 text-primary",
+                          "hover:bg-slate-600/70 hover:text-secondary" // Example hover
+                        )}
+                      >
+                        {tag}
+                      </Link>
+                      */
+                    ))}
+                  </div>
+                )}
+                {/* --- End Tags Section --- */}
+
+                {/* Post Description */}
+                <p className="text-slate-400 leading-relaxed mb-4">
+                  {post.description}
+                </p>
+
+                {/* Read More Link */}
+                <Link
+                  href={`/playbook/${post.slug}` as Route}
+                  className="inline-flex items-center font-medium text-primary hover:text-secondary transition-colors duration-150 ease-in-out group"
+                >
+                  <span>Read more</span>
+                  <span className="tracking-normal text-primary group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">
+                    ->
+                  </span>
+                </Link>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+
+================================================================================
+FILE: web-security/page.mdx
+================================================================================
+
+---
+title: "Web Security Fundamentals: Protecting Your Digital Fortress"
+description: "An introduction to the core concepts of web security, essential for every developer building for the modern web."
+author: "Samir Coder"
+date: "2025-03-29"
+tags:
+  - security
+  - web development
+  - fundamentals
+---
+
+import ArticleLayout from "@/components/layouts/ArticleLayout";
+
+{/* Keep the metadata export */}
+export const metadata = {
+title: "Web Security Fundamentals: Protecting Your Digital Fortress",
+description: "An introduction to the core concepts of web security, essential for every developer building for the modern web.",
+author: "Samir Coder",
+date: "2025-03-29",
+tags: ["security", "web development", "fundamentals"],
+};
+
+{/* Define the Table of Contents as a separate JSX variable */}
+export const toc = (
+
+<nav>
+  {/* Removed outer container/styling, just pass the nav itself */}
+  {/* Removed h2 - the layout adds "On this page" */}
+  <ul className="list-none !pl-0 space-y-1">
+    <li>
+      <a
+        href="#why-it-matters"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Why Does Web Security Matter?
+      </a>
+    </li>
+    <li>
+      <a
+        href="#core-pillars"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Core Pillars of Web Security
+      </a>
+      <ul className="list-none !pl-4 mt-1 space-y-1">
+        <li>
+          <a
+            href="#pillar-https"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            1. HTTPS Everywhere
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-input"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            2. Never Trust User Input
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-output"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            3. Encode Output Correctly
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-access"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            4. Control Access (AuthN/AuthZ)
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-headers"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            5. Security Headers
+          </a>
+        </li>
+        <li>
+          <a
+            href="#pillar-dependencies"
+            className="text-sm text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+          >
+            6. Keep Dependencies Updated
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a
+        href="#common-threats"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Common Threats to Be Aware Of
+      </a>
+    </li>
+    <li>
+      <a
+        href="#developer-role"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        Your Role as a Developer
+      </a>
+    </li>
+    <li>
+      <a
+        href="#journey-continues"
+        className="text-slate-400 hover:text-primary transition duration-150 ease-in-out no-underline"
+      >
+        The Journey Continues
+      </a>
+    </li>
+  </ul>
+</nav>
+);
+
+{/* Pass the 'toc' variable and metadata to ArticleLayout */}
+
+<ArticleLayout meta={metadata} tableOfContents={toc}>
+<h1>{metadata.title}</h1>
+
+{/* Introduction */}
+
+Welcome to the first technical post on my new site! As web engineers, we build
+the digital world brick by brick. But just like physical structures, our
+digital creations need strong foundations and defenses. Today, we're diving
+into a topic crucial for every developer: <strong>Web Security</strong>.
+
+This isn't about becoming a penetration tester overnight. It's about
+understanding the fundamental principles and common threats so we can build
+more resilient, trustworthy applications from the ground up. Let's secure our
+digital fortresses.
+
+    {/* Use custom HR component */}
+    <hr />
+
+    {/* Section: Why It Matters */}
+    <h2 id="why-it-matters">Why Does Web Security Matter So Much?</h2>
+    <p>In an era where data breaches make headlines almost weekly, and regulations like GDPR and CCPA impose hefty fines, the stakes have never been higher. Insecure web applications aren't just technical flaws; they are significant business risks leading to:</p>
+    <ul>
+      <li><strong>Compromised User Data:</strong> Sensitive personal information (passwords, credit cards, emails) stolen and misused, leading to identity theft and fraud.</li>
+      <li><strong>Financial Loss:</strong> Direct theft, regulatory fines, incident response costs, and potential lawsuits.</li>
+      <li><strong>Reputation Damage:</strong> Users lose trust in platforms that can't protect them, leading to customer churn and difficulty acquiring new users.</li>
+      <li><strong>Service Disruption:</strong> Attacks like DDoS can take your website or application offline, impacting users and business operations.</li>
+      <li><strong>Intellectual Property Theft:</strong> Source code, proprietary algorithms, or sensitive business data can be stolen.</li>
+    </ul>
+    <p>Security isn't just a feature or an afterthought; it's a fundamental requirement for building and maintaining trust in the digital age.</p>
+
+    {/* Section: Core Pillars */}
+    <h2 id="core-pillars">Core Pillars of Web Security</h2>
+    <p>Web security is vast, but many defensive principles revolve around these core ideas:</p>
+
+    <h3 id="pillar-https">1. Protect Data in Transit: HTTPS Everywhere</h3>
+    <ul>
+      <li><strong>What:</strong> Using HTTPS (HyperText Transfer Protocol Secure) encrypts the data exchanged between a user's browser and your server using TLS/SSL protocols.</li>
+      <li><strong>Why:</strong> Prevents eavesdroppers ("man-in-the-middle" attacks) from reading or modifying sensitive data like login credentials, session cookies, or personal information sent over potentially insecure networks (like public Wi-Fi).</li>
+      <li><strong>Action:</strong> Always configure your servers to enforce HTTPS. Use services like Let's Encrypt for free certificates. Most modern hosting platforms (Vercel, Netlify, etc.) handle this automatically. Ensure HTTP traffic is permanently redirected (301) to HTTPS. Look for the padlock!</li>
+    </ul>
+
+    <h3 id="pillar-input">2. Never Trust User Input: Validation & Sanitization</h3>
+    <ul>
+      <li><strong>What:</strong> Treat <em>any</em> data originating from the client-side (forms, URL parameters, API requests, headers, cookies) as potentially malicious until proven otherwise. Validate its format, type, length, and content against strict rules on the <strong>server-side</strong>. Sanitize data by removing or encoding potentially dangerous characters based on the context where it will be used.</li>
+      <li><strong>Why:</strong> This is the primary defense against <strong>Injection Attacks</strong> (like SQL Injection, NoSQL Injection, Command Injection, and Cross-Site Scripting).</li>
+      <li><strong>Action:</strong> Implement robust server-side validation using libraries like Zod (as seen in this project's actions!) or built-in framework validators. Use allow-lists (defining what *is* permitted) rather than block-lists (trying to guess what's bad). Use parameterized queries or ORMs (like Drizzle!) for database interactions to prevent SQLi.</li>
+    </ul>
+
+      {/* <<<=== ADD A BLANK LINE HERE ===>>> */}
+
+    <pre><code className="language-javascript">
+    {`// Simplified Zod Example (Server-Side)
+    import { z } from 'zod';
+
+    const CommentSchema = z.object({
+      email: z.string().email("Invalid email format"),
+      comment: z.string().min(1, "Comment cannot be empty").max(500, "Comment too long"),
+      // Example: Validate against known safe characters if needed
+      // safeComment: z.string().regex(/^[\\w\\s.,!?'"-]*$/),
+    });
+
+    function handleCommentSubmit(formData) {
+      const result = CommentSchema.safeParse({
+        email: formData.get("email"),
+        comment: formData.get("comment"),
+      });
+
+      if (!result.success) {
+        // Handle validation errors (e.g., return errors to user)
+        console.error("Validation failed:", result.error.flatten());
+        throw new Error("Invalid input");
+      }
+
+      // Data is validated, proceed with sanitized data
+      const validatedData = result.data;
+      // Further sanitization might be needed depending on usage
+      // e.g., using a library to strip unwanted HTML if displaying comment
+      saveCommentToDatabase(validatedData.email, validatedData.comment);
+    }`}
+    </code></pre>
+
+    <h3 id="pillar-output">3. Encode Output Correctly: Defeating XSS</h3>
+    <ul>
+      <li><strong>What:</strong> When displaying user-provided data back in the browser (or any client), ensure it's treated as plain text, not as executable code (HTML, JavaScript, CSS). This involves encoding special characters (like <code>{'<'}</code> becoming <code>{'<'}</code>, <code>{'>'}</code> becoming <code>{'>'}</code>) appropriate for the context (HTML body, HTML attributes, JS variables, etc.).</li>
+      <li><strong>Why:</strong> Prevents <strong>Cross-Site Scripting (XSS)</strong>, where attackers inject malicious scripts that execute in <em>other</em> users' browsers, potentially stealing session cookies, performing actions on their behalf, or defacing the site.</li>
+      <li><strong>Action:</strong> Use modern frameworks/libraries (like React, Vue, Angular) that automatically encode data rendered within standard templating syntax (e.g., `{data}` in JSX). Be extremely cautious when using mechanisms that bypass this encoding (like React's `dangerouslySetInnerHTML`). Use context-aware encoding libraries if manually constructing output.</li>
+    </ul>
+
+    <h3 id="pillar-access">4. Control Access: Authentication & Authorization (AuthN/AuthZ)</h3>
+    <ul>
+      <li><strong>Authentication (AuthN):</strong> Verifying <em>who</em> a user is (e.g., login with password, OAuth, magic links, biometrics). Implement secure password hashing (like bcrypt) and consider Multi-Factor Authentication (MFA).</li>
+      <li><strong>Authorization (AuthZ):</strong> Determining <em>what</em> an authenticated user is allowed to do (e.g., admin vs. regular user permissions, accessing specific resources). Enforce checks on the <strong>server-side</strong> for every sensitive request.</li>
+      <li><strong>Why:</strong> Ensures only legitimate users can access specific data or perform sensitive actions, preventing unauthorized access and privilege escalation.</li>
+      <li><strong>Action:</strong> Use robust authentication libraries/services (avoid rolling your own crypto!). Implement secure session management (e.g., HttpOnly, Secure, SameSite=Lax/Strict cookies). Apply the <strong>Principle of Least Privilege</strong> (users/systems should only have the minimum permissions necessary). Consider Role-Based Access Control (RBAC) or Attribute-Based Access Control (ABAC) models.</li>
+    </ul>
+
+    <h3 id="pillar-headers">5. Configure Server & Browser Defenses: Security Headers</h3>
+    <ul>
+      <li><strong>What:</strong> HTTP response headers sent from your server that instruct the browser on how to behave more securely.</li>
+      <li><strong>Why:</strong> Mitigate various attacks like clickjacking, XSS, data injection, MIME-type sniffing, and enforce HTTPS.</li>
+      {/* === CORRECTED THIS LIST ITEM === */}
+      <li>
+        <p><strong>Action:</strong> Implement essential headers (often configurable in frameworks like Next.js or via edge functions/reverse proxies):</p>
+
+        {/* Keep blank line before nested list */}
+        <ul>
+          <li><code>Content-Security-Policy</code> (CSP): Defines allowed sources for scripts, styles, images, fonts, etc. Reduces XSS risk significantly. Start strict and loosen as needed.</li>
+          <li><code>Strict-Transport-Security</code> (HSTS): Forces browsers to use HTTPS for subsequent requests, preventing downgrade attacks.</li>
+          <li><code>X-Content-Type-Options: nosniff</code>: Prevents browsers from interpreting files as a different MIME type than declared.</li>
+          <li><code>X-Frame-Options: DENY</code> or <code>SAMEORIGIN</code>: Prevents clickjacking by controlling if the site can be embedded in an iframe.</li>
+          <li><code>Referrer-Policy: strict-origin-when-cross-origin</code> or <code>no-referrer</code>: Controls how much referrer information is sent with requests.</li>
+          <li><code>Permissions-Policy</code>: Controls access to browser features (camera, microphone, geolocation, etc.).</li>
+        </ul>
+        {/* Keep blank line after nested list */}
+
+      </li>
+      {/* --- Modification End --- */}
+    </ul>
+
+    <h3 id="pillar-dependencies">6. Keep Dependencies Updated</h3>
+    <ul>
+      <li><strong>What:</strong> Regularly update your frameworks, libraries, OS, and server software.</li>
+      <li><strong>Why:</strong> Attackers actively scan for and exploit known vulnerabilities (CVEs) in outdated software. Updates often contain critical security patches.</li>
+      <li><strong>Action:</strong> Use package manager tools (`pnpm audit`, `npm audit`, `yarn audit`) and services like GitHub Dependabot or Snyk to identify vulnerable dependencies. Update promptly, testing thoroughly after updates. Maintain a Software Bill of Materials (SBOM) for better visibility.</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Common Threats */}
+    <h2 id="common-threats">Common Threats to Be Aware Of</h2>
+    <p>While the pillars provide defense, understanding common attack vectors helps focus efforts:</p>
+    <ul>
+      <li><strong>Cross-Site Scripting (XSS):</strong> Injecting malicious scripts into web pages viewed by other users. Can be Stored (in database), Reflected (in URL), or DOM-based. (Defense: Output Encoding, CSP).</li>
+      <li><strong>SQL Injection (SQLi):</strong> Injecting malicious SQL code via input fields to manipulate database queries, potentially stealing or corrupting data. (Defense: Input Validation, Parameterized Queries/ORMs).</li>
+      <li><strong>Cross-Site Request Forgery (CSRF):</strong> Tricking a logged-in user's browser into sending an unintended, malicious request to your application using their existing session. (Defense: Anti-CSRF Tokens, SameSite Cookies).</li>
+      <li><strong>Broken Access Control:</strong> Flaws allowing users to access data or perform actions they shouldn't be authorized for (e.g., viewing another user's profile via URL manipulation - IDOR). (Defense: Robust server-side authorization checks on every request).</li>
+      <li><strong>Security Misconfiguration:</strong> Default credentials, overly verbose error messages revealing internal details, unnecessary features enabled, missing security headers. (Defense: Secure configuration practices, hardening guides, regular audits).</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Developer Role */}
+    <h2 id="developer-role">Your Role as a Developer</h2>
+    <p>Security isn't solely the responsibility of a dedicated security team – it's an integral part of web engineering. Adopt a security mindset ("Shift-Left Security"):</p>
+    <ul>
+      <li><strong>Think Adversarially:</strong> How could this feature be misused or broken? Consider potential threats during design and implementation (basic threat modeling).</li>
+      <li><strong>Validate Everything:</strong> Especially data crossing trust boundaries (client -> server, external API -> server).</li>
+      <li><strong>Encode Appropriately:</strong> When displaying data back to any client.</li>
+      <li><strong>Use Secure Defaults:</strong> Leverage the security features built into your framework and libraries.</li>
+      <li><strong>Stay Updated:</strong> Keep libraries, tools, and your own knowledge current. Follow security news and vulnerability disclosures.</li>
+      <li><strong>Learn Continuously:</strong> Resources like the <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>, framework-specific security guides, and security blogs are invaluable.</li>
+    </ul>
+
+    <hr />
+
+    {/* Section: Conclusion */}
+    <h2 id="journey-continues">The Journey Continues</h2>
+    <p>This post merely scratches the surface of web security. It's a deep, complex, and ever-evolving field. However, understanding and consistently applying these fundamental principles provides a solid foundation for building significantly safer and more trustworthy applications.</p>
+    <p>In future posts, we might dive deeper into specific vulnerabilities like XSS or CSRF, explore secure coding practices within Next.js, implement advanced security headers like CSP, or look at API security best practices. Stay tuned, and keep building securely!</p>
+
+</ArticleLayout>
+

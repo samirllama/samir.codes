@@ -1,256 +1,92 @@
-/* MDX Content Styling */
-.prose {
-  max-width: 75ch;
-  font-size: var(--fontSize-base);
-  line-height: var(--lineHeight-relaxed);
-}
+/* app/styles/mdx.css (Simplified for v3 & Typography Plugin) */
 
-/* Basic Elements */
-.prose p {
-  margin-block: var(--spacing-md);
-  line-height: var(--lineHeight-relaxed);
-}
+/* Overrides or Additions to Typography Plugin --- */
 
-/* Headings - These take precedence for MDX content */
-.prose h1 {
-  font-size: var(--mdx-fontSize-h1);
-  line-height: var(--lineHeight-tight);
-  margin-block: 0 1em;
-}
-
-.prose h2 {
-  font-size: var(--mdx-fontSize-h2);
-  line-height: var(--lineHeight-tight);
-  margin-top: 2em;
-  margin-bottom: 1em;
-}
-
-.prose h3 {
-  font-size: var(--mdx-fontSize-h3);
-  line-height: var(--lineHeight-tight);
-  margin-top: 1.8em;
-  margin-bottom: 0.8em;
-}
-
-.prose h4 {
-  font-size: var(--mdx-fontSize-h4);
-  line-height: var(--lineHeight-tight);
-  margin-top: 1.8em;
-  margin-bottom: 0.8em;
-}
-
-.prose h5 {
-  font-size: var(--mdx-fontSize-h5);
-  line-height: var(--lineHeight-normal);
-  margin-top: 1.8em;
-  margin-bottom: 0.8em;
-}
-
-.prose h6 {
-  font-size: var(--mdx-fontSize-h6);
-  line-height: var(--lineHeight-normal);
-  margin-top: 1.8em;
-  margin-bottom: 0.8em;
-}
-
-/* Links */
-.prose .prose-a {
-  color: var(--primary-dark-color);
-  text-decoration: underline;
-  text-decoration-color: hsl(from var(--primary-dark-color) h s l / 0.4);
+/*  Link Styling Enhancements --- */
+/* Base color/decoration comes from --tw-prose-links */
+.mdx-prose a {
   text-underline-offset: 2px;
-  transition: all 0.2s ease-out;
+  transition: color 150ms ease-in-out, text-decoration-color 150ms ease-in-out;
+  /* Optionally override decoration color alpha */
+  text-decoration-color: rgba(var(--primary-rgb), 0.5);
+}
+.mdx-prose a:hover {
+  /* Hover color comes from plugin/theme vars, just adjust decoration */
+  text-decoration-color: rgba(var(--secondary-rgb), 0.7);
 }
 
-.prose .prose-a:hover {
-  color: var(--secondary-dark-color);
-  text-decoration-color: hsl(from var(--secondary-dark-color) h s l / 0.6);
-}
-
-/* External Links */
-.prose .prose-a-external::after {
+/* External Link Indicator */
+.mdx-prose a[target="_blank"]::after {
   content: "↗";
   display: inline-block;
-  margin-left: 4px;
-  font-size: 0.8em;
+  margin-left: 0.25rem;
+  font-size: 0.75em;
   opacity: 0.7;
   transition: opacity 0.2s ease-out;
 }
-
-/* Lists */
-.prose ul,
-.prose ol {
-  margin-block: 1.25em;
-  padding-left: 1.8em;
+.mdx-prose a[target="_blank"]:hover::after {
+  opacity: 1;
 }
 
-.prose li {
-  margin-bottom: 0.5em;
-}
+/* List Styling --- */
+/* Marker color comes from --tw-prose-bullets */
+/* .mdx-prose ul li::marker { color: rgb(var(--primary-rgb)); } */
 
-.prose ul li::marker {
-  color: var(--primary-dark-color);
-}
-
-.prose li > ul,
-.prose li > ol {
-  margin-top: 0.5em;
-  margin-bottom: 0;
-}
-
-/* Code Blocks */
-.prose :not(pre) > code {
-  background-color: hsl(from var(--foreground) h s l / 0.1);
-  color: var(--secondary-dark-color);
+/*  Inline Code Styling --- */
+/* Let plugin handle color via its defaults, just add bg/padding */
+.mdx-prose :not(pre) > code {
+  background-color: var(--gray-alpha-100);
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: var(--fontSize-sm);
   font-family: var(--font-geist-mono), monospace;
 }
 
-/* Rehype Pretty Code Styling */
-.prose figure[data-rehype-pretty-code-figure] {
+/* Rehype Pretty Code Styling --- */
+.mdx-prose figure[data-rehype-pretty-code-figure] {
   margin-block: 1.5em;
 }
 
-.prose figure[data-rehype-pretty-code-figure] > pre {
-  border: 1px solid var(--color-border);
+.mdx-prose figure[data-rehype-pretty-code-figure] > pre {
+  border: 1px solid rgb(var(--border-subtle-rgb)); /* Use border variable */
   border-radius: 6px;
   padding: var(--spacing-md);
   overflow-x: auto;
-  font-size: 0.9em;
+  font-size: 0.9em; /* Slightly smaller than base */
   line-height: 1.6;
+  /* Background comes from --tw-prose-pre-bg */
 }
 
-.prose figure[data-rehype-pretty-code-figure] > pre > code {
+.mdx-prose figure[data-rehype-pretty-code-figure] > pre > code {
   display: grid;
-  font-family: var(--font-geist-mono), monospace;
+  font-family: var(--font-geist-mono), monospace; /* Ensure monospace font */
+  background-color: transparent !important; /* Override theme bg */
+  font-size: inherit;
+  /* Text color comes from --tw-prose-pre-code (theme) or highlighting spans */
 }
 
 /* Code Highlights */
-.prose .line--highlighted {
-  background-color: hsl(from var(--primary-dark-color) h s l / 0.1);
-  box-shadow: inset 3px 0 0 0 var(--primary-dark-color);
+.mdx-prose .line--highlighted {
+  background-color: rgba(var(--primary-rgb), 0.1); /* Use primary with alpha */
+  box-shadow: inset 3px 0 0 0 rgb(var(--primary-rgb));
 }
-
-.prose .word--highlighted {
-  background-color: hsl(from var (--secondary-dark-color) h s l / 0.2);
+.mdx-prose .word--highlighted {
+  background-color: rgba(
+    var(--secondary-rgb),
+    0.2
+  ); /* Use secondary with alpha */
   padding: 0.1em 0.2em;
   border-radius: 3px;
 }
 
 /* Code Block Titles */
-.prose [data-rehype-pretty-code-title] {
+.mdx-prose [data-rehype-pretty-code-title] {
   font-size: 0.85em;
   font-family: var(--font-geist-mono), monospace;
-  color: hsl(from var(--foreground) h s l / 0.7);
-  background-color: hsl(from var(--foreground) h s l / 0.08);
+  color: rgba(var(--foreground-rgb), 0.7);
+  background-color: var(--gray-alpha-200); /* Slightly darker alpha gray */
   padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-bottom: none;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  margin-bottom: 0;
-}
-
-/* Base link style within prose */
-.prose .prose-a,
-.prose .prose-a-internal {
-  /* Use CSS variables directly */
-  color: var(--primary);
-  text-decoration-line: underline;
-  text-decoration-color: color-mix(
-    in srgb,
-    var(--primary) 50%,
-    transparent
-  ); /* Use color-mix for alpha */
-  text-underline-offset: 2px;
-  transition: color 150ms ease-in-out, text-decoration-color 150ms ease-in-out; /* Add transition */
-}
-.prose .prose-a:hover,
-.prose .prose-a-internal:hover {
-  /* Use CSS variables directly */
-  color: var(--secondary);
-  text-decoration-color: color-mix(
-    in srgb,
-    var(--secondary) 70%,
-    transparent
-  ); /* Use color-mix for alpha */
-}
-
-.prose .prose-a-external::after {
-  content: "↗";
-  /* Use @apply for standard utilities if needed, but avoid for custom theme colors */
-  /* @apply inline-block ml-1 text-xs opacity-70; */
-  /* Equivalent standard CSS:    */
-  display: inline-block;
-  margin-left: 0.25rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  opacity: 0.7;
-}
-
-/* === Code Block Styling (Keep existing rules) === */
-.prose :not(pre) > code {
-  /* Use variables or direct colors */
-  background-color: var(--gray-alpha-100); /* Example using alpha gray */
-  color: var(--secondary); /* Example using secondary color */
-  padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-size: var(--fontSize-sm); /* Use font size variable */
-  font-family: var(--font-geist-mono), monospace; /* Use font variable */
-}
-
-/* Rehype Pretty Code Styling */
-.prose figure[data-rehype-pretty-code-figure] {
-  margin-block: 1.5em;
-}
-
-.prose figure[data-rehype-pretty-code-figure] > pre {
-  /* Use variables or direct colors */
-  border: 1px solid var(--dark-border-subtle, #2a2a2a); /* Example */
-  border-radius: 6px;
-  padding: var(--spacing-md); /* Use spacing variable */
-  overflow-x: auto;
-  font-size: 0.9em; /* Or use var(--fontSize-sm) */
-  line-height: 1.6;
-}
-
-.prose figure[data-rehype-pretty-code-figure] > pre > code {
-  display: grid;
-  font-family: var(--font-geist-mono), monospace;
-}
-
-/* Code Highlights */
-.prose .line--highlighted {
-  /* Use variables or direct colors */
-  background-color: color-mix(
-    in srgb,
-    var(--primary) 10%,
-    transparent
-  ); /* Example */
-  box-shadow: inset 3px 0 0 0 var(--primary); /* Use variable */
-}
-
-.prose .word--highlighted {
-  /* Use variables or direct colors */
-  background-color: color-mix(
-    in srgb,
-    var(--secondary) 20%,
-    transparent
-  ); /* Example */
-  padding: 0.1em 0.2em;
-  border-radius: 3px;
-}
-
-/* Code Block Titles */
-.prose [data-rehype-pretty-code-title] {
-  font-size: 0.85em;
-  font-family: var(--font-geist-mono), monospace;
-  color: color-mix(in srgb, var(--foreground) 70%, transparent); /* Example */
-  background-color: var(--gray-alpha-100); /* Example */
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid var(--dark-border-subtle, #2a2a2a); /* Example */
+  border: 1px solid rgb(var(--border-subtle-rgb));
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
