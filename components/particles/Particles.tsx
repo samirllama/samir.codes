@@ -42,7 +42,7 @@ export default function Particles({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
-  // --- Resize Canvas Logic ---
+  //  Resize Canvas Logic ---
   const resizeCanvas = () => {
     if (canvasRef.current && context.current) {
       // Get dimensions from the canvas element's own layout size
@@ -62,7 +62,7 @@ export default function Particles({
     }
   };
 
-  // --- Effects ---
+  //  Effects ---
   useEffect(() => {
     // Declare animationFrameId here, accessible within the effect scope
     let animationFrameId: number;
@@ -163,7 +163,7 @@ export default function Particles({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mousePosition.x, mousePosition.y]); // Update mouse ref on position change
 
-  // --- Mouse Move ---
+  // Mouse Move ---
   const onMouseMove = () => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -179,7 +179,7 @@ export default function Particles({
     }
   };
 
-  // --- Particle Creation and Drawing ---
+  // Particle Creation and Drawing ---
   type Circle = Particle; // Alias
 
   const circleParams = (): Circle => {
@@ -264,7 +264,7 @@ export default function Particles({
     return remapped > 0 ? remapped : 0;
   };
 
-  // --- Render ---
+  // Render ---
   return (
     // Apply positioning/sizing classes DIRECTLY to the canvas element
     <canvas

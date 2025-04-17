@@ -73,7 +73,6 @@
 }
 
 @keyframes neon-blink {
-  /* Defined only once */
   0%,
   100% {
     opacity: 1;
@@ -83,9 +82,7 @@
   }
 }
 
-/* ==========================================================================
-   Animation Utility Classes (No @layer needed)
-   ========================================================================== */
+/* ========= Animation Utility Classes ========= */
 
 .animate-neonPulse {
   animation: neonPulse 2s ease-in-out infinite;
@@ -148,6 +145,77 @@
   box-shadow: 0 0 5px rgb(var(--accent-rgb)), 0 0 10px rgb(var(--accent-rgb)),
     0 0 15px rgb(var(--accent-rgb)), 0 0 20px rgba(var(--primary-rgb), 0.7);
   z-index: 1;
+}
+
+/* ========= Glitch Effect ========= */
+
+.glitchy {
+  font-size: 8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0.05em 0 0 var(--neon-glow-primary-rgb),
+    -0.025em -0.05em 0 var(--neon-glow-accent-rgb),
+    0.025em 0.05em 0 var(--neon-glow-secondary-rgb);
+  animation: glitchy 500ms infinite;
+}
+
+.glitchy span {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.glitchy span:first-child {
+  animation: glitchy 650ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 46%, 0 46%);
+  transform: translate(-0.025em, -0.0125em);
+  opacity: 0.8;
+}
+
+.glitchy span:last-child {
+  animation: glitchy 375ms infinite;
+  clip-path: polygon(0 70%, 100% 30%, 100% 100%, 0 100%);
+  transform: translate(0.0125em, 0.025em);
+  opacity: 0.8;
+}
+
+@keyframes glitchy {
+  0% {
+    text-shadow: 0.05em 0 0 rgb(48, 117, 12),
+      -0.05em -0.025em 0 var(--cyber-red-dark),
+      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgb(48, 117, 12),
+      -0.05em -0.025em 0 var(--cyber-red-dark),
+      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgb(48, 117, 12),
+      0.025em 0.025em var(--cyber-red-dark),
+      -0.05em -0.05em var(--neon-glow-secondary-rgb);
+  }
+  59% {
+    text-shadow: -0.05em -0.025em 0 rgba(48, 117, 12),
+      0.025em 0.025em 0 var(--cyber-red-dark),
+      -0.05em -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
+  60% {
+    text-shadow: 0.025em 0.05em 0 rgb(48, 117, 12),
+      0.05em 0 0 var(--cyber-red-dark),
+      0 -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgb(48, 117, 12),
+      0.05em 0 0 var(--cyber-red-dark),
+      0 -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
+
+  100% {
+    text-shadow: -0.025em 0 0 rgb(48, 117, 12),
+      -0.025em -0.025em 0 var(--cyber-red-dark),
+      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
+  }
 }
 
 /* ==========================================================================

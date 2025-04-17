@@ -7,9 +7,9 @@
 
 /* === Custom Style Imports (AFTER Tailwind directives for v3 JIT) === */
 @import "./theme.css"; /* Defines CSS variables, custom component styles */
-/* @import "./utility-patterns.css";
+@import "./utility-patterns.css";
 @import "./animations.css";
-@import "./mdx.css"; */
+@import "./mdx.css";
 
 /* === Base HTML/Body Styles === */
 /* Apply base styles using variables defined in theme.css */
@@ -20,9 +20,9 @@ body {
 }
 
 body {
-  /* Use CSS variables defined in theme.css */
-  background-color: rgb(var(--background-rgb)); /* Use -rgb variables */
-  color: rgb(var(--foreground-rgb)); /* Use -rgb variables */
+  /* Use CSS rgb variables defined in theme.css */
+  background-color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
 
   /* Apply font variables if defined in theme.css or layout.tsx */
   /* Example: font-family: var(--font-geist-sans); */
@@ -32,15 +32,14 @@ body {
   font-family: var(--font-geist-sans);
   line-height: var(--lineHeight-normal);
 
-  /* Remove padding-top for now if header is sticky */
-  /* padding-top: var(--nav-height); */
+  min-height: 100vh;
 
   /* Standard browser normalization */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Basic reset (also handled by @tailwind base) */
+/* Basic reset */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -52,8 +51,8 @@ a {
   text-decoration: none;
 }
 
-/* === Custom @layer definitions (Keep if you have them) === */
-/* Example:  scrollbar utilities defined here */
+/* === Custom @layer definitions  === */
+
 @layer utilities {
   .scrollbar-thin {
     scrollbar-width: thin;
@@ -69,8 +68,22 @@ a {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Add other custom utilities if needed */
+
   .rtl {
     direction: rtl;
   }
 }
+
+/* @media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms l important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+} */

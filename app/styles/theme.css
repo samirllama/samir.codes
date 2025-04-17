@@ -1,35 +1,176 @@
-/* app/styles/theme.css (Minimal for Theme Toggle Test) */
+/* app/styles/theme.css */
 
 /* ========== Core CSS Variable Definitions ========== */
-:root { /* Light Mode Defaults */
-    --background-rgb: 255 255 255;      /* white */
-    --foreground-rgb: 17 24 39;        /* gray-900 */
-    --border-subtle-rgb: 229 231 235; /* gray-200 */
-    --header-bg-rgb: 255 255 255;      /* white */
-  }
+:root {
+  /* Light Theme */
+  /* Colors (RGB values) --- */
+  --background-rgb: 241 245 249; /* slate-100 (Soft off-white) */
+  --foreground-rgb: 51 65 85; /* slate-700 (Readable dark gray) */
+  --card-bg-rgb: 255 255 255; /* white (For cards/elevated elements) */
+  --primary-rgb: 129 140 248; /* indigo-400 (Soft accent) */
+  --secondary-rgb: 96 165 250; /* sky-400 (Soft secondary accent) */
+  --accent-rgb: 168 85 247; /* purple-500 (Optional accent) */
+  --border-subtle-rgb: 226 232 240; /* slate-200 */
+  --border-medium-rgb: 203 213 225; /* slate-300 */
+  --code-background-rgb: 226 232 240; /* slate-200 (Light code bg) */
 
-  .dark { /* Dark Mode Overrides */
-    --background-rgb: 15 23 42;      /* slate-900 */
-    --foreground-rgb: 241 245 249;   /* slate-100 */
-    --border-subtle-rgb: 51 65 85;   /* slate-700 */
-    --header-bg-rgb: 15 23 42;       /* slate-900 */
-  }
+  /*  Shadow Colors (Light Mode) --- */
+  --shadow-highlight-rgb: 255 255 255; /* white */
+  --shadow-base-rgb: 203 213 225; /* slate-300 */
+  --shadow-outer-rgb: 148 163 184; /* slate-400 */
 
-  /*  Global HTML Styles  */
-  /* Keep these basic rules */
-  html {
-    color-scheme: light dark;
-    scroll-behavior: smooth;
-    font-size: 100%;
-  }
+  /* Core Spacing & Typography Tokens  */
+  --spacing-base: 1rem;
+  --spacing-xs: calc(var(--spacing-base) * 0.5);
+  --spacing-sm: calc(var(--spacing-base) * 0.75);
+  --spacing-md: var(--spacing-base);
+  --spacing-lg: calc(var(--spacing-base) * 1.5);
+  --spacing-xl: calc(var(--spacing-base) * 2);
+  --spacing-2xl: calc(var(--spacing-base) * 3);
 
-  /*  Keep Font Variables (If defined here, otherwise they come from layout.tsx)  */
-  /* Example:
-  :root {
-    --font-geist-sans: ...;
-    --font-geist-mono: ...;
-  }
-  */
+  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
+  --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
+  --fontSize-xs: clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem);
 
-  /*  Remove other variables (spacing, typography, components) for now  */
-  /*  We will add them back later  */
+  --fontSize-h1: clamp(2.5rem, 5vw, 3.5rem);
+  --fontSize-h2: clamp(2rem, 4vw, 3rem);
+  --fontSize-h3: clamp(1.75rem, 3vw, 2.5rem);
+  --fontSize-h4: clamp(1.5rem, 2.5vw, 2rem);
+
+  --lineHeight-tight: 1.25;
+  --lineHeight-normal: 1.75;
+  --lineHeight-relaxed: 1.85;
+
+  /* Layout Tokens  */
+  --nav-height: 3.75rem;
+  --max-width: 70rem;
+  --slide-height: 100vh;
+
+  --gray-alpha-100: rgba(var(--foreground-rgb), 0.06);
+  --gray-alpha-200: rgba(var(--foreground-rgb), 0.1);
+}
+
+/* Dark Theme Overrides  */
+.dark {
+  /*  Colors --- */
+  --background-rgb: 15 23 42; /* slate-900 */
+  --foreground-rgb: 226 232 240; /* slate-200 */
+  --card-bg-rgb: 30 41 59; /* slate-800 */
+  --primary-rgb: 34 211 238; /* cyan-400 (Neon) */
+  --secondary-rgb: 217 70 239; /* fuchsia-500 (Neon) */
+  --accent-rgb: 163 230 53; /* lime-400 (Neon) */
+  --border-subtle-rgb: 51 65 85; /* slate-700 */
+  --border-medium-rgb: 71 85 105; /* slate-600 */
+  --code-background-rgb: 30 41 59; /* slate-800 */
+
+  /* Shadow/Glow Colors for Cyberpunk (Dark Mode) --- */
+  /* These might be used for text-shadow, box-shadow glows, or borders */
+  --shadow-highlight-rgb: 71 85 105; /* slate-600 (Subtle inner highlight) */
+  --shadow-base-rgb: 0 0 0; /* black (Inner shadow base) */
+  --shadow-outer-rgb: 0 0 0; /* black (Outer shadow base) */
+
+  /* Define specific neon glow colors using the accent variables */
+  --neon-glow-primary-rgb: rgb(var(--primary-rgb));
+  --neon-glow-secondary-rgb: rgb(var(--secondary-rgb));
+  --neon-glow-accent-rgb: rgb(var(--accent-rgb));
+
+  /* Alpha Grays (Dark) */
+  --gray-alpha-100: rgba(var(--foreground-rgb), 0.08);
+  --gray-alpha-200: rgba(var(--foreground-rgb), 0.12);
+
+  --cyber-red-light: rgb(222, 81, 66);
+  --cyber-red-dark: rgb(171, 47, 33, 1);
+  --background-cyber: rgb(20, 30, 33);
+}
+
+/* Global HTML Styles  */
+html {
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+/* Body styles applied in globals.css */
+
+/* ==========================================================================
+   Component Styles (Keep minimal)
+   ========================================================================== */
+
+/* Scroll controls */
+.scroll-controls {
+  position: sticky;
+  bottom: theme("spacing.8", "2rem");
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
+}
+
+/* ==========================================================================
+   Utility Overrides & Prose Styles (No @layer needed)
+   ========================================================================== */
+
+/* Layout Utilities  */
+.content-grid {
+  display: grid;
+  grid-template-columns: 40fr 5fr 5fr 40fr;
+  grid-template-rows: minmax(var(--slide-height), auto);
+}
+
+.sticky-col {
+  position: sticky;
+  top: 0; /* Adjust if needed, e.g., top-[var(--nav-height)] */
+  height: var(--slide-height);
+  scroll-snap-align: start;
+}
+
+/* Scroll Utilities  */
+[data-scroll-section] {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* MDX Prose Styles (Controlling Typography Plugin) --- */
+/* Define the plugin variables to use theme variables */
+.mdx-prose {
+  @apply max-w-none;
+
+  /* Link plugin variables directly to the theme variables */
+  /* These will automatically switch with the .dark class */
+  --tw-prose-body: rgb(var(--foreground-rgb));
+  --tw-prose-headings: rgb(var(--foreground-rgb));
+  --tw-prose-lead: rgb(var(--foreground-rgb));
+  --tw-prose-links: rgb(var(--primary-rgb));
+  --tw-prose-bold: rgb(var(--foreground-rgb));
+  --tw-prose-counters: rgb(var(--foreground-rgb));
+  --tw-prose-bullets: rgb(var(--primary-rgb));
+  --tw-prose-hr: rgb(var(--border-medium-rgb));
+  --tw-prose-quotes: rgb(var(--foreground-rgb));
+  --tw-prose-quote-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-captions: rgba(var(--foreground-rgb), 0.7);
+  --tw-prose-code: rgb(var(--secondary-rgb)); /* Inline code color */
+  --tw-prose-pre-code: inherit; /* Let highlighter handle text */
+  --tw-prose-pre-bg: rgb(
+    var(--code-background-rgb)
+  ); /* Code block background */
+  --tw-prose-th-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-td-borders: rgb(var(--border-subtle-rgb));
+
+  /* Invert variables (Still point to the same theme vars) */
+  --tw-prose-invert-body: rgb(var(--foreground-rgb));
+  --tw-prose-invert-headings: rgb(var(--foreground-rgb));
+  --tw-prose-invert-lead: rgb(var(--foreground-rgb));
+  --tw-prose-invert-links: rgb(var(--primary-rgb));
+  --tw-prose-invert-bold: rgb(var(--foreground-rgb));
+  --tw-prose-invert-counters: rgb(var(--foreground-rgb));
+  --tw-prose-invert-bullets: rgb(var(--primary-rgb));
+  --tw-prose-invert-hr: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-quotes: rgb(var(--foreground-rgb));
+  --tw-prose-invert-quote-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-captions: rgba(var(--foreground-rgb), 0.7);
+  --tw-prose-invert-code: rgb(var(--secondary-rgb));
+  --tw-prose-invert-pre-code: inherit;
+  --tw-prose-invert-pre-bg: rgb(var(--code-background-rgb));
+  --tw-prose-invert-th-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-td-borders: rgb(var(--border-subtle-rgb));
+}

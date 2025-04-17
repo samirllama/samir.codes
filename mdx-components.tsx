@@ -76,7 +76,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           "bg-primary-500 dark:bg-primary-400",
           // Use CSS variables for the complex shadow
           "shadow-[0_0_10px_rgb(var(--primary-rgb)),0_0_20px_rgb(var(--primary-rgb)),0_0_30px_rgb(var(--accent-rgb))]",
-          "animate-neonPulse", // Assumes animation exists
+          "animate-neonPulse",
           className
         )}
         {...props}

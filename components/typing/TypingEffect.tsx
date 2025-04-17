@@ -2,7 +2,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./typing.module.css";
 import { calculateNextTypingStep } from "@/lib/typing-logic";
 import { cn } from "@/lib/utils";
 
@@ -31,18 +30,14 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Ensure items array is valid before starting
     if (!items || items.length === 0) return;
 
-    // The helper function works correctly as it operates on the items array
-    // which now contains only the dynamic parts.
     const step = calculateNextTypingStep(
       { items, currentItemIndex, displayedText, isDeleting },
       { typingSpeed, deletingSpeed, pauseDuration }
     );
 
     timeoutRef.current = setTimeout(() => {
-      // Update the state for the dynamic part
       setDisplayedText(step.nextText);
       setIsDeleting(step.nextIsDeleting);
 
@@ -54,7 +49,6 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
       }
     }, step.delay);
 
-    // Cleanup function
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -78,7 +72,6 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
       {/* Dynamic part within styled span */}
       <span
         className={cn(
-          // Core Tailwind utilities for gradient text
           "bg-gradient-to-r",
           // Colors based on tailwind.config.ts mapping
           "from-primary-500",
@@ -92,13 +85,13 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
           "inline-block",
           "font-bold", // font-weight: 700
           "relative", // For caret positioning
-          "align-bottom", // Or align-baseline if preferred
+          "align-bottom",
           "whitespace-nowrap",
 
           // Add min-height using arbitrary value to prevent collapse
           "min-h-[1.2em]",
 
-          // Custom class for the blinking caret (styles in global CSS)
+          // Custom class  in global CSS
           "blinkingCaret"
         )}
       >
