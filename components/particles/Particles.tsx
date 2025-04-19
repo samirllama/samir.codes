@@ -35,6 +35,7 @@ export default function Particles({
   refresh = false,
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
   const circles = useRef<Particle[]>([]);
   const mousePosition = useMousePosition();
@@ -42,19 +43,17 @@ export default function Particles({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
-  //  Resize Canvas Logic ---
   const resizeCanvas = () => {
-    if (canvasRef.current && context.current) {
+    if (canvasContainerRef.current && canvasRef.current && context.current) {
       // Get dimensions from the canvas element's own layout size
-      canvasSize.current.w = canvasRef.current.offsetWidth;
-      canvasSize.current.h = canvasRef.current.offsetHeight;
+      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
+      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
 
       // Set drawing surface size based on device pixel ratio
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
 
-      // Scale the drawing context (important!)
-      context.current.scale(dpr, dpr);
+      context.current.scale(dpr, dpr); // !Scale drawing context
 
       // Re-initialize particles after resize
       circles.current.length = 0;
@@ -62,12 +61,10 @@ export default function Particles({
     }
   };
 
-  //  Effects ---
   useEffect(() => {
-    // Declare animationFrameId here, accessible within the effect scope
+    // Declare animationFrameId, accessible within the effect scope
     let animationFrameId: number;
 
-    // Define animate function within the effect
     const animate = () => {
       clearContext();
       circles.current.forEach((circle: Particle, i: number) => {
@@ -139,7 +136,7 @@ export default function Particles({
       }
     }
 
-    // Cleanup function
+    // Cleanup
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       // Now animationFrameId will hold a valid ID (or be undefined if animate never ran)
@@ -156,14 +153,13 @@ export default function Particles({
       resizeCanvas(); // This will clear and redraw particles
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh, quantity, staticity, ease]); // Add dependencies that should trigger re-init
+  }, [refresh, quantity, staticity, ease]);
 
   useEffect(() => {
     onMouseMove();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mousePosition.x, mousePosition.y]); // Update mouse ref on position change
 
-  // Mouse Move ---
   const onMouseMove = () => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect();
@@ -230,7 +226,6 @@ export default function Particles({
 
   const clearContext = () => {
     if (context.current) {
-      // Use canvas dimensions from ref, adjusted for dpr scaling if needed
       // Clearing based on logical width/height before context scaling
       context.current.clearRect(
         0,
@@ -264,14 +259,18 @@ export default function Particles({
     return remapped > 0 ? remapped : 0;
   };
 
-  // Render ---
   return (
     // Apply positioning/sizing classes DIRECTLY to the canvas element
-    <canvas
-      ref={canvasRef}
-      // Ensure canvas fills container using cn utility
-      className={cn("w-full h-full", className)}
+    <div
+      className={cn("", className)}
+      ref={canvasContainerRef}
       aria-hidden="true"
-    />
+    >
+      <canvas
+        ref={canvasRef}
+        // Ensure canvas fills container using cn utility
+        // className={cn("w-full h-full", className)}
+      />
+    </div>
   );
 }

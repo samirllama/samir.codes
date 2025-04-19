@@ -6,6 +6,11 @@
   /* Colors (RGB values) --- */
   --background-rgb: 241 245 249; /* slate-100 (Soft off-white) */
   --foreground-rgb: 51 65 85; /* slate-700 (Readable dark gray) */
+
+  --orange-light-rgb: 210 142 113; /* #D28E71 */
+  --orange-mid-rgb: 203 132 103; /* #CB8467 */
+  --orange-dark-rgb: 191 119 85; /* #BF7755 */
+
   --card-bg-rgb: 255 255 255; /* white (For cards/elevated elements) */
   --primary-rgb: 129 140 248; /* indigo-400 (Soft accent) */
   --secondary-rgb: 96 165 250; /* sky-400 (Soft secondary accent) */
@@ -13,6 +18,27 @@
   --border-subtle-rgb: 226 232 240; /* slate-200 */
   --border-medium-rgb: 203 213 225; /* slate-300 */
   --code-background-rgb: 226 232 240; /* slate-200 (Light code bg) */
+
+  /* Gradient Definition --- */
+  /* Applied via body or specific container */
+  --light-gradient:
+      /* Top layer: Soft light orange cloud top-left */ radial-gradient(
+      ellipse 40% 50% at 20% 30%,
+      rgba(var(--orange-light-rgb), 0.25) 0px,
+      transparent 50%
+    ),
+    /* Mid layer: Slightly darker cloud bottom-right */
+      radial-gradient(
+        ellipse 50% 50% at 80% 70%,
+        rgba(var(--orange-mid-rgb), 0.2) 0px,
+        transparent 50%
+      ),
+    /* Bottom layer: Subtle warm cloud center-bottom */
+      radial-gradient(
+        ellipse 60% 40% at 50% 90%,
+        rgba(var(--orange-dark-rgb), 0.15) 0px,
+        transparent 60%
+      );
 
   /*  Shadow Colors (Light Mode) --- */
   --shadow-highlight-rgb: 255 255 255; /* white */

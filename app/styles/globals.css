@@ -21,13 +21,16 @@ body {
 
 body {
   /* Use CSS rgb variables defined in theme.css */
-  background-color: rgb(var(--background-rgb));
+  /* background-color: rgb(var(--background-rgb)); */
+  background-color: rgb(var(--orange-light-rgb));
   color: rgb(var(--foreground-rgb));
 
-  /* Apply font variables if defined in theme.css or layout.tsx */
-  /* Example: font-family: var(--font-geist-sans); */
+  /* Apply the gradient */
+  background-image: var(--light-gradient);
+  background-attachment: fixed; /* Keep gradient fixed during scroll */
 
-  /* Apply base typography variables from theme.css */
+  /* Typography variables from theme.css */
+  font-family: var(--font-geist-sans);
   font-size: var(--fontSize-base);
   font-family: var(--font-geist-sans);
   line-height: var(--lineHeight-normal);
@@ -49,6 +52,131 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+
+/* === Carousel Edge Fades === */
+.carousel-container-fades {
+  position: relative; /* Needed for pseudo-elements */
+}
+
+.carousel-container-fades::before,
+.carousel-container-fades::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* Cover the container vertically */
+  top: 0;
+  bottom: 0; /* Explicitly cover height */
+  z-index: 20; /* Ensure it's above slides but below nav buttons */
+  pointer-events: none; /* Allow clicks through */
+  width: 100px; /* Adjust width of fade */
+}
+
+.carousel-container-fades::before {
+  left: 0;
+  background-image: linear-gradient(
+    to right,
+    rgb(var(--background-rgb)),
+    transparent
+  ); /* Fade from background */
+}
+
+.carousel-container-fades::after {
+  right: 0;
+  background-image: linear-gradient(
+    to left,
+    rgb(var(--background-rgb)),
+    transparent
+  ); /* Fade from background */
+}
+
+/* === Highlighter Styles === */
+
+/* Base item styles will be applied via Tailwind */
+
+/* HighlighterItem Pseudo-elements */
+.highlighterItem::before {
+  content: "";
+  position: absolute;
+  width: 24rem; /* w-96 */
+  height: 24rem; /* h-96 */
+  left: -12rem; /* -left-48 */
+  top: -12rem; /* -top-48 */
+  background-color: rgb(var(--primary-rgb)); /* Use theme variable */
+  border-radius: 9999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms;
+  transform: translate(
+    var(--mouse-x, 0px),
+    var(--mouse-y, 0px)
+  ); /* Add fallback */
+  z-index: 30; /* Check z-index conflicts */
+  filter: blur(100px);
+}
+.highlighterItem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* Inherit from parent */
+  opacity: 0;
+  transition: opacity 500ms;
+  /* Use theme variable for the radial gradient color */
+  background: radial-gradient(
+    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(var(--foreground-rgb), 0.1),
+    /* Example: subtle foreground color */ transparent
+  );
+  z-index: 10; /* Check z-index conflicts */
+}
+
+/* HighlighterItem02 Pseudo-elements */
+.highlighterItem02::before {
+  content: "";
+  position: absolute;
+  width: 16rem; /* w-64 */
+  height: 16rem; /* h-64 */
+  left: -8rem; /* -left-32 */
+  top: -8rem; /* -top-32 */
+  background-color: rgb(var(--secondary-rgb)); /* Use theme variable */
+  border-radius: 9999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms;
+  transform: translate(
+    var(--mouse-x, 0px),
+    var(--mouse-y, 0px)
+  ); /* Add fallback */
+  z-index: 30;
+  filter: blur(64px);
+}
+.highlighterItem02::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 500ms;
+  background: radial-gradient(
+    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(var(--foreground-rgb), 0.1),
+    /* Example: subtle foreground color */ transparent
+  );
+  z-index: 10;
+}
+
+/* Group hover effects */
+.group:hover .highlighterItem::before {
+  opacity: 0.1; /* Adjusted opacity */
+}
+.group:hover .highlighterItem::after {
+  opacity: 0.3; /* Adjusted opacity */
+}
+.group:hover .highlighterItem02::before {
+  opacity: 0.15; /* Adjusted opacity */
+}
+.group:hover .highlighterItem02::after {
+  opacity: 0.3; /* Adjusted opacity */
 }
 
 /* === Custom @layer definitions  === */
@@ -74,7 +202,7 @@ a {
   }
 }
 
-/* @media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   *,
   ::before,
   ::after {
@@ -86,4 +214,4 @@ a {
     transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
-} */
+}

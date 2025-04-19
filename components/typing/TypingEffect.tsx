@@ -22,7 +22,7 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   typingSpeed = 100,
   deletingSpeed = 50,
   pauseDuration = 1500,
-  paragraphClassName = "text-2xl md:text-3xl font-semibold my-8",
+  paragraphClassName = "font-semibold",
 }) => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
@@ -36,23 +36,16 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
       { items, currentItemIndex, displayedText, isDeleting },
       { typingSpeed, deletingSpeed, pauseDuration }
     );
-
     timeoutRef.current = setTimeout(() => {
       setDisplayedText(step.nextText);
       setIsDeleting(step.nextIsDeleting);
-
-      // If we just finished deleting the dynamic part (it became empty)
       if (isDeleting && step.nextText === "") {
-        // Move to the next item in the list
         setCurrentItemIndex((prevIndex) => (prevIndex + 1) % items.length);
-        // isDeleting will be set to false in the next effect run via step.nextIsDeleting
       }
     }, step.delay);
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [
     items,
@@ -67,35 +60,23 @@ const TypingEffect: React.FC<TypingEffectProps> = ({
   return (
     <p className={cn(paragraphClassName)}>
       {/* Static prefix */}
-      {staticPrefix && <span>{staticPrefix}</span>}
+      {staticPrefix && (
+        <span className="inline-block align-bottom pr-3 min-h-[1.2em] ">{staticPrefix}</span>
+      )}
 
       {/* Dynamic part within styled span */}
       <span
         className={cn(
-          "bg-gradient-to-r",
-          // Colors based on tailwind.config.ts mapping
-          "from-primary-500",
-          "to-secondary-500",
-          "dark:from-primary-400",
-          "dark:to-secondary-400",
-          "bg-clip-text",
-          "text-transparent", // ESSENTIAL: Makes text transparent for gradient bg
-
-          // Layout/Appearance utilities (from old CSS module)
-          "inline-block",
-          "font-bold", // font-weight: 700
-          "relative", // For caret positioning
-          "align-bottom",
-          "whitespace-nowrap",
-
-          // Add min-height using arbitrary value to prevent collapse
-          "min-h-[1.2em]",
-
-          // Custom class  in global CSS
-          "blinkingCaret"
+          // Base styles needed for effect
+          "inline-block relative align-bottom whitespace-nowrap min-h-[1.2em]",
+          // Custom class for caret (styles in global CSS)
+          "blinkingCaret",
+          // Default text color (overridden by dark gradient)
+          "text-inherit", // Inherit color from parent <p>
+          // Dark mode gradient text (using mapped colors from tailwind.config)
+          "dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400 dark:bg-clip-text dark:text-transparent"
         )}
       >
-        {/* Render a non-breaking space if dynamic text is empty for layout/caret */}
         {displayedText || "\u00A0"}
       </span>
     </p>
