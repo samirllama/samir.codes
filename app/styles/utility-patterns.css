@@ -1,6 +1,6 @@
 /* app/styles/utility-patterns.css */
 
-/* === Typography Components (Using CSS Variables from theme.css) === */
+/* === Typography (Using CSS Variables from theme.css) === */
 .heading-1 {
   font-size: var(--fontSize-h1);
   font-weight: 800; /* extrabold */
@@ -26,7 +26,6 @@
 /* These act as base styles that can be extended with Tailwind classes */
 .btn {
   @apply inline-flex items-center justify-center rounded-full px-[var(--spacing-md)] py-[0.375rem] text-[length:var(--fontSize-sm)] leading-[var(--lineHeight-normal)] font-medium transition-all duration-150 whitespace-nowrap border border-transparent;
-  /* Apply base styles using @apply for brevity */
 }
 
 .btn-sm {
@@ -37,25 +36,16 @@
 /* === Form Components === */
 /* NOTE: @tailwindcss/forms plugin provides base styles.
    These custom classes might override or supplement them.
-   Review if they are all necessary after enabling the plugin.
-   Using Tailwind classes directly in components might be simpler.
 */
 .form-input,
 .form-textarea,
 .form-multiselect,
 .form-select {
-  /* Example using Tailwind classes via @apply - assumes forms plugin is active */
+  /* Forms plugin needs to be active */
   @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200 dark:placeholder-slate-500 dark:focus:border-indigo-400 dark:focus:ring-indigo-400;
-  /* Adjust colors (e.g., border-gray-300, focus:border-indigo-500) to match your theme */
+  /* Adjust colors (e.g., border-gray-300, focus:border-indigo-500) to match theme */
   font-size: var(--fontSize-sm); /* Override font size if needed */
 }
-
-/* Placeholder color is often handled by the base input styles */
-/* .form-input::placeholder,
-.form-textarea::placeholder {
- // Example if needed
-   color: theme('colors.slate.500');
-} */
 
 .form-select {
   @apply pr-10; /* Keep padding for arrow */
@@ -63,13 +53,10 @@
 
 .form-checkbox,
 .form-radio {
-  /* Example using Tailwind classes via @apply - assumes forms plugin is active */
   @apply rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-slate-600 dark:bg-slate-800 dark:checked:bg-indigo-500 dark:focus:ring-indigo-400;
-  /* Adjust colors to match your theme */
 }
 
-/* === Scrollbar Utilities (Defined directly - Layer Removed) === */
-/* REMOVED @layer utilities wrapper */
+/* === Scrollbar Utilities === */
 .scrollbar-thin {
   scrollbar-width: thin;
 }
@@ -90,4 +77,3 @@
 .no-search-decoration::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
-

@@ -1,9 +1,27 @@
 /* app/styles/theme.css */
 
 /* ========== Core CSS Variable Definitions ========== */
+
 :root {
-  /* Light Theme */
-  /* Colors (RGB values) --- */
+  --neutral-lightest: #ffffff;
+  --neutral-lighter: #f8f8f8;
+  --neutral-medium: #d3d3d3;
+  --neutral-darker: #666666;
+  --neutral-darkest: #333333;
+
+  /* Define Default Generic Role Values (e.g., for a light theme if no theme class is present or as a fallback) */
+  --color-surface-page: var(--neutral-lightest);
+  --color-surface-card: var(--neutral-lighter);
+  --color-text-default: var(--neutral-darkest);
+  --color-text-secondary: var(--neutral-darker);
+  --color-interactive-primary: var(--neutral-darkest);
+  --color-interactive-secondary: var(--neutral-medium);
+  --color-border-default: var(--neutral-medium);
+  /* ... default accent roles if needed */
+
+  /* ========== Light Theme ========== */
+
+  /* Colors (RGB ) --- */
   --background-rgb: 241 245 249; /* slate-100 (Soft off-white) */
   --foreground-rgb: 51 65 85; /* slate-700 (Readable dark gray) */
 
@@ -19,10 +37,10 @@
   --border-medium-rgb: 203 213 225; /* slate-300 */
   --code-background-rgb: 226 232 240; /* slate-200 (Light code bg) */
 
-  /* Gradient Definition --- */
-  /* Applied via body or specific container */
-  --light-gradient:
-      /* Top layer: Soft light orange cloud top-left */ radial-gradient(
+  /* === Gradient: Applied via body or specific container === */
+
+  /* Top layer: Soft light orange cloud top-left */
+  --light-gradient: radial-gradient(
       ellipse 40% 50% at 20% 30%,
       rgba(var(--orange-light-rgb), 0.25) 0px,
       transparent 50%
@@ -40,7 +58,7 @@
         transparent 60%
       );
 
-  /*  Shadow Colors (Light Mode) --- */
+  /*  Shadows (Light Mode) --- */
   --shadow-highlight-rgb: 255 255 255; /* white */
   --shadow-base-rgb: 203 213 225; /* slate-300 */
   --shadow-outer-rgb: 148 163 184; /* slate-400 */
@@ -76,9 +94,98 @@
   --gray-alpha-200: rgba(var(--foreground-rgb), 0.1);
 }
 
-/* Dark Theme Overrides  */
+/* ==== Theme: Mocha Mousse (Earthy, Balanced) ==== */
+
+.mocha-mousse_v1 {
+  /* Mocha Mousse Theme Specific Colors */
+  --mocha-mousse-color: #a67b5b;
+  --mocha-mousse-background-page: var(--neutral-lighter);
+  --mocha-mousse-background-alt: var(--neutral-lightest);
+  --mocha-mousse-text-default: var(--neutral-darkest);
+  --mocha-mousse-text-secondary: var(--neutral-darker);
+  --mocha-mousse-accent-terra-cotta: #bc8f8f; /* Rosy Brown/Muted Terracotta */
+  --mocha-mousse-accent-earth-green: #8fbc8f; /* Muted Green (like Dark Sea Green) */
+  --mocha-mousse-accent-warm-tan: #d2b48c;
+  --mocha-mousse-accent-deep-ochre: #a0522d;
+  --mocha-mousse-accent-soft-grey: #c0c0c0; /* Silver/Cool Gray for subtle contrast */
+  --mocha-mousse-interactive-primary: var(--mocha-mousse-color);
+  --mocha-mousse-interactive-secondary: var(--mocha-mousse-accent-deep-ochre);
+  --mocha-mousse-border-color: var(--neutral-medium);
+  /* Map Mocha Mousse Theme Colors to Generic Roles */
+  --color-surface-page: var(--mocha-mousse-background-page);
+  --color-surface-card: var(--mocha-mousse-background-alt);
+  --color-text-default: var(--mocha-mousse-text-default);
+  --color-text-secondary: var(--mocha-mousse-text-secondary);
+  --color-interactive-primary: var(--mocha-mousse-interactive-primary);
+  --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
+  --color-border-default: var(--mocha-mousse-border-color);
+}
+
+.mocha-mousse {
+  --mocha-mousse-color: #a67b5b; /* The core Pantone color */
+  /* Define  dark mocha background color */
+  --mocha-mousse-background-dark: #5d4037; /* Example Dark Mocha hex code - Choose specific shade */
+  --mocha-mousse-background-alt: #6d504b; /* Example slightly lighter dark mocha for contrast surfaces */
+
+  /*  Update Backgrounds --- */
+  --mocha-mousse-background-page: var(
+    --mocha-mousse-background-dark
+  ); /* <-- Set page background to dark mocha */
+  --mocha-mousse-background-alt: var(
+    --mocha-mousse-background-alt
+  ); /* <-- Use the alt dark mocha for cards etc. */
+
+  /* Update Text Colors for Readability on Dark Background --- */
+  --mocha-mousse-text-default: var(
+    --neutral-lightest
+  ); /* <-- Use a light neutral for default text */
+  --mocha-mousse-text-secondary: var(
+    --neutral-medium
+  ); /* <-- Use a medium neutral for secondary text */
+
+  --mocha-mousse-accent-terra-cotta: #bc8f8f;
+  --mocha-mousse-accent-earth-green: #8fbc8f;
+  --mocha-mousse-accent-warm-tan: #d2b48c;
+  --mocha-mousse-accent-deep-ochre: #a0522d;
+  --mocha-mousse-accent-soft-grey: #c0c0c0;
+
+  --mocha-mousse-interactive-primary: var(
+    --mocha-mousse-color
+  ); /* Mocha Mousse itself might work as primary interactive */
+  --mocha-mousse-interactive-secondary: var(
+    --mocha-mousse-accent-warm-tan
+  ); /* Use a lighter earthy accent */
+  --mocha-mousse-border-color: var(
+    --neutral-darker
+  ); /* Use a darker neutral for borders on dark background */
+
+  /* --- Map Mocha Mousse Theme Colors to Generic Roles --- */
+  --color-surface-page: var(
+    --mocha-mousse-background-page
+  ); /* Generic role now maps to dark mocha */
+  --color-surface-card: var(
+    --mocha-mousse-background-alt
+  ); /* Generic card role maps to alt dark mocha */
+
+  --color-text-default: var(
+    --mocha-mousse-text-default
+  ); /* Generic text role maps to light neutral */
+  --color-text-secondary: var(
+    --mocha-mousse-text-secondary
+  ); /* Generic secondary text maps to medium neutral */
+
+  --color-interactive-primary: var(--mocha-mousse-interactive-primary);
+  --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
+  --color-border-default: var(--mocha-mousse-border-color);
+
+  /* Map generic accent *colors* to generic roles if they are used consistently for a purpose */
+  --color-accent-highlight: var(--mocha-mousse-accent-earth-green);
+  --color-accent-bold: var(--mocha-mousse-accent-deep-ochre);
+}
+
+/* ========== Dark Theme Overrides ==========  */
 .dark {
-  /*  Colors --- */
+  /*  Colors */
   --background-rgb: 15 23 42; /* slate-900 */
   --foreground-rgb: 226 232 240; /* slate-200 */
   --card-bg-rgb: 30 41 59; /* slate-800 */
@@ -90,12 +197,10 @@
   --code-background-rgb: 30 41 59; /* slate-800 */
 
   /* Shadow/Glow Colors for Cyberpunk (Dark Mode) --- */
-  /* These might be used for text-shadow, box-shadow glows, or borders */
   --shadow-highlight-rgb: 71 85 105; /* slate-600 (Subtle inner highlight) */
   --shadow-base-rgb: 0 0 0; /* black (Inner shadow base) */
   --shadow-outer-rgb: 0 0 0; /* black (Outer shadow base) */
 
-  /* Define specific neon glow colors using the accent variables */
   --neon-glow-primary-rgb: rgb(var(--primary-rgb));
   --neon-glow-secondary-rgb: rgb(var(--secondary-rgb));
   --neon-glow-accent-rgb: rgb(var(--accent-rgb));
@@ -109,17 +214,14 @@
   --background-cyber: rgb(20, 30, 33);
 }
 
-/* Global HTML Styles  */
+/* Global HTML Styles, Body styles applied in globals.css */
 html {
   color-scheme: light dark;
   scroll-behavior: smooth;
   font-size: 100%;
 }
-/* Body styles applied in globals.css */
 
-/* ==========================================================================
-   Component Styles (Keep minimal)
-   ========================================================================== */
+/* === Component Styles (Keep minimal) === */
 
 /* Scroll controls */
 .scroll-controls {
@@ -131,9 +233,7 @@ html {
   margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
 }
 
-/* ==========================================================================
-   Utility Overrides & Prose Styles (No @layer needed)
-   ========================================================================== */
+/* === Utility Overrides & Prose Styles === */
 
 /* Layout Utilities  */
 .content-grid {
@@ -157,7 +257,7 @@ html {
 }
 
 /* MDX Prose Styles (Controlling Typography Plugin) --- */
-/* Define the plugin variables to use theme variables */
+/* Plugin variables need to be defined to use theme variables */
 .mdx-prose {
   @apply max-w-none;
 
@@ -176,13 +276,12 @@ html {
   --tw-prose-captions: rgba(var(--foreground-rgb), 0.7);
   --tw-prose-code: rgb(var(--secondary-rgb)); /* Inline code color */
   --tw-prose-pre-code: inherit; /* Let highlighter handle text */
-  --tw-prose-pre-bg: rgb(
-    var(--code-background-rgb)
-  ); /* Code block background */
+  /* Code block background */
+  --tw-prose-pre-bg: rgb(var(--code-background-rgb));
   --tw-prose-th-borders: rgb(var(--border-medium-rgb));
   --tw-prose-td-borders: rgb(var(--border-subtle-rgb));
 
-  /* Invert variables (Still point to the same theme vars) */
+  /* Invert variables, points to the same theme vars */
   --tw-prose-invert-body: rgb(var(--foreground-rgb));
   --tw-prose-invert-headings: rgb(var(--foreground-rgb));
   --tw-prose-invert-lead: rgb(var(--foreground-rgb));

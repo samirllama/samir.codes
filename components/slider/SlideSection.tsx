@@ -3,18 +3,18 @@
 import Image from "next/image";
 import React from "react";
 import SlideColumn from "./SlideColumn";
-import { SlideContent } from "./slideData"; // Import the interface
+import { SlideContent } from "./slideData"; // Import interface
 
 interface SlideSectionProps {
   slide: SlideContent;
 }
 
+// Each section takes full viewport height and has its own background
 const SlideSection: React.FC<SlideSectionProps> = ({ slide }) => {
   return (
-    // Each section takes full viewport height and has its own background
-    // min-h-screen ensures it takes at least the screen height, allowing scrolling
     <section
       id={slide.id}
+      // min-h-screen ensures it takes at least the screen height, allowing scrolling
       className={`min-h-screen w-full flex items-center justify-center p-4 md:p-8 ${slide.bgColor}`}
     >
       {/* The grid container within the section */}

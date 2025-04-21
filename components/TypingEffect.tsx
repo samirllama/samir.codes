@@ -1,4 +1,4 @@
-// /components/typing/TypingEffect.tsx
+// /components/TypingEffect.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";

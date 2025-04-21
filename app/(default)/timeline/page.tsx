@@ -1,9 +1,9 @@
 // app/(default)/timeline/page.tsx
 import Image from "next/image";
-import { professionalExperience, techSkills } from "@/lib/data/experience"; // Import data
+import { professionalExperience, techSkills } from "@/lib/data/experience";
 import ExperienceItem from "@/components/ExperienceItem";
 import Illustration from "@/public/assets/page-illustration.svg"; // Use an appropriate illustration
-import Particles from "@/components/particles/Particles"; // Assuming Particles component exists
+import Particles from "@/components/particles/Particles";
 import { cn } from "@/lib/utils";
 
 // Optional: Add metadata
@@ -35,7 +35,7 @@ export default function TimelinePage() {
           staticity={30}
         />
         {/* <div className="absolute inset-0 h-96 -z-10" aria-hidden="true">
-          <canvas data-particle-animation data-particle-quantity="15"></canvas> // Replace with your Particles component if preferred
+          <canvas data-particle-animation data-particle-quantity="15"></canvas> // Replace with Particles component if preferred
         </div> */}
         <div
           className="md:block absolute left-1/2 -translate-x-1/2 -mt-16 blur-2xl opacity-50 dark:opacity-90 pointer-events-none -z-10"
@@ -69,9 +69,12 @@ export default function TimelinePage() {
                 {/* Vertical Line */}
                 <div
                   className={cn(
-                    "absolute h-full top-6 left-[5px] w-0.5 -z-10", // Positioning
-                    "bg-gradient-to-b from-transparent via-slate-300 to-transparent", // Light mode gradient
-                    "dark:via-slate-700" // Dark mode gradient color
+                    // Positioning
+                    "absolute h-full top-6 left-[5px] w-0.5 -z-10",
+                    // Light mode gradient
+                    "bg-gradient-to-b from-transparent via-slate-300 to-transparent",
+                    // Dark mode gradient color
+                    "dark:via-slate-700"
                     // Add shine animation if desired, potentially only in dark mode
                     // "after:absolute after:h-4 after:top-0 ... dark:after:animate-shine"
                   )}

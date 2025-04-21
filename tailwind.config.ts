@@ -33,8 +33,24 @@ const config: Config = {
                 background: colors.white,
                 foreground: colors.slate[900],
 
-                // Explicitly include red for errors/warnings
+                // Explicitly included for errors/warnings
                 red: colors.red,
+
+                "mocha-mousse": "var(--color-mocha-mousse)",
+                "neutral-lightest": "var(--color-neutral-lightest)",
+                "neutral-lighter": "var(--color-neutral-lighter)",
+                "neutral-medium": "var(--color-neutral-medium)",
+                "neutral-darker": "var(--color-neutral-darker)",
+                "neutral-darkest": "var(--color-neutral-darkest)",
+                "accent-1": "var(--color-accent-1)", // Map chosen accents
+                "accent-2": "var(--color-accent-2)",
+                "text-primary": "var(--color-text-primary)",
+                "text-secondary": "var(--color-text-secondary)",
+                "background-base": "var(--color-background-base)",
+                "background-alt": "var(--color-background-alt)",
+                "background-mocha": "var(--color-background-mocha)",
+
+
                 orange: { 100: "#CB8467", 2: "#CF8B6D", 3: "#C88262", 4: "#C67E5E", 5: "#D28E71", 6: "#BF7755" },
                 "cyber-green": {
                     '100': "rgb(68, 127, 118)",
@@ -45,35 +61,11 @@ const config: Config = {
                     '600': "rgb(74, 177, 19)",
                     '700': "rgb(48, 117, 12)",
                     '800': "rgb(19, 46, 4)",
-
-                    // rgb(109, 119, 121)
-                    // rgb(126, 139, 122)
-                    // rgb(49, 66, 59)
-                    // rgb(41, 54, 25)
-                    // rgb(75, 160, 122)
-                    // rgb(53, 168, 123)
-                    // rgb(35, 146, 102)
-                    // rgb(49, 118, 86)
-                    // rgba(33, 80, 65, 1)
-                    // rgb(11, 206, 86)
-                    // rgb(8, 59, 34)
-                    // rgb(0, 51, 31)
-                    // rgb(12, 48, 38)
-                    // rgb(18, 39, 38)
-                    // rgb(19, 32, 35)
-                    // rgb(20, 33, 35)
-                    // rgb(19, 36, 37)
-                    // rgb(189, 84, 61)
-                    // rgb(169, 49, 28)
-                    // rgb(90, 45, 23)
-
-
                 }
             },
 
             //  Font Family (Using CSS Variables) ---
             fontFamily: {
-                // Assumes --font-geist-sans & --font-geist-mono are defined globally
                 sans: [
                     "var(--font-geist-sans)",
                     "ui-sans-serif",

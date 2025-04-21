@@ -2,8 +2,8 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import useMousePosition from "../hooks/mouse-position"; // Adjust path if needed
-import { cn } from "@/lib/utils"; // Adjust path if needed
+import useMousePosition from "../hooks/mouse-position";
+import { cn } from "@/lib/utils";
 
 interface ParticlesProps {
   className?: string;

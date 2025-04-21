@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ParticlesV3 from "./particles-v3";
+import ParticlesV3 from "./particles/ParticlesV3";
 
 const Glitchy: FC = () => (
   <div className="relative max-w-6xl mx-auto px-4 sm:px-6 min-h-screen border border-red-500">

@@ -2,11 +2,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
-import "./styles/globals.css"; // Ensure globals.css is imported
+import "./styles/globals.css";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Samir Llama",
+  title: "Samir Codes",
   description: "Personal website and portfolio",
 };
 
@@ -39,6 +39,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark" // Ensures .dark is applied initially if no preference
           enableSystem={true} // Allows respecting OS preference
+          themes={['light', 'dark', 'mocha-mousse']}
         >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
             {children}

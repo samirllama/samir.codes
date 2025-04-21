@@ -100,7 +100,7 @@ export default function ProjectsCarousel() {
     <section>
       {/* Outer container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="py-12 md:py-20"> {/* Padding top/bottom */}
+        <div className="py-12 md:py-20">
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
