@@ -41,7 +41,7 @@ export default function RootLayout({
           enableSystem={true} // Allows respecting OS preference
           themes={['light', 'dark', 'mocha-mousse']}
         >
-          <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip">
+          <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">
             {children}
           </div>
         </ThemeProvider>

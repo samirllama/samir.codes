@@ -12,10 +12,11 @@ export default function DefaultLayout({
   return (
     <>
       <Animate />
+      <Header />
 
-      <SwipeHeader />
-
-      <main className="grow">{children}</main>
+      <main className="grow" style={{ opacity: 1 }}>
+        <div className="pt-[65px] lg:pt-[70px]">{children}</div>
+      </main>
       <Footer />
     </>
   );

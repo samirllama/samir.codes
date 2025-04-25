@@ -32,10 +32,8 @@ import React from "react";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
 
-const name = "Samir";
-const role = "Developer";
 const coreMessage =
-  "I'M A SENIOR DEVELOPER on a quest to build robust digital experiences. Sometimes things get... creatively deconstructed. It's part of the process!";
+  "ENJOY MAKING WEBSITES THAT ARE INNOVATIVE, ACCESSIBLE & PERFORMANT!";
 
 // Component can be a Server Component by default in App Router, if it doesn't use client-only features like hooks or event listeners.
 const HeroSection = () => {
@@ -43,29 +41,83 @@ const HeroSection = () => {
     <section
       className={twMerge(
         clsx(
-          "relative w-full min-h-screen flex items-center justify-center", // Full width, min full height, center content vertically
-          "bg-background-dark text-text-light", // Apply dark background and light text from theme.css
-          "px-4 sm:px-8 lg:px-16 py-16" // Responsive horizontal padding and vertical padding
+          // Full width, min full height, center content vertically
+          // "relative w-full min-h-screen flex justify-center",
+          "my-4"
           // Consider adding 'overflow-hidden' if elements extending beyond bounds
         )
       )}
     >
-      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="pb-[61vw] md:pb-[55vw] lg:pb-[45vw] xl:pb-[36.25vw] 2xl:pb-[670px] mb-24 lg:mb-16 relative">
+        <div className="absolute bottom-0 right-0 w-10/12 md:w-8/12 lg:w-[52%] xl:w-[44%] aspect-square overflow-hidden bg-[#000] bg-opacity-50 max-w-[800px]">
+          <div className="opacity-[0.2] absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 w-full h-full">
+              <div className="will-change-transform absolute inset-0">
+                [Image Goes Here]
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Text Content Area */}
-        <div className="flex-1 max-w-3xl text-center lg:text-left">
-          {/* Headline - uses the serif font */}
+        <div className="leading-[1] uppercase text-[clamp(30px,0.92rem+4.9vw,90px)] font-display tracking-tight max-w-[1700px] w-full lg:w-11/12">
           <h1
             className={twMerge(
               clsx(
                 // Large font size, serif, tight leading, bottom margin
-                "text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif-display leading-tight mb-6",
-                "text-text-light" // Ensure headline uses light text color
+                "font-mono",
+                "text-default",
+                "flex flex-wrap overflow-hidden justify-start w-full"
                 // Optional: Add aos animation data attribute
                 // data-aos="fade-up"
               )
             )}
           >
-            {coreMessage}
+            <span className="block overflow-hidden">
+              <span
+                className="block overflow-hidden will-change-transform"
+                style={{ transform: "translateY(0%) translateZ(0px);" }}
+              >
+                <span className="block mb-0 pb-0 pr-[1px] ml-[10vw]">
+                  <span className="block ms-text-adjust">Hello &nbsp;</span>
+                </span>
+              </span>
+            </span>
+            <span className="block overflow-hidden">
+              <span
+                className="block overflow-hidden will-change-transform"
+                style={{ transform: "translateY(0%) translateZ(0px);" }}
+              >
+                <span className="block mb-0 pb-0 pr-[1px] false">
+                  <span className="block ms-text-adjust">World! &nbsp;</span>
+                </span>
+              </span>
+            </span>
+
+            <span className="block overflow-hidden">
+              <span
+                className="block overflow-hidden will-change-transform"
+                style={{ transform: "translateY(0%) translateZ(0px);" }}
+              >
+                <span className="block mb-0 pb-0 pr-[1px] false">
+                  <span className="block ms-text-adjust">I &nbsp;</span>
+                </span>
+              </span>
+            </span>
+
+            {coreMessage.split(" ").map((message) => (
+              <span className="block overflow-hidden" key={message}>
+                <span
+                  className="block overflow-hidden will-change-transform"
+                  style={{ transform: "translateY(0%) translateZ(0px);" }}
+                >
+                  <span className="block mb-0 pb-0 pr-[1px] false">
+                    <span className="block ms-text-adjust">
+                      {message}&nbsp;
+                    </span>
+                  </span>
+                </span>
+              </span>
+            ))}
           </h1>
 
           {/* Subtext or Call to Action (Optional) */}
@@ -102,6 +154,95 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      <nav className="pb-[20vw] lg:pb-[12.5vw]">
+        <h2 className="font-mono uppercase tracking-tight leading-none text-[10px] mb-3 lg:mb-3 pb-0">
+          Projects
+        </h2>
+        <ul className="border-t border-white/30">
+          <li className="block relative">
+            <a className="uppercase border-b border-white/30 w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:pl-0 a11y-focus">
+              <span className="block overflow-hidden">
+                <span className="leading-[0.95] block text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                  <span
+                    className="block"
+                    style={{ transform: "translateY(0%) translateZ(0px);" }}
+                  >
+                    <span className="block ms-text-adjust">Wells Fargo</span>
+                  </span>
+                </span>
+              </span>
+              <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                <span
+                  className="block"
+                  style={{ transform: "translateY(0%) translateZ(0px);" }}
+                >
+                  View Project
+                </span>
+              </span>
+            </a>
+          </li>
+          <li className="block relative">
+            <a className="uppercase border-b border-white/30 w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:pl-0 a11y-focus">
+              <span className="block overflow-hidden">
+                <span className="leading-[0.95] block text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                  <span
+                    className="block"
+                    style={{ transform: "translateY(0%) translateZ(0px);" }}
+                  >
+                    <span className="block ms-text-adjust">Dealer Inspire</span>
+                  </span>
+                </span>
+              </span>
+
+              <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                <span
+                  className="block"
+                  style={{ transform: "translateY(0%) translateZ(0px);" }}
+                >
+                  View Project
+                </span>
+              </span>
+            </a>
+          </li>
+          <li className="block relative">
+            <a className="uppercase border-b border-white/30 w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:pl-0 a11y-focus">
+              <span className="block overflow-hidden">
+                <span className="leading-[0.95] block text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                  <span
+                    className="block"
+                    style={{ transform: "translateY(0%) translateZ(0px);" }}
+                  >
+                    <span className="block ms-text-adjust">Expedia</span>
+                  </span>
+                </span>
+              </span>
+              <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                <span
+                  className="block"
+                  style={{ transform: "translateY(0%) translateZ(0px);" }}
+                >
+                  View Project
+                </span>
+              </span>
+            </a>
+          </li>
+          <li className="block relative">
+            <a className="uppercase border-b border-white/30 w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:pl-0 a11y-focus">
+              <span className="block overflow-hidden">
+                <span className="leading-[0.95] block text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
+                  <span
+                    className="block"
+                    style={{ transform: "translateY(0%) translateZ(0px);" }}
+                  >
+                    <span className="block ms-text-adjust">Domino's</span>
+                  </span>
+                </span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </section>
   );
 };

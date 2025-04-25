@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import Particles from "./particles/Particles"; // Assuming path is correct
+import Particles from "./particles/Particles";
 import Highlighter, { HighlighterItem } from "./highlighter";
 import { cn } from "@/lib/utils"
 
@@ -119,19 +119,18 @@ export default function ProjectsCarousel() {
           </div>
 
           {/* Carousel built with Swiper.js */}
-          {/* Add fade classes if implemented in global CSS */}
           <div className="carousel-container-fades">
-            {/* Swiper container */}
-            <div ref={swiperRef} className="swiper stellar-carousel"> {/* Add stellar-carousel class if needed by theme.css */}
+              {/* Swiper container, stellar-carousel class from theme.css */}
+            <div ref={swiperRef} className="swiper stellar-carousel">
               {/* Highlighter wraps the swiper-wrapper */}
               <Highlighter className="swiper-wrapper group/wrapper" refresh={!!swiperInstance}>
-                {/* Map through project data */}
                 {projects.map((project, index) => (
                   // Each slide is a HighlighterItem
                   <HighlighterItem
                     key={index}
                     className={cn(
-                      "swiper-slide group/slide h-auto", // Base Swiper classes + group name for particle hover
+                      // Base Swiper classes + group name for particle hover
+                      "swiper-slide group/slide h-auto",
                       // Light Theme: Claymorphism
                       "shadow-clay-light bg-[rgb(var(--card-bg-rgb))]",
                       // Dark Theme: Neon Border/Glow (Example)
@@ -144,7 +143,8 @@ export default function ProjectsCarousel() {
                       <Particles
                         className={cn(
                           "absolute inset-0 -z-10",
-                          "opacity-0 group-hover/slide:opacity-100 [&.active-slide]:opacity-100", // Fade in on hover or active
+                          // Fade in on hover or active
+                          "opacity-0 group-hover/slide:opacity-100 [&.active-slide]:opacity-100",
                           "transition-opacity duration-500 ease-in-out",
                           "hidden dark:block" // Only show particles in dark mode
                         )}

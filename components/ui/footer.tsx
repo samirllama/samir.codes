@@ -1,18 +1,82 @@
-import { Timestamp } from "@/components/Timestamp"
+import { Timestamp } from "@/components/Timestamp";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-dark-border-subtle bg-white dark:bg-dark-base">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          {/* ...existing footer content... */}
-          <div className="mt-8 border-t pt-8 text-center">
-            <p className="text-sm text-gray-600">
-              &copy; <Timestamp /> Mode. All rights reserved.
-            </p>
+    <footer>
+      <div className="px-4 lg:px-5">
+        <div className="grid grid-cols-2 text-lg leading-none lg:text-xl lg:leading-none border-t border-current pt-4 pb-3 lg:pt-4 lg:pb-3 items-center">
+          <div className="col-span-1">
+            <nav className="ml-auto flex space-x-3 lg:space-x-4">
+              <a
+                href="https://twitter.com/samuelgoddard"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group a11y-focus"
+              >
+                <span className="block relative overflow-hidden">
+                  Twitter{" "}
+                  <span className="absolute inset-0 w-full h-full flex items-center justify-start">
+                    <span className="block transition-transform ease-in-out duration-[350ms] w-full h-[1px] bg-current translate-y-[-100%] translate-x-[-110%] lg:group-hover:translate-x-0"></span>
+                  </span>
+                </span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/samirllama/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group a11y-focus"
+              >
+                <span className="block relative overflow-hidden">
+                  LinkedIn{" "}
+                  <span className="absolute inset-0 w-full h-full flex items-center justify-start">
+                    <span className="block transition-transform ease-in-out duration-[350ms] w-full h-[1px] bg-current translate-y-[-100%] translate-x-[-110%] lg:group-hover:translate-x-0"></span>
+                  </span>
+                </span>
+              </a>
+              <a
+                href="https://github.com/samirllama"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block group a11y-focus"
+              >
+                <span className="block relative overflow-hidden">
+                  Github{" "}
+                  <span className="absolute inset-0 w-full h-full flex items-center justify-start">
+                    <span className="block transition-transform ease-in-out duration-[350ms] w-full h-[1px] bg-current translate-y-[-100%] translate-x-[-110%] lg:group-hover:translate-x-0"></span>
+                  </span>
+                </span>
+              </a>
+              <a
+                href="mailto:hello@samgoddard.co.uk"
+                className="block group a11y-focus"
+              >
+                <span className="block relative overflow-hidden">
+                  Email{" "}
+                  <span className="absolute inset-0 w-full h-full flex items-center justify-start">
+                    <span className="block transition-transform ease-in-out duration-[350ms] w-full h-[1px] bg-current translate-y-[-100%] translate-x-[-110%] lg:group-hover:translate-x-0"></span>
+                  </span>
+                </span>
+              </a>
+            </nav>
+          </div>
+
+          <div className="col-span-1 text-right flex justify-end">
+            <button className="block group a11y-focus border-none outline-none focus:border-none focus:outline-none">
+              <span className="block relative overflow-hidden">
+                <span className="hidden lg:inline">Back To </span>Top
+                <span className="absolute inset-0 w-full h-full flex items-center justify-start">
+                  <span className="block transition-transform ease-in-out duration-[350ms] w-full h-[1px] bg-current translate-y-[-100%] translate-x-[-110%] lg:group-hover:translate-x-0"></span>
+                </span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
+      <div className="text-center">
+        <span className="hidden lg:inline">
+          &copy; <Timestamp /> Samir.Coder. All rights reserved.
+        </span>
+      </div>
     </footer>
-  )
+  );
 }

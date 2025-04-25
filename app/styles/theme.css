@@ -3,66 +3,51 @@
 /* ========== Core CSS Variable Definitions ========== */
 
 :root {
-  --neutral-lightest: #ffffff;
-  --neutral-lighter: #f8f8f8;
-  --neutral-medium: #d3d3d3;
-  --neutral-darker: #666666;
-  --neutral-darkest: #333333;
+  /* Core Mocha Mousse Palette */
+  --color_0: 255, 255, 255; /* White */
+  --color_14: 248, 246, 242; /* Light off-white */
+  --color_15: 247, 245, 241; /* Very Light Beige (Alternative Background) */
+  --color_16: 203, 196, 185; /* Light grey/beige */
+  --color_17: 164, 120, 100; /* Mocha-Mousse (Main Color) */
+  --color_18: 83, 53, 39; /* Dark Brown (Primary Text) */
+  --color_26: 45, 22, 11; /* Chocolate (Secondary Text/Button) */
+  --color_34: 92, 68, 57; /* Cocoa (Accents) */
+  --color_choco: #533527; /* Medium brown */
 
-  /* Define Default Generic Role Values (e.g., for a light theme if no theme class is present or as a fallback) */
-  --color-surface-page: var(--neutral-lightest);
-  --color-surface-card: var(--neutral-lighter);
-  --color-text-default: var(--neutral-darkest);
-  --color-text-secondary: var(--neutral-darker);
-  --color-interactive-primary: var(--neutral-darkest);
-  --color-interactive-secondary: var(--neutral-medium);
-  --color-border-default: var(--neutral-medium);
-  /* ... default accent roles if needed */
+  --color_dark-chocolate: 45, 22, 11;
+  --color_arona: #869aa3;
+  --color_coffee: #6a5650;
+  --color_mocha-mousse: #a67763; /* Core mocha-mousse color */
+  --color_warm-taupe: #b09382;
+  --color_tapestry: #436374;
 
-  /* ========== Light Theme ========== */
+  --accent-terra-cotta: #bc8f8f;
+  --accent-earth-green: #8fbc8f;
+  --accent-warm-tan: #d2b48c;
+  --accent-deep-ochre: #a0522d;
+  --accent-soft-grey: #c0c0c0;
 
-  /* Colors (RGB ) --- */
-  --background-rgb: 241 245 249; /* slate-100 (Soft off-white) */
-  --foreground-rgb: 51 65 85; /* slate-700 (Readable dark gray) */
+  --header-text: rgb(var(--color_17));
 
-  --orange-light-rgb: 210 142 113; /* #D28E71 */
-  --orange-mid-rgb: 203 132 103; /* #CB8467 */
-  --orange-dark-rgb: 191 119 85; /* #BF7755 */
+  /* ==== Semantic Colors ==== */
+  --color-accent: var(--accent-earth-green); /* Cocoa accents */
+  --color-header: #2d160b; /* Dark brown headers */
+  /* --color-surface-page: #2d160b; */
+  --color-surface-page: rgba(var(--color_dark-chocolate), 1);
+  --color-text-default: var(--color_mocha-mousse); /* Chocolate brown text */
+  --color-text-primary: var(--color_mocha-mousse); /* Dark brown text */
+  --color-text-secondary: rgb(var(--color_26)); /* Chocolate secondary text */
+  --color-interactive-primary: rgb(var(--color_26)); /* Chocolate buttons */
+  --color-interactive-secondary: var(--accent-deep-ochre);
+  --color-interactive-text: rgb(var(--color_0)); /* White text for buttons */
+  --color-surface-card: rgb(var(--color_16)); /* Light grey/beige cards */
+  --color-border-default: rgb(var(--color_16)); /* Light grey/beige borders */
+  --color-coco: rgba(var(--color_dark-chocolate), 1);
 
-  --card-bg-rgb: 255 255 255; /* white (For cards/elevated elements) */
-  --primary-rgb: 129 140 248; /* indigo-400 (Soft accent) */
-  --secondary-rgb: 96 165 250; /* sky-400 (Soft secondary accent) */
-  --accent-rgb: 168 85 247; /* purple-500 (Optional accent) */
-  --border-subtle-rgb: 226 232 240; /* slate-200 */
-  --border-medium-rgb: 203 213 225; /* slate-300 */
-  --code-background-rgb: 226 232 240; /* slate-200 (Light code bg) */
-
-  /* === Gradient: Applied via body or specific container === */
-
-  /* Top layer: Soft light orange cloud top-left */
-  --light-gradient: radial-gradient(
-      ellipse 40% 50% at 20% 30%,
-      rgba(var(--orange-light-rgb), 0.25) 0px,
-      transparent 50%
-    ),
-    /* Mid layer: Slightly darker cloud bottom-right */
-      radial-gradient(
-        ellipse 50% 50% at 80% 70%,
-        rgba(var(--orange-mid-rgb), 0.2) 0px,
-        transparent 50%
-      ),
-    /* Bottom layer: Subtle warm cloud center-bottom */
-      radial-gradient(
-        ellipse 60% 40% at 50% 90%,
-        rgba(var(--orange-dark-rgb), 0.15) 0px,
-        transparent 60%
-      );
-
-  /*  Shadows (Light Mode) --- */
-  --shadow-highlight-rgb: 255 255 255; /* white */
-  --shadow-base-rgb: 203 213 225; /* slate-300 */
-  --shadow-outer-rgb: 148 163 184; /* slate-400 */
-
+  /* Shadows for Light Theme */
+  --shadow-highlight-rgb: 255, 255, 255; /* White */
+  --shadow-base-rgb: 203, 213, 225; /* Subtle grey */
+  --shadow-outer-rgb: 148, 163, 184; /* Medium grey */
   /* Core Spacing & Typography Tokens  */
   --spacing-base: 1rem;
   --spacing-xs: calc(var(--spacing-base) * 0.5);
@@ -75,73 +60,52 @@
   --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
   --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
   --fontSize-xs: clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem);
-
   --fontSize-h1: clamp(2.5rem, 5vw, 3.5rem);
   --fontSize-h2: clamp(2rem, 4vw, 3rem);
   --fontSize-h3: clamp(1.75rem, 3vw, 2.5rem);
   --fontSize-h4: clamp(1.5rem, 2.5vw, 2rem);
-
-  --lineHeight-tight: 1.25;
-  --lineHeight-normal: 1.75;
-  --lineHeight-relaxed: 1.85;
+  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
 
   /* Layout Tokens  */
   --nav-height: 3.75rem;
   --max-width: 70rem;
   --slide-height: 100vh;
+}
 
-  --gray-alpha-100: rgba(var(--foreground-rgb), 0.06);
-  --gray-alpha-200: rgba(var(--foreground-rgb), 0.1);
+/* lighter background for testing */
+.light-background {
+  --color-background: rgb(var(--color_15));
+  --color-text-primary: rgb(var(--color_18));
+  --color-text-secondary: rgb(var(--color_34)); /* Cocoa for secondary text */
+  --color-header: rgb(var(--color_18));
+  --color-interactive-primary: rgb(var(--color_17)); /* Mocha-Mousse buttons */
+}
+
+/* ========== Dark Theme Overrides ==========  */
+.dark {
+  --color-surface-page: #2d160b; /* Dark choco */
+  --color-surface-card: #533527; /* Medium brown */
+  --color-text-default: var(--color_mocha-mousse); /* Light off-white */
+  --color-text-secondary: #d3d3d3; /* Light grey */
+  --color-interactive-primary: var(--accent-deep-ochre); /* Mid-tone orange */
+  --color-interactive-secondary: var(--accent-terra-cotta);
+  --color-border-default: #666666; /* Neutral darker */
 }
 
 /* ==== Theme: Mocha Mousse (Earthy, Balanced) ==== */
 
-.mocha-mousse_v1 {
-  /* Mocha Mousse Theme Specific Colors */
-  --mocha-mousse-color: #a67b5b;
-  --mocha-mousse-background-page: var(--neutral-lighter);
-  --mocha-mousse-background-alt: var(--neutral-lightest);
-  --mocha-mousse-text-default: var(--neutral-darkest);
-  --mocha-mousse-text-secondary: var(--neutral-darker);
-  --mocha-mousse-accent-terra-cotta: #bc8f8f; /* Rosy Brown/Muted Terracotta */
-  --mocha-mousse-accent-earth-green: #8fbc8f; /* Muted Green (like Dark Sea Green) */
-  --mocha-mousse-accent-warm-tan: #d2b48c;
-  --mocha-mousse-accent-deep-ochre: #a0522d;
-  --mocha-mousse-accent-soft-grey: #c0c0c0; /* Silver/Cool Gray for subtle contrast */
-  --mocha-mousse-interactive-primary: var(--mocha-mousse-color);
-  --mocha-mousse-interactive-secondary: var(--mocha-mousse-accent-deep-ochre);
-  --mocha-mousse-border-color: var(--neutral-medium);
-  /* Map Mocha Mousse Theme Colors to Generic Roles */
-  --color-surface-page: var(--mocha-mousse-background-page);
-  --color-surface-card: var(--mocha-mousse-background-alt);
-  --color-text-default: var(--mocha-mousse-text-default);
-  --color-text-secondary: var(--mocha-mousse-text-secondary);
-  --color-interactive-primary: var(--mocha-mousse-interactive-primary);
-  --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
-  --color-border-default: var(--mocha-mousse-border-color);
-}
-
 .mocha-mousse {
-  --mocha-mousse-color: #a67b5b; /* The core Pantone color */
-  /* Define  dark mocha background color */
-  --mocha-mousse-background-dark: #5d4037; /* Example Dark Mocha hex code - Choose specific shade */
-  --mocha-mousse-background-alt: #6d504b; /* Example slightly lighter dark mocha for contrast surfaces */
+  --mocha-mousse-color: #a47864; /* The core Pantone color */
+  --mocha-mousse-background-dark: #5d4037;
+  --mocha-mousse-background-alt: #6d504b;
 
   /*  Update Backgrounds --- */
-  --mocha-mousse-background-page: var(
-    --mocha-mousse-background-dark
-  ); /* <-- Set page background to dark mocha */
-  --mocha-mousse-background-alt: var(
-    --mocha-mousse-background-alt
-  ); /* <-- Use the alt dark mocha for cards etc. */
+  --mocha-mousse-background-page: var(--color_choco);
+  /* Use the alt dark mocha for cards etc. */
+  --mocha-mousse-background-alt: var(--mocha-mousse-background-alt);
 
-  /* Update Text Colors for Readability on Dark Background --- */
-  --mocha-mousse-text-default: var(
-    --neutral-lightest
-  ); /* <-- Use a light neutral for default text */
-  --mocha-mousse-text-secondary: var(
-    --neutral-medium
-  ); /* <-- Use a medium neutral for secondary text */
+  --mocha-mousse-text-default: rgb(var(--color_18));
+  --mocha-mousse-text-secondary: var(--neutral-medium);
 
   --mocha-mousse-accent-terra-cotta: #bc8f8f;
   --mocha-mousse-accent-earth-green: #8fbc8f;
@@ -149,79 +113,65 @@
   --mocha-mousse-accent-deep-ochre: #a0522d;
   --mocha-mousse-accent-soft-grey: #c0c0c0;
 
-  --mocha-mousse-interactive-primary: var(
-    --mocha-mousse-color
-  ); /* Mocha Mousse itself might work as primary interactive */
-  --mocha-mousse-interactive-secondary: var(
-    --mocha-mousse-accent-warm-tan
-  ); /* Use a lighter earthy accent */
-  --mocha-mousse-border-color: var(
-    --neutral-darker
-  ); /* Use a darker neutral for borders on dark background */
+  --mocha-mousse-interactive-primary: var(--color_mocha-mousse);
+  /* Use a lighter earthy accent */
+  --mocha-mousse-interactive-secondary: var(--mocha-mousse-accent-warm-tan);
+  --mocha-mousse-border-color: var(--neutral-darker);
 
-  /* --- Map Mocha Mousse Theme Colors to Generic Roles --- */
-  --color-surface-page: var(
-    --mocha-mousse-background-page
-  ); /* Generic role now maps to dark mocha */
-  --color-surface-card: var(
-    --mocha-mousse-background-alt
-  ); /* Generic card role maps to alt dark mocha */
-
-  --color-text-default: var(
-    --mocha-mousse-text-default
-  ); /* Generic text role maps to light neutral */
-  --color-text-secondary: var(
-    --mocha-mousse-text-secondary
-  ); /* Generic secondary text maps to medium neutral */
+  /* Map Mocha Mousse Theme Colors to Generic Roles --- */
+  --color-surface-page: var(--mocha-mousse-background-page);
+  --color-surface-card: var(--mocha-mousse-background-alt);
+  --color-text-default: var(--mocha-mousse-color);
+  --color-text-secondary: var(--mocha-mousse-text-secondary);
 
   --color-interactive-primary: var(--mocha-mousse-interactive-primary);
   --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
   --color-border-default: var(--mocha-mousse-border-color);
 
-  /* Map generic accent *colors* to generic roles if they are used consistently for a purpose */
   --color-accent-highlight: var(--mocha-mousse-accent-earth-green);
   --color-accent-bold: var(--mocha-mousse-accent-deep-ochre);
 }
 
-/* ========== Dark Theme Overrides ==========  */
-.dark {
-  /*  Colors */
-  --background-rgb: 15 23 42; /* slate-900 */
-  --foreground-rgb: 226 232 240; /* slate-200 */
-  --card-bg-rgb: 30 41 59; /* slate-800 */
-  --primary-rgb: 34 211 238; /* cyan-400 (Neon) */
-  --secondary-rgb: 217 70 239; /* fuchsia-500 (Neon) */
-  --accent-rgb: 163 230 53; /* lime-400 (Neon) */
-  --border-subtle-rgb: 51 65 85; /* slate-700 */
-  --border-medium-rgb: 71 85 105; /* slate-600 */
-  --code-background-rgb: 30 41 59; /* slate-800 */
-
-  /* Shadow/Glow Colors for Cyberpunk (Dark Mode) --- */
-  --shadow-highlight-rgb: 71 85 105; /* slate-600 (Subtle inner highlight) */
-  --shadow-base-rgb: 0 0 0; /* black (Inner shadow base) */
-  --shadow-outer-rgb: 0 0 0; /* black (Outer shadow base) */
-
-  --neon-glow-primary-rgb: rgb(var(--primary-rgb));
-  --neon-glow-secondary-rgb: rgb(var(--secondary-rgb));
-  --neon-glow-accent-rgb: rgb(var(--accent-rgb));
-
-  /* Alpha Grays (Dark) */
-  --gray-alpha-100: rgba(var(--foreground-rgb), 0.08);
-  --gray-alpha-200: rgba(var(--foreground-rgb), 0.12);
-
-  --cyber-red-light: rgb(222, 81, 66);
-  --cyber-red-dark: rgb(171, 47, 33, 1);
-  --background-cyber: rgb(20, 30, 33);
-}
-
-/* Global HTML Styles, Body styles applied in globals.css */
 html {
-  color-scheme: light dark;
+  color-scheme: light; /* Enforce light theme by default */
   scroll-behavior: smooth;
   font-size: 100%;
 }
 
 /* === Component Styles (Keep minimal) === */
+
+.scroll-watcher {
+  height: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--color-accent);
+  width: 100%;
+  scale: 0 1;
+  transform-origin: left;
+  animation: scroll-watcher linear;
+  animation-timeline: scroll(y);
+}
+
+@keyframes scroll-watcher {
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+}
 
 /* Scroll controls */
 .scroll-controls {
@@ -234,6 +184,13 @@ html {
 }
 
 /* === Utility Overrides & Prose Styles === */
+
+.hamburger div {
+  transition: all 0.3s ease;
+}
+.menu {
+  transition: transform 0.3s ease;
+}
 
 /* Layout Utilities  */
 .content-grid {
