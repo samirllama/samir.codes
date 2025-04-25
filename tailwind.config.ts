@@ -1,6 +1,5 @@
 // tailwind.config.ts
 import type { Config } from 'tailwindcss'
-import colors from 'tailwindcss/colors' // Import default colors for mapping
 import typography from '@tailwindcss/typography'
 import forms from '@tailwindcss/forms'
 import aspectRatio from '@tailwindcss/aspect-ratio'
@@ -35,16 +34,17 @@ const config: Config = {
                 'button-text': 'var(--color-button-text)',
                 'interactive-text': 'var(--color-interactive-text)',
                 accent: 'var(--color-accent)',
+                'light-grey': 'rgb(var(--color-light-grey-rgb))',
+                'galactic-base': 'rgb(var(--color-galactic-base-rgb))',
+                'mousse-terracotta': '#924622',
             },
 
             fontFamily: {
-                sans: [
-                    "var(--font-geist-sans)",
-                    "ui-sans-serif",
-                    "system-ui",
-                    "sans-serif",
-                ],
+                'cal-sans': ['Cal Sans', 'sans-serif'],
+                'cinzel': ['Cinzel', 'sans'],
+                'cinzel-deco': ['Cinzel Decorative', 'sans'],
                 mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+                dancing: ['Dancing Script', 'cursive']
             },
 
             // Custom Shadows (Using CSS Variables) ---

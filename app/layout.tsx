@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cinzel, Cinzel_Decorative, Dancing_Script, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
@@ -10,9 +10,25 @@ export const metadata: Metadata = {
   description: "Personal website and portfolio",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cinzel = Cinzel({
+  weight: ["400", "700", "900"], // Choose the weights
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cinzel",
+});
+
+const cinzelDecorative = Cinzel_Decorative({
+  weight: ["400", "700", "900"], // Choose the weights
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cinzel-deco",
+});
+
+const dancingScript = Dancing_Script({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-dancing-script',
 });
 
 const geistMono = Geist_Mono({
@@ -29,7 +45,9 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          geistSans.variable,
+          cinzel.variable,
+          cinzelDecorative.variable,
+          dancingScript.variable,
           geistMono.variable,
           "antialiased",
           "tracking-tight"
@@ -39,7 +57,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark" // Ensures .dark is applied initially if no preference
           enableSystem={true} // Allows respecting OS preference
-          themes={['light', 'dark', 'mocha-mousse']}
+          themes={["light", "dark", "mocha-mousse"]}
         >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">
             {children}

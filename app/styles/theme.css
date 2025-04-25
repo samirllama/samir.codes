@@ -1,5 +1,7 @@
 /* app/styles/theme.css */
 
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+
 /* ========== Core CSS Variable Definitions ========== */
 
 :root {
@@ -12,15 +14,16 @@
   --color_18: 83, 53, 39; /* Dark Brown (Primary Text) */
   --color_26: 45, 22, 11; /* Chocolate (Secondary Text/Button) */
   --color_34: 92, 68, 57; /* Cocoa (Accents) */
-  --color_choco: #533527; /* Medium brown */
 
+  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
+
+  --color_choco: #533527; /* Medium brown */
   --color_dark-chocolate: 45, 22, 11;
   --color_arona: #869aa3;
   --color_coffee: #6a5650;
   --color_mocha-mousse: #a67763; /* Core mocha-mousse color */
   --color_warm-taupe: #b09382;
   --color_tapestry: #436374;
-
   --accent-terra-cotta: #bc8f8f;
   --accent-earth-green: #8fbc8f;
   --accent-warm-tan: #d2b48c;
@@ -32,7 +35,6 @@
   /* ==== Semantic Colors ==== */
   --color-accent: var(--accent-earth-green); /* Cocoa accents */
   --color-header: #2d160b; /* Dark brown headers */
-  /* --color-surface-page: #2d160b; */
   --color-surface-page: rgba(var(--color_dark-chocolate), 1);
   --color-text-default: var(--color_mocha-mousse); /* Chocolate brown text */
   --color-text-primary: var(--color_mocha-mousse); /* Dark brown text */
@@ -56,6 +58,8 @@
   --spacing-lg: calc(var(--spacing-base) * 1.5);
   --spacing-xl: calc(var(--spacing-base) * 2);
   --spacing-2xl: calc(var(--spacing-base) * 3);
+
+  --font-cal-sans: "Cal Sans", sans-serif;
 
   --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
   --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
@@ -82,8 +86,19 @@
 }
 
 /* ========== Dark Theme Overrides ==========  */
+
 .dark {
-  --color-surface-page: #2d160b; /* Dark choco */
+  --color-surface-page: #0e1b07; /* Dark green background */
+  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
+  --color-accent: #924622;
+  --color-text-default: #f7e8e1; /* Light text for dark mode */
+  --color-text-muted: #9e7967;
+}
+
+.dark_V2 {
+  --color-light-grey-rgb: 50, 50, 50; /* darker grey for dark mode */
+  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
+  --color-surface-page: rgba(var(--color_16), 0.1); /* 10% opaque */
   --color-surface-card: #533527; /* Medium brown */
   --color-text-default: var(--color_mocha-mousse); /* Light off-white */
   --color-text-secondary: #d3d3d3; /* Light grey */
@@ -171,6 +186,8 @@ html {
 
 .marquee {
   animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  font-family: var(--font-dancing-script), serif;
 }
 
 /* Scroll controls */

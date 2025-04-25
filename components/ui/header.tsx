@@ -16,24 +16,26 @@ export default function HeaderMinimal() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] transition-colors ease-[cubic-bezier([0.83,0,0.17,1])] duration-[500ms] delay-[50ms]",
-        "text-[var(--header-text)] selection:bg-[var(--color-accent)] selection:text-black",
-        "bg-header"
+        "selection:bg-[var(--color-accent)] selection:text-black",
+        "bg-surface-page"
       )}
       data-testid="header-minimal"
     >
       <div className="px-4 lg:px-5">
-        <div className="grid grid-cols-3 lg:grid-cols-4 text-xl leading-none lg:text-2xl lg:leading-none border-b border-b-current pt-4 pb-3 lg:pt-4 lg:pb-3 items-center">
-          <div className="align-center text-2xl">Samir Lama</div>
+        <div className="grid grid-cols-3 lg:grid-cols-4 text-xl leading-none lg:text-2xl lg:leading-none border-b border-b-mousse-terracota pt-4 pb-3 lg:pt-4 lg:pb-3 items-center">
+          <div className="align-center text-2xl  font-cinzel-deco">
+            Samir Lama
+          </div>
           <div className="col-span-2 text-center hidden lg:flex justify-center items-center">
-            <div className="relative flex overflow-hidden lg:max-w-[250px] xl:max-w-[300px]">
-              <div className="marquee whitespace-nowrap">
-                <span className="mr-4">Software Developer&nbsp;&nbsp;—</span>
+            <div className="relative flex overflow-hidden lg:max-w-[250px] xl:max-w-[300px] pb-[0.25rem]">
+              <div className="marquee">
+                <span className="mr-4">Software Engineer&nbsp;&nbsp;—</span>
                 <span className="mr-4">Chicago Based&nbsp;&nbsp;—</span>
-                <span className="mr-4">Web Dev&nbsp;&nbsp;—</span>
+                <span className="mr-4">Web Developer&nbsp;&nbsp;—</span>
 
-                <span className="mr-4">Software Developer&nbsp;&nbsp;—</span>
+                <span className="mr-4">Software Engineer&nbsp;&nbsp;—</span>
                 <span className="mr-4">Chicago Based&nbsp;&nbsp;—</span>
-                <span className="mr-4">Web Dev&nbsp;&nbsp;—</span>
+                <span className="mr-4">Web Developer&nbsp;&nbsp;—</span>
               </div>
             </div>
           </div>

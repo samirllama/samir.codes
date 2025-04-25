@@ -30,11 +30,12 @@ body {
   /* Or 'scroll' if scrollable needed, but 'initial' is safer */
   background-attachment: initial;
 
-  /* Typography variables from theme.css */
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-cinzel);
   font-size: var(--fontSize-base);
   line-height: var(--lineHeight-normal);
 
+  font-feature-settings: "ss01" 1;
+  font-feature-settings: "ss02" 1;
   /* Standard browser normalization */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,10 +43,26 @@ body {
   overscroll-behavior: none !important;
 }
 
+.font-mono {
+  letter-spacing: 0.05em !important;
+}
+
 .will-change-transform {
   transform: translateY(3.3446px) translateZ(0px);
   will-change: transform;
 }
+
+.hero-text {
+  font-family: var(--font-cinzel), serif;
+  line-height: 1; /* maps to leading-[1] */
+  /* text-transform: uppercase; */
+  font-size: clamp(1.875rem, 0.92rem + 4.9vw, 5.625rem);
+  letter-spacing: -0.025em; /* maps to tracking-tight  */
+  /* stylistic set to activate */
+  /* font-feature-settings: "ss01" 1; */
+  font-feature-settings: "ss02" 1;
+}
+
 /* Basic reset */
 * {
   box-sizing: border-box;
