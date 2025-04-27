@@ -10,7 +10,6 @@ const myProjects = [
   { id: 3, name: "Dealer Inspire", link: "/projects/dealer-inspire" },
   { id: 4, name: "Expedia", link: "/projects/expedia" },
   { id: 5, name: "Domino's", link: "/projects/dominos" },
-  // ... more projects to add
 ];
 
 export default function Home() {

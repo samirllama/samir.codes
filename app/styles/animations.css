@@ -199,7 +199,7 @@
 /* ========= Flip Effect Hero ========= */
 .flip-hero-text {
   overflow-y: hidden;
-  height: 2em; /* Adjust based on your font's line-height; matches one line of text */
+  height: 1lh; /* Adjust based on your font's line-height; matches one line of text */
   position: relative;
 }
 

@@ -40,15 +40,15 @@ const HeroSection = () => {
             </span>
 
             {/* "Build! " */}
-            <span className="block overflow-hidden">
+            {/* <span className="block overflow-hidden">
               <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">
                 <span className="block mb-0 pb-0">
                   <span className="block ms-text-adjust">Build &nbsp;</span>
                 </span>
               </span>
-            </span>
+            </span> */}
             {/* "Build" with flip effect to "Break " */}
-            {/* <span className="block overflow-hidden">
+            <span className="block overflow-hidden">
               <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">
                 <span className="block mb-0 pb-0 flip-hero-text">
                   <span className="block ms-text-adjust flip-word">
@@ -59,7 +59,7 @@ const HeroSection = () => {
                   </span>
                 </span>
               </span>
-            </span> */}
+            </span>
 
             {/* "things! " */}
             <span className="block overflow-hidden">
