@@ -177,7 +177,7 @@
   }
 }
 
-/* ========= Flip Effect ========= */
+/* ========= Quick Flip Effect ========= */
 .quick-flip {
   overflow-y: clip;
   --quick-flip-duration: 0.325s;
@@ -194,6 +194,62 @@
 .quick-flip:focus > * {
   translate: 0 -2lh;
   transform: translateY(2lh);
+}
+
+/* ========= Flip Effect Hero ========= */
+.flip-hero-text {
+  overflow-y: hidden;
+  height: 2em; /* Adjust based on your font's line-height; matches one line of text */
+  position: relative;
+}
+
+.flip-hero-text > * {
+  display: block; /* Won't work without this block */
+  transition: translate var(--quick-flip-duration),
+    transform 0s calc(var(--quick-flip-duration) / 2);
+  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+.flip-word {
+  position: absolute;
+  width: 100%;
+  animation: flip 4s infinite ease-in-out;
+}
+
+.flip-word:first-child {
+  animation-name: flip-build;
+}
+
+.flip-word:last-child {
+  animation-name: flip-break;
+}
+
+@keyframes flip-build {
+  0%,
+  45% {
+    transform: translateY(0);
+  }
+  50%,
+  95% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes flip-break {
+  0%,
+  45% {
+    transform: translateY(100%);
+  }
+  50%,
+  95% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 /* ========= Glitch Effect ========= */
@@ -228,7 +284,7 @@
   opacity: 0.8;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
   ::after {
@@ -240,8 +296,7 @@
     transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
-}
-
+} */
 
 /* ==========================================================================
    Custom AOS Animations
