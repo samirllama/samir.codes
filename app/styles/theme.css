@@ -33,11 +33,18 @@
   --header-text: rgb(var(--color_17));
 
   /* ==== Semantic Colors ==== */
+  --color-surface-page: #0e1b07; /* Dark green background */
+  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
+  --color-accent: #924622;
+  --color-text-default: #f7e8e1; /* Light text for dark mode */
+  --color-text-muted: #9e7967;
+
   --color-accent: var(--accent-earth-green); /* Cocoa accents */
   --color-header: #2d160b; /* Dark brown headers */
-  --color-surface-page: rgba(var(--color_dark-chocolate), 1);
-  --color-text-default: var(--color_mocha-mousse); /* Chocolate brown text */
-  --color-text-primary: var(--color_mocha-mousse); /* Dark brown text */
+  /* Chocolate brown text */
+  /* --color-surface-page: rgba(var(--color_dark-chocolate), 1); */
+  /* --color-text-default: var(--color_mocha-mousse); */
+  /* --color-text-primary: var(--color_mocha-mousse);  */
   --color-text-secondary: rgb(var(--color_26)); /* Chocolate secondary text */
   --color-interactive-primary: rgb(var(--color_26)); /* Chocolate buttons */
   --color-interactive-secondary: var(--accent-deep-ochre);
@@ -74,6 +81,33 @@
   --nav-height: 3.75rem;
   --max-width: 70rem;
   --slide-height: 100vh;
+
+  --bounce: linear(
+    0,
+    0.009 1%,
+    0.04 2.1%,
+    0.093 3.3%,
+    0.164 4.5%,
+    0.324 6.7%,
+    0.807 12.6%,
+    0.935 14.4%,
+    1.037 16.1%,
+    1.12 17.8%,
+    1.179 19.4%,
+    1.22 21%,
+    1.245 22.7%,
+    1.253 25%,
+    1.233 27.6%,
+    1.189 30.3%,
+    1.058 36.6%,
+    1.004 39.7%,
+    0.96 43.2%,
+    0.939 46.7%,
+    0.941 52%,
+    0.998 64%,
+    1.015 70.6%,
+    1
+  );
 }
 
 /* lighter background for testing */

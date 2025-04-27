@@ -147,6 +147,55 @@
   z-index: 1;
 }
 
+/* ========= Fancy Hover ========= */
+
+.fancy-hover {
+  @media (hover) {
+    & > li {
+      transition: opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+  }
+}
+
+.bouncy-hover {
+  @media (hover) and (prefers-reduced-motion) {
+    & > li {
+      transform-origin: left center;
+      transition: transform 1s var(--bounce), opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+}
+
+/* ========= Flip Effect ========= */
+.quick-flip {
+  overflow-y: clip;
+  --quick-flip-duration: 0.325s;
+}
+
+.quick-flip > * {
+  display: block; /* Won't work without this block */
+  transition: translate var(--quick-flip-duration),
+    transform 0s calc(var(--quick-flip-duration) / 2);
+  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+.quick-flip:hover > *,
+.quick-flip:focus > * {
+  translate: 0 -2lh;
+  transform: translateY(2lh);
+}
+
 /* ========= Glitch Effect ========= */
 
 .glitchy {
@@ -179,44 +228,20 @@
   opacity: 0.8;
 }
 
-/* @keyframes glitchy {
-  0% {
-    text-shadow: 0.05em 0 0 rgb(48, 117, 12),
-      -0.05em -0.025em 0 var(--cyber-red-dark),
-      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms l important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
-  14% {
-    text-shadow: 0.05em 0 0 rgb(48, 117, 12),
-      -0.05em -0.025em 0 var(--cyber-red-dark),
-      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
-  }
-  15% {
-    text-shadow: -0.05em -0.025em 0 rgb(48, 117, 12),
-      0.025em 0.025em var(--cyber-red-dark),
-      -0.05em -0.05em var(--neon-glow-secondary-rgb);
-  }
-  59% {
-    text-shadow: -0.05em -0.025em 0 rgba(48, 117, 12),
-      0.025em 0.025em 0 var(--cyber-red-dark),
-      -0.05em -0.05em 0 var(--neon-glow-secondary-rgb);
-  }
-  60% {
-    text-shadow: 0.025em 0.05em 0 rgb(48, 117, 12),
-      0.05em 0 0 var(--cyber-red-dark),
-      0 -0.05em 0 var(--neon-glow-secondary-rgb);
-  }
-  99% {
-    text-shadow: 0.025em 0.05em 0 rgb(48, 117, 12),
-      0.05em 0 0 var(--cyber-red-dark),
-      0 -0.05em 0 var(--neon-glow-secondary-rgb);
-  }
+}
 
-  100% {
-    text-shadow: -0.025em 0 0 rgb(48, 117, 12),
-      -0.025em -0.025em 0 var(--cyber-red-dark),
-      -0.025em -0.05em 0 var(--neon-glow-secondary-rgb);
-  }
-} */
 
 /* ==========================================================================
    Custom AOS Animations

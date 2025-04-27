@@ -19,7 +19,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
         </h2>
 
         {/* The list of projects */}
-        <ul className="border-t border-">
+        <ul className="border-t bouncy-hover">
           {projects.map((project) => (
             <li key={project.id} className="block relative">
               <a
@@ -29,10 +29,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
               >
                 <span className="block overflow-hidden">
                   <span className="leading-[0.95] block text-mousse-terracotta text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
-                    <span
-                      className="block"
-                      style={{ transform: "translateY(0%) translateZ(0px)" }}
-                    >
+                    <span className="block">
                       <span className="block ms-text-adjust">
                         {project.name}
                       </span>

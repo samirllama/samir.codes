@@ -57,7 +57,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark" // Ensures .dark is applied initially if no preference
           enableSystem={true} // Allows respecting OS preference
-          themes={["light", "dark", "mocha-mousse"]}
+          themes={["dark"]}
         >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">
             {children}
