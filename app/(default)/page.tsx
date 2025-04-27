@@ -136,7 +136,7 @@ export default function Home() {
         <div className="col-span-12 lg:col-span-7">
           <div className="max-w-[820px]">
             <h2 className="leading-[1] block text-[clamp(30px,0.92rem+2vw,45px)] font-display tracking-tight mb-12 uppercase">
-              Tools I&apos;ve used to bring visions to life.
+              Tools
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="mb-8 lg:mb-12 col-span-1">
@@ -323,3 +323,5 @@ export default function Home() {
     </article>
   );
 }
+
+
