@@ -1,0 +1,380 @@
+/* app/styles/animations.css */
+
+/* ==========================================================================
+   Keyframe Definitions
+   ========================================================================== */
+
+@keyframes neonPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulseLoop {
+  0% {
+    opacity: var(--opacity-none, 0);
+    transform: scale(0.25) translateZ(0);
+  }
+  30% {
+    opacity: 0.4;
+  }
+  70% {
+    opacity: var(--opacity-none, 0);
+  }
+  80% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes endless {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-245px);
+  } /* Adjust value as needed */
+}
+
+@keyframes shine {
+  0% {
+    top: 0;
+    transform: translateY(-100%) scaleY(10);
+    opacity: var(--opacity-none, 0);
+  }
+  2% {
+    opacity: var(--opacity-low, 0.5);
+  }
+  40% {
+    top: 100%;
+    transform: translateY(0) scaleY(200);
+    opacity: var(--opacity-none, 0);
+  }
+  100% {
+    top: 100%;
+    transform: translateY(0) scaleY(1);
+    opacity: var(--opacity-none, 0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(3%);
+  }
+  50% {
+    transform: translateY(-3%);
+  }
+  100% {
+    transform: translateY(3%);
+  }
+}
+
+@keyframes neon-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ========= Animation Utility Classes ========= */
+
+.animate-neonPulse {
+  animation: neonPulse 2s ease-in-out infinite;
+}
+
+.animation-endless {
+  animation: endless var(--animation-duration-slow, 12s)
+    var(--animation-timing-linear, linear)
+    var(--animation-iteration-infinite, infinite);
+}
+
+.animation-shine {
+  animation: shine var(--animation-duration-medium, 8s)
+    var(--animation-timing-linear, linear) 500ms
+    var(--animation-iteration-infinite, infinite);
+}
+
+.animation-float {
+  animation: float 2s ease-in-out var(--animation-iteration-infinite, infinite);
+}
+
+.pulse {
+  opacity: var(--opacity-none, 0);
+  transform-origin: center;
+  animation: pulseLoop var(--animation-duration-slow, 12s)
+    var(--animation-timing-linear, linear)
+    var(--animation-iteration-infinite, infinite);
+}
+.pulse-1 {
+  animation-delay: calc(var(--animation-duration-fast, 4s) * -1);
+}
+.pulse-2 {
+  animation-delay: calc(var(--animation-duration-medium, 8s) * -1);
+}
+
+.blinkingCaret {
+  position: relative;
+}
+
+.blinkingCaret::before,
+.blinkingCaret::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  margin-left: 0.1em;
+  animation: neon-blink 1.1s ease-in-out infinite;
+}
+
+.blinkingCaret::before {
+  width: 2px;
+  background-color: rgb(var(--accent-rgb)); /* Use theme variable */
+  z-index: 2;
+}
+
+.blinkingCaret::after {
+  width: 2px;
+  background-color: transparent;
+  box-shadow: 0 0 5px rgb(var(--accent-rgb)), 0 0 10px rgb(var(--accent-rgb)),
+    0 0 15px rgb(var(--accent-rgb)), 0 0 20px rgba(var(--primary-rgb), 0.7);
+  z-index: 1;
+}
+
+/* ========= Fancy Hover ========= */
+
+.fancy-hover {
+  @media (hover) {
+    & > li {
+      transition: opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+  }
+}
+
+.bouncy-hover {
+  @media (hover) and (prefers-reduced-motion) {
+    & > li {
+      transform-origin: left center;
+      transition: transform 1s var(--bounce), opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+}
+
+/* ========= Quick Flip Effect ========= */
+.quick-flip {
+  overflow-y: clip;
+  --quick-flip-duration: 0.325s;
+}
+
+.quick-flip > * {
+  display: block; /* Won't work without this block */
+  transition: translate var(--quick-flip-duration),
+    transform 0s calc(var(--quick-flip-duration) / 2);
+  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+.quick-flip:hover > *,
+.quick-flip:focus > * {
+  translate: 0 -2lh;
+  transform: translateY(2lh);
+}
+
+/* ========= Flip Effect Hero ========= */
+.flip-hero-text {
+  overflow-y: hidden;
+  height: 2em; /* Adjust based on your font's line-height; matches one line of text */
+  position: relative;
+}
+
+.flip-hero-text > * {
+  display: block; /* Won't work without this block */
+  transition: translate var(--quick-flip-duration),
+    transform 0s calc(var(--quick-flip-duration) / 2);
+  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+.flip-word {
+  position: absolute;
+  width: 100%;
+  animation: flip 4s infinite ease-in-out;
+}
+
+.flip-word:first-child {
+  animation-name: flip-build;
+}
+
+.flip-word:last-child {
+  animation-name: flip-break;
+}
+
+@keyframes flip-build {
+  0%,
+  45% {
+    transform: translateY(0);
+  }
+  50%,
+  95% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes flip-break {
+  0%,
+  45% {
+    transform: translateY(100%);
+  }
+  50%,
+  95% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ========= Glitch Effect ========= */
+
+.glitchy {
+  font-size: 8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 0.05em 0 0 var(--neon-glow-primary-rgb),
+    -0.025em -0.05em 0 var(--neon-glow-accent-rgb),
+    0.025em 0.05em 0 var(--neon-glow-secondary-rgb);
+  animation: glitchy 500ms infinite;
+}
+
+.glitchy span {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.glitchy span:first-child {
+  animation: glitchy 650ms infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 46%, 0 46%);
+  transform: translate(-0.025em, -0.0125em);
+  opacity: 0.8;
+}
+
+.glitchy span:last-child {
+  animation: glitchy 375ms infinite;
+  clip-path: polygon(0 70%, 100% 30%, 100% 100%, 0 100%);
+  transform: translate(0.0125em, 0.025em);
+  opacity: 0.8;
+}
+
+/* @media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms l important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+} */
+
+/* ==========================================================================
+   Custom AOS Animations
+   ========================================================================== */
+@media screen {
+  html:not(.no-js) body [data-aos="fade-up"] {
+    -webkit-transform: translate3d(0, 14px, 0);
+    transform: translate3d(0, 14px, 0);
+  }
+  html:not(.no-js) body [data-aos="fade-down"] {
+    -webkit-transform: translate3d(0, -14px, 0);
+    transform: translate3d(0, -14px, 0);
+  }
+  html:not(.no-js) body [data-aos="fade-right"] {
+    -webkit-transform: translate3d(-14px, 0, 0);
+    transform: translate3d(-14px, 0, 0);
+  }
+  html:not(.no-js) body [data-aos="fade-left"] {
+    -webkit-transform: translate3d(14px, 0, 0);
+    transform: translate3d(14px, 0, 0);
+  }
+  html:not(.no-js) body [data-aos="fade-up-right"] {
+    -webkit-transform: translate3d(-14px, 14px, 0);
+    transform: translate3d(-14px, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-up-left"] {
+    -webkit-transform: translate3d(14px, 14px, 0);
+    transform: translate3d(14px, 14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-down-right"] {
+    -webkit-transform: translate3d(-14px, -14px, 0);
+    transform: translate3d(-14px, -14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="fade-down-left"] {
+    -webkit-transform: translate3d(14px, -14px, 0);
+    transform: translate3d(14px, -14px, 0);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-in-up"] {
+    -webkit-transform: translate3d(0, 14px, 0) scale(0.6);
+    transform: translate3d(0, 14px, 0) scale(0.6);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-in-down"] {
+    -webkit-transform: translate3d(0, -14px, 0) scale(0.6);
+    transform: translate3d(0, -14px, 0) scale(0.6);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-in-right"] {
+    -webkit-transform: translate3d(-14px, 0, 0) scale(0.6);
+    transform: translate3d(-14px, 0, 0) scale(0.6);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-in-left"] {
+    -webkit-transform: translate3d(14px, 0, 0) scale(0.6);
+    transform: translate3d(14px, 0, 0) scale(0.6);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-out-up"] {
+    -webkit-transform: translate3d(0, 14px, 0) scale(1.2);
+    transform: translate3d(0, 14px, 0) scale(1.2);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-out-down"] {
+    -webkit-transform: translate3d(0, -14px, 0) scale(1.2);
+    transform: translate3d(0, -14px, 0) scale(1.2);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-out-right"] {
+    -webkit-transform: translate3d(-14px, 0, 0) scale(1.2);
+    transform: translate3d(-14px, 0, 0) scale(1.2);
+  }
+
+  html:not(.no-js) body [data-aos="zoom-out-left"] {
+    -webkit-transform: translate3d(14px, 0, 0) scale(1.2);
+    transform: translate3d(14px, 0, 0) scale(1.2);
+  }
+}

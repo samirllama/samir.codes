@@ -1,0 +1,309 @@
+/* app/styles/theme.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+
+/* ========== Core CSS Variable Definitions ========== */
+
+:root {
+  /* Core Mocha Mousse Palette */
+  --color_0: 255, 255, 255; /* White */
+  --color_14: 248, 246, 242; /* Light off-white */
+  --color_15: 247, 245, 241; /* Very Light Beige (Alternative Background) */
+  --color_16: 203, 196, 185; /* Light grey/beige */
+  --color_17: 164, 120, 100; /* Mocha-Mousse (Main Color) */
+  --color_18: 83, 53, 39; /* Dark Brown (Primary Text) */
+  --color_26: 45, 22, 11; /* Chocolate (Secondary Text/Button) */
+  --color_34: 92, 68, 57; /* Cocoa (Accents) */
+
+  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
+
+  --color_choco: #533527; /* Medium brown */
+  --color_dark-chocolate: 45, 22, 11;
+  --color_arona: #869aa3;
+  --color_coffee: #6a5650;
+  --color_mocha-mousse: #a67763; /* Core mocha-mousse color */
+  --color_warm-taupe: #b09382;
+  --color_tapestry: #436374;
+  --accent-terra-cotta: #bc8f8f;
+  --accent-earth-green: #8fbc8f;
+  --accent-warm-tan: #d2b48c;
+  --accent-deep-ochre: #a0522d;
+  --accent-soft-grey: #c0c0c0;
+
+  --header-text: rgb(var(--color_17));
+
+  /* ==== Semantic Colors ==== */
+  --color-surface-page: #0e1b07; /* Dark green background */
+  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
+  --color-accent: #924622;
+  --color-text-default: #f7e8e1; /* Light text for dark mode */
+  --color-text-muted: #9e7967;
+
+  --color-accent: var(--accent-earth-green); /* Cocoa accents */
+  --color-header: #2d160b; /* Dark brown headers */
+  /* Chocolate brown text */
+  /* --color-surface-page: rgba(var(--color_dark-chocolate), 1); */
+  /* --color-text-default: var(--color_mocha-mousse); */
+  /* --color-text-primary: var(--color_mocha-mousse);  */
+  --color-text-secondary: rgb(var(--color_26)); /* Chocolate secondary text */
+  --color-interactive-primary: rgb(var(--color_26)); /* Chocolate buttons */
+  --color-interactive-secondary: var(--accent-deep-ochre);
+  --color-interactive-text: rgb(var(--color_0)); /* White text for buttons */
+  --color-surface-card: rgb(var(--color_16)); /* Light grey/beige cards */
+  --color-border-default: rgb(var(--color_16)); /* Light grey/beige borders */
+  --color-coco: rgba(var(--color_dark-chocolate), 1);
+
+  /* Shadows for Light Theme */
+  --shadow-highlight-rgb: 255, 255, 255; /* White */
+  --shadow-base-rgb: 203, 213, 225; /* Subtle grey */
+  --shadow-outer-rgb: 148, 163, 184; /* Medium grey */
+  /* Core Spacing & Typography Tokens  */
+  --spacing-base: 1rem;
+  --spacing-xs: calc(var(--spacing-base) * 0.5);
+  --spacing-sm: calc(var(--spacing-base) * 0.75);
+  --spacing-md: var(--spacing-base);
+  --spacing-lg: calc(var(--spacing-base) * 1.5);
+  --spacing-xl: calc(var(--spacing-base) * 2);
+  --spacing-2xl: calc(var(--spacing-base) * 3);
+
+  --font-cal-sans: "Cal Sans", sans-serif;
+
+  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
+  --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
+  --fontSize-xs: clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem);
+  --fontSize-h1: clamp(2.5rem, 5vw, 3.5rem);
+  --fontSize-h2: clamp(2rem, 4vw, 3rem);
+  --fontSize-h3: clamp(1.75rem, 3vw, 2.5rem);
+  --fontSize-h4: clamp(1.5rem, 2.5vw, 2rem);
+  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
+
+  /* Layout Tokens  */
+  --nav-height: 3.75rem;
+  --max-width: 70rem;
+  --slide-height: 100vh;
+
+  --bounce: linear(
+    0,
+    0.009 1%,
+    0.04 2.1%,
+    0.093 3.3%,
+    0.164 4.5%,
+    0.324 6.7%,
+    0.807 12.6%,
+    0.935 14.4%,
+    1.037 16.1%,
+    1.12 17.8%,
+    1.179 19.4%,
+    1.22 21%,
+    1.245 22.7%,
+    1.253 25%,
+    1.233 27.6%,
+    1.189 30.3%,
+    1.058 36.6%,
+    1.004 39.7%,
+    0.96 43.2%,
+    0.939 46.7%,
+    0.941 52%,
+    0.998 64%,
+    1.015 70.6%,
+    1
+  );
+}
+
+/* lighter background for testing */
+.light-background {
+  --color-background: rgb(var(--color_15));
+  --color-text-primary: rgb(var(--color_18));
+  --color-text-secondary: rgb(var(--color_34)); /* Cocoa for secondary text */
+  --color-header: rgb(var(--color_18));
+  --color-interactive-primary: rgb(var(--color_17)); /* Mocha-Mousse buttons */
+}
+
+/* ========== Dark Theme Overrides ==========  */
+
+.dark {
+  --color-surface-page: #0e1b07; /* Dark green background */
+  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
+  --color-accent: #924622;
+  --color-text-default: #f7e8e1; /* Light text for dark mode */
+  --color-text-muted: #9e7967;
+}
+
+.dark_V2 {
+  --color-light-grey-rgb: 50, 50, 50; /* darker grey for dark mode */
+  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
+  --color-surface-page: rgba(var(--color_16), 0.1); /* 10% opaque */
+  --color-surface-card: #533527; /* Medium brown */
+  --color-text-default: var(--color_mocha-mousse); /* Light off-white */
+  --color-text-secondary: #d3d3d3; /* Light grey */
+  --color-interactive-primary: var(--accent-deep-ochre); /* Mid-tone orange */
+  --color-interactive-secondary: var(--accent-terra-cotta);
+  --color-border-default: #666666; /* Neutral darker */
+}
+
+/* ==== Theme: Mocha Mousse (Earthy, Balanced) ==== */
+
+.mocha-mousse {
+  --mocha-mousse-color: #a47864; /* The core Pantone color */
+  --mocha-mousse-background-dark: #5d4037;
+  --mocha-mousse-background-alt: #6d504b;
+
+  /*  Update Backgrounds --- */
+  --mocha-mousse-background-page: var(--color_choco);
+  /* Use the alt dark mocha for cards etc. */
+  --mocha-mousse-background-alt: var(--mocha-mousse-background-alt);
+
+  --mocha-mousse-text-default: rgb(var(--color_18));
+  --mocha-mousse-text-secondary: var(--neutral-medium);
+
+  --mocha-mousse-accent-terra-cotta: #bc8f8f;
+  --mocha-mousse-accent-earth-green: #8fbc8f;
+  --mocha-mousse-accent-warm-tan: #d2b48c;
+  --mocha-mousse-accent-deep-ochre: #a0522d;
+  --mocha-mousse-accent-soft-grey: #c0c0c0;
+
+  --mocha-mousse-interactive-primary: var(--color_mocha-mousse);
+  /* Use a lighter earthy accent */
+  --mocha-mousse-interactive-secondary: var(--mocha-mousse-accent-warm-tan);
+  --mocha-mousse-border-color: var(--neutral-darker);
+
+  /* Map Mocha Mousse Theme Colors to Generic Roles --- */
+  --color-surface-page: var(--mocha-mousse-background-page);
+  --color-surface-card: var(--mocha-mousse-background-alt);
+  --color-text-default: var(--mocha-mousse-color);
+  --color-text-secondary: var(--mocha-mousse-text-secondary);
+
+  --color-interactive-primary: var(--mocha-mousse-interactive-primary);
+  --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
+  --color-border-default: var(--mocha-mousse-border-color);
+
+  --color-accent-highlight: var(--mocha-mousse-accent-earth-green);
+  --color-accent-bold: var(--mocha-mousse-accent-deep-ochre);
+}
+
+html {
+  color-scheme: light; /* Enforce light theme by default */
+  scroll-behavior: smooth;
+  font-size: 100%;
+}
+
+/* === Component Styles (Keep minimal) === */
+
+.scroll-watcher {
+  height: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--color-accent);
+  width: 100%;
+  scale: 0 1;
+  transform-origin: left;
+  animation: scroll-watcher linear;
+  animation-timeline: scroll(y);
+}
+
+@keyframes scroll-watcher {
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  font-family: var(--font-dancing-script), serif;
+}
+
+/* Scroll controls */
+.scroll-controls {
+  position: sticky;
+  bottom: theme("spacing.8", "2rem");
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
+}
+
+/* === Utility Overrides & Prose Styles === */
+
+.hamburger div {
+  transition: all 0.3s ease;
+}
+.menu {
+  transition: transform 0.3s ease;
+}
+
+/* Layout Utilities  */
+.content-grid {
+  display: grid;
+  grid-template-columns: 40fr 5fr 5fr 40fr;
+  grid-template-rows: minmax(var(--slide-height), auto);
+}
+
+.sticky-col {
+  position: sticky;
+  top: 0; /* Adjust if needed, e.g., top-[var(--nav-height)] */
+  height: var(--slide-height);
+  scroll-snap-align: start;
+}
+
+/* Scroll Utilities  */
+[data-scroll-section] {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* MDX Prose Styles (Controlling Typography Plugin) --- */
+/* Plugin variables need to be defined to use theme variables */
+.mdx-prose {
+  @apply max-w-none;
+
+  /* Link plugin variables directly to the theme variables */
+  /* These will automatically switch with the .dark class */
+  --tw-prose-body: rgb(var(--foreground-rgb));
+  --tw-prose-headings: rgb(var(--foreground-rgb));
+  --tw-prose-lead: rgb(var(--foreground-rgb));
+  --tw-prose-links: rgb(var(--primary-rgb));
+  --tw-prose-bold: rgb(var(--foreground-rgb));
+  --tw-prose-counters: rgb(var(--foreground-rgb));
+  --tw-prose-bullets: rgb(var(--primary-rgb));
+  --tw-prose-hr: rgb(var(--border-medium-rgb));
+  --tw-prose-quotes: rgb(var(--foreground-rgb));
+  --tw-prose-quote-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-captions: rgba(var(--foreground-rgb), 0.7);
+  --tw-prose-code: rgb(var(--secondary-rgb)); /* Inline code color */
+  --tw-prose-pre-code: inherit; /* Let highlighter handle text */
+  /* Code block background */
+  --tw-prose-pre-bg: rgb(var(--code-background-rgb));
+  --tw-prose-th-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-td-borders: rgb(var(--border-subtle-rgb));
+
+  /* Invert variables, points to the same theme vars */
+  --tw-prose-invert-body: rgb(var(--foreground-rgb));
+  --tw-prose-invert-headings: rgb(var(--foreground-rgb));
+  --tw-prose-invert-lead: rgb(var(--foreground-rgb));
+  --tw-prose-invert-links: rgb(var(--primary-rgb));
+  --tw-prose-invert-bold: rgb(var(--foreground-rgb));
+  --tw-prose-invert-counters: rgb(var(--foreground-rgb));
+  --tw-prose-invert-bullets: rgb(var(--primary-rgb));
+  --tw-prose-invert-hr: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-quotes: rgb(var(--foreground-rgb));
+  --tw-prose-invert-quote-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-captions: rgba(var(--foreground-rgb), 0.7);
+  --tw-prose-invert-code: rgb(var(--secondary-rgb));
+  --tw-prose-invert-pre-code: inherit;
+  --tw-prose-invert-pre-bg: rgb(var(--code-background-rgb));
+  --tw-prose-invert-th-borders: rgb(var(--border-medium-rgb));
+  --tw-prose-invert-td-borders: rgb(var(--border-subtle-rgb));
+}

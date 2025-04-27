@@ -1,0 +1,9 @@
+{
+  "cSpell.words": [
+    "cinzel",
+    "nmsregular"
+  ],
+  "workbench.colorTheme": "Cobalt2",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
