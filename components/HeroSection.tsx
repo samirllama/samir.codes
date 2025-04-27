@@ -47,16 +47,19 @@ const HeroSection = () => {
                 </span>
               </span>
             </span> */}
-            {/* "Build" with flip effect to "Break " */}
-            <span className="block overflow-hidden">
-              <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">
-                <span className="block mb-0 pb-0 flip-hero-text">
-                  <span className="block ms-text-adjust flip-word">
-                    Build &nbsp;
-                  </span>
-                  <span className="block ms-text-adjust flip-word">
-                    Break &nbsp;
-                  </span>
+
+            <span className="inline-block relative h-[1em] overflow-hidden align-bottom">
+              {/* INVISIBLE SPACER - Give parent width */}
+              <span className="invisible whitespace-nowrap ms-text-adjust">
+                Break &nbsp;
+              </span>
+              <span className="block absolute inset-0 flip-animation-container">
+                {/* This should now have top: 0 */}
+                <span className="block whitespace-nowrap ms-text-adjust">
+                  Build
+                </span>
+                <span className="block whitespace-nowrap ms-text-adjust absolute top-full left-0">
+                  Break
                 </span>
               </span>
             </span>
@@ -77,7 +80,6 @@ const HeroSection = () => {
             */}
             <span className="w-full"></span>
 
-            {/* Mapping the rest of the words from coreMessage */}
             {subText.split(" ").map((message, index) => (
               <span className="block overflow-hidden" key={index}>
                 <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">

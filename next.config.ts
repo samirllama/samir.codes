@@ -72,12 +72,7 @@ const nextConfig = (phase: string): NextConfig => {
       typedRoutes: true,
       // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
     },
-    typescript: {
-      ignoreBuildErrors: true,
-    },
-    eslint: {
-      ignoreDuringBuilds: true,
-    },
+
     // Add other configs like CSP headers, images, redirects here later
   };
 

@@ -196,60 +196,49 @@
   transform: translateY(2lh);
 }
 
+/* === Animated Gradient Underline === */
+@keyframes slideGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-slideGradient {
+  animation: slideGradient 3s ease infinite;
+}
+
 /* ========= Flip Effect Hero ========= */
-.flip-hero-text {
-  overflow-y: hidden;
-  height: 1lh; /* Adjust based on your font's line-height; matches one line of text */
-  position: relative;
-}
-
-.flip-hero-text > * {
-  display: block; /* Won't work without this block */
-  transition: translate var(--quick-flip-duration),
-    transform 0s calc(var(--quick-flip-duration) / 2);
-  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
-}
-
-.flip-word {
-  position: absolute;
-  width: 100%;
-  animation: flip 4s infinite ease-in-out;
-}
-
-.flip-word:first-child {
-  animation-name: flip-build;
-}
-
-.flip-word:last-child {
-  animation-name: flip-break;
-}
-
-@keyframes flip-build {
+@keyframes slideWordsUp {
   0%,
   45% {
+    /* Pause on 'Build' */
     transform: translateY(0);
   }
   50%,
   95% {
+    /* Pause on 'Break' */
+    /* Move container up by the height of one line (100% of its own height) */
     transform: translateY(-100%);
   }
   100% {
+    /* Loop back */
     transform: translateY(0);
   }
 }
 
-@keyframes flip-break {
-  0%,
-  45% {
-    transform: translateY(100%);
-  }
-  50%,
-  95% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+.flip-animation-container {
+  /* Apply the animation */
+  animation: slideWordsUp 4s infinite ease-in-out;
+  /* Ensure smooth GPU acceleration */
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU layer */
+  width: auto;
 }
 
 /* ========= Glitch Effect ========= */
