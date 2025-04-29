@@ -1,4 +1,5 @@
 // components/project-stack.tsx
+import { cn } from "@/lib/utils";
 
 interface Project {
   id: string | number;
@@ -19,36 +20,46 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
         </h2>
 
         {/* The list of projects */}
-        <ul className="border-t bouncy-hover">
-          {projects.map((project) => (
-            <li key={project.id} className="block relative">
-              <a
-                href={project.link}
-                className="uppercase border-b border-text-default w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:pl-0 a11y-focus"
-                aria-label={`View Project: ${project.name}`}
-              >
-                <span className="block overflow-hidden">
-                  <span className="leading-[0.95] block text-mousse-terracotta text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
-                    <span className="block">
-                      <span className="block ms-text-adjust">
-                        {project.name}
+        <ul className="border-t border-accent-secondary bouncy-hover">
+          {projects.map((project) => {
+            return (
+              <li key={project.id} className="block relative">
+                <a
+                  href={project.link}
+                  target="_blank" // <-- Open in new tab
+                  rel="noopener noreferrer" // <-- Security best practice for target="_blank"
+                  className="uppercase border-b border-accent-secondary w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:pl-0 a11y-focus"
+                  aria-label={`View Project: ${project.name}`}
+                >
+                  {/* Project Name Span */}
+                  <span className="block overflow-hidden">
+                    <span
+                      className={cn(
+                        "leading-[0.95] block text-[clamp(30px,0.92rem+4.4vw,100px)] font-display tracking-tight relative z-[1] transition-opacity ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:opacity-100",
+                        "text-default"
+                      )}
+                    >
+                      <span className="block">
+                        <span className="block ms-text-adjust">
+                          {project.name}
+                        </span>
                       </span>
                     </span>
                   </span>
-                </span>
 
-                {/* "View Project" text (hidden on small screens) */}
-                <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier([0.83,0,0.17,1])] duration-[400ms] lg:opacity-100">
-                  <span
-                    className="block"
-                    style={{ transform: "translateY(0%) translateZ(0px)" }}
-                  >
-                    View Project
+                  {/* "View Project" text */}
+                  <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:opacity-100">
+                    <span
+                      className="block"
+                      style={{ transform: "translateY(0%) translateZ(0px)" }}
+                    >
+                      View Project
+                    </span>
                   </span>
-                </span>
-              </a>
-            </li>
-          ))}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

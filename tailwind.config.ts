@@ -23,6 +23,7 @@ const config: Config = {
             },
 
             colors: {
+                'custom-peach': '#f7e8e1',
                 'surface-page': 'var(--color-surface-page)',
                 'surface-card': 'var(--color-surface-card)',
                 'text-default': 'var(--color-text-default)',
@@ -34,9 +35,38 @@ const config: Config = {
                 'button-text': 'var(--color-button-text)',
                 'interactive-text': 'var(--color-interactive-text)',
                 accent: 'var(--color-accent)',
+                "accent-secondary": 'var(--color-accent-secondary)',
                 'light-grey': 'rgb(var(--color-light-grey-rgb))',
                 'galactic-base': 'rgb(var(--color-galactic-base-rgb))',
-                'mousse-terracotta': '#924622',
+                'moth-terracotta': '#924622',
+                'moth-orange': 'var(--color_moth-orange)',
+                'neon-primary': 'var(--color-neon-primary)',
+                'radon-primary': 'var(--color-radon-primary)',
+                'krypton-primary': 'var(--color-krypton-primary)',
+                'argon-primary': 'var(--color-argon-primary)',
+                'xenon-primary': 'var(--color-xenon-primary)',
+
+                // Monaspace Colors ---
+                // neon: {
+                //     primary: 'rgb(var(--color-neon-primary-rgb) / <alpha-value>)',
+                //     dark: 'rgb(var(--color-neon-dark-rgb) / <alpha-value>)',
+                // },
+                // argon: {
+                //     primary: 'var(--color-argon-primary)',
+                //     dark: 'rgb(var(--color-argon-dark-rgb) / <alpha-value>)',
+                // },
+                // xenon: {
+                //     primary: 'rgb(var(--color-xenon-primary-rgb) / <alpha-value>)',
+                //     dark: 'rgb(var(--color-xenon-dark-rgb) / <alpha-value>)',
+                // },
+                // radon: {
+                //     primary: 'rgb(var(--color-radon-primary-rgb) / <alpha-value>)',
+                //     dark: 'rgb(var(--color-radon-dark-rgb) / <alpha-value>)',
+                // },
+                // krypton: {
+                //     primary: 'rgb(var(--color-krypton-primary-rgb) / <alpha-value>)',
+                //     dark: 'rgb(var(--color-krypton-dark-rgb) / <alpha-value>)',
+                // },
             },
 
             fontFamily: {
@@ -44,7 +74,15 @@ const config: Config = {
                 'cinzel': ['Cinzel', 'sans'],
                 'cinzel-deco': ['Cinzel Decorative', 'sans'],
                 mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
-                dancing: ['Dancing Script', 'cursive']
+                dancing: ['Dancing Script', 'cursive'],
+
+                // Monaspace Fonts ---
+                'mona-neon': ['MonaspaceNeon', 'monospace'],
+                'mona-argon': ['MonaspaceArgon', 'monospace'],
+                'mona-xenon': ['MonaspaceXenon', 'monospace'],
+                'mona-radon': ['MonaspaceRadon', 'monospace'],
+                'mona-krypton': ['MonaspaceKrypton', 'monospace'],
+
             },
 
             // Custom Shadows (Using CSS Variables) ---
@@ -63,6 +101,27 @@ const config: Config = {
             },
             gridTemplateColumns: {
                 'scroll-slide': '40fr 5fr 5fr 40fr',
+            },
+
+            animation: {
+                ghostpulse: 'ghostpulse 1s ease-in-out infinite alternate',
+                ghostpulse2: 'ghostpulse2 0.5s ease-in-out infinite alternate',
+                ghostpulse3: 'ghostpulse3 1s ease-in-out infinite alternate',
+            },
+            keyframes: {
+                ghostpulse: {
+                    '0%': { 'font-variation-settings': '"wght" 600' },
+                    'to': { 'font-variation-settings': '"wght" 200' },
+                },
+                ghostpulse2: {
+                    '0%': { 'font-variation-settings': '"slnt" 0' },
+                    'to': { 'font-variation-settings': '"slnt" -11' },
+                },
+                ghostpulse3: {
+                    '0%': { 'font-variation-settings': '"wdth" 100', opacity: '.9' },
+                    'to': { 'font-variation-settings': '"wdth" 101', opacity: '.7' },
+                },
+
             },
         },
     },

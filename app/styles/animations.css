@@ -4,148 +4,39 @@
    Keyframe Definitions
    ========================================================================== */
 
-@keyframes neonPulse {
-  0%,
-  100% {
-    opacity: 1;
+/*  Animated Gradient Underline */
+@keyframes slideGradient {
+  0% {
+    background-position: 0% 50%;
   }
   50% {
-    opacity: 0.7;
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-@keyframes pulseLoop {
-  0% {
-    opacity: var(--opacity-none, 0);
-    transform: scale(0.25) translateZ(0);
-  }
-  30% {
-    opacity: 0.4;
-  }
-  70% {
-    opacity: var(--opacity-none, 0);
-  }
-  80% {
-    transform: scale(1) translateZ(0);
-  }
-}
-
-@keyframes endless {
-  0% {
+/* === flip effect === */
+@keyframes slideWordsUp {
+  0%,
+  45% {
+    /* Pause on 'Build' */
     transform: translateY(0);
   }
-  100% {
-    transform: translateY(-245px);
-  } /* Adjust value as needed */
-}
-
-@keyframes shine {
-  0% {
-    top: 0;
-    transform: translateY(-100%) scaleY(10);
-    opacity: var(--opacity-none, 0);
-  }
-  2% {
-    opacity: var(--opacity-low, 0.5);
-  }
-  40% {
-    top: 100%;
-    transform: translateY(0) scaleY(200);
-    opacity: var(--opacity-none, 0);
+  50%,
+  95% {
+    /* Pause on 'Break' */
+    /* Move container up by the height of one line (100% of its own height) */
+    transform: translateY(-100%);
   }
   100% {
-    top: 100%;
-    transform: translateY(0) scaleY(1);
-    opacity: var(--opacity-none, 0);
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(3%);
-  }
-  50% {
-    transform: translateY(-3%);
-  }
-  100% {
-    transform: translateY(3%);
-  }
-}
-
-@keyframes neon-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
+    /* Loop back */
+    transform: translateY(0);
   }
 }
 
 /* ========= Animation Utility Classes ========= */
-
-.animate-neonPulse {
-  animation: neonPulse 2s ease-in-out infinite;
-}
-
-.animation-endless {
-  animation: endless var(--animation-duration-slow, 12s)
-    var(--animation-timing-linear, linear)
-    var(--animation-iteration-infinite, infinite);
-}
-
-.animation-shine {
-  animation: shine var(--animation-duration-medium, 8s)
-    var(--animation-timing-linear, linear) 500ms
-    var(--animation-iteration-infinite, infinite);
-}
-
-.animation-float {
-  animation: float 2s ease-in-out var(--animation-iteration-infinite, infinite);
-}
-
-.pulse {
-  opacity: var(--opacity-none, 0);
-  transform-origin: center;
-  animation: pulseLoop var(--animation-duration-slow, 12s)
-    var(--animation-timing-linear, linear)
-    var(--animation-iteration-infinite, infinite);
-}
-.pulse-1 {
-  animation-delay: calc(var(--animation-duration-fast, 4s) * -1);
-}
-.pulse-2 {
-  animation-delay: calc(var(--animation-duration-medium, 8s) * -1);
-}
-
-.blinkingCaret {
-  position: relative;
-}
-
-.blinkingCaret::before,
-.blinkingCaret::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 100%;
-  margin-left: 0.1em;
-  animation: neon-blink 1.1s ease-in-out infinite;
-}
-
-.blinkingCaret::before {
-  width: 2px;
-  background-color: rgb(var(--accent-rgb)); /* Use theme variable */
-  z-index: 2;
-}
-
-.blinkingCaret::after {
-  width: 2px;
-  background-color: transparent;
-  box-shadow: 0 0 5px rgb(var(--accent-rgb)), 0 0 10px rgb(var(--accent-rgb)),
-    0 0 15px rgb(var(--accent-rgb)), 0 0 20px rgba(var(--primary-rgb), 0.7);
-  z-index: 1;
-}
 
 /* ========= Fancy Hover ========= */
 
@@ -163,7 +54,8 @@
 }
 
 .bouncy-hover {
-  @media (hover) and (prefers-reduced-motion) {
+  @media (hover) {
+    /* @media (hover) and (prefers-reduced-motion) { */
     & > li {
       transform-origin: left center;
       transition: transform 1s var(--bounce), opacity 0.3s linear;
@@ -176,6 +68,60 @@
     transform: scale(0.8);
   }
 }
+
+/* ========= Fanning Effect ========= */
+
+.fanning-list {
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 0;
+  /* Add any other base styles for the ul */
+  /* The :has() selector below triggers the fanning effect */
+  /* This ensures the effect only happens when a child li is hovered or focused */
+}
+
+/* Styles for individual list items */
+.fanning-list-item {
+  /* Set the transform origin for rotation */
+  transform-origin: left center;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  /* Add padding, margin, or other styling for list items */
+  padding: 10px; /* Example padding */
+  margin-bottom: 5px; /* Example margin */
+  /* Ensure items are block level or have defined width for transform-origin to work consistently */
+  display: block;
+  width: 100%; /* Example width */
+
+  /* Optional: Add a subtle effect on the active item itself */
+  /* As discussed, this specific rule is not in the core blog post demo */
+  /* &:hover,
+  &:focus-within {
+    transform: scale(1.05);
+  } */
+}
+/* Optional: Add a subtle scale effect on active item */
+.fanning-list-item:hover,
+.fanning-list-item:focus-within {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+/* Media query to disable hover effects on devices that don't support hover */
+/* This is important for touch devices */
+@media (hover: none) {
+  .fanning-list:has(> li:hover) > li:not(:hover) {
+    opacity: 1 !important; /* Override opacity */
+    transform: none !important; /* Override transform */
+  }
+}
+
+/* Optional: Add styles for reduced motion */
+/* @media (prefers-reduced-motion: reduce) {
+  .fanning-list-item {
+    Disable transitions
+    transition: none !important;
+  }
+} */
 
 /* ========= Quick Flip Effect ========= */
 .quick-flip {
@@ -196,41 +142,11 @@
   transform: translateY(2lh);
 }
 
-/* === Animated Gradient Underline === */
-@keyframes slideGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 .animate-slideGradient {
   animation: slideGradient 3s ease infinite;
 }
 
 /* ========= Flip Effect Hero ========= */
-@keyframes slideWordsUp {
-  0%,
-  45% {
-    /* Pause on 'Build' */
-    transform: translateY(0);
-  }
-  50%,
-  95% {
-    /* Pause on 'Break' */
-    /* Move container up by the height of one line (100% of its own height) */
-    transform: translateY(-100%);
-  }
-  100% {
-    /* Loop back */
-    transform: translateY(0);
-  }
-}
 
 .flip-animation-container {
   /* Apply the animation */
@@ -239,38 +155,6 @@
   will-change: transform;
   transform: translateZ(0); /* Force GPU layer */
   width: auto;
-}
-
-/* ========= Glitch Effect ========= */
-
-.glitchy {
-  font-size: 8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-shadow: 0.05em 0 0 var(--neon-glow-primary-rgb),
-    -0.025em -0.05em 0 var(--neon-glow-accent-rgb),
-    0.025em 0.05em 0 var(--neon-glow-secondary-rgb);
-  animation: glitchy 500ms infinite;
-}
-
-.glitchy span {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.glitchy span:first-child {
-  animation: glitchy 650ms infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 46%, 0 46%);
-  transform: translate(-0.025em, -0.0125em);
-  opacity: 0.8;
-}
-
-.glitchy span:last-child {
-  animation: glitchy 375ms infinite;
-  clip-path: polygon(0 70%, 100% 30%, 100% 100%, 0 100%);
-  transform: translate(0.0125em, 0.025em);
-  opacity: 0.8;
 }
 
 /* @media (prefers-reduced-motion: reduce) {

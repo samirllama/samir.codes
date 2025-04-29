@@ -1,9 +1,8 @@
 {
-  "cSpell.words": [
-    "cinzel",
-    "nmsregular"
-  ],
-  "workbench.colorTheme": "Halcyon",
+  "cSpell.words": ["cinzel", "nmsregular"],
+  "workbench.colorTheme": "Ayu Adapta",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true
 }

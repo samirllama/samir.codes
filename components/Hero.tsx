@@ -1,7 +1,7 @@
 // components/Hero.tsx
 
 import Image from "next/image";
-import Particles from "./particles/Particles";
+import LeafParticles from "./leaf-particles/LeafParticles";
 import Illustration from "@/public/glow-bottom.svg";
 import TypingEffect from "./TypingEffect";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center">
       {/* Background Elements */}
-      <Particles className="absolute inset-0 -z-10" quantity={40} />
+      <LeafParticles className="absolute inset-0 -z-10" quantity={40} />
       <div
         className="absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none -z-10 opacity-70 dark:opacity-100"
         aria-hidden="true"

@@ -1,5 +1,10 @@
 // app/layout.tsx
-import { Cinzel, Cinzel_Decorative, Dancing_Script, Geist_Mono } from "next/font/google";
+import {
+  Cinzel,
+  Cinzel_Decorative,
+  Dancing_Script,
+  Geist_Mono,
+} from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
@@ -25,10 +30,10 @@ const cinzelDecorative = Cinzel_Decorative({
 });
 
 const dancingScript = Dancing_Script({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-dancing-script',
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-dancing-script",
 });
 
 const geistMono = Geist_Mono({
@@ -42,7 +47,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth scrollbar-thin"
+      suppressHydrationWarning
+    >
       <body
         className={cn(
           cinzel.variable,
@@ -56,7 +65,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark" // Ensures .dark is applied initially if no preference
-          enableSystem={true} // Allows respecting OS preference
+          enableSystem={true}
           themes={["dark"]}
         >
           <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">

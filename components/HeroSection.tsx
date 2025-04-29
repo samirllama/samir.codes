@@ -2,7 +2,7 @@
 
 // 'use client'; Uncomment later to add interactive elements
 import Image from "next/image";
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 
 const imageSrc = "/assets/Relaxing-Forest-Setting.png";
 const imageAlt = "Samir Coder";
@@ -18,18 +18,13 @@ const HeroSection = () => {
     >
       <div className="pb-[61vw] md:pb-[55vw] lg:pb-[45vw] xl:pb-[36.25vw] 2xl:pb-[670px] mb-24 lg:mb-16 relative">
         {/* Text Content Area */}
-        <div
-          className={cn(
-            "uppercase",
-            "max-w-[1700px] w-full lg:w-11/12",
-            "hero-text"
-          )}
-        >
+        <div className="uppercase max-w-[1700px] w-full lg:w-11/12">
           <h1
-            className={cn(
+            className={cn([
               "text-default",
-              "flex flex-wrap overflow-hidden justify-start w-full"
-            )}
+              "flex flex-wrap overflow-hidden justify-start w-full",
+              "hero-text",
+            ])}
           >
             <span className="block overflow-hidden">
               <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">
@@ -38,15 +33,6 @@ const HeroSection = () => {
                 </span>
               </span>
             </span>
-
-            {/* "Build! " */}
-            {/* <span className="block overflow-hidden">
-              <span className="block overflow-hidden will-change-transform translate-y-0 transform-gpu">
-                <span className="block mb-0 pb-0">
-                  <span className="block ms-text-adjust">Build &nbsp;</span>
-                </span>
-              </span>
-            </span> */}
 
             <span className="inline-block relative h-[1em] overflow-hidden align-bottom">
               {/* INVISIBLE SPACER - Give parent width */}
@@ -94,8 +80,8 @@ const HeroSection = () => {
             ))}
           </h1>
         </div>
+
         <div className="absolute bottom-0 right-0 h-[60vh] w-[80vw] overflow-hidden bg-[#000] bg-opacity-50 max-w-[1000px]">
-          {/* This div provides the W/H needed for Image fill and ensures it covers the opacity layer */}
           <div className="opacity-[0.2] absolute inset-0 overflow-hidden">
             {/* Inner container needed for Image fill (must be relative/absolute/etc. and have dimensions) */}
 

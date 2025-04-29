@@ -25,10 +25,10 @@ const ProfessionalSummary: React.FC<ProfessionalSummaryProps> = ({
           Professional Summary
         </span>
       </h2>
-      <ul className="bouncy-hover uppercase border-t border-white/30">
+      <ul className="bouncy-hover uppercase border-t border-accent-secondary">
         {experiences.map((job) => (
           <li key={job.company} className="block">
-            <span className="border-b border-white/30 w-full py-2 lg:py-1 block lg:flex lg:items-end">
+            <span className="border-b border-accent-secondary w-full py-2 lg:py-1 block lg:flex lg:items-end">
               {/* Company Name */}
               <span className="leading-[1.275] block text-[clamp(18px,0.92rem+1.15vw,34px)] font-display tracking-tight mb-1 lg:mb-0 relative overflow-hidden">
                 <span

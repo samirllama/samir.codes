@@ -1,55 +1,31 @@
-// next.config.ts
 import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import createMDX from '@next/mdx';
-
-// Import MDX Plugins ---
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
-import type { Element } from 'hast';
-import type { Options as PrettyCodeOptions } from 'rehype-pretty-code'; //
+import type { Options as PrettyCodeOptions } from 'rehype-pretty-code';
 
-//  Configure rehype-pretty-code
+// Configure rehype-pretty-code (unchanged)
 const prettyCodeOptions: PrettyCodeOptions = {
   theme: {
-    // Match dark theme base (slate-900)
-    dark: 'github-dark', // Example: Use GitHub Dark theme
-    // Add light theme if desired
-    light: 'github-light', // Example: Use GitHub Light theme
+    dark: 'github-dark',
+    light: 'github-light',
   },
-
-  onVisitLine(node: Element) {
+  onVisitLine(node) {
     if (node.children.length === 0) {
       node.children = [{ type: 'text', value: ' ' }];
     }
   },
-  onVisitHighlightedLine(node: Element) {
-    node.properties = node.properties || {};
-    const currentClasses = node.properties.className;
-
-    if (Array.isArray(currentClasses)) {
-      // Already an array, push the new class
-      currentClasses.push('line--highlighted');
-    } else if (typeof currentClasses === 'string') {
-      // It's a string, create a new array containing the existing class and the new one
-      node.properties.className = [currentClasses, 'line--highlighted'];
-    } else {
-      // It's null, undefined, or something else - create a new array with just our class
-      node.properties.className = ['line--highlighted'];
-    }
+  onVisitHighlightedLine(node) {
+    node.properties.className = ['line--highlighted'];
   },
-
-  onVisitHighlightedChars(node: Element) {
-    node.properties = node.properties || {};
+  onVisitHighlightedChars(node) {
     node.properties.className = ['word--highlighted'];
   },
-
 };
 
-
-//  Main Next.js Config Function ---
+// Main Next.js Config Function
 const nextConfig = (phase: string): NextConfig => {
-  // Call createMdx INSIDE the function ---
   const withMDX = createMDX({
     extension: /\.mdx?$/,
     options: {
@@ -62,7 +38,6 @@ const nextConfig = (phase: string): NextConfig => {
     console.log('happy building session ;)');
   }
 
-  // Define base config options
   const nextConfigOptions: NextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
     reactStrictMode: true,
@@ -72,11 +47,34 @@ const nextConfig = (phase: string): NextConfig => {
       typedRoutes: true,
       // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
     },
-
-    // Add other configs like CSP headers, images, redirects here later
+    // Add CSP headers
+    async headers() {
+      return [
+        {
+          source: '/(.*)', // Apply to all routes
+          headers: [
+            {
+              key: 'Content-Security-Policy',
+              value: `
+                default-src 'self';
+                script-src 'self' 'unsafe-inline';
+                style-src 'self' 'unsafe-inline';
+                img-src 'self' data:;
+                connect-src 'self';
+                font-src 'self';
+                object-src 'none';
+                base-uri 'self';
+                form-action 'self';
+                frame-ancestors 'none';
+              `.replace(/\s{2,}/g, ' ').trim(), // Clean up whitespace
+            },
+          ],
+        },
+      ];
+    },
   };
 
   return withMDX(nextConfigOptions);
 };
 
-export default nextConfig
+export default nextConfig;

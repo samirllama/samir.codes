@@ -5,58 +5,126 @@
 /* ========== Core CSS Variable Definitions ========== */
 
 :root {
-  /* Core Mocha Mousse Palette */
-  --color_0: 255, 255, 255; /* White */
-  --color_14: 248, 246, 242; /* Light off-white */
-  --color_15: 247, 245, 241; /* Very Light Beige (Alternative Background) */
-  --color_16: 203, 196, 185; /* Light grey/beige */
-  --color_17: 164, 120, 100; /* Mocha-Mousse (Main Color) */
-  --color_18: 83, 53, 39; /* Dark Brown (Primary Text) */
-  --color_26: 45, 22, 11; /* Chocolate (Secondary Text/Button) */
-  --color_34: 92, 68, 57; /* Cocoa (Accents) */
-
-  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
-
-  --color_choco: #533527; /* Medium brown */
-  --color_dark-chocolate: 45, 22, 11;
-  --color_arona: #869aa3;
-  --color_coffee: #6a5650;
-  --color_mocha-mousse: #a67763; /* Core mocha-mousse color */
-  --color_warm-taupe: #b09382;
-  --color_tapestry: #436374;
+  /* === Base Color Palette === */
+  /* Base Hex Colors */
   --accent-terra-cotta: #bc8f8f;
   --accent-earth-green: #8fbc8f;
   --accent-warm-tan: #d2b48c;
   --accent-deep-ochre: #a0522d;
   --accent-soft-grey: #c0c0c0;
+  --color_moth-green: #0e1b07;
+  --color_moth-brown: #35170c;
+  --color_moth-mousse: #9e7967;
+  --color_moth-light: #f7e8e1;
+  --color_moth-orange: #924622;
+  --color_white: #ffffff; /* Explicit white if needed */
+  --color_black: #000000; /* Explicit black if needed */
 
-  --header-text: rgb(var(--color_17));
+  /* Base RGB Values (for use with Tailwind opacity) */
+  --rgb-moth-green: 14, 27, 7;
+  --rgb-moth-brown: 53, 23, 12;
+  --rgb-moth-mousse: 158, 121, 103;
+  --rgb-moth-light: 247, 232, 225;
+  --rgb-moth-orange: 146, 70, 34;
+  --rgb-accent-terra-cotta: 188, 143, 143;
+  --rgb-accent-earth-green: 143, 188, 143;
+  --rgb-accent-warm-tan: 210, 180, 140;
+  --rgb-accent-deep-ochre: 160, 82, 45;
+  --rgb-accent-soft-grey: 192, 192, 192;
+  --rgb-white: 255, 255, 255;
+  --rgb-black: 0, 0, 0;
 
-  /* ==== Semantic Colors ==== */
-  --color-surface-page: #0e1b07; /* Dark green background */
-  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
-  --color-accent: #924622;
-  --color-text-default: #f7e8e1; /* Light text for dark mode */
-  --color-text-muted: #9e7967;
+  /* Monaspace RGB Variables */
+  --color-neon-primary-rgb: 0, 255, 0; /* Bright Green */
+  --color-argon-primary-rgb: 0, 255, 255; /* Cyan */
+  --color-xenon-primary-rgb: 255, 0, 255; /* Magenta */
+  --color-radon-primary-rgb: 255, 0, 0; /* Red */
+  --color-krypton-primary-rgb: 255, 255, 0; /* Yellow */
+  /* Define -dark vars pointing to primary, as there's only one theme */
+  --color-neon-dark-rgb: var(--color-neon-primary-rgb);
+  --color-argon-dark-rgb: var(--color-argon-primary-rgb);
+  --color-xenon-dark-rgb: var(--color-xenon-primary-rgb);
+  --color-radon-dark-rgb: var(--color-radon-primary-rgb);
+  --color-krypton-dark-rgb: var(--color-krypton-primary-rgb);
 
-  --color-accent: var(--accent-earth-green); /* Cocoa accents */
-  --color-header: #2d160b; /* Dark brown headers */
-  /* Chocolate brown text */
-  /* --color-surface-page: rgba(var(--color_dark-chocolate), 1); */
-  /* --color-text-default: var(--color_mocha-mousse); */
-  /* --color-text-primary: var(--color_mocha-mousse);  */
+  /* === Semantic Color Mapping === */
+  /* Uses vars defined in "Base RGB Values" section */
+  --color-surface-page-rgb: var(--rgb-moth-green);
+  --color-surface-card-rgb: var(--rgb-moth-brown); /* Card Background */
+  --color-surface-secondary-rgb: var(
+    --rgb-moth-brown
+  ); /* Alt Surfaces/Borders */
+  --color-text-default-rgb: var(--rgb-moth-light); /* Primary text */
+  --color-text-muted-rgb: var(--rgb-moth-mousse); /* Secondary/subtle text */
+  --color-text-inverted-rgb: var(
+    --rgb-moth-green
+  ); /* Text on light/accent backgrounds */
+  --color-accent-primary-rgb: var(--rgb-moth-orange); /* Primary Accent */
+  --color-accent-secondary-rgb: var(
+    --rgb-accent-deep-ochre
+  ); /* Secondary Accent */
+  --color-border-default-rgb: var(--rgb-moth-mousse); /* Default borders */
+  --color-border-subtle-rgb: var(
+    --rgb-moth-brown
+  ); /* Subtle borders (e.g., code blocks) */
+  --color-interactive-primary-rgb: var(
+    --rgb-accent-deep-ochre
+  ); /* Primary buttons/links */
+  --color-interactive-secondary-rgb: var(
+    --rgb-accent-warm-tan
+  ); /* Secondary buttons/links */
+  --color-interactive-muted-rgb: var(
+    --rgb-moth-mousse
+  ); /* Muted interactive elements */
+  --color-interactive-text-rgb: var(
+    --rgb-moth-light
+  ); /* Text on primary interactive elements */
+  --color-code-background-rgb: var(
+    --rgb-moth-brown
+  ); /* Code block background */
+
+  /* ==========================================================================
+                  === Semantic Colors ===
+   ========================================================================== */
+  --color-surface-page: rgb(var(--color-surface-page-rgb));
+  /* Secondary Dark BG/Borders */
+  --color-surface-secondary: var(--color_moth-brown);
+  --color-text-default: var(--color_moth-light);
+  --color-text-muted: var(--color_moth-mousse);
+
+  --color-accent: var(--accent-earth-green);
+  --color-accent-secondary: var(--accent-deep-ochre);
+  --color-header: var(--color_moth-green);
   --color-text-secondary: rgb(var(--color_26)); /* Chocolate secondary text */
   --color-interactive-primary: rgb(var(--color_26)); /* Chocolate buttons */
-  --color-interactive-secondary: var(--accent-deep-ochre);
+  --color-interactive-secondary: var(--accent-warm-tan);
+  --color-coco: rgba(var(--color_dark-chocolate), 1);
+  --color-moth-orange: var(--color_moth-orange);
   --color-interactive-text: rgb(var(--color_0)); /* White text for buttons */
   --color-surface-card: rgb(var(--color_16)); /* Light grey/beige cards */
   --color-border-default: rgb(var(--color_16)); /* Light grey/beige borders */
-  --color-coco: rgba(var(--color_dark-chocolate), 1);
+  --color-neon-primary: rgb(var(--color-neon-dark-rgb));
+  --color-argon-primary: rgb(var(--color-argon-dark-rgb));
+  --color-xenon-primary: rgb(var(--color-xenon-dark-rgb));
+  --color-radon-primary: rgb(var(--color-radon-primary-rgb));
+  --color-krypton-primary: rgb(var(--color-krypton-primary-rgb));
+  /* ==========================================================================
+            === Semantic Colors END ===
+   ========================================================================== */
 
-  /* Shadows for Light Theme */
-  --shadow-highlight-rgb: 255, 255, 255; /* White */
-  --shadow-base-rgb: 203, 213, 225; /* Subtle grey */
-  --shadow-outer-rgb: 148, 163, 184; /* Medium grey */
+  /* === Shadows (Dark Theme Adjustments) === */
+  /* Using subtle light text color for highlights, darker for base/outer */
+  --shadow-highlight-rgb: var(--rgb-moth-light);
+  --shadow-base-rgb: var(--rgb-moth-brown);
+  --shadow-outer-rgb: var(--rgb-black); /* Use black for deep shadow */
+
+  /* === Typography === */
+  /* Font Variables (referenced by layout.tsx & tailwind.config.ts) */
+  --font-cinzel: "Cinzel", serif;
+  --font-cinzel-deco: "Cinzel Decorative", serif;
+  --font-dancing-script: "Dancing Script", cursive;
+  --font-geist-mono: "Geist Mono", monospace; /* Assumed name */
+
   /* Core Spacing & Typography Tokens  */
   --spacing-base: 1rem;
   --spacing-xs: calc(var(--spacing-base) * 0.5);
@@ -108,83 +176,46 @@
     1.015 70.6%,
     1
   );
-}
-
-/* lighter background for testing */
-.light-background {
-  --color-background: rgb(var(--color_15));
-  --color-text-primary: rgb(var(--color_18));
-  --color-text-secondary: rgb(var(--color_34)); /* Cocoa for secondary text */
-  --color-header: rgb(var(--color_18));
-  --color-interactive-primary: rgb(var(--color_17)); /* Mocha-Mousse buttons */
-}
+} /* End of :root */
 
 /* ========== Dark Theme Overrides ==========  */
 
 .dark {
-  --color-surface-page: #0e1b07; /* Dark green background */
+  --color-surface-page: var(--color_moth-green);
   --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
   --color-accent: #924622;
   --color-text-default: #f7e8e1; /* Light text for dark mode */
   --color-text-muted: #9e7967;
 }
 
-.dark_V2 {
-  --color-light-grey-rgb: 50, 50, 50; /* darker grey for dark mode */
-  --color-galactic-base-rgb: 18, 18, 36; /* Deep purplish-blue for galactic theme */
-  --color-surface-page: rgba(var(--color_16), 0.1); /* 10% opaque */
-  --color-surface-card: #533527; /* Medium brown */
-  --color-text-default: var(--color_mocha-mousse); /* Light off-white */
-  --color-text-secondary: #d3d3d3; /* Light grey */
-  --color-interactive-primary: var(--accent-deep-ochre); /* Mid-tone orange */
-  --color-interactive-secondary: var(--accent-terra-cotta);
-  --color-border-default: #666666; /* Neutral darker */
-}
-
-/* ==== Theme: Mocha Mousse (Earthy, Balanced) ==== */
-
-.mocha-mousse {
-  --mocha-mousse-color: #a47864; /* The core Pantone color */
-  --mocha-mousse-background-dark: #5d4037;
-  --mocha-mousse-background-alt: #6d504b;
-
-  /*  Update Backgrounds --- */
-  --mocha-mousse-background-page: var(--color_choco);
-  /* Use the alt dark mocha for cards etc. */
-  --mocha-mousse-background-alt: var(--mocha-mousse-background-alt);
-
-  --mocha-mousse-text-default: rgb(var(--color_18));
-  --mocha-mousse-text-secondary: var(--neutral-medium);
-
-  --mocha-mousse-accent-terra-cotta: #bc8f8f;
-  --mocha-mousse-accent-earth-green: #8fbc8f;
-  --mocha-mousse-accent-warm-tan: #d2b48c;
-  --mocha-mousse-accent-deep-ochre: #a0522d;
-  --mocha-mousse-accent-soft-grey: #c0c0c0;
-
-  --mocha-mousse-interactive-primary: var(--color_mocha-mousse);
-  /* Use a lighter earthy accent */
-  --mocha-mousse-interactive-secondary: var(--mocha-mousse-accent-warm-tan);
-  --mocha-mousse-border-color: var(--neutral-darker);
-
-  /* Map Mocha Mousse Theme Colors to Generic Roles --- */
-  --color-surface-page: var(--mocha-mousse-background-page);
-  --color-surface-card: var(--mocha-mousse-background-alt);
-  --color-text-default: var(--mocha-mousse-color);
-  --color-text-secondary: var(--mocha-mousse-text-secondary);
-
-  --color-interactive-primary: var(--mocha-mousse-interactive-primary);
-  --color-interactive-secondary: var(--mocha-mousse-interactive-secondary);
-  --color-border-default: var(--mocha-mousse-border-color);
-
-  --color-accent-highlight: var(--mocha-mousse-accent-earth-green);
-  --color-accent-bold: var(--mocha-mousse-accent-deep-ochre);
-}
-
 html {
   color-scheme: light; /* Enforce light theme by default */
   scroll-behavior: smooth;
   font-size: 100%;
+}
+
+/* Marquee (Used in Header) */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+  font-family: var(--font-dancing-script), serif; /* Ensure font var is correct */
+}
+
+/* Hamburger Menu Base (Used by ui.module.css / MobileMenu) */
+.hamburger div {
+  transition: all 0.3s ease;
+}
+.menu {
+  transition: transform 0.3s ease;
 }
 
 /* === Component Styles (Keep minimal) === */
@@ -208,22 +239,6 @@ html {
   }
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.marquee {
-  animation: marquee 30s linear infinite;
-  white-space: nowrap;
-  font-family: var(--font-dancing-script), serif;
-}
-
 /* Scroll controls */
 .scroll-controls {
   position: sticky;
@@ -234,76 +249,9 @@ html {
   margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
 }
 
-/* === Utility Overrides & Prose Styles === */
-
-.hamburger div {
-  transition: all 0.3s ease;
-}
-.menu {
-  transition: transform 0.3s ease;
-}
-
-/* Layout Utilities  */
-.content-grid {
-  display: grid;
-  grid-template-columns: 40fr 5fr 5fr 40fr;
-  grid-template-rows: minmax(var(--slide-height), auto);
-}
-
-.sticky-col {
-  position: sticky;
-  top: 0; /* Adjust if needed, e.g., top-[var(--nav-height)] */
-  height: var(--slide-height);
-  scroll-snap-align: start;
-}
-
 /* Scroll Utilities  */
 [data-scroll-section] {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
-}
-
-/* MDX Prose Styles (Controlling Typography Plugin) --- */
-/* Plugin variables need to be defined to use theme variables */
-.mdx-prose {
-  @apply max-w-none;
-
-  /* Link plugin variables directly to the theme variables */
-  /* These will automatically switch with the .dark class */
-  --tw-prose-body: rgb(var(--foreground-rgb));
-  --tw-prose-headings: rgb(var(--foreground-rgb));
-  --tw-prose-lead: rgb(var(--foreground-rgb));
-  --tw-prose-links: rgb(var(--primary-rgb));
-  --tw-prose-bold: rgb(var(--foreground-rgb));
-  --tw-prose-counters: rgb(var(--foreground-rgb));
-  --tw-prose-bullets: rgb(var(--primary-rgb));
-  --tw-prose-hr: rgb(var(--border-medium-rgb));
-  --tw-prose-quotes: rgb(var(--foreground-rgb));
-  --tw-prose-quote-borders: rgb(var(--border-medium-rgb));
-  --tw-prose-captions: rgba(var(--foreground-rgb), 0.7);
-  --tw-prose-code: rgb(var(--secondary-rgb)); /* Inline code color */
-  --tw-prose-pre-code: inherit; /* Let highlighter handle text */
-  /* Code block background */
-  --tw-prose-pre-bg: rgb(var(--code-background-rgb));
-  --tw-prose-th-borders: rgb(var(--border-medium-rgb));
-  --tw-prose-td-borders: rgb(var(--border-subtle-rgb));
-
-  /* Invert variables, points to the same theme vars */
-  --tw-prose-invert-body: rgb(var(--foreground-rgb));
-  --tw-prose-invert-headings: rgb(var(--foreground-rgb));
-  --tw-prose-invert-lead: rgb(var(--foreground-rgb));
-  --tw-prose-invert-links: rgb(var(--primary-rgb));
-  --tw-prose-invert-bold: rgb(var(--foreground-rgb));
-  --tw-prose-invert-counters: rgb(var(--foreground-rgb));
-  --tw-prose-invert-bullets: rgb(var(--primary-rgb));
-  --tw-prose-invert-hr: rgb(var(--border-medium-rgb));
-  --tw-prose-invert-quotes: rgb(var(--foreground-rgb));
-  --tw-prose-invert-quote-borders: rgb(var(--border-medium-rgb));
-  --tw-prose-invert-captions: rgba(var(--foreground-rgb), 0.7);
-  --tw-prose-invert-code: rgb(var(--secondary-rgb));
-  --tw-prose-invert-pre-code: inherit;
-  --tw-prose-invert-pre-bg: rgb(var(--code-background-rgb));
-  --tw-prose-invert-th-borders: rgb(var(--border-medium-rgb));
-  --tw-prose-invert-td-borders: rgb(var(--border-subtle-rgb));
 }
