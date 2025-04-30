@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
+import { cn } from "../lib/utils";
 /*
 
 ? Revealing the detailList items when an experience is expanded, Step-by-Step Explanation:
@@ -15,7 +15,7 @@ import React, { useState } from "react";
 
 */
 
-const FanningList = ({ experiences }) => {
+const FanningListV2 = ({ experiences }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [focusedIndex, setFocusedIndex] = useState(null);
   const activeIndex = hoveredIndex !== null ? hoveredIndex : focusedIndex;
@@ -121,7 +121,7 @@ const FanningList = ({ experiences }) => {
   );
 };
 
-const FanningListV = ({ experiences }) => {
+const FanningList = ({ experiences }) => {
   // State to track the index of the currently hovered item
   const [hoveredIndex, setHoveredIndex] = useState(null);
   // State to track the index of the currently focused item (for accessibility via keyboard)
@@ -184,13 +184,15 @@ const FanningListV = ({ experiences }) => {
                   opacity: 1,
                 }),
               }
-            : {}; // No dynamic styles when no item is active
+            : {};
+
+        const siblingIndex = ` ${activeIndex !== null ? index : 0}`;
 
         return (
           <li
             key={index} // Using index as key is acceptable here if the list order is static
-            className="fanning-list-item block" // Apply base item styles
-            style={dynamicStyles} // Apply calculated dynamic styles
+            className={cn(["fanning-list-item", "block"])}
+            style={{ "--sibling-index": siblingIndex }} // Apply calculated dynamic styles
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
             onFocus={() => handleFocus(index)}

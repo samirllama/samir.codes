@@ -100,7 +100,6 @@ const TypefaceShowcase: React.FC = () => {
   }, []);
 
   const handleClick = (snippetId: string) => {
-    // Clear any existing timer for this snippet
     if (timers.current.has(snippetId)) {
       clearTimeout(timers.current.get(snippetId));
     }

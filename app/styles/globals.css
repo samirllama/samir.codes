@@ -44,6 +44,19 @@ body {
   min-height: 100vh;
 }
 
+/* :root {
+  --hdr-gradient: radial-gradient(
+    farthest-corner circle at 50% 50% in oklab,
+    oklch(44% 0.04 139) 0%, oklch(20% 0.04 135) 100%
+  );
+  --sdr-gradient: radial-gradient(
+    farthest-corner circle at 50% 50%,
+    #475843 0%, #0e1a07 100%
+  );
+
+  background: var(--hdr-gradient);
+} */
+
 body {
   /* Theme-aware Background and Text Color --- */
   /* Generic role-based variables, which get their values, from the theme class (.dark, .mocha-mousse) applied to the html tag. */
@@ -66,6 +79,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   overscroll-behavior: none !important;
+
+  &[page-type="detail"] {
+    background: radial-gradient(
+        circle at 35% 50%,
+        /* YOUR_COLOR_1 (consider using low opacity, e.g., rgba(R,G,B, 0.15)) */
+          rgba(255, 165, 0, 0.15),
+        /* Example: Semi-transparent Orange */ transparent 50%
+      ),
+      radial-gradient(
+        circle at 65% 50%,
+        /* YOUR_COLOR_2 (consider using low opacity) */ rgba(0, 128, 128, 0.15),
+        /* Example: Semi-transparent Teal */ transparent 50%
+      ),
+      radial-gradient(
+        circle at 50% 65%,
+        /* YOUR_COLOR_3 (consider using low opacity) */
+          rgba(221, 160, 221, 0.15),
+        /* Example: Semi-transparent Plum */ transparent 50%
+      );
+    background-attachment: fixed;
+  }
 }
 
 .font-mono {

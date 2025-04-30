@@ -14,6 +14,10 @@ const config: Config = {
     darkMode: 'class', // Using class-based dark mode
     theme: {
         extend: {
+            backgroundImage: {
+                'hdr-gradient':
+                    'radial-gradient(farthest-corner circle at 100% 0% in oklab, oklch(35% 0.09 136) 30% 49%, oklch(36% 0.18 312 / 0%) 100% 50%)',
+            },
             position: {
                 sticky: 'sticky',
                 fixed: 'fixed',
