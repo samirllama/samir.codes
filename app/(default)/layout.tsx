@@ -10,7 +10,7 @@ export default function DefaultLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">
       <Animate />
       <Header />
 
@@ -18,6 +18,6 @@ export default function DefaultLayout({
         <div className="pt-[65px] lg:pt-[70px]">{children}</div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

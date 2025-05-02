@@ -1,135 +1,139 @@
 /* app/styles/theme.css */
-
 @import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
 
 /* ========== Core CSS Variable Definitions ========== */
 
 :root {
-  /* === Base Color Palette === */
-  /* Base Hex Colors */
-  --accent-terra-cotta: #bc8f8f;
-  --accent-earth-green: #8fbc8f;
-  --accent-warm-tan: #d2b48c;
-  --accent-deep-ochre: #a0522d;
-  --accent-soft-grey: #c0c0c0;
-  --color_moth-green: #0e1b07;
-  --color_moth-brown: #35170c;
-  --color_moth-mousse: #9e7967;
-  --color_moth-light: #f7e8e1;
-  --color_moth-orange: #924622;
-  --color_white: #ffffff; /* Explicit white if needed */
-  --color_black: #000000; /* Explicit black if needed */
+  /* === Base OKLCH Color Definitions === */
+  /* Define base colors using their full oklch() string */
+  --oklch-moth-green: oklch(20.3% 0.037 138); /* #0e1b07 */
+  --oklch-moth-brown: oklch(24.6% 0.062 48); /* #35170c */
+  --oklch-moth-mousse: oklch(55.8% 0.053 51); /* #9e7967 */
+  --oklch-moth-light: oklch(93.5% 0.016 53); /* #f7e8e1 */
+  --oklch-moth-orange: oklch(47.9% 0.106 44); /* #924622 */
 
-  /* Base RGB Values (for use with Tailwind opacity) */
-  --rgb-moth-green: 14, 27, 7;
-  --rgb-moth-brown: 53, 23, 12;
-  --rgb-moth-mousse: 158, 121, 103;
-  --rgb-moth-light: 247, 232, 225;
-  --rgb-moth-orange: 146, 70, 34;
-  --rgb-accent-terra-cotta: 188, 143, 143;
-  --rgb-accent-earth-green: 143, 188, 143;
-  --rgb-accent-warm-tan: 210, 180, 140;
-  --rgb-accent-deep-ochre: 160, 82, 45;
-  --rgb-accent-soft-grey: 192, 192, 192;
-  --rgb-white: 255, 255, 255;
-  --rgb-black: 0, 0, 0;
+  --oklch-accent-terra-cotta: oklch(65.1% 0.06 25); /* #bc8f8f */
+  --oklch-accent-earth-green: oklch(74.1% 0.06 145); /* #8fbc8f */
+  --oklch-accent-warm-tan: oklch(77.5% 0.054 77); /* #d2b48c */
+  --oklch-accent-deep-ochre: oklch(51.2% 0.098 53); /* #a0522d */
+  --oklch-accent-soft-grey: oklch(79.2% 0 0); /* #c0c0c0 */
 
-  /* Monaspace RGB Variables */
-  --color-neon-primary-rgb: 0, 255, 0; /* Bright Green */
-  --color-argon-primary-rgb: 0, 255, 255; /* Cyan */
-  --color-xenon-primary-rgb: 255, 0, 255; /* Magenta */
-  --color-radon-primary-rgb: 255, 0, 0; /* Red */
-  --color-krypton-primary-rgb: 255, 255, 0; /* Yellow */
-  /* Define -dark vars pointing to primary, as there's only one theme */
-  --color-neon-dark-rgb: var(--color-neon-primary-rgb);
-  --color-argon-dark-rgb: var(--color-argon-primary-rgb);
-  --color-xenon-dark-rgb: var(--color-xenon-primary-rgb);
-  --color-radon-dark-rgb: var(--color-radon-primary-rgb);
-  --color-krypton-dark-rgb: var(--color-krypton-primary-rgb);
+  --oklch-white: oklch(100% 0 0);
+  --oklch-black: oklch(0% 0 0);
 
-  /* === Semantic Color Mapping === */
-  /* Uses vars defined in "Base RGB Values" section */
-  --color-surface-page-rgb: var(--rgb-moth-green);
-  --color-surface-card-rgb: var(--rgb-moth-brown); /* Card Background */
-  --color-surface-secondary-rgb: var(
-    --rgb-moth-brown
-  ); /* Alt Surfaces/Borders */
-  --color-text-default-rgb: var(--rgb-moth-light); /* Primary text */
-  --color-text-muted-rgb: var(--rgb-moth-mousse); /* Secondary/subtle text */
-  --color-text-inverted-rgb: var(
-    --rgb-moth-green
-  ); /* Text on light/accent backgrounds */
-  --color-accent-primary-rgb: var(--rgb-moth-orange); /* Primary Accent */
-  --color-accent-secondary-rgb: var(
-    --rgb-accent-deep-ochre
-  ); /* Secondary Accent */
-  --color-border-default-rgb: var(--rgb-moth-mousse); /* Default borders */
-  --color-border-subtle-rgb: var(
-    --rgb-moth-brown
-  ); /* Subtle borders (e.g., code blocks) */
-  --color-interactive-primary-rgb: var(
-    --rgb-accent-deep-ochre
-  ); /* Primary buttons/links */
-  --color-interactive-secondary-rgb: var(
-    --rgb-accent-warm-tan
-  ); /* Secondary buttons/links */
-  --color-interactive-muted-rgb: var(
-    --rgb-moth-mousse
-  ); /* Muted interactive elements */
-  --color-interactive-text-rgb: var(
-    --rgb-moth-light
-  ); /* Text on primary interactive elements */
-  --color-code-background-rgb: var(
-    --rgb-moth-brown
-  ); /* Code block background */
+  /* Monaspace OKLCH Variables */
+  --oklch-neon-primary: oklch(85% 0.3 145); /* Vibrant Green */
+  --oklch-argon-primary: oklch(85% 0.3 190); /* Cyan */
+  --oklch-xenon-primary: oklch(75% 0.3 330); /* Magenta */
+  --oklch-radon-primary: oklch(70% 0.3 25); /* Red */
+  --oklch-krypton-primary: oklch(95% 0.3 100); /* Yellow */
+  --oklch-neon-dark: var(--oklch-neon-primary);
+  --oklch-argon-dark: var(--oklch-argon-primary);
+  --oklch-xenon-dark: var(--oklch-xenon-primary);
+  --oklch-radon-dark: var(--oklch-radon-primary);
+  --oklch-krypton-dark: var(--oklch-krypton-primary);
 
-  --hdr-gradient: radial-gradient(
-    farthest-corner circle at 100% 0% in oklab,
-    oklch(35% 0.09 136) 30% 49%,
-    oklch(36% 0.18 312 / 0%) 100% 50%
-  );
+  /* === Semantic Color Mapping (LIGHT THEME) === */
+  --color-surface-page: var(--oklch-white); /* Light background */
+  --color-surface-card: var(--oklch-grey-light); /* Light card background */
+  --color-surface-secondary: var(--oklch-grey-light);
+  --color-text-default: var(--oklch-moth-orange); /* Dark text */
+  --color-text-muted: var(--oklch-moth-mousse); /* Muted text */
+  --color-text-inverted: var(--oklch-white); /* Text on dark backgrounds */
+  --color-accent-primary: var(--oklch-moth-orange); /* Keep accent */
+  --color-accent-secondary: var(--oklch-accent-deep-ochre); /* Keep accent */
+  --color-border-default: var(--oklch-accent-soft-grey); /* Lighter borders */
+  --color-border-subtle: var(--oklch-grey-light);
+  --color-interactive-primary: var(--oklch-accent-deep-ochre);
+  --color-interactive-secondary: var(--oklch-moth-orange);
+  --color-interactive-muted: var(--oklch-moth-mousse);
+  --color-interactive-text: var(--oklch-white); /* Text on buttons */
+  --color-code-background: var(--oklch-grey-light);
 
-  /* ==========================================================================
-                  === Semantic Colors ===
-   ========================================================================== */
-  --color-surface-page: rgb(var(--color-surface-page-rgb));
-  /* Secondary Dark BG/Borders */
-  --color-surface-secondary: var(--color_moth-brown);
-  --color-text-default: var(--color_moth-light);
-  --color-text-muted: var(--color_moth-mousse);
+  /* Map Monaspace vars */
+  --color-neon-primary: var(--oklch-neon-primary);
+  --color-argon-primary: var(--oklch-argon-primary);
+  --color-xenon-primary: var(--oklch-xenon-primary);
+  --color-radon-primary: var(--oklch-radon-primary);
+  --color-krypton-primary: var(--oklch-krypton-primary);
+  /* Define -dark vars for light theme (can be same as primary) */
+  --color-neon-dark: var(--oklch-neon-primary);
+  --color-argon-dark: var(--oklch-argon-primary);
+  --color-xenon-dark: var(--oklch-xenon-primary);
+  --color-radon-dark: var(--oklch-radon-primary);
+  --color-krypton-dark: var(--oklch-krypton-primary);
 
-  --color-accent: var(--accent-earth-green);
-  --color-accent-secondary: var(--accent-deep-ochre);
-  --color-header: var(--color_moth-green);
-  --color-text-secondary: rgb(var(--color_26)); /* Chocolate secondary text */
-  --color-interactive-primary: rgb(var(--color_26)); /* Chocolate buttons */
-  --color-interactive-secondary: var(--accent-warm-tan);
-  --color-coco: rgba(var(--color_dark-chocolate), 1);
-  --color-moth-orange: var(--color_moth-orange);
-  --color-interactive-text: rgb(var(--color_0)); /* White text for buttons */
-  --color-surface-card: rgb(var(--color_16)); /* Light grey/beige cards */
-  --color-border-default: rgb(var(--color_16)); /* Light grey/beige borders */
-  --color-neon-primary: rgb(var(--color-neon-dark-rgb));
-  --color-argon-primary: rgb(var(--color-argon-dark-rgb));
-  --color-xenon-primary: rgb(var(--color-xenon-dark-rgb));
-  --color-radon-primary: rgb(var(--color-radon-primary-rgb));
-  --color-krypton-primary: rgb(var(--color-krypton-primary-rgb));
-  /* ==========================================================================
-            === Semantic Colors END ===
-   ========================================================================== */
+  /* === Gradient (LIGHT THEME) === */
+--hdr-gradient: radial-gradient(
+  farthest-corner circle at 50% 50% in oklab,
+  oklch(44% 0.04 139) 0%,
+  oklch(20% 0.04 135) 100%
+);
 
-  /* === Shadows (Dark Theme Adjustments) === */
-  /* Using subtle light text color for highlights, darker for base/outer */
-  --shadow-highlight-rgb: var(--rgb-moth-light);
-  --shadow-base-rgb: var(--rgb-moth-brown);
-  --shadow-outer-rgb: var(--rgb-black); /* Use black for deep shadow */
+  --nerdy-gradient: radial-gradient(
+      circle at 35% 50%,
+      rgba(255, 165, 0, 0.15),
+      transparent 50%
+    ),
+    /* COLOR_2 (consider using low opacity) */
+      radial-gradient(
+        circle at 65% 50%,
+        rgba(0, 128, 128, 0.15),
+        transparent 50%
+      ),
+    /* COLOR_3 (consider using low opacity) */
+      radial-gradient(
+        circle at 50% 65%,
+        rgba(221, 160, 221, 0.15),
+        transparent 50%
+      ),
+    var(--color-surface-page);
+
+  /* === Shadows (LIGHT THEME) === */
+  /* Adjust RGB values for lighter shadows */
+  --shadow-highlight-rgb: 255, 255, 255; /* White */
+  --shadow-base-rgb: 200, 200, 200; /* Light Grey */
+  --shadow-outer-rgb: 150, 150, 150; /* Medium Grey */
 
   /* === Typography === */
-  /* Font Variables (referenced by layout.tsx & tailwind.config.ts) */
   --font-cinzel: "Cinzel", serif;
   --font-cinzel-deco: "Cinzel Decorative", serif;
   --font-dancing-script: "Dancing Script", cursive;
-  --font-geist-mono: "Geist Mono", monospace; /* Assumed name */
+  --font-sans: "Geist Mono", monospace; /* temp */
+
+  /* === Typography Scale === */
+  /* Utopian type scales
+   https://utopia.fyi/type/calculator?c=320,14,1.067,1200,16,1.414,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+  --type-scale-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
+  --type-scale-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
+  --type-scale-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
+  --type-scale-step-1: clamp(0.9338rem, 0.7592rem + 0.8727vw, 1.4138rem);
+  --type-scale-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
+  --type-scale-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
+  --type-scale-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
+  --type-scale-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 5.6525rem);
+
+  /* Utopian spacing scales
+   https://utopia.fyi/spacing/calculator?c=320,14,1.2,1800,18,1.25,5,2,&s=0.75,1.5|2|3|4,&g=s,l,xl,12 */
+
+  --spacing-xs: clamp(0.69rem, calc(0.65rem + 0.2vw), 0.88rem);
+  --spacing-s: clamp(0.88rem, calc(0.82rem + 0.27vw), 1.13rem);
+  --spacing-m: clamp(1.31rem, calc(1.23rem + 0.41vw), 1.69rem);
+  --spacing-l: clamp(1.75rem, calc(1.64rem + 0.54vw), 2.25rem);
+  --spacing-xl: clamp(2.63rem, calc(2.46rem + 0.81vw), 3.38rem);
+  --spacing-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
+
+  --spacing-range-xs-s: clamp(0.69rem, calc(0.59rem + 0.47vw), 1.13rem);
+  --spacing-range-s-m: clamp(0.88rem, calc(0.7rem + 0.88vw), 1.69rem);
+  --spacing-range-m-l: clamp(1.31rem, calc(1.11rem + 1.01vw), 2.25rem);
+  --spacing-range-l-xl: clamp(1.75rem, calc(1.4rem + 1.76vw), 3.38rem);
+  --spacing-range-xl-2xl: clamp(2.63rem, calc(2.22rem + 2.03vw), 4.5rem);
+
+  /* === Default Variable Font Settings === */
+  --pf-opsz: 1;
+  --pf-slnt: 0;
+  --pf-wght: 400;
 
   /* Core Spacing & Typography Tokens  */
   --spacing-base: 1rem;
@@ -152,7 +156,7 @@
   --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
 
   /* Layout Tokens  */
-  --nav-height: 3.75rem;
+  --nav-height:   --pf-opsz: 1;
   --max-width: 70rem;
   --slide-height: 100vh;
 
@@ -184,44 +188,50 @@
   );
 } /* End of :root */
 
-/* ========== Dark Theme Overrides ==========  */
+* {
 
-.dark {
-  --color-surface-page: var(--color_moth-green);
-  --color-surface-secondary: #35170c; /* Secondary Dark BG / Borders */
-  --color-accent: #924622;
-  --color-text-default: #f7e8e1; /* Light text for dark mode */
-  --color-text-muted: #9e7967;
+  font-synthesis: none;
+  font-variation-settings: "opsz" var(--pf-opsz),
+    /* Optical size: 0–1000 */ "slnt" var(--pf-slnt),
+    /* Slant: 0–10 */ "wght" var(--pf-wght); /* Weight: 0–1000 */
 }
+
+/* === DARK THEME OVERRIDES === */
+.dark {
+  /* === Semantic Color Mapping (DARK THEME) === */
+  --color-surface-page: var(--oklch-moth-green);
+  --color-surface-card: var(--oklch-moth-brown);
+  --color-surface-secondary: var(--oklch-moth-brown);
+  --color-text-default: var(--oklch-moth-light);
+  --color-text-muted: oklch(65% 0.03 51); /* Dark theme muted text */
+  --color-text-inverted: var(--oklch-moth-green);
+  --color-accent-primary: var(--oklch-moth-orange);
+  --color-accent-secondary: var(--oklch-accent-deep-ochre);
+  --color-border-default: var(--oklch-moth-mousse); /* Dark theme border */
+  --color-border-subtle: var(--oklch-moth-brown);
+  --color-interactive-primary: var(--oklch-accent-deep-ochre);
+  --color-interactive-secondary: var(--oklch-accent-warm-tan);
+  --color-interactive-muted: var(--oklch-moth-mousse);
+  --color-interactive-text: var(--oklch-moth-light);
+  --color-code-background: var(--oklch-moth-brown);
+
+  /* === Detail Page Gradient (DARK THEME) === */
+  --nerdy-gradient: radial-gradient(
+      farthest-corner circle at 50% 50% in oklab,
+      oklch(44% 0.04 139) 0%,
+      oklch(20% 0.04 135) 100%
+    ),
+    var(--color-surface-page);
+
+  /* === Shadows (DARK THEME) === */
+  --shadow-highlight-rgb: 247, 232, 225; /* moth-light */
+  --shadow-base-rgb: 53, 23, 12; /* moth-brown */
+  --shadow-outer-rgb: 0, 0, 0; /* black */
+} /* End of .dark */
 
 html {
-  color-scheme: light; /* Enforce light theme by default */
   scroll-behavior: smooth;
   font-size: 100%;
-}
-
-/* Marquee (Used in Header) */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.marquee {
-  animation: marquee 30s linear infinite;
-  white-space: nowrap;
-  font-family: var(--font-dancing-script), serif; /* Ensure font var is correct */
-}
-
-/* Hamburger Menu Base (Used by ui.module.css / MobileMenu) */
-.hamburger div {
-  transition: all 0.3s ease;
-}
-.menu {
-  transition: transform 0.3s ease;
 }
 
 /* === Component Styles (Keep minimal) === */

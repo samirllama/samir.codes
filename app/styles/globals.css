@@ -27,7 +27,411 @@
 
 /* === Tailwind v3 Directives  === */
 @tailwind base;
+
+/* === Base Layer Styles === */
+
+@layer base {
+  body,
+  input {
+    /* Default styles */
+    background-color: var(--color-surface-page);
+    --pf-opsz: 1;
+    --pf-slnt: 0;
+    --pf-wght: 1;
+  }
+
+  /* Detail Page Body Background */
+  body[page-type="detail"] {
+    background: var(--nerdy-gradient);
+    background-attachment: fixed;
+    /* Optional: Override base text color if gradient needs it */
+    /* color: var(--some-other-color); */
+  }
+
+  /* ... other base styles (headings, etc.) ... */
+}
+@layer base {
+  body,
+  input {
+    color: var(--color-text-default);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern" on, "liga" on;
+    font-size: var(--type-scale-step-0);
+    font-style: normal;
+    letter-spacing: normal; /* Base letter-spacing */
+    line-height: 1.325; /* 132.5% */
+
+    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
+      "wght" var(--pf-wght);
+    background-color: var(--color-surface-page);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    overscroll-behavior: none;
+  }
+
+  body[page-type="detail"] {
+    background: var(--nerdy-gradient);
+    background-attachment: fixed;
+  }
+
+  @media screen and (min-width: 40em) {
+    body,
+    input {
+      --pf-opsz: 20;
+    }
+  }
+  @media screen and (min-width: 45em) {
+    body,
+    input {
+      line-height: 1.4725;
+      --pf-opsz: 40;
+    } /* 147.25% */
+  }
+  @media screen and (min-width: 55em) {
+    body,
+    input {
+      line-height: 1.5;
+    } /* 150% */
+  }
+  @media screen and (min-width: 65em) {
+    body,
+    input {
+      --pf-opsz: 80;
+    }
+  }
+  @media screen and (min-width: 80em) {
+    body,
+    input {
+      line-height: 1.45;
+      --pf-opsz: 160;
+    } /* 145% */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p.welcome {
+    --pf-opsz: 250;
+  }
+  @media screen and (min-width: 30em) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p.welcome {
+      --pf-opsz: 400;
+    }
+  }
+  @media screen and (min-width: 35em) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p.welcome {
+      --pf-opsz: 600;
+    }
+  }
+  @media screen and (min-width: 50em) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p.welcome {
+      --pf-opsz: 850;
+    }
+  }
+  @media screen and (min-width: 70em) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p.welcome {
+      --pf-opsz: 1000;
+    }
+  }
+
+  strong,
+  bold {
+    /* Use strong, avoid custom 'bold' tag */
+    font-synthesis: none;
+    --pf-wght: 700; /* Apply weight override via variable */
+    /* Update variation settings */
+    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
+      "wght" var(--pf-wght);
+  }
+  em,
+  i,
+  blockquote p {
+    /* Use em */
+    font-style: italic;
+    font-synthesis: none;
+    --pf-slnt: 10; /* Apply slant override via variable */
+    /* Update variation settings */
+    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
+      "wght" var(--pf-wght);
+  }
+
+  /* Heading Specific Styles --- */
+  h1,
+  h2,
+  h3,
+  h4 {
+    padding-bottom: var(--spacing-xs);
+    /* Apply font variation settings */
+    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
+      "wght" var(--pf-wght);
+  }
+
+  h1 {
+    font-size: var(--type-scale-step-5);
+    line-height: var(--type-scale-step-5);
+    padding-bottom: var(--spacing-lg);
+    --pf-wght: 900; /* Override weight */
+    font-variation-settings: /* Re-apply with new weight */ "opsz"
+        var(--pf-opsz),
+      "slnt" var(--pf-slnt), "wght" var(--pf-wght);
+  }
+  @media screen and (min-width: 40em) {
+    h1 {
+      line-height: calc(var(--type-scale-step-5) * 0.825);
+    }
+  }
+  h1 span {
+    /* Style spans *within* h1 if needed */
+    --pf-wght: 100;
+    font-variation-settings: /* Apply specifically */ "opsz" var(--pf-opsz),
+      "slnt" var(--pf-slnt), "wght" var(--pf-wght);
+  }
+
+  h2 {
+    font-size: var(--type-scale-step-3);
+    line-height: var(--type-scale-step-3);
+    --pf-wght: 100; /* Override weight */
+    font-variation-settings: /* Re-apply */ "opsz" var(--pf-opsz),
+      "slnt" var(--pf-slnt), "wght" var(--pf-wght);
+  }
+
+  h3 {
+    font-size: var(--type-scale-step-2);
+    line-height: var(--type-scale-step-2);
+    --pf-wght: 700; /* Override weight */
+    font-variation-settings: /* Re-apply */ "opsz" var(--pf-opsz),
+      "slnt" var(--pf-slnt), "wght" var(--pf-wght);
+  }
+
+  h3 a {
+    text-decoration-thickness: 0.025em;
+  }
+
+  h4 {
+    font-size: var(--type-scale-step-0);
+    line-height: var(--type-scale-step-0);
+    letter-spacing: var(--tracking-wide); /* Use variable */
+    text-transform: uppercase;
+    --pf-wght: 560; /* Override weight */
+    font-variation-settings: /* Re-apply */ "opsz" var(--pf-opsz),
+      "slnt" var(--pf-slnt), "wght" var(--pf-wght);
+  }
+  h4 + p,
+  h4 + ul.tags {
+    /* Assuming .tags class might be used */
+    margin-top: -0.5rem;
+  }
+
+  /* Figcaption / Button Font Size --- */
+  figcaption,
+  button {
+    font-size: var(--type-scale-step--1);
+  }
+  figcaption {
+    margin-bottom: var(--spacing-l);
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .hero-text {
+    font-family: var(--font-cinzel), serif;
+    line-height: 1.2;
+    font-size: clamp(1.875rem, 0.82rem + 4.6vw, 5.625rem);
+    letter-spacing: -0.025em;
+
+    font-feature-settings: "ss01" 1;
+  }
+
+  .font-mono {
+    letter-spacing: 0.05em !important;
+  }
+
+  .will-change-transform {
+    transform: translateY(3.3446px) translateZ(0px);
+    will-change: transform;
+  }
+
+  .mdx-prose {
+    /* the correct semantic color vars defined in :root */
+    /* MDX Prose Styles (Controlling Typography Plugin) --- */
+    .mdx-prose {
+      @apply max-w-none;
+      --tw-prose-body: var(--color-text-default);
+      --tw-prose-body: rgb(var(--color-text-default-rgb));
+      --tw-prose-headings: rgb(var(--color-text-default-rgb));
+      --tw-prose-lead: rgb(var(--color-text-muted-rgb));
+      --tw-prose-links: rgb(
+        var(--color-accent-primary-rgb)
+      ); /* Using moth-orange */
+      --tw-prose-bold: rgb(var(--color-text-default-rgb));
+      --tw-prose-counters: rgb(var(--color-text-muted-rgb));
+      --tw-prose-bullets: rgb(
+        var(--color-accent-primary-rgb)
+      ); /* Using moth-orange */
+      --tw-prose-hr: rgb(
+        var(--color-border-default-rgb)
+      ); /* Using moth-mousse */
+      --tw-prose-quotes: rgb(var(--color-text-muted-rgb));
+      --tw-prose-quote-borders: rgb(var(--color-border-default-rgb));
+      --tw-prose-captions: rgb(var(--color-text-muted-rgb));
+      --tw-prose-code: rgb(
+        var(--color-accent-secondary-rgb)
+      ); /* Using deep-ochre */
+      --tw-prose-pre-code: inherit; /* Let syntax highlighter handle */
+      --tw-prose-pre-bg: rgb(
+        var(--color-code-background-rgb)
+      ); /* Using moth-brown */
+      --tw-prose-th-borders: rgb(var(--color-border-default-rgb));
+      --tw-prose-td-borders: rgb(
+        var(--color-border-subtle-rgb)
+      ); /* Using moth-brown */
+
+      /* Define invert vars pointing to the same values, just in case */
+      --tw-prose-invert-body: rgb(var(--color-text-default-rgb));
+      --tw-prose-invert-headings: rgb(var(--color-text-default-rgb));
+      --tw-prose-invert-lead: rgb(var(--color-text-muted-rgb));
+      --tw-prose-invert-links: rgb(var(--color-accent-primary-rgb));
+      --tw-prose-invert-bold: rgb(var(--color-text-default-rgb));
+      --tw-prose-invert-counters: rgb(var(--color-text-muted-rgb));
+      --tw-prose-invert-bullets: rgb(var(--color-accent-primary-rgb));
+      --tw-prose-invert-hr: rgb(var(--color-border-default-rgb));
+      --tw-prose-invert-quotes: rgb(var(--color-text-muted-rgb));
+      --tw-prose-invert-quote-borders: rgb(var(--color-border-default-rgb));
+      --tw-prose-invert-captions: rgb(var(--color-text-muted-rgb));
+      --tw-prose-invert-code: rgb(var(--color-accent-secondary-rgb));
+      --tw-prose-invert-pre-code: inherit;
+      --tw-prose-invert-pre-bg: rgb(var(--color-code-background-rgb));
+      --tw-prose-invert-th-borders: rgb(var(--color-border-default-rgb));
+      --tw-prose-invert-td-borders: rgb(var(--color-border-subtle-rgb));
+    }
+  }
+} /* End of @layer base */
+
 @tailwind components;
+
+/* === NEW Custom Components Layer === */
+@layer components {
+  /* Marquee (Used in Header) */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  .marquee {
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    font-family: var(--font-dancing-script), serif;
+  }
+
+  /* Hamburger Menu Base (Used by ui.module.css / MobileMenu) */
+  .hamburger div {
+    transition: all 0.3s ease;
+  }
+  .menu {
+    transition: transform 0.3s ease;
+  }
+
+  .project_list {
+    @media screen and (min-width: 55em) {
+      li.project {
+        display: grid;
+        grid-gap: 0 5%;
+        grid-template-columns: 33% 62%;
+        grid-template-areas: "head body";
+        padding: var(--spacing-2xl) 0;
+      }
+    }
+  }
+
+  .project_header {
+    grid-area: head;
+    padding-top: var(--spacing-lg);
+
+    > h2 {
+      font-size: var(--type-scale-step-3);
+    }
+  }
+
+  .project_body {
+    grid-area: body;
+    padding-top: var(--spacing-l);
+  }
+
+  .portfolio_intro {
+    font-size: var(--type-scale-step-2);
+    line-height: calc(var(--type-scale-step-2) * 1.125);
+    max-width: 50ch;
+
+    > a {
+      color: #333;
+      text-decoration-thickness: 0.05em;
+      text-underline-offset: 0.07em;
+      transition: color 0.25s ease, text-decoration-color 0.25s ease;
+    }
+  }
+
+  .detail-page-background {
+    background: radial-gradient(
+        circle at 35% 50%,
+        rgba(5, 88, 255, 0.15),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 65% 50%,
+        rgba(128, 0, 74, 0.15),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 50% 65%,
+        rgba(74, 128, 0, 0.15),
+        transparent 50%
+      );
+    background-attachment: fixed;
+  }
+} /* End of @layer components */
+
 @tailwind utilities;
 
 /* === Custom Style Imports (AFTER Tailwind directives for v3 JIT) === */
@@ -35,132 +439,6 @@
 @import "./utility-patterns.css";
 @import "./animations.css";
 @import "./mdx.css";
-
-/* === Base HTML/Body Styles === */
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  min-height: 100vh;
-}
-
-/* :root {
-  --hdr-gradient: radial-gradient(
-    farthest-corner circle at 50% 50% in oklab,
-    oklch(44% 0.04 139) 0%, oklch(20% 0.04 135) 100%
-  );
-  --sdr-gradient: radial-gradient(
-    farthest-corner circle at 50% 50%,
-    #475843 0%, #0e1a07 100%
-  );
-
-  background: var(--hdr-gradient);
-} */
-
-body {
-  /* Theme-aware Background and Text Color --- */
-  /* Generic role-based variables, which get their values, from the theme class (.dark, .mocha-mousse) applied to the html tag. */
-
-  background-color: var(--color-surface-page);
-  color: var(--color-text-default);
-
-  background-image: none;
-  /* Or 'scroll' if scrollable needed, but 'initial' is safer */
-  background-attachment: initial;
-
-  font-family: var(--font-cal-sans);
-  font-size: var(--fontSize-base);
-  line-height: var(--lineHeight-normal);
-
-  font-feature-settings: "ss01" 1;
-  font-feature-settings: "ss02" 1;
-  /* Standard browser normalization */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  overscroll-behavior: none !important;
-
-  &[page-type="detail"] {
-    background: radial-gradient(
-        circle at 35% 50%,
-        /* YOUR_COLOR_1 (consider using low opacity, e.g., rgba(R,G,B, 0.15)) */
-          rgba(255, 165, 0, 0.15),
-        /* Example: Semi-transparent Orange */ transparent 50%
-      ),
-      radial-gradient(
-        circle at 65% 50%,
-        /* YOUR_COLOR_2 (consider using low opacity) */ rgba(0, 128, 128, 0.15),
-        /* Example: Semi-transparent Teal */ transparent 50%
-      ),
-      radial-gradient(
-        circle at 50% 65%,
-        /* YOUR_COLOR_3 (consider using low opacity) */
-          rgba(221, 160, 221, 0.15),
-        /* Example: Semi-transparent Plum */ transparent 50%
-      );
-    background-attachment: fixed;
-  }
-}
-
-.font-mono {
-  letter-spacing: 0.05em !important;
-}
-
-.will-change-transform {
-  transform: translateY(3.3446px) translateZ(0px);
-  will-change: transform;
-}
-
-.hero-text {
-  font-family: var(--font-cinzel), serif;
-  line-height: 1.2; /* maps to leading-[1] */
-  /* text-transform: uppercase; */
-  font-size: clamp(1.875rem, 0.92rem + 4.9vw, 5.625rem);
-  letter-spacing: -0.025em;
-
-  /* stylistic set to activate */
-  font-feature-settings: "ss01" 1;
-  /* font-feature-settings: "ss02" 1; */
-}
-
-/* Basic reset */
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  background-color: var(--button-primary-fill);
-  color: var(--button-primary-text);
-  border: 1px solid var(--button-primary-border);
-  padding: 10px 20px; /* Example padding */
-  border-radius: 5px; /* Example border radius */
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease; /* Smooth transition for hover */
-}
-
-button:hover {
-  background-color: var(--button-primary-fill-hover);
-  border-color: var(--button-primary-border-hover);
-  color: var(--button-primary-text-hover);
-}
-
-/* Custom hover effects */
-.nav-item {
-  transition: all 0.2s ease-in-out;
-}
-
-/* Optional: Add subtle shadow to nav */
-.nav-shadow {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
 
 /* === lighting effect with pseudo-elements === */
 .bg-lighting::before {
@@ -178,91 +456,6 @@ button:hover {
   pointer-events: none;
 }
 
-/* === Highlighter Styles === */
-
-/* HighlighterItem Pseudo-elements */
-.highlighterItem::before {
-  content: "";
-  position: absolute;
-  width: 24rem; /* w-96 */
-  height: 24rem; /* h-96 */
-  left: -12rem; /* left-48 */
-  top: -12rem; /* top-48 */
-  background-color: rgb(var(--primary-rgb));
-  border-radius: 9999px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 500ms;
-  transform: translate(
-    var(--mouse-x, 0px),
-    var(--mouse-y, 0px)
-  ); /* Add fallback */
-  z-index: 30; /* Check z-index conflicts */
-  filter: blur(100px);
-}
-.highlighterItem::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 500ms;
-  /* Example subtle foreground color */
-  background: radial-gradient(
-    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(var(--foreground-rgb), 0.1),
-    transparent
-  );
-  z-index: 10; /* Check z-index conflicts */
-}
-
-/* HighlighterItem02 Pseudo-elements */
-.highlighterItem02::before {
-  content: "";
-  position: absolute;
-  width: 16rem; /* w-64 */
-  height: 16rem; /* h-64 */
-  left: -8rem; /* left-32 */
-  top: -8rem; /* top-32 */
-  background-color: rgb(var(--secondary-rgb));
-  border-radius: 9999px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 500ms;
-  transform: translate(var(--mouse-x, 0px), var(--mouse-y, 0px)); /* fallback */
-  z-index: 30;
-  filter: blur(64px);
-}
-
-.highlighterItem02::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 500ms;
-  background: radial-gradient(
-    250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
-    rgba(var(--foreground-rgb), 0.1),
-    transparent
-  );
-  z-index: 10;
-}
-
-/* Group hover effects */
-.group:hover .highlighterItem::before {
-  opacity: 0.1;
-}
-.group:hover .highlighterItem::after {
-  opacity: 0.3;
-}
-.group:hover .highlighterItem02::before {
-  opacity: 0.15;
-}
-.group:hover .highlighterItem02::after {
-  opacity: 0.3;
-}
-
 /* === Custom @layer definitions  === */
 
 @layer utilities {
@@ -271,88 +464,38 @@ button:hover {
   }
 }
 
-/* MDX Prose Styles (Controlling Typography Plugin) --- */
-/* Apply thin scrollbar specifically to code blocks */
-.mdx-prose figure[data-rehype-pretty-code-figure] > pre {
-  border: 1px solid rgb(var(--border-subtle-rgb));
-  border-radius: 6px;
-  padding: var(--spacing-md);
-  overflow-x: auto; /* Ensure horizontal scrolling is enabled */
-  font-size: 0.9em;
-  line-height: 1.6;
-  scrollbar-width: thin; /* Standard property */
-  scrollbar-color: rgba(var(--foreground-rgb), 0.5) transparent; /* Optional: Thumb/track color */
+/* === Transition Styles === */
+
+/* Style the old view during transition */
+::view-transition-old(root) {
+  animation: exit-fade 0.25s ease-out forwards;
+  /* Add 'forwards' to keep the final state */
 }
 
-/* Webkit scrollbar styling (optional but recommended for cross-browser) */
-.mdx-prose figure[data-rehype-pretty-code-figure] > pre::-webkit-scrollbar {
-  height: 6px; /* Height for horizontal scrollbar */
-  width: 6px; /* Width for vertical scrollbar (if it ever scrolls vertically) */
+/* Style the new view during transition */
+::view-transition-new(root) {
+  animation: enter-fade 0.25s ease-out 0.1s backwards;
+  /* Delay slightly, start from the first keyframe state */
 }
 
-.mdx-prose
-  figure[data-rehype-pretty-code-figure]
-  > pre::-webkit-scrollbar-track {
-  background: transparent; /* Or a subtle background color */
+@keyframes exit-fade {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98); /* Slight shrink */
+  }
 }
 
-.mdx-prose
-  figure[data-rehype-pretty-code-figure]
-  > pre::-webkit-scrollbar-thumb {
-  background-color: rgba(var(--foreground-rgb), 0.5); /* Match thumb color */
-  border-radius: 3px;
-  border: 1px solid transparent; /* Prevent border from adding size */
-  background-clip: content-box; /* Clip background to content area */
-}
-
-/* MDX Prose Styles (Controlling Typography Plugin) --- */
-/* Plugin variables need to be defined to use theme variables */
-.mdx-prose {
-  @apply max-w-none;
-
-  /* Map semantic variables defined in :root */
-  --tw-prose-body: rgb(var(--color-text-default-rgb));
-  --tw-prose-headings: rgb(var(--color-text-default-rgb));
-  --tw-prose-lead: rgb(var(--color-text-muted-rgb));
-  --tw-prose-links: rgb(
-    var(--color-accent-primary-rgb)
-  ); /* Using moth-orange */
-  --tw-prose-bold: rgb(var(--color-text-default-rgb));
-  --tw-prose-counters: rgb(var(--color-text-muted-rgb));
-  --tw-prose-bullets: rgb(
-    var(--color-accent-primary-rgb)
-  ); /* Using moth-orange */
-  --tw-prose-hr: rgb(var(--color-border-default-rgb)); /* Using moth-mousse */
-  --tw-prose-quotes: rgb(var(--color-text-muted-rgb));
-  --tw-prose-quote-borders: rgb(var(--color-border-default-rgb));
-  --tw-prose-captions: rgb(var(--color-text-muted-rgb));
-  --tw-prose-code: rgb(
-    var(--color-accent-secondary-rgb)
-  ); /* Using deep-ochre */
-  --tw-prose-pre-code: inherit; /* Let syntax highlighter handle */
-  --tw-prose-pre-bg: rgb(
-    var(--color-code-background-rgb)
-  ); /* Using moth-brown */
-  --tw-prose-th-borders: rgb(var(--color-border-default-rgb));
-  --tw-prose-td-borders: rgb(
-    var(--color-border-subtle-rgb)
-  ); /* Using moth-brown */
-
-  /* Define invert vars pointing to the same values, just in case */
-  --tw-prose-invert-body: rgb(var(--color-text-default-rgb));
-  --tw-prose-invert-headings: rgb(var(--color-text-default-rgb));
-  --tw-prose-invert-lead: rgb(var(--color-text-muted-rgb));
-  --tw-prose-invert-links: rgb(var(--color-accent-primary-rgb));
-  --tw-prose-invert-bold: rgb(var(--color-text-default-rgb));
-  --tw-prose-invert-counters: rgb(var(--color-text-muted-rgb));
-  --tw-prose-invert-bullets: rgb(var(--color-accent-primary-rgb));
-  --tw-prose-invert-hr: rgb(var(--color-border-default-rgb));
-  --tw-prose-invert-quotes: rgb(var(--color-text-muted-rgb));
-  --tw-prose-invert-quote-borders: rgb(var(--color-border-default-rgb));
-  --tw-prose-invert-captions: rgb(var(--color-text-muted-rgb));
-  --tw-prose-invert-code: rgb(var(--color-accent-secondary-rgb));
-  --tw-prose-invert-pre-code: inherit;
-  --tw-prose-invert-pre-bg: rgb(var(--color-code-background-rgb));
-  --tw-prose-invert-th-borders: rgb(var(--color-border-default-rgb));
-  --tw-prose-invert-td-borders: rgb(var(--color-border-subtle-rgb));
+@keyframes enter-fade {
+  from {
+    opacity: 0;
+    transform: scale(1.02); /* Slight grow */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -7,7 +7,6 @@ import TechStack from "@/components/tech-stack";
 import FanningList from "@/components/fanning-list";
 import TypefaceShowcase from "@/components/typeface-section";
 
-// Import Data
 import {
   myProjects,
   jobExperiences,
@@ -33,14 +32,16 @@ export default function Home() {
   return (
     <article>
       <HeroSection />
-      <TypefaceShowcase />
 
       <ProjectStack projects={myProjects} />
 
-      <FanningList experiences={jobExperiences} />
+      <section className="pb-[20vw] lg:pb-[12.5vw]">Portfolio</section>
 
       {/* === Professional Summary Section === */}
       <ProfessionalSummary experiences={jobExperiences} />
+
+      <FanningList experiences={jobExperiences} />
+      <TypefaceShowcase />
       <TechStack skillCategories={skillCategories} />
     </article>
   );

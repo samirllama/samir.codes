@@ -3,6 +3,7 @@
 // 'use client'; Uncomment later to add interactive elements
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { ScrollFadeWrapper } from "./ui/ScrollFadeWrapper";
 
 const imageSrc = "/assets/Relaxing-Forest-Setting.png";
 const imageAlt = "Samir Coder";
@@ -81,6 +82,36 @@ const HeroSection = () => {
           </h1>
         </div>
 
+        {/* === Image Area - Apply Wrapper === */}
+        <ScrollFadeWrapper
+          className={cn(
+            "absolute bottom-0 right-0 h-[60vh] w-[80vw]", // Positioning & Base Size
+            "overflow-hidden", // Keep overflow hidden on wrapper
+            "bg-[#000] bg-opacity-50", // Background/Opacity layer
+            "max-w-[1000px]" // Max width constraint
+          )}
+          // Optional: Customize fade duration/easing
+          // transitionDuration="duration-700"
+          // transitionTiming="ease-in-out"
+        >
+          <div className="absolute inset-0 opacity-[0.2] overflow-hidden">
+            {/* Keep opacity and overflow */}
+            <div className="absolute inset-0 w-full h-full">
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                className="object-cover filter saturate-50 hue-rotate-15deg"
+                priority={true}
+              />
+              {/* Overlay for text readability and blending */}
+              <div className="absolute inset-0 bg-color-surface-page bg-opacity-60" />
+            </div>
+          </div>
+        </ScrollFadeWrapper>
+        {/* === End Image Area === */}
+
+        {/* === Original Image version  === */}
         <div className="absolute bottom-0 right-0 h-[60vh] w-[80vw] overflow-hidden bg-[#000] bg-opacity-50 max-w-[1000px]">
           <div className="opacity-[0.2] absolute inset-0 overflow-hidden">
             {/* Inner container needed for Image fill (must be relative/absolute/etc. and have dimensions) */}

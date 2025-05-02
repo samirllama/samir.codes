@@ -11,40 +11,30 @@ const config: Config = {
         './components/**/*.{js,ts,jsx,tsx,mdx,css}',
         './app/**/*.{js,ts,jsx,tsx,mdx,css}',
     ],
-    darkMode: 'class', // Using class-based dark mode
+    darkMode: 'class',
     theme: {
         extend: {
             backgroundImage: {
-                'hdr-gradient':
-                    'radial-gradient(farthest-corner circle at 100% 0% in oklab, oklch(35% 0.09 136) 30% 49%, oklch(36% 0.18 312 / 0%) 100% 50%)',
+                'hdr-gradient': 'var(--nerdy-gradient)',
             },
-            position: {
-                sticky: 'sticky',
-                fixed: 'fixed',
-                absolute: 'absolute',
-                relative: 'relative',
-                static: 'static',
-            },
-
             colors: {
-                'custom-peach': '#f7e8e1',
                 'surface-page': 'var(--color-surface-page)',
                 'surface-card': 'var(--color-surface-card)',
+                'surface-secondary': 'var(--color-surface-secondary)',
                 'text-default': 'var(--color-text-default)',
-                header: 'var(--color-header)',
-                'text-secondary': 'var(--color-text-secondary)',
+                'text-muted': 'var(--color-text-muted)',
+                'text-inverted': 'var(--color-text-inverted)',
+                'accent-primary': 'var(--color-accent-primary)',
+                'accent-secondary': 'var(--color-accent-secondary)',
+                'border-default': 'var(--color-border-default)',
+                'border-subtle': 'var(--color-border-subtle)',
                 'interactive-primary': 'var(--color-interactive-primary)',
                 'interactive-secondary': 'var(--color-interactive-secondary)',
-                'border-default': 'var(--color-border-default)',
-                'button-text': 'var(--color-button-text)',
+                'interactive-muted': 'var(--color-interactive-muted)',
                 'interactive-text': 'var(--color-interactive-text)',
-                accent: 'var(--color-accent)',
-                "accent-secondary": 'var(--color-accent-secondary)',
-                'light-grey': 'rgb(var(--color-light-grey-rgb))',
-                'galactic-base': 'rgb(var(--color-galactic-base-rgb))',
-                'moth-terracotta': '#924622',
-                'moth-orange': 'var(--color_moth-orange)',
+                'code-background': 'var(--color-code-background)',
                 'neon-primary': 'var(--color-neon-primary)',
+                'neon-dark': 'var(--color-neon-dark)',
                 'radon-primary': 'var(--color-radon-primary)',
                 'krypton-primary': 'var(--color-krypton-primary)',
                 'argon-primary': 'var(--color-argon-primary)',
@@ -77,10 +67,9 @@ const config: Config = {
                 'cal-sans': ['Cal Sans', 'sans-serif'],
                 'cinzel': ['Cinzel', 'sans'],
                 'cinzel-deco': ['Cinzel Decorative', 'sans'],
-                mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+                mono: ['MonaspaceNeon', 'monospace'],
                 dancing: ['Dancing Script', 'cursive'],
 
-                // Monaspace Fonts ---
                 'mona-neon': ['MonaspaceNeon', 'monospace'],
                 'mona-argon': ['MonaspaceArgon', 'monospace'],
                 'mona-xenon': ['MonaspaceXenon', 'monospace'],
@@ -88,8 +77,19 @@ const config: Config = {
                 'mona-krypton': ['MonaspaceKrypton', 'monospace'],
 
             },
-
-            // Custom Shadows (Using CSS Variables) ---
+            fontSize: {
+                'step--2': 'var(--type-scale-step--2)',
+                'step--1': 'var(--type-scale-step--1)',
+                'step-0': 'var(--type-scale-step-0)',
+                'step-1': 'var(--type-scale-step-1)',
+                'step-2': 'var(--type-scale-step-2)',
+                'step-3': 'var(--type-scale-step-3)',
+                'step-4': 'var(--type-scale-step-4)',
+                'step-5': 'var(--type-scale-step-5)',
+            },
+            letterSpacing: {
+                wide: 'var(--tracking-wide)',
+            },
             boxShadow: {
                 'default': "var(--shadow-default)",
                 "clay-light": `

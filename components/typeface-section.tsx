@@ -140,7 +140,7 @@ const TypefaceShowcase: React.FC = () => {
             style={{ opacity: 1, willChange: "opacity" }}
           >
             <div
-              className={cn(
+              className={cn([
                 "cursor-pointer select-none",
                 // Responsive text size
                 "text-[max(1.5rem,min(3rem,3vw))] leading-[1]",
@@ -148,11 +148,10 @@ const TypefaceShowcase: React.FC = () => {
                 "py-3 lg:py-4 xl:py-5", // Padding for vertical spacing
                 "whitespace-nowrap relative min-w-full",
                 "transform-gpu",
-                // Apply dynamic classes from snippet data:
-                // `text-${snippet.typeface}-primary`,
-                "text-neon-primary",
-                // `font-mona-${snippet.typeface}`,
-                "font-mona-xenon",
+                `text-${snippet.typeface}-primary`,
+                // "text-neon-primary",
+                `font-mona-${snippet.typeface}`,
+                // "font-mona-xenon",
                 snippet.ghostStateClass,
                 snippet.animationClass,
                 `selection:bg-${snippet.typeface}-dark`,
@@ -161,8 +160,8 @@ const TypefaceShowcase: React.FC = () => {
                   ? "self-start text-left left-0"
                   : "self-end text-right right-0",
 
-                "glowtext"
-              )}
+                "glowtext",
+              ])}
               onClick={() => handleClick(snippet.id)}
             >
               <div className="transform-gpu" style={{ transform: "none" }}>

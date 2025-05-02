@@ -9,11 +9,18 @@ import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
+import { BodyAttributeManager } from "@/components/BodyAttributeManager";
 
 export const metadata: Metadata = {
   title: "Samir Codes",
   description: "Personal website and portfolio",
 };
+
+const defaultSans = Geist_Mono({
+  display: "swap",
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
 
 const cinzel = Cinzel({
   weight: ["400", "700", "900"], // Choose the weights
@@ -23,7 +30,7 @@ const cinzel = Cinzel({
 });
 
 const cinzelDecorative = Cinzel_Decorative({
-  weight: ["400", "700", "900"], // Choose the weights
+  weight: ["400", "700", "900"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-cinzel-deco",
@@ -34,11 +41,6 @@ const dancingScript = Dancing_Script({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-dancing-script",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -52,25 +54,24 @@ export default function RootLayout({
       className="scroll-smooth scrollbar-thin"
       suppressHydrationWarning
     >
+      <BodyAttributeManager />
       <body
-        className={cn(
+        className={cn([
           cinzel.variable,
           cinzelDecorative.variable,
           dancingScript.variable,
-          geistMono.variable,
+          defaultSans.variable,
           "antialiased",
-          "tracking-tight"
-        )}
+          "tracking-tight",
+        ])}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark" // Ensures .dark is applied initially if no preference
+          defaultTheme="light" // Ensures .dark is applied initially
           enableSystem={true}
           themes={["dark"]}
         >
-          <div className="flex flex-col min-h-screen overflow-hidden supports-[overflow:clip]:overflow-clip mx-4">
-            {children}
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>

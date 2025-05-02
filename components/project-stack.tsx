@@ -16,7 +16,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
     <section>
       <div className="pb-[20vw] lg:pb-[12.5vw]">
         <h2 className="font-mono uppercase tracking-tight leading-none text-[10px] mb-3 lg:mb-3 pb-0">
-          Some Of My Projects
+          Overview of work/projects
         </h2>
 
         {/* The list of projects */}
