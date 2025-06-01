@@ -310,3 +310,123 @@
     transform: translate3d(14px, 0, 0) scale(1.2);
   }
 }
+
+/* Initial states for anim-in classes, applied when NOT active */
+.anim-in-fade-up {
+  --translateY: 14px;
+  opacity: 0; /* Add opacity for fade effect */
+}
+.anim-in-fade-down {
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-fade-right {
+  --translateX: -14px;
+  opacity: 0;
+}
+.anim-in-fade-left {
+  --translateX: 14px;
+  opacity: 0;
+}
+.anim-in-fade-up-right {
+  --translateX: -14px;
+  --translateY: 14px;
+  opacity: 0;
+}
+.anim-in-fade-up-left {
+  --translateX: 14px;
+  --translateY: 14px;
+  opacity: 0;
+}
+.anim-in-fade-down-right {
+  --translateX: -14px;
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-fade-down-left {
+  --translateX: 14px;
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-zoom-in-up {
+  --translateY: 14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-down {
+  --translateY: -14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-right {
+  --translateX: -14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-left {
+  --translateX: 14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-out-up {
+  --translateY: 14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-down {
+  --translateY: -14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-right {
+  --translateX: -14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-left {
+  --translateX: 14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+
+/* Common transition for all anim-in elements */
+/* Apply this to elements that use anim-in-* and transform-custom */
+.anim-in {
+  transition: transform 0.8s var(--alias-easeOut),
+    opacity 0.8s var(--alias-easeOut);
+  will-change: transform, opacity;
+}
+
+/* Final states when the parent is-active and html is-ready */
+/* These should override the initial states to their "normal" values */
+html.is-ready .scroll-object.is-active .anim-in-fade-up,
+html.is-ready .scroll-object.is-active .anim-in-fade-down,
+html.is-ready .scroll-object.is-active .anim-in-fade-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-left,
+html.is-ready .scroll-object.is-active .anim-in-fade-up-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-up-left,
+html.is-ready .scroll-object.is-active .anim-in-fade-down-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-down-left,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-up,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-down,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-right,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-left,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-up,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-down,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-right,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-left {
+  --translateX: 0;
+  --translateY: 0;
+  --rotate: 0;
+  --scaleX: 1;
+  --scaleY: 1;
+  opacity: 1;
+}

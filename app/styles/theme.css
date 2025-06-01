@@ -5,11 +5,11 @@
 
 :root {
   /* === Base OKLCH Color Definitions === */
-  /* Define base colors using their full oklch() string */
+  /* ... (Your existing OKLCH color definitions) ... */
   --oklch-moth-green: oklch(20.3% 0.037 138); /* #0e1b07 */
   --oklch-moth-brown: oklch(24.6% 0.062 48); /* #35170c */
   --oklch-moth-mousse: oklch(55.8% 0.053 51); /* #9e7967 */
-  --oklch-moth-light: oklch(93.5% 0.016 53); /* #f7e8e1 */
+  --oklch-moth-light: oklch(93.5% 0.016 53);
   --oklch-moth-orange: oklch(47.9% 0.106 44); /* #924622 */
 
   --oklch-accent-terra-cotta: oklch(65.1% 0.06 25); /* #bc8f8f */
@@ -34,21 +34,31 @@
   --oklch-krypton-dark: var(--oklch-krypton-primary);
 
   /* === Semantic Color Mapping (LIGHT THEME) === */
-  --color-surface-page: var(--oklch-white); /* Light background */
-  --color-surface-card: var(--oklch-grey-light); /* Light card background */
-  --color-surface-secondary: var(--oklch-grey-light);
-  --color-text-default: var(--oklch-moth-orange); /* Dark text */
+  --color-surface-page: var(--oklch-moth-green); /* Light background */
+  --color-surface-card: var(
+    --oklch-moth-light
+  ); /* Assuming moth-light for light card background */
+  --color-surface-secondary: var(
+    --oklch-moth-light
+  ); /* Assuming moth-light for light surface secondary */
+  --color-text-default: var(
+    --oklch-white
+  ); /* Dark text (on green background, white is better) */
   --color-text-muted: var(--oklch-moth-mousse); /* Muted text */
   --color-text-inverted: var(--oklch-white); /* Text on dark backgrounds */
   --color-accent-primary: var(--oklch-moth-orange); /* Keep accent */
   --color-accent-secondary: var(--oklch-accent-deep-ochre); /* Keep accent */
   --color-border-default: var(--oklch-accent-soft-grey); /* Lighter borders */
-  --color-border-subtle: var(--oklch-grey-light);
+  --color-border-subtle: var(
+    --oklch-moth-light
+  ); /* Assuming moth-light for subtle borders */
   --color-interactive-primary: var(--oklch-accent-deep-ochre);
   --color-interactive-secondary: var(--oklch-moth-orange);
   --color-interactive-muted: var(--oklch-moth-mousse);
   --color-interactive-text: var(--oklch-white); /* Text on buttons */
-  --color-code-background: var(--oklch-grey-light);
+  --color-code-background: var(
+    --oklch-moth-light
+  ); /* Assuming moth-light for code background */
 
   /* Map Monaspace vars */
   --color-neon-primary: var(--oklch-neon-primary);
@@ -62,13 +72,13 @@
   --color-xenon-dark: var(--oklch-xenon-primary);
   --color-radon-dark: var(--oklch-radon-primary);
   --color-krypton-dark: var(--oklch-krypton-primary);
-
+  --initial-bg-color: var(--oklch-white); /* Start with white */
   /* === Gradient (LIGHT THEME) === */
---hdr-gradient: radial-gradient(
-  farthest-corner circle at 50% 50% in oklab,
-  oklch(44% 0.04 139) 0%,
-  oklch(20% 0.04 135) 100%
-);
+  --hdr-gradient: radial-gradient(
+    farthest-corner circle at 50% 50% in oklab,
+    oklch(44% 0.04 139) 0%,
+    oklch(20% 0.04 135) 100%
+  );
 
   --nerdy-gradient: radial-gradient(
       circle at 35% 50%,
@@ -98,13 +108,9 @@
   /* === Typography === */
   --font-cinzel: "Cinzel", serif;
   --font-cinzel-deco: "Cinzel Decorative", serif;
-  --font-dancing-script: "Dancing Script", cursive;
   --font-sans: "Geist Mono", monospace; /* temp */
 
   /* === Typography Scale === */
-  /* Utopian type scales
-   https://utopia.fyi/type/calculator?c=320,14,1.067,1200,16,1.414,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-
   --type-scale-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
   --type-scale-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
   --type-scale-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
@@ -112,17 +118,20 @@
   --type-scale-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
   --type-scale-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
   --type-scale-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
-  --type-scale-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 5.6525rem);
+  --type-scale-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 4.7125rem);
 
-  /* Utopian spacing scales
-   https://utopia.fyi/spacing/calculator?c=320,14,1.2,1800,18,1.25,5,2,&s=0.75,1.5|2|3|4,&g=s,l,xl,12 */
-
+  /* Utopian spacing scales */
   --spacing-xs: clamp(0.69rem, calc(0.65rem + 0.2vw), 0.88rem);
   --spacing-s: clamp(0.88rem, calc(0.82rem + 0.27vw), 1.13rem);
   --spacing-m: clamp(1.31rem, calc(1.23rem + 0.41vw), 1.69rem);
   --spacing-l: clamp(1.75rem, calc(1.64rem + 0.54vw), 2.25rem);
   --spacing-xl: clamp(2.63rem, calc(2.46rem + 0.81vw), 3.38rem);
   --spacing-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
+
+  /* Explicitly define --spacing-sm and --spacing-md to match utility-patterns.css */
+
+  --spacing-sm: var(--spacing-s);
+  --spacing-md: var(--spacing-m);
 
   --spacing-range-xs-s: clamp(0.69rem, calc(0.59rem + 0.47vw), 1.13rem);
   --spacing-range-s-m: clamp(0.88rem, calc(0.7rem + 0.88vw), 1.69rem);
@@ -133,105 +142,159 @@
   /* === Default Variable Font Settings === */
   --pf-opsz: 1;
   --pf-slnt: 0;
-  --pf-wght: 400;
+  --pf-wght: 300;
 
-  /* Core Spacing & Typography Tokens  */
+  /* Core Spacing & Typography Tokens */
   --spacing-base: 1rem;
-  --spacing-xs: calc(var(--spacing-base) * 0.5);
-  --spacing-sm: calc(var(--spacing-base) * 0.75);
-  --spacing-md: var(--spacing-base);
-  --spacing-lg: calc(var(--spacing-base) * 1.5);
-  --spacing-xl: calc(var(--spacing-base) * 2);
-  --spacing-2xl: calc(var(--spacing-base) * 3);
 
-  --font-cal-sans: "Cal Sans", sans-serif;
-
-  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
-  --fontSize-sm: clamp(0.89rem, 0.95cqw + 0.7rem, 1.13rem);
-  --fontSize-xs: clamp(0.8rem, 0.91cqw + 0.6rem, 0.98rem);
-  --fontSize-h1: clamp(2.5rem, 5vw, 3.5rem);
-  --fontSize-h2: clamp(2rem, 4vw, 3rem);
-  --fontSize-h3: clamp(1.75rem, 3vw, 2.5rem);
-  --fontSize-h4: clamp(1.5rem, 2.5vw, 2rem);
-  --fontSize-base: clamp(1rem, 1.05cqw + 0.8rem, 1.25rem);
-
-  /* Layout Tokens  */
-  --nav-height:   --pf-opsz: 1;
+  /* Layout Tokens */
+  --nav-height: 5rem;
   --max-width: 70rem;
   --slide-height: 100vh;
 
-  --bounce: linear(
-    0,
-    0.009 1%,
-    0.04 2.1%,
-    0.093 3.3%,
-    0.164 4.5%,
-    0.324 6.7%,
-    0.807 12.6%,
-    0.935 14.4%,
-    1.037 16.1%,
-    1.12 17.8%,
-    1.179 19.4%,
-    1.22 21%,
-    1.245 22.7%,
-    1.253 25%,
-    1.233 27.6%,
-    1.189 30.3%,
-    1.058 36.6%,
-    1.004 39.7%,
-    0.96 43.2%,
-    0.939 46.7%,
-    0.941 52%,
-    0.998 64%,
-    1.015 70.6%,
+  /* Global Transform Variables (for .transform-custom class) */
+  --translateX: 0;
+  --translateY: 0;
+  --rotate: 0;
+  --scaleX: 1;
+  --scaleY: 1;
+
+  --minSize: 320;
+  --maxSize: 1440;
+  --media-d: 1440px; /* desktop */
+  --media-l: 1439px; /* large laptop/tablet landscape */
+  --media-t: 1024px; /* tablet portrait */
+  --media-tp: 1024px; /* tablet portrait (duplicate, keep one or alias) */
+  --media-m: 767px; /* mobile landscape/small tablet */
+  --media-mp: 600px; /* mobile portrait */
+  --media-nom: 768px; /* "no mobile" breakpoint */
+
+  --alias-grey10: rgba(196, 196, 196, 0.1);
+  --alias-white20: rgba(255, 255, 255, 0.2);
+  --alias-white25: rgba(255, 255, 255, 0.25);
+  --alias-white85: rgba(255, 255, 255, 0.85);
+  --alias-black10: rgba(0, 0, 0, 0.1);
+  --alias-black20: rgba(0, 0, 0, 0.2);
+  --alias-black30: rgba(0, 0, 0, 0.3);
+  --alias-black40: rgba(0, 0, 0, 0.4);
+  --alias-black50: rgba(0, 0, 0, 0.5);
+
+  --alias-theme: #000; /* From original HTML root */
+  --alias-dark: #000; /* From original HTML root */
+  --alias-light: #fff; /* From original HTML root */
+
+  /* New Easing Aliases (Referenced by Tailwind.config.ts) */
+  --alias-easeOut: cubic-bezier(0.43, 0.195, 0.02, 1);
+  --alias-easeOut2: cubic-bezier(0.77, 0, 0.175, 1);
+  --alias-easeOut3: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --alias-easeOutSlow: cubic-bezier(
+    0.43,
+    0.195,
+    0.02,
     1
-  );
-} /* End of :root */
+  ); /* Duplicate of easeOut, ensure intent */
 
-* {
+  /* Dynamic values and should be set by JS on the HTML element */
+  --vw: 1px; /* Default, will be overridden by JS */
+  --vh: 1px; /* Default, will be overridden by JS */
 
-  font-synthesis: none;
-  font-variation-settings: "opsz" var(--pf-opsz),
-    /* Optical size: 0–1000 */ "slnt" var(--pf-slnt),
-    /* Slant: 0–10 */ "wght" var(--pf-wght); /* Weight: 0–1000 */
+  --unit-vw: calc(var(--vw) / 100);
+  --unit-vhfix: calc(var(--vh) / 100);
+  --unit-vr: calc(15 / 1440 * var(--vw));
+  --unit-fx: calc(var(--vw) / 1440);
+  --unit-fy: calc(var(--vh) / 900);
+  --unit-c: calc(var(--vw) / 14);
+
+  --baseColor: var(--alias-dark);
+  --baseBackground: var(--alias-light);
+
+  --alias-between: space-between;
+  --alias-around: space-around;
+  --alias-evenly: space-evenly;
+  --alias-start: flex-start;
+  --alias-end: flex-end;
+  --alias-fit: 100%;
+  --alias-current: currentColor;
+  --alias-abs: absolute;
+  --alias-col: column;
+  --alias-trans: transparent;
+  /* Line Heights */
+  --lineHeight-tight: 1.1; /* Example value, adjust as needed */
+  --lineHeight-normal: 1.5;
+
+  /* Font Sizes (Mapping to Utopian scale) */
+  --fontSize-h1: var(--type-scale-step-5);
+  --fontSize-h2: var(--type-scale-step-4);
+  --fontSize-h3: var(--type-scale-step-3);
+  --fontSize-h4: var(--type-scale-step-2);
+  --fontSize-sm: var(--type-scale-step-0);
+  --fontSize-xs: var(--type-scale-step--1);
+
+  /* Bounce easing for animations */
+  --bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* TODO: adjust */
 }
 
-/* === DARK THEME OVERRIDES === */
+/* Dark Theme Overrides */
 .dark {
-  /* === Semantic Color Mapping (DARK THEME) === */
-  --color-surface-page: var(--oklch-moth-green);
-  --color-surface-card: var(--oklch-moth-brown);
-  --color-surface-secondary: var(--oklch-moth-brown);
-  --color-text-default: var(--oklch-moth-light);
-  --color-text-muted: oklch(65% 0.03 51); /* Dark theme muted text */
-  --color-text-inverted: var(--oklch-moth-green);
+  --color-surface-page: var(--oklch-black);
+  --color-surface-card: var(--oklch-moth-green);
+  --color-surface-secondary: var(--oklch-moth-green);
+  --color-text-default: var(--oklch-white);
+  --color-text-muted: var(--oklch-moth-mousse);
+  --color-text-inverted: var(--oklch-black);
   --color-accent-primary: var(--oklch-moth-orange);
   --color-accent-secondary: var(--oklch-accent-deep-ochre);
-  --color-border-default: var(--oklch-moth-mousse); /* Dark theme border */
-  --color-border-subtle: var(--oklch-moth-brown);
+  --color-border-default: var(--oklch-accent-soft-grey);
+  --color-border-subtle: var(--oklch-moth-green);
   --color-interactive-primary: var(--oklch-accent-deep-ochre);
-  --color-interactive-secondary: var(--oklch-accent-warm-tan);
+  --color-interactive-secondary: var(--oklch-moth-orange);
   --color-interactive-muted: var(--oklch-moth-mousse);
-  --color-interactive-text: var(--oklch-moth-light);
-  --color-code-background: var(--oklch-moth-brown);
+  --color-interactive-text: var(--oklch-white);
+  --color-code-background: var(--oklch-moth-green);
 
-  /* === Detail Page Gradient (DARK THEME) === */
+  /* Dark Theme Monaspace vars */
+  --color-neon-primary: var(--oklch-neon-dark);
+  --color-argon-primary: var(--oklch-argon-dark);
+  --color-xenon-primary: var(--oklch-xenon-dark);
+  --color-radon-primary: var(--oklch-radon-dark);
+  --color-krypton-primary: var(--oklch-krypton-dark);
+  /* Ensure -dark vars are distinct if needed for dark theme */
+  --color-neon-dark: var(--oklch-neon-dark);
+  --color-argon-dark: var(--oklch-argon-dark);
+  --color-xenon-dark: var(--oklch-xenon-dark);
+  --color-radon-dark: var(--oklch-radon-dark);
+  --color-krypton-dark: var(--oklch-krypton-dark);
+
+  /* Dark theme gradient */
+  --hdr-gradient: radial-gradient(
+    farthest-corner circle at 50% 50% in oklab,
+    oklch(20% 0.04 135) 0%,
+    oklch(5% 0.02 130) 100%
+  );
+
   --nerdy-gradient: radial-gradient(
-      farthest-corner circle at 50% 50% in oklab,
-      oklch(44% 0.04 139) 0%,
-      oklch(20% 0.04 135) 100%
+      circle at 35% 50%,
+      rgba(255, 165, 0, 0.05),
+      transparent 50%
     ),
+    /* COLOR_2 */
+      radial-gradient(
+        circle at 65% 50%,
+        rgba(0, 128, 128, 0.05),
+        transparent 50%
+      ),
+    /* COLOR_3 */
+      radial-gradient(
+        circle at 50% 65%,
+        rgba(221, 160, 221, 0.05),
+        transparent 50%
+      ),
     var(--color-surface-page);
 
-  /* === Shadows (DARK THEME) === */
-  --shadow-highlight-rgb: 247, 232, 225; /* moth-light */
-  --shadow-base-rgb: 53, 23, 12; /* moth-brown */
-  --shadow-outer-rgb: 0, 0, 0; /* black */
-} /* End of .dark */
-
-html {
-  scroll-behavior: smooth;
-  font-size: 100%;
+  /* Dark theme shadows */
+  --shadow-highlight-rgb: 70, 70, 70;
+  --shadow-base-rgb: 30, 30, 30;
+  --shadow-outer-rgb: 0, 0, 0;
 }
 
 /* === Component Styles (Keep minimal) === */
@@ -265,7 +328,7 @@ html {
   margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
 }
 
-/* Scroll Utilities  */
+/* Scroll Utilities */
 [data-scroll-section] {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;

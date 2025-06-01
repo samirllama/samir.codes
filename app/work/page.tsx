@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ScrollFadeWrapper } from "@/components/ui/ScrollFadeWrapper";
-import { cn } from "@/lib/utils";
+import DeveloperLanding from "./claude.jsx";
 
 import MobileNavToggle from "@/components/ui/mobile-nav";
 
 const borderRadius = "rounded-md"; // Assuming $border-radius
-const spacingS = "4"; // Tailwind's spacing unit 4 (1rem = 16px)
+const spacingS = 2; // Assuming $border-radius
 
 const WorkPage: React.FC = () => {
   return (
@@ -24,7 +23,7 @@ const WorkPage: React.FC = () => {
               src="/logo.svg"
               alt="SC logo"
               fill
-              className={`${borderRadius} mb-${spacingS}`}
+              className={`${borderRadius} mb-4`}
             /> */}
             LOGO HERE
           </Link>
@@ -32,6 +31,7 @@ const WorkPage: React.FC = () => {
         <MobileNavToggle /> {/* === MobileNavToggle === */}
       </header>
 
+      <DeveloperLanding />
       {/* === Portfolio section === */}
       <div className="portfolio mt-8">
         <h1 className="headline font-bold mb-4 font-mona-argon">

@@ -1,15 +1,13 @@
 // app/layout.tsx
-import {
-  Cinzel,
-  Cinzel_Decorative,
-  Dancing_Script,
-  Geist_Mono,
-} from "next/font/google";
+import { Cinzel, Cinzel_Decorative, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
-import { BodyAttributeManager } from "@/components/BodyAttributeManager";
+import {
+  BodyAttributeManager,
+  HTMLAttributeManager,
+} from "@/components/AttributeManager";
 
 export const metadata: Metadata = {
   title: "Samir Codes",
@@ -17,6 +15,7 @@ export const metadata: Metadata = {
 };
 
 const defaultSans = Geist_Mono({
+  weight: ["500", "600", "700", "800"],
   display: "swap",
   variable: "--font-sans",
   subsets: ["latin"],
@@ -36,30 +35,19 @@ const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-deco",
 });
 
-const dancingScript = Dancing_Script({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-dancing-script",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="scroll-smooth scrollbar-thin"
-      suppressHydrationWarning
-    >
+    <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
+      <HTMLAttributeManager />
       <BodyAttributeManager />
       <body
         className={cn([
           cinzel.variable,
           cinzelDecorative.variable,
-          dancingScript.variable,
           defaultSans.variable,
           "antialiased",
           "tracking-tight",
@@ -67,10 +55,11 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light" // Ensures .dark is applied initially
+          defaultTheme="dark"
           enableSystem={true}
-          themes={["dark"]}
+          themes={["dark", "light"]}
         >
+          <div className="scroll-watcher" />
           {children}
         </ThemeProvider>
       </body>
