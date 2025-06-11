@@ -11,8 +11,12 @@ import {
   ArrowRight,
   ExternalLink,
 } from "lucide-react";
+import Image from "next/image";
 
-export default function DeveloperLanding() {
+const borderRadius = "rounded-md";
+const spacingS = 2;
+
+export default function DevLanding() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -69,7 +73,7 @@ export default function DeveloperLanding() {
         <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-black/20 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Claude.dev
+              Samir.codes
             </div>
             <div className="flex gap-6 items-center">
               <a
@@ -154,6 +158,153 @@ export default function DeveloperLanding() {
           </div>
         </section>
 
+        <section className="py-18 px-6 portfolio">
+          <h1 className="font-bold py-8 font-mona-neon">My portfolio</h1>
+          <p className="portfolio_intro font-mona-argon">
+            I’ve led teams big and small, and worked with large scale,
+            performant and enterprise level applications. I’m a software
+            engineer passionate about solving complex problems and creating
+            technology that improves lives.
+            {/* Email link */}
+            <a
+              href="mailto:samirllama@gmail.com"
+              className="text-blue-600 hover:underline"
+            >
+              Always love to chat about new and exciting opportunities
+            </a>
+            !
+          </p>
+
+          <ul className="project_list">
+            <li className="project" id="bp">
+              <div className="project_header">
+                <h2 className="pb-4">Bioverse</h2>
+                <h3>
+                  A system designed and built to streamline supply-chain
+                  operations.
+                </h3>
+                <p>
+                  While working as a Senior Software Engineer, I architected and
+                  built the front-end system for <em>Co Processing</em>. I also
+                  created the initial framework for the product.
+                </p>
+                <h4 className="pt-[var(--type-scale-step-4)]">Tools used</h4>
+                <ul className="tools">
+                  <li>GraphQL</li>
+                  <li>AWS Appsync</li>
+                  <li>Postgres</li>
+                  <li>SQLAlchemy</li>
+                  <li>Python</li>
+                  <li>Typescript</li>
+                  <li>Modern Javascript</li>
+                  <li>React</li>
+                </ul>
+              </div>
+
+              <div className="project_body">
+                <div className="relative w-full h-[70%] mb-[var(--spacing-xl)]">
+                  <Image
+                    src="/assets/bp-screen.png"
+                    loading="lazy"
+                    alt=""
+                    fill
+                    objectFit="cover"
+                    className={`rounded-md mb-${2} mt-${2} h-2`}
+                  />
+                </div>
+                <p className="pb-[var(--spacing-xs)">
+                  The final product was launched in late 2024, financed by BP.
+                  The project uses incoming Receipts data to track feed stock
+                  data and allocate the co-processed fuel to different pipeline,
+                  vessel and truck shipments. The app is a first-of-its kind,
+                  bespoke system that allows bp auditors to achieve accurate
+                  quality levels of insight for the first time.
+                </p>
+              </div>
+            </li>
+
+            <li className="project" id="wf">
+              <div className="project_header">
+                <h2 className="pb-4">Wells Fargo</h2>
+                <h3>Wells Fargo's Primary Checking accpunt markegt page</h3>
+                <p>
+                  While working as a Senior Software Engineer, I architected and
+                  built the front-end system for <em>Wells Fargo's</em>. I also
+                  created the initial framework for the product.
+                </p>
+                <h4 className="pt-[var(--type-scale-step-4)]">Tools used</h4>
+                <ul className="tools">
+                  <li>GraphQL</li>
+                  <li>AWS Appsync</li>
+                  <li>Postgres</li>
+                  <li>Typescript</li>
+                  <li>Modern Javascript</li>
+                  <li>React</li>
+                </ul>
+              </div>
+
+              <div className="project_body">
+                <div className="relative w-full h-[70%] mb-[var(--spacing-xl)]">
+                  <Image
+                    src="/assets/wf-screen.png"
+                    loading="lazy"
+                    alt=""
+                    fill
+                    objectFit="cover"
+                    className={`${borderRadius} mb-${spacingS} mt-${spacingS} h-2`}
+                  />
+                </div>
+                <p className="pb-[var(--spacing-xs)">
+                  The app served over 50+ Million users that allowed users to
+                  quickly create or signup fro an account for the first time.
+                </p>
+              </div>
+            </li>
+            <li className="project" id="di">
+              <div className="project_header">
+                <h2 className="pb-4">Dealer Inspire</h2>
+                <h3>
+                  Dealer Inspire accelerates and simplifies how customers
+                  connect and transact with car dealers
+                </h3>
+                <p>
+                  The car business is still a people business, so Dealer Inspire
+                  accelerates and simplifies how customers connect and transact
+                  with your team to make the most of every opportunity. I also
+                  created the initial framework for the product.
+                </p>
+                <h4 className="pt-[var(--type-scale-step-4)]">Tools used</h4>
+                <ul className="tools">
+                  <li>GraphQL</li>
+                  <li>Redux</li>
+                  <li>Postgres</li>
+                  <li>Typescript</li>
+                  <li>Modern Javascript</li>
+                  <li>React</li>
+                </ul>
+              </div>
+
+              <div className="project_body">
+                <div className="relative w-full h-[70%] mb-[var(--spacing-xl)]">
+                  <Image
+                    src="/assets/di-screen.png"
+                    loading="lazy"
+                    alt=""
+                    fill
+                    objectFit="cover"
+                    className={`${borderRadius} mb-${spacingS} mt-${spacingS} h-2`}
+                  />
+                </div>
+                <p className="pb-[var(--spacing-xs)">
+                  Dealer Inspire websites provide visitors with approachable
+                  data-driven design, dynamic personalized messaging based on
+                  location and activity, and the seamlessly integrated tools to
+                  empower confident decisions
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
         {/* Featured Projects */}
         <section id="work" className="py-20 px-6">
           <div className="max-w-7xl mx-auto">
@@ -283,7 +434,7 @@ export default function DeveloperLanding() {
             </div>
 
             <p className="text-gray-500">
-              © 2025 Claude.dev • Crafted with React & Tailwind
+              © 2025 Samir.codes • Crafted with Next.js & Tailwind
             </p>
           </div>
         </footer>

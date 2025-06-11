@@ -17,7 +17,6 @@ export default function WorkLayout({
         "pt-0 pb-16",
         `md:px-8 px-6`,
         "lg:max-w-[70em]",
-        // "font-mona-neon",
       ])}
     >
       {children}

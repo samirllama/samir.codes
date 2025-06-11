@@ -122,14 +122,11 @@ export function Header_() {
       className={cn(
         "sticky top-0 z-50 w-full", // Sticky positioning
         "border-b border-[rgb(var(--border-subtle-rgb))]", // Subtle border using theme variable
-        "bg-[rgb(var(--header-bg-rgb))]/95 backdrop-blur-sm" // Background with transparency + blur
+        "bg-[rgb(var(--header-bg-rgb))]/95 backdrop-blur-sm"
       )}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Content container */}
         <div className="flex items-center justify-between h-16">
-          {/* Height and flex layout */}
-          {/* Site branding with my name as Logo */}
           <div className="flex-shrink-0 mr-4">
             <Logo />
           </div>

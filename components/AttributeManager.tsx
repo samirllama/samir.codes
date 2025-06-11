@@ -6,7 +6,6 @@ import { useEffect } from "react";
 export function HTMLAttributeManager() {
   useEffect(() => {
     const html = document.documentElement;
-
     console.log("useEffect(() => HTMLAttributeManager:", html);
 
     html.classList.add("is-ready");

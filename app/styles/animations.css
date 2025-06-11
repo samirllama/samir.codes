@@ -1,10 +1,10 @@
 /* app/styles/animations.css */
 
 /* ==========================================================================
-   Keyframe Definitions
+   Keyframe Definitions (Must match names used in tailwind.config.ts)
    ========================================================================== */
 
-/*  Animated Gradient Underline */
+/* Animated Gradient Underline */
 @keyframes slideGradient {
   0% {
     background-position: 0% 50%;
@@ -17,7 +17,7 @@
   }
 }
 
-/* === flip effect === */
+/* === Text Flip Effect (Hero) === */
 @keyframes slideWordsUp {
   0%,
   45% {
@@ -36,285 +36,76 @@
   }
 }
 
-/* ========= Animation Utility Classes ========= */
-
-/* ========= Fancy Hover ========= */
-
-.fancy-hover {
-  @media (hover) {
-    & > li {
-      transition: opacity 0.3s linear;
-    }
+/* === Letter Enter Animation (for Logo and Menu Items) === */
+@keyframes letter-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
   }
-
-  &:has(> li:hover) > li:not(:hover),
-  &:has(> li:focus-within) > li:not(:focus-within) {
-    opacity: 0.25;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
-
-.bouncy-hover {
-  @media (hover) {
-    /* @media (hover) and (prefers-reduced-motion) { */
-    & > li {
-      transform-origin: left center;
-      transition: transform 1s var(--bounce), opacity 0.3s linear;
-    }
-  }
-
-  &:has(> li:hover) > li:not(:hover),
-  &:has(> li:focus-within) > li:not(:focus-within) {
-    opacity: 0.25;
-    transform: scale(0.8);
-  }
-}
-
-.fanning-hover {
-  /* play with these */
-  --arc: 5deg;
-  --distance-multiplier: 15%;
-
-  &:has(li:nth-child(1):hover) {
-    --target: 1;
-  }
-  &:has(li:nth-child(2):hover) {
-    --target: 2;
-  }
-  &:has(li:nth-child(3):hover) {
-    --target: 3;
-  }
-  &:has(li:nth-child(4) :hover) {
-    --target: 4;
-  }
-  &:has(li:nth-child(5) :hover) {
-    --target: 5;
-  }
-  &:has(li:nth-child(6) :hover) {
-    --target: 6;
-  }
-  &:has(li:nth-child(7) :hover) {
-    --target: 7;
-  }
-  &:has(li:nth-child(8) :hover) {
-    --target: 8;
-  }
-  &:has(li:nth-child(9) :hover) {
-    --target: 9;
-  }
-  &:has(li:nth-child(10) :hover) {
-    --target: 10;
-  }
-
-  @media (hover) and (prefers-reduced-motion: no-preference) {
-    & > li {
-      transform-origin: -200% 50%;
-      transition: transform 1s var (--bounce), opacity 0.3s linear;
-    }
-
-    &:has(> li:hover) > li:not(:hover),
-    &:has(> li:focus-within) > li:not(:focus-within) {
-      /* used for calculations, don't touch */
-      --distance-from-target: abs(var (--sibling-index) - var(--target));
-      --distance-multiplier-calc: var(--distance-from-target) *
-        var(--distance-multiplier);
-      --gradual-fadeout: calc(100% - var(--distance-multiplier-calc));
-      --angle: calc((var(--sibling-index) - var(--target)) * var(--arc));
-
-      /* opacity: 0.25; */
-      /* transform: scale(0.8); */
-      opacity: var (--gradual-fadeout);
-      transform: rotateZ(var(--angle));
-    }
-  }
-}
-
-/* ========= Fanning Effect ========= */
-
-.fanning-list {
-  list-style: none; /* Remove default list bullets */
-  padding: 0;
-  margin: 0;
-  /* Add any other base styles for the ul */
-  /* The :has() selector below triggers the fanning effect */
-  /* This ensures the effect only happens when a child li is hovered or focused */
-}
-
-/* Styles for individual list items */
-.fanning-list-item {
-  /* Set the transform origin for rotation */
-  transform-origin: left center;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  /* Add padding, margin, or other styling for list items */
-  padding: 10px; /* Example padding */
-  margin-bottom: 5px; /* Example margin */
-  /* Ensure items are block level or have defined width for transform-origin to work consistently */
-  display: block;
-  width: 100%; /* Example width */
-
-  /* Optional: Add a subtle effect on the active item itself */
-  /* As discussed, this specific rule is not in the core blog post demo */
-  /* &:hover,
-  &:focus-within {
-    transform: scale(1.05);
-  } */
-}
-/* Optional: Add a subtle scale effect on active item */
-.fanning-list-item:hover,
-.fanning-list-item:focus-within {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
-}
-
-/* Media query to disable hover effects on devices that don't support hover */
-/* This is important for touch devices */
-@media (hover: none) {
-  .fanning-list:has(> li:hover) > li:not(:hover) {
-    opacity: 1 !important; /* Override opacity */
-    transform: none !important; /* Override transform */
-  }
-}
-
-/* Optional: Add styles for reduced motion */
-/* @media (prefers-reduced-motion: reduce) {
-  .fanning-list-item {
-    Disable transitions
-    transition: none !important;
-  }
-} */
-
-/* ========= Quick Flip Effect ========= */
-.quick-flip {
-  overflow-y: clip;
-  --quick-flip-duration: 0.325s;
-}
-
-.quick-flip > * {
-  display: block; /* Won't work without this block */
-  transition: translate var(--quick-flip-duration),
-    transform 0s calc(var(--quick-flip-duration) / 2);
-  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
-}
-
-.quick-flip:hover > *,
-.quick-flip:focus > * {
-  translate: 0 -2lh;
-  transform: translateY(2lh);
-}
-
-.animate-slideGradient {
-  animation: slideGradient 3s ease infinite;
-}
-
-/* ========= Flip Effect Hero ========= */
-
-.flip-animation-container {
-  /* Apply the animation */
-  animation: slideWordsUp 4s infinite ease-in-out;
-  /* Ensure smooth GPU acceleration */
-  will-change: transform;
-  transform: translateZ(0); /* Force GPU layer */
-  width: auto;
-}
-
-/* @media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-delay: -1ms l important;
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    background-attachment: initial !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0s !important;
-    transition-delay: 0s !important;
-  }
-} */
 
 /* ==========================================================================
-   Custom AOS Animations
+   Burger Line Keyframe Definitions (Based on common burger animation logic)
+   May need to adjust these values to match design's movement.
    ========================================================================== */
-@media screen {
-  html:not(.no-js) body [data-aos="fade-up"] {
-    -webkit-transform: translate3d(0, 14px, 0);
-    transform: translate3d(0, 14px, 0);
+@keyframes burger-line1-start {
+  /* This is the segment that rotates to form the top arm of the 'X' */
+  0% {
+    transform: translateY(0) rotate(0deg); /* Initial state */
   }
-  html:not(.no-js) body [data-aos="fade-down"] {
-    -webkit-transform: translate3d(0, -14px, 0);
-    transform: translate3d(0, -14px, 0);
-  }
-  html:not(.no-js) body [data-aos="fade-right"] {
-    -webkit-transform: translate3d(-14px, 0, 0);
-    transform: translate3d(-14px, 0, 0);
-  }
-  html:not(.no-js) body [data-aos="fade-left"] {
-    -webkit-transform: translate3d(14px, 0, 0);
-    transform: translate3d(14px, 0, 0);
-  }
-  html:not(.no-js) body [data-aos="fade-up-right"] {
-    -webkit-transform: translate3d(-14px, 14px, 0);
-    transform: translate3d(-14px, 14px, 0);
-  }
-
-  html:not(.no-js) body [data-aos="fade-up-left"] {
-    -webkit-transform: translate3d(14px, 14px, 0);
-    transform: translate3d(14px, 14px, 0);
-  }
-
-  html:not(.no-js) body [data-aos="fade-down-right"] {
-    -webkit-transform: translate3d(-14px, -14px, 0);
-    transform: translate3d(-14px, -14px, 0);
-  }
-
-  html:not(.no-js) body [data-aos="fade-down-left"] {
-    -webkit-transform: translate3d(14px, -14px, 0);
-    transform: translate3d(14px, -14px, 0);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-in-up"] {
-    -webkit-transform: translate3d(0, 14px, 0) scale(0.6);
-    transform: translate3d(0, 14px, 0) scale(0.6);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-in-down"] {
-    -webkit-transform: translate3d(0, -14px, 0) scale(0.6);
-    transform: translate3d(0, -14px, 0) scale(0.6);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-in-right"] {
-    -webkit-transform: translate3d(-14px, 0, 0) scale(0.6);
-    transform: translate3d(-14px, 0, 0) scale(0.6);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-in-left"] {
-    -webkit-transform: translate3d(14px, 0, 0) scale(0.6);
-    transform: translate3d(14px, 0, 0) scale(0.6);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-out-up"] {
-    -webkit-transform: translate3d(0, 14px, 0) scale(1.2);
-    transform: translate3d(0, 14px, 0) scale(1.2);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-out-down"] {
-    -webkit-transform: translate3d(0, -14px, 0) scale(1.2);
-    transform: translate3d(0, -14px, 0) scale(1.2);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-out-right"] {
-    -webkit-transform: translate3d(-14px, 0, 0) scale(1.2);
-    transform: translate3d(-14px, 0, 0) scale(1.2);
-  }
-
-  html:not(.no-js) body [data-aos="zoom-out-left"] {
-    -webkit-transform: translate3d(14px, 0, 0) scale(1.2);
-    transform: translate3d(14px, 0, 0) scale(1.2);
+  100% {
+    transform: translateY(2.5px) rotate(45deg); /* Final 'X' top arm */
   }
 }
 
-/* Initial states for anim-in classes, applied when NOT active */
+@keyframes burger-line1-end {
+  /* This is the segment that fades out or moves away for the top line */
+  0% {
+    transform: translateX(0); /* Initial state */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%); /* Moves out of view */
+    opacity: 0; /* Fades out */
+  }
+}
+
+@keyframes burger-line2-start {
+  /* This is the segment that rotates to form the bottom arm of the 'X' */
+  0% {
+    transform: translateY(0) rotate(0deg); /* Initial state */
+  }
+  100% {
+    transform: translateY(-2.5px) rotate(-45deg); /* Final 'X' bottom arm */
+  }
+}
+
+@keyframes burger-line2-end {
+  /* This is the segment that fades out or moves away for the bottom line */
+  0% {
+    transform: translateX(0); /* Initial state */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%); /* Moves out of view (opposite direction) */
+    opacity: 0; /* Fades out */
+  }
+}
+
+.transform-custom {
+  will-change: transform;
+  transform: translate(var(--translateX, 0), var(--translateY, 0))
+    rotate(var(--rotate, 0deg)) scale(var(--scaleX, 1), var(--scaleY, 1))
+    translateZ(0); /* translateZ(0) for GPU acceleration */
+}
+
 .anim-in-fade-up {
   --translateY: 14px;
-  opacity: 0; /* Add opacity for fade effect */
+  opacity: 0;
 }
 .anim-in-fade-down {
   --translateY: -14px;
@@ -392,21 +183,24 @@
 }
 .anim-in-zoom-out-left {
   --translateX: 14px;
+  --translateY: -14px;
   --scaleX: 1.2;
   --scaleY: 1.2;
   opacity: 0;
 }
 
 /* Common transition for all anim-in elements */
-/* Apply this to elements that use anim-in-* and transform-custom */
+/* Apply class to elements that use anim-in-* and transform-custom */
 .anim-in {
   transition: transform 0.8s var(--alias-easeOut),
     opacity 0.8s var(--alias-easeOut);
   will-change: transform, opacity;
 }
 
-/* Final states when the parent is-active and html is-ready */
-/* These should override the initial states to their "normal" values */
+/* ==========================================================================
+   Anim-in Final States (Triggered when html.is-ready and parent.is-active)
+   These reset the CSS variables and opacity to their "natural" or "active" state.
+   ========================================================================== */
 html.is-ready .scroll-object.is-active .anim-in-fade-up,
 html.is-ready .scroll-object.is-active .anim-in-fade-down,
 html.is-ready .scroll-object.is-active .anim-in-fade-right,
@@ -430,3 +224,200 @@ html.is-ready .scroll-object.is-active .anim-in-zoom-out-left {
   --scaleY: 1;
   opacity: 1;
 }
+
+.menu-button.is-active .burger-line-container:nth-child(1) {
+  /* Can set CSS variables here if the children use transform-custom */
+  /* Or directly apply transform if the children are simple */
+  --translateY: 2.5px;
+  --rotate: 45deg;
+  /* If using a transition here, define it. Tailwind `transition` class on the component is better. */
+  transition: transform 0.6s var(--alias-easeOut2),
+    var(--_tw-translate-x) 0.6s var(--alias-easeOut2),
+    var(--_tw-translate-y) 0.6s var(--alias-easeOut2),
+    var(--_tw-rotate) 0.6s var(--alias-easeOut2); /* Ensures smooth transition */
+}
+
+.menu-button.is-active .burger-line-container:nth-child(2) {
+  --translateY: -2.5px;
+  --rotate: -45deg;
+  transition: transform 0.6s var(--alias-easeOut2),
+    var(--_tw-translate-x) 0.6s var(--alias-easeOut2),
+    var(--_tw-translate-y) 0.6s var(--alias-easeOut2),
+    var(--_tw-rotate) 0.6s var(--alias-easeOut2);
+}
+
+.menu-button.is-active
+  .burger-line-container:nth-child(1)
+  .burger-line-segment:nth-child(2),
+.menu-button.is-active
+  .burger-line-container:nth-child(2)
+  .burger-line-segment:nth-child(1) {
+  /* These segments might fade out or scale down if they are the "middle" parts of the lines */
+  opacity: 0;
+  transform: scaleX(0); /* Example: scale to nothing */
+  transition: opacity 0.6s var(--alias-easeOut2),
+    transform 0.6s var(--alias-easeOut2);
+}
+
+/* ==========================================================================
+   Other Animation Utility Classes (Mostly for specific hover effects)
+   ========================================================================== */
+
+.fancy-hover {
+  @media (hover) {
+    & > li {
+      transition: opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+  }
+}
+
+.bouncy-hover {
+  @media (hover) {
+    & > li {
+      transform-origin: left center;
+      transition: transform 1s var(--bounce), opacity 0.3s linear;
+    }
+  }
+
+  &:has(> li:hover) > li:not(:hover),
+  &:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+}
+
+.fanning-hover {
+  /* play with these */
+  --arc: 5deg;
+  --distance-multiplier: 15%;
+
+  &:has(li:nth-child(1):hover) {
+    --target: 1;
+  }
+  &:has(li:nth-child(2):hover) {
+    --target: 2;
+  }
+  &:has(li:nth-child(3):hover) {
+    --target: 3;
+  }
+  &:has(li:nth-child(4) :hover) {
+    --target: 4;
+  }
+  &:has(li:nth-child(5) :hover) {
+    --target: 5;
+  }
+  &:has(li:nth-child(6) :hover) {
+    --target: 6;
+  }
+  &:has(li:nth-child(7) :hover) {
+    --target: 7;
+  }
+  &:has(li:nth-child(8) :hover) {
+    --target: 8;
+  }
+  &:has(li:nth-child(9) :hover) {
+    --target: 9;
+  }
+  &:has(li:nth-child(10) :hover) {
+    --target: 10;
+  }
+
+  @media (hover) and (prefers-reduced-motion: no-preference) {
+    & > li {
+      transform-origin: -200% 50%;
+      /* Fixed space in var(--bounce) */
+      transition: transform 1s var(--bounce), opacity 0.3s linear;
+    }
+
+    &:has(> li:hover) > li:not(:hover),
+    &:has(> li:focus-within) > li:not(:focus-within) {
+      /* used for calculations, don't touch */
+      --distance-from-target: abs(var(--sibling-index) - var(--target));
+      --distance-multiplier-calc: var(--distance-from-target) *
+        var(--distance-multiplier);
+      --gradual-fadeout: calc(100% - var(--distance-multiplier-calc));
+      --angle: calc((var(--sibling-index) - var(--target)) * var(--arc));
+
+      /* Fixed space in var(--gradual-fadeout) */
+      opacity: var(--gradual-fadeout);
+      transform: rotateZ(var(--angle));
+    }
+  }
+}
+
+.fanning-list {
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 0;
+}
+
+.fanning-list-item {
+  transform-origin: left center;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  padding: 10px;
+  margin-bottom: 5px;
+  display: block;
+  width: 100%;
+}
+/* Optional: Add a subtle scale effect on active item */
+.fanning-list-item:hover,
+.fanning-list-item:focus-within {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+@media (hover: none) {
+  .fanning-list:has(> li:hover) > li:not(:hover) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Quick Flip Effect */
+.quick-flip {
+  overflow-y: clip;
+  --quick-flip-duration: 0.325s;
+}
+
+.quick-flip > * {
+  display: block;
+  transition: translate var(--quick-flip-duration),
+    transform 0s calc(var(--quick-flip-duration) / 2);
+  transition-timing-function: cubic-bezier(0.66, 0, 0.34, 1);
+}
+
+.quick-flip:hover > *,
+.quick-flip:focus > * {
+  translate: 0 -2lh;
+  transform: translateY(2lh);
+}
+
+/* Flip Effect Hero */
+.flip-animation-container {
+  animation: slideWordsUp 4s infinite ease-in-out;
+  will-change: transform;
+  transform: translateZ(0);
+  width: auto;
+}
+
+/* ==========================================================================
+   Reduced Motion / Accessibility (Uncomment to enable these)
+   ========================================================================== */
+/* @media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+} */

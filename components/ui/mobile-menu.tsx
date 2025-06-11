@@ -17,7 +17,7 @@ export default function MobileMenu() {
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileNav = useRef<HTMLDivElement>(null);
 
-  // close the mobile menu on click outside
+  // close menu on click outside
   useEffect(() => {
     const clickHandler = ({ target }: { target: EventTarget | null }): void => {
       if (!mobileNav.current || !trigger.current) return;
@@ -33,7 +33,7 @@ export default function MobileMenu() {
     return () => document.removeEventListener("click", clickHandler);
   });
 
-  // close the mobile menu if the esc key is pressed
+  // close mobile menu if esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }: { keyCode: number }): void => {
       if (!mobileNavOpen || keyCode !== 27) return;
@@ -48,10 +48,10 @@ export default function MobileMenu() {
       {/* Hamburger button */}
       <button
         ref={trigger}
-        className={cn(
+        className={cn([
           "hamburger", // Keep base class if needed for JS/CSS targeting
-          mobileNavOpen && "active"
-        )}
+          mobileNavOpen && "active",
+        ])}
         type="button"
         aria-controls="mobile-nav"
         aria-expanded={mobileNavOpen}

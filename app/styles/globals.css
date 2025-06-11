@@ -288,7 +288,8 @@
   }
 
   a {
-    @apply text-text-default hover:text-accent-primary transition-colors duration-300;
+    @apply transition-colors duration-300;
+    /* @apply text-text-default hover:text-accent-primary; */
     text-decoration: none;
   }
 
@@ -302,6 +303,21 @@
 
   .font-mono {
     letter-spacing: 0.05em !important;
+  }
+
+  /* This custom transform class is crucial for your variable-based animations */
+  .transform-custom {
+    will-change: transform;
+    transform: translate(var(--translateX, 0), var(--translateY, 0))
+      /* Added defaults for safety */ rotate(var(--rotate, 0deg))
+      scale(var(--scaleX, 1), var(--scaleY, 1)) translateZ(0);
+  }
+
+  /* This pattern relies on a parent `.is-ready.is-active` state. */
+  /* These are NOT actual utility classes but part of your animation system */
+  /* Keep these as they manage the final states when animation triggers */
+  .is-ready.is-active .anim-in-shift-y-0 {
+    --translateY: 0%;
   }
 
   .will-change-transform {
@@ -348,7 +364,6 @@
 }
 
 @layer components {
-  /* Custom transform class for animations, defining and applying CSS variables. */
   .transform-custom {
     will-change: transform;
     transform: translate(var(--translateX), var(--translateY))
@@ -364,6 +379,100 @@
     --scaleX: 1;
   }
 
+  /* === Hamburger Button Styles === */
+  .burger-wrapper {
+    cursor: pointer;
+    display: block;
+    opacity: 1;
+    width: 36px;
+    height: 15px;
+    position: relative;
+    pointer-events: auto;
+    will-change: transform;
+    top: 50%;
+    left: 0;
+    transform: translateY(calc(-50% - 2.5px));
+  }
+  .line-wrapper {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: var(--line-height);
+    display: block;
+    overflow: hidden;
+    background-color: currentColor;
+    transform-origin: 0% 50%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.3s var(--ease-out-standard);
+  }
+
+  .line-wrapper-1 {
+    top: 50%;
+    transform: translateY(-2.5px);
+  }
+
+  .line-wrapper-2 {
+    top: 50%;
+    transform: translateY(2.5px);
+  }
+
+  @keyframes burger_line1_start_animation {
+    0% {
+      transform: translateY(-2.5px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(45deg);
+    }
+  }
+
+  @keyframes burger_line1_end_animation {
+    0% {
+      transform: translateY(2.5px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(-45deg);
+    }
+  }
+
+  @keyframes letter_enter_animation {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes burger_close_line1_animation {
+    0% {
+      transform: translateY(-2.5px) rotate(0deg) scale(1, 1);
+    }
+    100% {
+      transform: translateY(0px) rotate(45deg) scale(0.7, 1) translateZ(0px);
+    }
+  }
+
+  @keyframes burger_close_line2_animation {
+    0% {
+      transform: translateY(2.5px) rotate(0deg) scale(1, 1);
+    }
+    100% {
+      transform: translateY(0px) rotate(-45deg) scale(0.7, 1) translateZ(0px);
+    }
+  }
+  /* =========== *
+  End Hamburger Style
+     =========== */
+
+  .hamburger div {
+    transition: all 0.3s ease;
+  }
+
+  .menu {
+    transition: transform 0.3s ease;
+  }
+
   /* The .scroll-object class for animations */
   .scroll-object {
     /* Base styles for scroll objects */
@@ -376,6 +485,7 @@
   }
 
   /* Specific transition utility classes */
+
   .tween-all-1-6s-easeOut2 {
     transition: all 1.6s var(--alias-easeOut2);
   }
@@ -450,15 +560,6 @@
     animation: marquee 30s linear infinite;
     white-space: nowrap;
     font-family: var(--font-cinzel-deco), serif;
-  }
-
-  /* Hamburger Menu Base (Used by ui.module.css / MobileMenu) */
-  .hamburger div {
-    transition: all 0.3s ease;
-  }
-
-  .menu {
-    transition: transform 0.3s ease;
   }
 
   .project_list {
@@ -689,11 +790,6 @@
   .rotate-90deg {
     --rotate: 90deg;
   }
-
-  .dashoffset-0 {
-    stroke-dashoffset: 0;
-  }
-
   .w-fit-fx {
     width: var(--alias-fit);
   }
@@ -1120,6 +1216,7 @@
 @import "./animations.css";
 @import "./mdx.css";
 
+/* Specific global styles */
 .bg-lighting::before {
   content: "";
   position: absolute;
@@ -1134,15 +1231,12 @@
   );
   pointer-events: none;
 }
-
 ::view-transition-old(root) {
   animation: exit-fade 0.25s ease-out forwards;
 }
-
 ::view-transition-new(root) {
   animation: enter-fade 0.25s ease-out 0.1s backwards;
 }
-
 @keyframes exit-fade {
   from {
     opacity: 1;
@@ -1153,7 +1247,6 @@
     transform: scale(0.98);
   }
 }
-
 @keyframes enter-fade {
   from {
     opacity: 0;
@@ -1163,4 +1256,159 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.anim-in-fade-up {
+  --translateY: 14px;
+  opacity: 0;
+}
+.anim-in-fade-down {
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-fade-right {
+  --translateX: -14px;
+  opacity: 0;
+}
+.anim-in-fade-left {
+  --translateX: 14px;
+  opacity: 0;
+}
+.anim-in-fade-up-right {
+  --translateX: -14px;
+  --translateY: 14px;
+  opacity: 0;
+}
+.anim-in-fade-up-left {
+  --translateX: 14px;
+  --translateY: 14px;
+  opacity: 0;
+}
+.anim-in-fade-down-right {
+  --translateX: -14px;
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-fade-down-left {
+  --translateX: 14px;
+  --translateY: -14px;
+  opacity: 0;
+}
+.anim-in-zoom-in-up {
+  --translateY: 14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-down {
+  --translateY: -14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-right {
+  --translateX: -14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-in-left {
+  --translateX: 14px;
+  --scaleX: 0.6;
+  --scaleY: 0.6;
+  opacity: 0;
+}
+.anim-in-zoom-out-up {
+  --translateY: 14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-down {
+  --translateY: -14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-right {
+  --translateX: -14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+.anim-in-zoom-out-left {
+  --translateX: 14px;
+  --translateY: -14px;
+  --scaleX: 1.2;
+  --scaleY: 1.2;
+  opacity: 0;
+}
+
+.anim-in {
+  transition: transform 0.8s var(--alias-easeOut),
+    opacity 0.8s var(--alias-easeOut);
+  will-change: transform, opacity;
+}
+
+html.is-ready .scroll-object.is-active .anim-in-fade-up,
+html.is-ready .scroll-object.is-active .anim-in-fade-down,
+html.is-ready .scroll-object.is-active .anim-in-fade-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-left,
+html.is-ready .scroll-object.is-active .anim-in-fade-up-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-up-left,
+html.is-ready .scroll-object.is-active .anim-in-fade-down-right,
+html.is-ready .scroll-object.is-active .anim-in-fade-down-left,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-up,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-down,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-right,
+html.is-ready .scroll-object.is-active .anim-in-zoom-in-left,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-up,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-down,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-right,
+html.is-ready .scroll-object.is-active .anim-in-zoom-out-left {
+  --translateX: 0;
+  --translateY: 0;
+  --rotate: 0;
+  --scaleX: 1;
+  --scaleY: 1;
+  opacity: 1;
+}
+
+.menu-button.is-active .burger-line-container:nth-child(1) {
+  transform: translateY(2.5px) rotate(45deg); /* Or sets --translateY: 2.5px; --rotate: 45deg; if using transform-custom */
+}
+
+.menu-button.is-active .burger-line-container:nth-child(2) {
+  transform: translateY(-2.5px) rotate(-45deg); /* Or sets --translateY: -2.5px; --rotate: -45deg; */
+}
+
+.menu-button.is-active
+  .burger-line-container
+  .burger-line-segment:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-wrapper.hovered:not(.active) .line-wrapper-1 {
+  animation: burger_line1_start_animation 1.3s var(--alias-easeOut2) 0.1s
+    forwards;
+}
+
+.burger-wrapper.hovered:not(.active) .line-wrapper-2 {
+  animation: burger_line1_end_animation 1.3s var(--alias-easeOut2) 0s forwards;
+}
+
+.burger-wrapper.hovered:not(.active) .line-wrapper {
+  animation: letter_enter_animation 0.4s var(--alias-easeOut) 0.5s forwards;
+}
+
+.burger-wrapper.active .line-wrapper-1 {
+  animation: burger_close_line1_animation 1s var(--alias-easeOut) 0.5s forwards !important;
+}
+
+.burger-wrapper.active .line-wrapper-2 {
+  animation: burger_close_line2_animation 1s var(--alias-easeOut) 0.5s forwards !important;
+}
+
+.burger-wrapper.active {
+  animation: none !important;
 }

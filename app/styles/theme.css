@@ -183,7 +183,7 @@
   --alias-dark: #000; /* From original HTML root */
   --alias-light: #fff; /* From original HTML root */
 
-  /* New Easing Aliases (Referenced by Tailwind.config.ts) */
+  /* Easing Aliases (Referenced by Tailwind.config.ts) */
   --alias-easeOut: cubic-bezier(0.43, 0.195, 0.02, 1);
   --alias-easeOut2: cubic-bezier(0.77, 0, 0.175, 1);
   --alias-easeOut3: cubic-bezier(0.165, 0.84, 0.44, 1);
