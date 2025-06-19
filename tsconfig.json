@@ -25,6 +25,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/posts/[slug]/fibonacci-spiral.mdx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/posts/[slug]/fibonacci-spiral.mdx",
+    "components/ScrollSection.js"
+  ],
   "exclude": ["node_modules"]
 }

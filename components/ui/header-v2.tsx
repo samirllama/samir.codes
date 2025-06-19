@@ -1,53 +1,140 @@
+// @/components/ui/header.tsx
+
 "use client";
 
-// src/components/ui/header.tsx
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "./logo";
 import StaggeredText from "./staggered-text";
 
-// Hamburger Button component
-function BurgerButton() {
-  const [isHovered, setIsHovered] = useState(false);
+interface BurgerButtonProps {
+  isActive: boolean;
+  onClick: () => void;
+  className?: string;
+}
 
-  const [isActive, setIsActive] = useState(false);
-
-  // 'active' state takes precedence over 'hovered'.
-  const effectiveState = isActive ? "active" : isHovered ? "hovered" : "";
-
+function BurgerBtn({ isActive, onClick, className }: BurgerButtonProps) {
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={() => setIsActive(!isActive)}
-      role="button" // Improve accessibility
+      onClick={onClick}
+      role="button"
       aria-label={isActive ? "Close menu" : "Open menu"}
       className={cn([
         "pointer-events-auto relative group inline-block w-36px h-15px bg-none text-current",
-        `burger-wrapper ${effectiveState}`,
+        "line-wrapper",
+        { "is-active": isActive },
+        className,
       ])}
     >
-      {/* Line 1: with shift-y:-2.5px and burger_close_line1 animation */}
-      <div className="line-wrapper line-wrapper-1"></div>
+      <span
+        className={cn([
+          "line-wrapper-1",
+          "transform-custom h-5px w-fit-fx block",
+        ])}
+        style={
+          isActive
+            ? ({
+                "--translateY": "0px",
+                "--rotate": "45deg",
+                "--scaleX": "0.7",
+                "--scaleY": "1",
+              } as React.CSSProperties)
+            : {}
+        }
+      ></span>
 
-      {/*Line 2: with shift-y:2.5px and burger_close_line2 animation*/}
-      <div className="line-wrapper line-wrapper-2"></div>
+      <span
+        className={cn([
+          "line-wrapper-2",
+          "transform-custom h-5px w-fit-fx block",
+        ])}
+        style={
+          isActive
+            ? ({
+                "--translateY": "0px",
+                "--rotate": "-45deg",
+                "--scaleX": "0.7",
+                "--scaleY": "1",
+              } as React.CSSProperties)
+            : {}
+        } // Type assertion for custom CSS properties
+      ></span>
     </div>
   );
 }
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
+  { href: "/work", label: "Work" },
   { href: "/contact", label: "Contact" },
 ];
 
+interface AppHeaderProps {
+  isMenuOpen: boolean;
+  toggleAction: () => void;
+}
+
+export function AppHeader({ toggleAction, isMenuOpen }: AppHeaderProps) {
+  const headerContainerClasses = cn([
+    "fixed",
+    "w-100vw",
+    "z-50",
+    "pointer:none",
+  ]);
+
+  const headerBlockClasses = cn([
+    "pointer-events-auto flex items-center justify-between",
+    "transition-colors duration-500 ease-out-alias",
+    "p-10",
+    "bg-transparent",
+    {
+      "text-white": !isMenuOpen, // Default: Black background, White text/elements
+      "text-black": isMenuOpen, // Menu Open: White background, Black text/elements
+    },
+  ]);
+
+  const burgerClasses = cn([
+    "hamburger-button",
+    "group cursor-pointer relative inline-block w-9 h-4 bg-transparent text-current",
+    { "is-active": isMenuOpen },
+  ]);
+
+  return (
+    <div className={headerContainerClasses}>
+      <header className={headerBlockClasses}>
+        <Link
+          href="/"
+          className={`pointer-events-auto ${
+            isMenuOpen ? "text-black" : "text-white"
+          }`}
+        >
+          <Logo />
+        </Link>
+
+        <div
+          id="hamburger-button"
+          role="button"
+          onClick={toggleAction}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className={burgerClasses}
+        >
+          <span className="hamburger-line-1 line-wrapper-1 absolute top-1/2 left-0 w-full block h-px opacity-100 tra-translate-y-1.5">
+            <span className="hamburger-line-1-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
+            <span className="hamburger-line-1-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
+          </span>
+          <span className="hamburger-line-2 line-wrapper-2 absolute top-1/2 left-0 w-full block h-px opacity-100  translate-y-1.5">
+            <span className="hamburger-line-2-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
+            <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
+          </span>
+        </div>
+      </header>
+    </div>
+  );
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Example: Base header theme state (e.g., from a context, scroll, or prop)
-  const [isHeaderBlockDark, setIsHeaderBlockDark] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -61,21 +148,16 @@ export default function Header() {
     }
   }, [isMenuOpen]);
 
-  // Determines header's actual dark/light state, If menu open, inverse base theme; otherwise, use base theme.
-  const effectiveHeaderIsDark = isMenuOpen
-    ? !isHeaderBlockDark
-    : isHeaderBlockDark;
+  const headerContainerClasses = cn(["fixed w-screen"]);
 
-  // 1. Header Container Classes: Ensure header is above the menu overlay
-  const headerContainerClasses = cn(["fixed w-screen z-50"]);
-
-  // 2. Header Block Classes: Apply effective theme state
   const headerBlockClasses = cn([
     "pointer-events-auto flex items-center justify-between",
     "transition-colors duration-500 ease-out-alias",
     "p-10",
+    "z-50",
     {
-      "is-dark": !effectiveHeaderIsDark,
+      "bg-black text-white": !isMenuOpen, // Default: Black background, White text/elements
+      "bg-white text-black": isMenuOpen, // Menu Open: White background, Black text/elements
     },
   ]);
 
@@ -89,71 +171,64 @@ export default function Header() {
     },
   ]);
 
+  const burgerClasses = cn([
+    "hamburger-button",
+    "group cursor-pointer relative inline-block w-9 h-4 bg-transparent text-current",
+    { "is-active": isMenuOpen },
+  ]);
+
   return (
     <div className={headerContainerClasses}>
       <header className={headerBlockClasses}>
-        <Link href="/" className="pointer-events-auto text-white">
+        <Link
+          href="/"
+          className={`pointer-events-auto ${
+            isMenuOpen ? "text-black" : "text-white"
+          }`}
+        >
           <Logo />
         </Link>
 
-        {/* Burger Button */}
-        <div
+        {/* <BurgerBtn
+          isActive={isMenuOpen}
           onClick={toggleMenu}
-          className={cn([
-            "pointer-events-auto relative group inline-block w-36px h-15px mr-20 bg-none text-current",
-            "menu-button",
-            { "is-active": isMenuOpen },
-          ])}
-          aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="mr-20"
+        /> */}
+
+        <div
+          id="hamburger-btn"
           role="button"
-          tabIndex={0}
+          onClick={toggleMenu}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className={burgerClasses}
         >
-          {/* Burger lines - their color will inherit from headerBlockClasses's color property */}
-          <span
-            className={cn([
-              "burger-line-container shift-y--2-5px transform-custom backface-hidden",
-              { "shift-y-0 rotate-45deg": isMenuOpen },
-            ])}
-          >
-            <span className="burger-line-segment origin-[0%_50%] transform-custom"></span>
-            <span className="burger-line-segment origin-[100%_50%] transform-custom"></span>
+          <span className="hamburger-line-1 absolute top-1/2 left-0 w-full block h-px opacity-100 transform -translate-y-1.5">
+            <span className="hamburger-line-1-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
+            <span className="hamburger-line-1-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
           </span>
-          <span
-            className={cn([
-              "burger-line-container shift-y-2-5px transform-custom backface-hidden",
-              { "shift-y-0 rotate-neg-45deg": isMenuOpen },
-            ])}
-          >
-            <span className="burger-line-segment origin-[0%_50%] transform-custom"></span>
-            <span className="burger-line-segment origin-[100%_50%] transform-custom"></span>
+          <span className="hamburger-line-2 absolute top-1/2 left-0 w-full block h-px opacity-100 transform translate-y-1.5">
+            <span className="hamburger-line-2-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-right transform scale-x-100"></span>
+            <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right transform scale-x-100"></span>
           </span>
         </div>
       </header>
 
-      {/* Full-screen Menu Overlay */}
       <div className={menuOverlayClasses}>
-        {/* Inner div for content alignment within the menu */}
         <div
           className={cn([
-            // Ensure this inner div also accounts for the 80vh height of its parent
             "h-full w-screen flex flex-col justify-center items-center overflow-y-auto",
             "pt-130fy pb-217fy",
             "scroll-object",
-            {
-              "is-ready": true,
-              "is-active": isMenuOpen,
-            },
+            { "is-active": isMenuOpen },
           ])}
         >
           <nav className="space-y-195fy text-black text-center">
-            {/* Menu text always black for white background */}
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={toggleMenu} // Close menu on link click
-                className="block leading-none font-bold transition-colors duration-500 ease-out-alias hover:text-gray-500"
+                onClick={toggleMenu}
+                className="block leading-none font-bold transition-colors duration-500 ease-out-alias hover:text-gray-500 text-3xl"
               >
                 {link.label}
               </Link>

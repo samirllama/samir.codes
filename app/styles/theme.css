@@ -56,11 +56,8 @@
   --color-interactive-secondary: var(--oklch-moth-orange);
   --color-interactive-muted: var(--oklch-moth-mousse);
   --color-interactive-text: var(--oklch-white); /* Text on buttons */
-  --color-code-background: var(
-    --oklch-moth-light
-  ); /* Assuming moth-light for code background */
+  --color-code-background: var(--oklch-moth-light);
 
-  /* Map Monaspace vars */
   --color-neon-primary: var(--oklch-neon-primary);
   --color-argon-primary: var(--oklch-argon-primary);
   --color-xenon-primary: var(--oklch-xenon-primary);
@@ -85,22 +82,15 @@
       rgba(255, 165, 0, 0.15),
       transparent 50%
     ),
-    /* COLOR_2 (consider using low opacity) */
-      radial-gradient(
-        circle at 65% 50%,
-        rgba(0, 128, 128, 0.15),
-        transparent 50%
-      ),
-    /* COLOR_3 (consider using low opacity) */
-      radial-gradient(
-        circle at 50% 65%,
-        rgba(221, 160, 221, 0.15),
-        transparent 50%
-      ),
+    radial-gradient(circle at 65% 50%, rgba(0, 128, 128, 0.15), transparent 50%),
+    radial-gradient(
+      circle at 50% 65%,
+      rgba(221, 160, 221, 0.15),
+      transparent 50%
+    ),
     var(--color-surface-page);
 
   /* === Shadows (LIGHT THEME) === */
-  /* Adjust RGB values for lighter shadows */
   --shadow-highlight-rgb: 255, 255, 255; /* White */
   --shadow-base-rgb: 200, 200, 200; /* Light Grey */
   --shadow-outer-rgb: 150, 150, 150; /* Medium Grey */
@@ -128,8 +118,6 @@
   --spacing-xl: clamp(2.63rem, calc(2.46rem + 0.81vw), 3.38rem);
   --spacing-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
 
-  /* Explicitly define --spacing-sm and --spacing-md to match utility-patterns.css */
-
   --spacing-sm: var(--spacing-s);
   --spacing-md: var(--spacing-m);
 
@@ -155,9 +143,11 @@
   /* Global Transform Variables (for .transform-custom class) */
   --translateX: 0;
   --translateY: 0;
-  --rotate: 0;
+  --rotate: 0deg;
   --scaleX: 1;
   --scaleY: 1;
+  --vw: 100vw;
+  --vh: 100vh;
 
   --minSize: 320;
   --maxSize: 1440;
@@ -187,16 +177,7 @@
   --alias-easeOut: cubic-bezier(0.43, 0.195, 0.02, 1);
   --alias-easeOut2: cubic-bezier(0.77, 0, 0.175, 1);
   --alias-easeOut3: cubic-bezier(0.165, 0.84, 0.44, 1);
-  --alias-easeOutSlow: cubic-bezier(
-    0.43,
-    0.195,
-    0.02,
-    1
-  ); /* Duplicate of easeOut, ensure intent */
-
-  /* Dynamic values and should be set by JS on the HTML element */
-  --vw: 1px; /* Default, will be overridden by JS */
-  --vh: 1px; /* Default, will be overridden by JS */
+  --alias-easeOutSlow: cubic-bezier(0.43, 0.195, 0.02, 1);
 
   --unit-vw: calc(var(--vw) / 100);
   --unit-vhfix: calc(var(--vh) / 100);
@@ -232,6 +213,13 @@
 
   /* Bounce easing for animations */
   --bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* TODO: adjust */
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --unit-fx: calc(var(--vw) / 375);
+    --unit-fy: calc(var(--vh) / 755);
+  }
 }
 
 /* Dark Theme Overrides */

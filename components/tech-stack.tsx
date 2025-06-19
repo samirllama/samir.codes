@@ -72,7 +72,6 @@ export default function TechStack({ skillCategories }: TechStackProps) {
               <div
                 // Distribute categories between columns somewhat evenly
                 // This basic logic puts first half in col 1, second half in col 2
-                // Adjust if you want more specific column breaks
                 className={cn(
                   "mb-8 lg:mb-12",
                   index < Math.ceil(skillCategories.length / 2)
@@ -85,7 +84,6 @@ export default function TechStack({ skillCategories }: TechStackProps) {
                   {category.title}
                 </span>
                 <ul className="bouncy-hover">
-                  {/* Applied bouncy-hover to each list */}
                   {category.skills.map((skill: Skill) => (
                     <SkillLink key={skill.name} skill={skill} />
                   ))}

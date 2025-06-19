@@ -80,6 +80,7 @@ const config: Config = {
                 'sm': 'var(--type-scale-step-0)',
                 'xs': 'var(--type-scale-step--1)',
                 '300px': '300px',
+                '15fx': 'calc(15 * var(--unit-fx))',
             },
             lineHeight: {
                 tight: "var(--lineHeight-tight)",

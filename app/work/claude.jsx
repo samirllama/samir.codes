@@ -116,13 +116,13 @@ export default function DevLanding() {
               <div className="mb-8">
                 <h1 className="text-7xl md:text-8xl font-black mb-4 leading-none">
                   <span className="bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-                    Code. Scale. Ship.™
+                    Code. Create. Catalyze.™
                   </span>
                 </h1>
                 <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
                   Full-stack architect building the next generation of web
-                  experiences. From concept to global scale, I turn ambitious
-                  ideas into reality.
+                  experiences. From Bottlenecks to Breakthroughs, I craft
+                  digital solutions that matter.
                 </p>
               </div>
 

@@ -39,6 +39,48 @@
 @tailwind utilities;
 
 @layer base {
+  /* Base HTML & Body styles (use variables from theme.css) */
+  html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+    --vw: 1px; /* Initialize these here if not done via JS or config */
+    --vh: 1px;
+    display: block;
+    font-family: var(--font-sans); /* Use the variable defined in theme.css */
+    -webkit-locale: "en";
+    box-sizing: border-box; /* Part of reset */
+    margin: 0;
+    padding: 0;
+  }
+  /* Ensure universal box-sizing is consistent with Tailwind's Preflight */
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    color: var(--color-text-default); /* Use variable from theme.css */
+    background-color: var(
+      --color-surface-page
+    ); /* Use variable from theme.css */
+    font-family: var(--font-sans); /* Use variable from theme.css */
+    font-feature-settings: "kern" on, "liga" on;
+    font-size: var(--type-scale-step-0); /* Use variable from theme.css */
+    letter-spacing: normal;
+    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
+      "wght" var(--pf-wght); /* Use variables from theme.css */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizelegibility;
+    overscroll-behavior: none;
+    scroll-snap-type: y mandatory;
+  }
+
+  /* Blockquote styles (pure CSS) */
   blockquote::before {
     content: open-quote;
   }
@@ -49,59 +91,44 @@
     quotes: "“" "”" "‘" "’";
   }
 
-  html {
-    scroll-behavior: smooth;
-    font-size: 100%;
-    --vw: 1px;
-    --vh: 1px;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    display: block;
-    font-family: var(--font-sans);
-    -webkit-locale: "en";
+  /* List reset (pure CSS) */
+  ol,
+  ul,
+  li {
+    list-style: none;
   }
 
-  html.is-ready {
-    /* Styles that apply only when is-ready is present on html */
+  /* Input/Button/Link resets (pure CSS) */
+  button,
+  input,
+  a {
+    outline: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  fieldset,
+  button,
+  input,
+  select,
+  textarea,
+  hr {
+    -webkit-appearance: none;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 
-  body,
-  input {
-    color: var(--color-text-default);
-    background-color: var(--color-surface-page);
-    font-family: var(--font-sans);
-    font-feature-settings: "kern" on, "liga" on;
-    font-size: var(--type-scale-step-0);
-    letter-spacing: normal;
-    line-height: 1.325;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght); /* Default wght: 400 from theme.css */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    --translateX: 0;
-    --translateY: 0;
-    --rotate: 0;
-    --scaleX: 1;
-    --scaleY: 1;
-  }
-
-  body {
-    overscroll-behavior: none;
-  }
-
-  body[page-type="detail"] {
-    background: var(--nerdy-gradient);
-    background-attachment: fixed;
-  }
-
+  /* Responsive font-variation-settings (pure CSS, using variables) */
   @media screen and (min-width: 40em) {
     body,
     input {
       --pf-opsz: 20;
     }
   }
-
   @media screen and (min-width: 45em) {
     body,
     input {
@@ -131,29 +158,6 @@
       --pf-opsz: 160;
     }
   }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p.welcome {
-    --pf-opsz: 250;
-  }
-
-  @media screen and (min-width: 30em) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p.welcome {
-      --pf-opsz: 400;
-    }
-  }
-
   @media screen and (min-width: 35em) {
     h1,
     h2,
@@ -178,25 +182,13 @@
     }
   }
 
-  @media screen and (min-width: 70em) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p.welcome {
-      --pf-opsz: 1000;
-    }
-  }
-
+  /* Font styles for strong, em, i, blockquote p (pure CSS, using variables) */
   strong {
     font-synthesis: none;
     --pf-wght: 700;
     font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
       "wght" var(--pf-wght);
   }
-
   em,
   i,
   blockquote p {
@@ -207,6 +199,7 @@
       "wght" var(--pf-wght);
   }
 
+  /* Heading specific styles (pure CSS, using variables) */
   h1,
   h2,
   h3,
@@ -215,7 +208,6 @@
     font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
       "wght" var(--pf-wght);
   }
-
   h1 {
     font-size: var(--type-scale-step-5);
     line-height: var(--type-scale-step-5);
@@ -267,299 +259,86 @@
       "wght" var(--pf-wght);
   }
 
-  h4 + p,
-  h4 + ul.tags {
-    margin-top: -0.5rem;
-  }
-
   figcaption,
   button {
     font-size: var(--type-scale-step--1);
   }
-
   figcaption {
     margin-bottom: var(--spacing-l);
   }
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-
-  a {
-    @apply transition-colors duration-300;
-    /* @apply text-text-default hover:text-accent-primary; */
-    text-decoration: none;
-  }
-
-  .hero-text {
-    font-family: var(--font-cinzel), serif;
-    line-height: 1.2;
-    font-size: clamp(1.875rem, 0.82rem + 4.6vw, 5.625rem);
-    letter-spacing: -0.025em;
-    font-feature-settings: "ss01" 1;
-  }
-
-  .font-mono {
-    letter-spacing: 0.05em !important;
-  }
-
-  /* This custom transform class is crucial for your variable-based animations */
   .transform-custom {
     will-change: transform;
     transform: translate(var(--translateX, 0), var(--translateY, 0))
-      /* Added defaults for safety */ rotate(var(--rotate, 0deg))
-      scale(var(--scaleX, 1), var(--scaleY, 1)) translateZ(0);
+      rotate(var(--rotate, 0deg)) scale(var(--scaleX, 1), var(--scaleY, 1))
+      translateZ(0);
   }
 
-  /* This pattern relies on a parent `.is-ready.is-active` state. */
-  /* These are NOT actual utility classes but part of your animation system */
-  /* Keep these as they manage the final states when animation triggers */
-  .is-ready.is-active .anim-in-shift-y-0 {
-    --translateY: 0%;
-  }
-
-  .will-change-transform {
-    transform: translateY(3.3446px) translateZ(0px);
-    will-change: transform;
-  }
-
-  .mdx-prose {
-    @apply max-w-none;
-    --tw-prose-body: var(--color-text-default);
-    --tw-prose-body: rgb(var(--color-text-default-rgb));
-    --tw-prose-headings: rgb(var(--color-text-default-rgb));
-    --tw-prose-lead: rgb(var(--color-text-muted-rgb));
-    --tw-prose-links: rgb(var(--color-accent-primary-rgb));
-    --tw-prose-bold: rgb(var(--color-text-default-rgb));
-    --tw-prose-counters: rgb(var(--color-text-muted-rgb));
-    --tw-prose-bullets: rgb(var(--color-accent-primary-rgb));
-    --tw-prose-hr: rgb(var(--color-border-default-rgb));
-    --tw-prose-quotes: rgb(var(--color-text-muted-rgb));
-    --tw-prose-quote-borders: rgb(var(--color-border-default-rgb));
-    --tw-prose-captions: rgb(var(--color-text-muted-rgb));
-    --tw-prose-code: rgb(var(--color-accent-secondary-rgb));
-    --tw-prose-pre-code: inherit;
-    --tw-prose-pre-bg: rgb(var(--color-code-background-rgb));
-    --tw-prose-th-borders: rgb(var(--color-border-default-rgb));
-    --tw-prose-td-borders: rgb(var(--color-border-subtle-rgb));
-    --tw-prose-invert-body: rgb(var(--color-text-default-rgb));
-    --tw-prose-invert-headings: rgb(var(--color-text-default-rgb));
-    --tw-prose-invert-lead: rgb(var(--color-text-muted-rgb));
-    --tw-prose-invert-links: rgb(var(--color-accent-primary-rgb));
-    --tw-prose-invert-bold: rgb(var(--color-text-default-rgb));
-    --tw-prose-invert-counters: rgb(var(--color-text-muted-rgb));
-    --tw-prose-invert-bullets: rgb(var(--color-accent-primary-rgb));
-    --tw-prose-invert-hr: rgb(var(--color-border-default-rgb));
-    --tw-prose-invert-quotes: rgb(var(--color-text-muted-rgb));
-    --tw-prose-invert-quote-borders: rgb(var(--color-border-default-rgb));
-    --tw-prose-invert-captions: rgb(var(--color-text-muted-rgb));
-    --tw-prose-invert-code: rgb(var(--color-accent-secondary-rgb));
-    --tw-prose-invert-pre-code: inherit;
-    --tw-prose-invert-pre-bg: rgb(var(--color-code-background-rgb));
-    --tw-prose-invert-th-borders: rgb(var(--color-border-default-rgb));
-    --tw-prose-invert-td-borders: rgb(var(--color-border-subtle-rgb));
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
 @layer components {
-  .transform-custom {
-    will-change: transform;
-    transform: translate(var(--translateX), var(--translateY))
-      rotate(var(--rotate)) scale(var(--scaleX), var(--scaleY)) translateZ(0);
-  }
-
-  /* This pattern relies on a parent `.is-ready.is-active` state. */
-  .is-ready.is-active .anim-in-shift-y-0 {
-    --translateY: 0%;
-  }
-
-  .is-ready.is-active .anim-in-scale-x-1 {
-    --scaleX: 1;
-  }
-
-  /* === Hamburger Button Styles === */
-  .burger-wrapper {
-    cursor: pointer;
-    display: block;
-    opacity: 1;
-    width: 36px;
-    height: 15px;
-    position: relative;
-    pointer-events: auto;
-    will-change: transform;
-    top: 50%;
-    left: 0;
-    transform: translateY(calc(-50% - 2.5px));
-  }
-  .line-wrapper {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: var(--line-height);
-    display: block;
-    overflow: hidden;
-    background-color: currentColor;
-    transform-origin: 0% 50%;
-    backface-visibility: hidden;
+  /* Hamburger Menu Animations - these can remain here as they are specific to a component structure */
+  .hamburger-button {
     -webkit-backface-visibility: hidden;
-    transition: transform 0.3s var(--ease-out-standard);
+    backface-visibility: hidden;
+  }
+  .hamburger-line-1,
+  .hamburger-line-2 {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .line-wrapper-1 {
-    top: 50%;
-    transform: translateY(-2.5px);
+  .hamburger-line-1-start,
+  .hamburger-line-1-end,
+  .hamburger-line-2-start,
+  .hamburger-line-2-end {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  .line-wrapper-2 {
-    top: 50%;
-    transform: translateY(2.5px);
+  /* Hover Effects */
+  .hamburger-button:hover .hamburger-line-1-start {
+    animation: burger-line-1-start-hover 1.3s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
   }
 
-  @keyframes burger_line1_start_animation {
-    0% {
-      transform: translateY(-2.5px) rotate(0deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(45deg);
-    }
+  .hamburger-button:hover .hamburger-line-1-end {
+    animation: burger-line-1-end-hover 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      0s forwards;
   }
 
-  @keyframes burger_line1_end_animation {
-    0% {
-      transform: translateY(2.5px) rotate(0deg);
-    }
-    100% {
-      transform: translateY(0px) rotate(-45deg);
-    }
+  .hamburger-button:hover .hamburger-line-2-start {
+    animation: burger-line-2-start-hover 1.3s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
   }
 
-  @keyframes letter_enter_animation {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
+  .hamburger-button:hover .hamburger-line-2-end {
+    animation: burger-line-2-end-hover 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      0s forwards;
   }
 
-  @keyframes burger_close_line1_animation {
-    0% {
-      transform: translateY(-2.5px) rotate(0deg) scale(1, 1);
-    }
-    100% {
-      transform: translateY(0px) rotate(45deg) scale(0.7, 1) translateZ(0px);
-    }
+  /* === Active/Open State === */
+  .hamburger-button.is-active .hamburger-line-1 {
+    transform: translateY(0) rotate(45deg);
   }
 
-  @keyframes burger_close_line2_animation {
-    0% {
-      transform: translateY(2.5px) rotate(0deg) scale(1, 1);
-    }
-    100% {
-      transform: translateY(0px) rotate(-45deg) scale(0.7, 1) translateZ(0px);
-    }
-  }
-  /* =========== *
-  End Hamburger Style
-     =========== */
-
-  .hamburger div {
-    transition: all 0.3s ease;
+  .hamburger-button.is-active .hamburger-line-2 {
+    transform: translateY(0) rotate(-45deg);
   }
 
-  .menu {
-    transition: transform 0.3s ease;
-  }
-
-  /* The .scroll-object class for animations */
-  .scroll-object {
-    /* Base styles for scroll objects */
-    /* Add any default transitions or opacity changes here if they always apply */
-  }
-
-  .scroll-object.is-active {
-    /* Styles that apply when the scroll-object is in view */
-    /* This will likely include animation-triggering properties or resets */
-  }
-
-  /* Specific transition utility classes */
-
-  .tween-all-1-6s-easeOut2 {
-    transition: all 1.6s var(--alias-easeOut2);
-  }
-
-  .tween-all-1s-easeOut {
-    transition: all 1s var(--alias-easeOut);
-  }
-
-  .tween-0-3s-easeOut {
-    transition: all 0.3s var(--alias-easeOut);
-  }
-
-  .tween-bg-color-0-3s-easeOut {
-    transition: background-color 0.3s var(--alias-easeOut);
-  }
-
-  .tween-color-0-5s-easeOut {
-    transition: color 0.5s var(--alias-easeOut);
-  }
-
-  .tween-opacity-1-3s-easeOut2 {
-    transition: opacity 1.3s var(--alias-easeOut2);
-  }
-
-  .tween-opacity-1-6s-easeOut {
-    transition: opacity 1.6s var(--alias-easeOut);
-  }
-
-  .tween-opacity-0-6s-easeOut3 {
-    transition: opacity 0.6s var(--alias-easeOut3);
-  }
-
-  .tween-stroke-dashoffset-1-6s-4s-easeOut3 {
-    transition: stroke-dashoffset 1.6s 4s var(--alias-easeOut3);
-  }
-
-  .tween-1-8s-easeOut {
-    transition: all 1.8s var(--alias-easeOut);
-  }
-
-  .tween-transform-0-6s-easeOut {
-    transition: transform 0.6s var(--alias-easeOut);
-  }
-
-  .tween-transform-0-6s-easeOut3 {
-    transition: transform 0.6s var(--alias-easeOut3);
-  }
-
-  .tween-transform-1-3s-easeOut3 {
-    transition: transform 1.3s var(--alias-easeOut3);
-  }
-
-  .tween-transform-1-8s-2-3s-easeOut2 {
-    transition: transform 1.8s 2.3s var(--alias-easeOut2);
-  }
-
-  .tween-transform-2-3s-easeOutSlow {
-    transition: transform 2.3s var(--alias-easeOutSlow);
-  }
-
-  /* Marquee (Used in Header) */
-  @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  .marquee {
-    animation: marquee 30s linear infinite;
-    white-space: nowrap;
-    font-family: var(--font-cinzel-deco), serif;
+  /* Mobile Menu States */
+  .mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .project_list {
@@ -573,34 +352,25 @@
       }
     }
   }
-
   .project_header {
     grid-area: head;
     padding-top: var(--spacing-lg);
   }
-
-  .project_header > h2 {
-    font-size: var(--type-scale-step-3);
-  }
-
   .project_body {
     grid-area: body;
     padding-top: var(--spacing-l);
   }
-
   .portfolio_intro {
     font-size: var(--type-scale-step-2);
     line-height: calc(var(--type-scale-step-2) * 1.125);
     max-width: 50ch;
   }
-
   .portfolio_intro > a {
     color: #333;
     text-decoration-thickness: 0.05em;
     text-underline-offset: 0.07em;
     transition: color 0.25s ease, text-decoration-color 0.25s ease;
   }
-
   .quote {
     margin: 0;
     background: var(--hdr-gradient);
@@ -612,31 +382,15 @@
     margin: 1em;
   }
 
-  .detail-page-background {
-    background: radial-gradient(
-        circle at 35% 50%,
-        rgba(5, 88, 255, 0.15),
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 65% 50%,
-        rgba(128, 0, 74, 0.15),
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 50% 65%,
-        rgba(74, 128, 0, 0.15),
-        transparent 50%
-      );
-    background-attachment: fixed;
-  }
-
+  /* Scroll Watcher & Controls */
   .scroll-watcher {
     height: 10px;
     position: fixed;
     top: 0;
     z-index: 1000;
-    background-color: var(--color-accent-primary);
+    background-color: var(
+      --color-accent-primary
+    ); /* Use variable from theme.css */
     width: 100%;
     scale: 0 1;
     transform-origin: left;
@@ -644,68 +398,95 @@
     animation-timeline: scroll(y);
   }
 
+  /* Keyframe Animations */
   @keyframes scroll-watcher {
     to {
       scale: 1 1;
     }
   }
-
-  .scroll-controls {
-    position: sticky;
-    bottom: theme("spacing.8", "2rem");
-    z-index: 50;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
+  @keyframes burger-line-1-start-hover {
+    0% {
+      transform: scaleX(1);
+    }
+    20% {
+      transform: scaleX(0.8);
+    }
+    40% {
+      transform: scaleX(1.1);
+    }
+    60% {
+      transform: scaleX(0.9);
+    }
+    80% {
+      transform: scaleX(1.05);
+    }
+    100% {
+      transform: scaleX(1);
+    }
   }
 
-  [data-scroll-section] {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
+  @keyframes burger-line-1-end-hover {
+    0% {
+      transform: scaleX(1);
+    }
+    15% {
+      transform: scaleX(0.7);
+    }
+    35% {
+      transform: scaleX(1.2);
+    }
+    55% {
+      transform: scaleX(0.85);
+    }
+    75% {
+      transform: scaleX(1.08);
+    }
+    100% {
+      transform: scaleX(1);
+    }
   }
 
-  .lighting-effect {
-    position: relative;
-    overflow: hidden;
+  @keyframes burger-line-2-start-hover {
+    0% {
+      transform: scaleX(1);
+    }
+    18% {
+      transform: scaleX(0.9);
+    }
+    38% {
+      transform: scaleX(1.15);
+    }
+    58% {
+      transform: scaleX(0.88);
+    }
+    78% {
+      transform: scaleX(1.06);
+    }
+    100% {
+      transform: scaleX(1);
+    }
   }
 
-  .lighting-effect::before,
-  .lighting-effect::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.7;
-    z-index: -1;
+  @keyframes burger-line-2-end-hover {
+    0% {
+      transform: scaleX(1);
+    }
+    22% {
+      transform: scaleX(0.75);
+    }
+    42% {
+      transform: scaleX(1.18);
+    }
+    62% {
+      transform: scaleX(0.92);
+    }
+    82% {
+      transform: scaleX(1.04);
+    }
+    100% {
+      transform: scaleX(1);
+    }
   }
-
-  .lighting-effect::before {
-    background: radial-gradient(
-      circle,
-      var(--color-accent-primary) 0%,
-      transparent 70%
-    );
-    top: -50px;
-    left: -50px;
-    width: 200px;
-    height: 200px;
-    animation: light-pulse 5s infinite alternate ease-in-out;
-  }
-
-  .lighting-effect::after {
-    background: radial-gradient(
-      circle,
-      var(--color-accent-secondary) 0%,
-      transparent 70%
-    );
-    bottom: -50px;
-    right: -50px;
-    width: 250px;
-    height: 250px;
-    animation: light-pulse 6s infinite alternate-reverse ease-in-out;
-  }
-
   @keyframes light-pulse {
     0% {
       transform: translate(0, 0) scale(1);
@@ -720,6 +501,175 @@
       opacity: 0.7;
     }
   }
+
+  @keyframes letter_enter_animation {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes exit-fade {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+  @keyframes enter-fade {
+    from {
+      opacity: 0;
+      transform: scale(1.02);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .scroll-controls {
+    position: sticky;
+    bottom: theme("spacing.8");
+    z-index: 50;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
+  }
+  [data-scroll-section] {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+
+  /* Lighting Effect */
+  .lighting-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  .lighting-effect::before,
+  .lighting-effect::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.7;
+    z-index: -1;
+  }
+  .lighting-effect::before {
+    background: radial-gradient(
+      circle,
+      var(--color-accent-primary) 0%,
+      transparent 70%
+    ); /* Use variable from theme.css */
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    animation: light-pulse 5s infinite alternate ease-in-out;
+  }
+  .lighting-effect::after {
+    background: radial-gradient(
+      circle,
+      var(--color-accent-secondary) 0%,
+      transparent 70%
+    ); /* Use variable from theme.css */
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    animation: light-pulse 6s infinite alternate-reverse ease-in-out; /* Use light-pulse or a new name if reverse is different keyframe */
+  }
+
+  /* Container for the entire scrollable block */
+  .scrollBlockContainer {
+    position: relative; /* Needed for absolute positioning of child */
+    background-color: var(
+      --alias-light
+    ); /* Default to white as placeholder's background */
+    z-index: -1; /* Place it behind other content if necessary */
+    /* This outer div acts like the `rel bg:#fff z:-1` container in the snippet */
+  }
+
+  /* The placeholder div to create initial scroll space */
+  .placeholder {
+    height: 150vh; /* Equivalent to h:150vh, h:100vh@m from snippet */
+    width: 100%;
+    /* For mobile, add a media query for height: 100vh; */
+  }
+
+  /* The absolute container that creates the extended scroll space for pinning */
+  .absolutePinContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250vh;
+    /* For mobile, add a media query for height: 100vh; */
+  }
+
+  /* The actual "sticky" element that will hold the animating content */
+  .stickyContentWrapper {
+    position: sticky;
+    top: 0; /* Pins to the top of the viewport */
+    height: 100vh; /* This makes the sticky area exactly one viewport high */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Important for masking content that slides in/out */
+    /* This is equivalent to `w:fit h:100vh pos:sticky t:0px` from the snippet */
+  }
+
+  /* The main section (like <scroll-object> or a section holding it) that contains content */
+  .scrollSection {
+    height: 100vh; /* Each section is full viewport height */
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Optional: background transition for smoother section background changes */
+    transition: background-image 1s ease-in-out, background-color 1s ease-in-out;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* Important: This section itself needs to snap for smooth transitions between sections */
+    scroll-snap-align: start;
+
+    /* Actual content inside this section, could also be a nested animatable */
+    position: relative; /* For absolute positioned children if needed */
+    text-align: center;
+    color: var(--alias-light); /* Default content color */
+    padding: 2rem;
+    max-width: 80%; /* Constrain content width */
+  }
+
+  .animatableInnerContent {
+    transform: scale(1.2);
+    opacity: 0;
+    --translateY: 100%;
+
+    transition: transform 1.6s var(--alias-easeOut),
+      opacity 1.3s var(--alias-easeOut2),
+      /* Adding translateY for slide animation */ transform 1.3s
+        var(--alias-easeOut2); /* Apply to transform for translateY as well */
+
+    /* We need to separate the scale transform and translateY transform to apply both */
+    /* One way is to chain them or animate different elements.
+     For simplicity, let's make `animatableInnerContent` scale and its child `contentWrapper` translateY.
+     OR, better, use a CSS variable for the base scale/translate and only transition the value.
+     Let's stick to the CSS variable for scale and translateY too, and apply to same element.
+  */
+    transform: scale(var(--scale-value, 1.2))
+      translateY(var(--translateY-value, 100%));
+    opacity: var(--opacity-value, 0);
+  }
 }
 
 @layer utilities {
@@ -729,45 +679,12 @@
   .shift-y-0 {
     --translateY: 0%;
   }
-  .shift-y-neg-100fy {
-    --translateY: calc(-100 * var(--unit-fy));
-  }
-  .shift-y-neg-2-5px {
-    --translateY: -2.5px;
-  }
-  .shift-y-2-5px {
-    --translateY: 2.5px;
-  }
-  .shift-y-7vh {
-    --translateY: 7vh;
-  }
-  .shift-y-0vh {
-    --translateY: 0vh;
-  }
-  .shift-x-neg-50 {
-    --translateX: -50%;
-  }
-  .shift-x-100 {
-    --translateX: 100%;
-  }
-  .shift-x-neg-100 {
-    --translateX: -100%;
-  }
-  .shift-x-0 {
-    --translateX: 0;
-  }
-  .shift-x-neg-12 {
-    --translateX: -12%;
-  }
 
   .scale-x-0 {
     --scaleX: 0;
   }
   .scale-x-1 {
     --scaleX: 1;
-  }
-  .scale-x-0-15 {
-    --scaleX: 0.15;
   }
   .scale-0 {
     --scaleX: 0;
@@ -784,377 +701,33 @@
   .rotate-neg-45deg {
     --rotate: -45deg;
   }
-  .rotate-0deg {
-    --rotate: 0deg;
-  }
-  .rotate-90deg {
-    --rotate: 90deg;
-  }
-  .w-fit-fx {
-    width: var(--alias-fit);
-  }
-  .w-20px {
-    width: 20px;
-  }
-  .w-10px {
-    width: 10px;
-  }
-  .w-36px {
-    width: 36px;
-  }
-  .w-60px {
-    width: 60px;
-  }
-  .w-87px {
-    width: 87px;
-  }
-  .w-310fx {
-    width: calc(310 * var(--unit-fx));
-  }
-  .w-620fx {
-    width: calc(620 * var(--unit-fx));
-  }
-  .w-100fx {
-    width: calc(100 * var(--unit-fx));
-  }
-  .w-790fx {
-    width: calc(790 * var(--unit-fx));
-  }
-  .w-514fx {
-    width: calc(514 * var(--unit-fx));
-  }
-  .w-779fx {
-    width: calc(779 * var(--unit-fx));
-  }
-  .w-430fx {
-    width: calc(430 * var(--unit-fx));
-  }
-  .w-511fx {
-    width: calc(511 * var(--unit-fx));
-  }
-  .w-472fx {
-    width: calc(472 * var(--unit-fx));
-  }
-  .w-300fx {
-    width: calc(300 * var(--unit-fx));
-  }
-  .w-206fx {
-    width: calc(206 * var(--unit-fx));
-  }
 
-  .h-fit-fy {
-    height: var(--alias-fit);
+  /* Prefer direct Tailwind classes for width/height or arbitrary values */
+  .w-100vw {
+    width: 100vw;
   }
   .h-100vh {
     height: 100vh;
   }
-  .h-14px {
-    height: 14px;
-  }
-  .h-1px {
-    height: 1px;
-  }
-  .h-15px {
-    height: 15px;
-  }
-  .h-800fy {
-    height: calc(800 * var(--unit-fy));
-  }
-  .h-900fy {
-    height: calc(900 * var(--unit-fy));
-  }
-  .h-990fy {
-    height: calc(990 * var(--unit-fy));
-  }
-  .h-100fx {
-    height: calc(100 * var(--unit-fx));
-  }
-  .h-430fx {
-    height: calc(430 * var(--unit-fx));
-  }
-  .h-200vh {
-    height: 200vh;
-  }
-  .h-66px {
-    height: 66px;
-  }
   .min-h-100vh {
     min-height: 100vh;
   }
-  .min-h-900fy {
-    min-height: calc(900 * var(--unit-fy));
-  }
 
-  .z-10 {
-    z-index: 10;
-  }
-  .z-1 {
-    z-index: 1;
-  }
-  .z-0 {
-    z-index: 0;
-  }
-  .z-9 {
-    z-index: 9;
-  }
-  .z-100 {
-    z-index: 100;
-  }
-  .z-1000000 {
-    z-index: 1000000;
-  }
   .z-neg-1 {
     z-index: -1;
-  }
-  .z-2 {
-    z-index: 2;
-  }
-  .z-3 {
-    z-index: 3;
-  }
+  } /* Tailwind doesn't have negative z-index by default */
 
   .bg-transparent {
-    background: var(--alias-trans);
+    background: transparent;
   }
   .bg-current-color {
-    background: var(--alias-current);
-  }
-  .bg-light {
-    background: var(--alias-light);
-  }
-  .bg-dark {
-    background: var(--alias-dark);
-  }
-  .bg-none {
-    background: none;
+    background: currentColor;
   }
   .bg-black {
     background: black;
   }
 
-  .c-dark {
-    color: var(--alias-dark);
-  }
-  .c-light {
-    color: var(--alias-light);
-  }
-  .c-current-color {
-    color: var(--alias-current);
-  }
-
-  .b-t-solid-1px-white20 {
-    border-top: solid 1px var(--alias-white20);
-  }
-  .b-b-solid-1px-black20 {
-    border-bottom: solid 1px var(--alias-black20);
-  }
-  .b-b-solid-1px-black {
-    border-bottom: solid 1px black;
-  }
-  .border-solid-1px-black40 {
-    border: solid 1px var(--alias-black40);
-  }
-  .border-solid-1px-white20 {
-    border: solid 1px var(--alias-white20);
-  }
-
-  .o-0-7 {
-    opacity: 0.7;
-  }
-  .o-0-15 {
-    opacity: 0.15;
-  }
-  .o-0-25 {
-    opacity: 0.25;
-  }
-  .o-0-6 {
-    opacity: 0.6;
-  }
-
-  .p-20px {
-    padding: 20px;
-  }
-  .p-y-25px {
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-  .p-x-30px {
-    padding-right: 30px;
-    padding-left: 30px;
-  }
-  .p-x-102fx {
-    padding-right: calc(102 * var(--unit-fx));
-    padding-left: calc(102 * var(--unit-fx));
-  }
-  .p-t-102fy {
-    padding-top: calc(102 * var(--unit-fy));
-  }
-  .p-l-211fx {
-    padding-left: calc(211 * var(--unit-fx));
-  }
-  .p-r-290fx {
-    padding-right: calc(290 * var(--unit-fx));
-  }
-  .p-x-103fx {
-    padding-right: calc(103 * var(--unit-fx));
-    padding-left: calc(103 * var(--unit-fx));
-  }
-  .p-y-90fy {
-    padding-top: calc(90 * var(--unit-fy));
-    padding-bottom: calc(90 * var(--unit-fy));
-  }
-  .p-x-101fx {
-    padding-right: calc(101 * var(--unit-fx));
-    padding-left: calc(101 * var(--unit-fx));
-  }
-  .p-b-100fy {
-    padding-bottom: calc(100 * var(--unit-fy));
-  }
-  .p-x-47fx {
-    padding-right: calc(47 * var(--unit-fx));
-    padding-left: calc(47 * var(--unit-fx));
-  }
-  .p-b-200fy {
-    padding-bottom: calc(200 * var(--unit-fy));
-  }
-  .p-t-90fy {
-    padding-top: calc(90 * var(--unit-fy));
-  }
-  .p-l-90fx {
-    padding-left: calc(90 * var(--unit-fx));
-  }
-  .p-r-209fx {
-    padding-right: calc(209 * var(--unit-fx));
-  }
-  .p-t-180fy {
-    padding-top: calc(180 * var(--unit-fy));
-  }
-  .p-l-103fx {
-    padding-left: calc(103 * var(--unit-fx));
-  }
-  .p-b-150fy {
-    padding-bottom: calc(150 * var(--unit-fy));
-  }
-  .p-l-102fx {
-    padding-left: calc(102 * var(--unit-fx));
-  }
-  .p-t-200fy {
-    padding-top: calc(200 * var(--unit-fy));
-  }
-  .p-t-130fy {
-    padding-top: calc(130 * var(--unit-fy));
-  }
-  .p-l-30fx {
-    padding-left: calc(30 * var(--unit-fx));
-  }
-  .p-r-102fx {
-    padding-right: calc(102 * var(--unit-fx));
-  }
-  .p-y-50fy {
-    padding-top: calc(50 * var(--unit-fy));
-    padding-bottom: calc(50 * var(--unit-fy));
-  }
-  .p-r-30fx {
-    padding-right: calc(30 * var(--unit-fx));
-  }
-  .p-x-100fx {
-    padding-right: calc(100 * var(--unit-fx));
-    padding-left: calc(100 * var(--unit-fx));
-  }
-
-  .m-r-40fx {
-    margin-right: calc(40 * var(--unit-fx));
-  }
-  .m-r-10fx {
-    margin-right: calc(10 * var(--unit-fx));
-  }
-  .m-r-30fx {
-    margin-right: calc(30 * var(--unit-fx));
-  }
-  .m-b-114fy {
-    margin-bottom: calc(114 * var(--unit-fy));
-  }
-  .m-b-42fy {
-    margin-bottom: calc(42 * var(--unit-fy));
-  }
-  .m-b-19fy {
-    margin-bottom: calc(19 * var(--unit-fy));
-  }
-  .m-b-1fy {
-    margin-bottom: calc(1 * var(--unit-fy));
-  }
-  .m-b-87fy {
-    margin-bottom: calc(87 * var(--unit-fy));
-  }
-  .m-b-70fy {
-    margin-bottom: calc(70 * var(--unit-fy));
-  }
-  .m-b-86fy {
-    margin-bottom: calc(86 * var(--unit-fy));
-  }
-  .m-b-154fy {
-    margin-bottom: calc(154 * var(--unit-fy));
-  }
-  .m-b-162fy {
-    margin-bottom: calc(162 * var(--unit-fy));
-  }
-  .m-b-90fy {
-    margin-bottom: calc(90 * var(--unit-fy));
-  }
-  .m-b-38fy {
-    margin-bottom: calc(38 * var(--unit-fy));
-  }
-  .m-r-11fx {
-    margin-right: calc(11 * var(--unit-fx));
-  }
-
-  .rtl {
-    direction: rtl;
-  }
-
-  .just-center {
-    justify-content: var(--alias-center);
-  }
-  .just-start {
-    justify-content: var(--alias-start);
-  }
-  .just-end {
-    justify-content: var(--alias-end);
-  }
-  .just-between {
-    justify-content: var(--alias-between);
-  }
-  .items-center {
-    align-items: center;
-  }
-  .items-start {
-    align-items: var(--alias-start);
-  }
-  .items-stretch {
-    align-items: stretch;
-  }
-  .items-end {
-    align-items: var(--alias-end);
-  }
-  .dir-column {
-    flex-direction: var(--alias-col);
-  }
-  .grow-0 {
-    flex-grow: 0;
-  }
-  .shrink-0 {
-    flex-shrink: 0;
-  }
-  .justify-between {
-    justify-content: var(--alias-between);
-  }
-  .wrap-wrap {
-    flex-wrap: wrap;
-  }
-  .dir-row-reverse {
-    flex-direction: row-reverse;
-  }
-
+  /* Space Between: Use Tailwind's space-x/y utilities */
   .space-x-10px > *:not(:last-child) {
     margin-right: 10px;
   }
@@ -1173,42 +746,7 @@
   }
 
   .radius-100px {
-    border-radius: 100px;
-  }
-  .radius-300px {
-    border-radius: 300px;
-  }
-  .object-cover {
-    object-fit: cover;
-  }
-  .object-contain {
-    object-fit: contain;
-  }
-  .blend-difference {
-    mix-blend-mode: difference;
-  }
-  .fill-currentColor {
-    fill: currentColor;
-  }
-  .stroke-white20 {
-    stroke: var(--alias-white20);
-  }
-  .anim-delay-1-3s {
-    animation-delay: 1.3s !important;
-  }
-  .anim-delay-1-4s {
-    animation-delay: 1.4s !important;
-  }
-
-  .before-p-t-92::before {
-    padding-top: 92%;
-  }
-  .before-p-t-145::before {
-    padding-top: 145%;
-  }
-
-  .d-none {
-    display: none;
+    border-radius: 10;
   }
 }
 
@@ -1216,46 +754,11 @@
 @import "./animations.css";
 @import "./mdx.css";
 
-/* Specific global styles */
-.bg-lighting::before {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(255, 255, 255, 0.2) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-}
 ::view-transition-old(root) {
   animation: exit-fade 0.25s ease-out forwards;
 }
 ::view-transition-new(root) {
   animation: enter-fade 0.25s ease-out 0.1s backwards;
-}
-@keyframes exit-fade {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.98);
-  }
-}
-@keyframes enter-fade {
-  from {
-    opacity: 0;
-    transform: scale(1.02);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .anim-in-fade-up {
@@ -1350,6 +853,34 @@
   will-change: transform, opacity;
 }
 
+/* State when the animation should be "in" or "active" */
+/* Equivalent to `is-ready .is-active .anim-in:scale:1` etc. */
+/* We'll add this class `is-anim-active` via JS when section is in view */
+html.is-ready .animatableInnerContent.is-anim-active {
+  transform: scale(1) translateY(0%); /* Target scale:1, translateY:0% */
+  opacity: 1; /* Target opacity:1 */
+
+  /* The transition should apply when this class is added/removed */
+  /* The `transition` property needs to be defined on the element itself, not just its active state.
+     It's already defined above.
+  */
+}
+
+/* Styles for the last section's background (if it's just black) */
+.scrollSection.bgBlack {
+  background-color: var(--alias-dark);
+  background-image: none !important; /* Ensure no image if solid color is desired */
+}
+
+/*  Responsive Adjustments (from snippet) --- */
+@media (max-width: 768px) {
+  /* Assuming @m means tablet/mobile */
+  .placeholder,
+  .absolutePinContainer {
+    height: 100vh; /* For mobile */
+  }
+}
+
 html.is-ready .scroll-object.is-active .anim-in-fade-up,
 html.is-ready .scroll-object.is-active .anim-in-fade-down,
 html.is-ready .scroll-object.is-active .anim-in-fade-right,
@@ -1375,11 +906,11 @@ html.is-ready .scroll-object.is-active .anim-in-zoom-out-left {
 }
 
 .menu-button.is-active .burger-line-container:nth-child(1) {
-  transform: translateY(2.5px) rotate(45deg); /* Or sets --translateY: 2.5px; --rotate: 45deg; if using transform-custom */
+  transform: translateY(2.5px) rotate(45deg);
 }
 
 .menu-button.is-active .burger-line-container:nth-child(2) {
-  transform: translateY(-2.5px) rotate(-45deg); /* Or sets --translateY: -2.5px; --rotate: -45deg; */
+  transform: translateY(-2.5px) rotate(-45deg);
 }
 
 .menu-button.is-active
