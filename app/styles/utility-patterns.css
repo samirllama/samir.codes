@@ -109,7 +109,6 @@
 
 .btn-sm {
   @apply inline-flex items-center justify-center rounded-full px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-[length:var(--fontSize-xs)] leading-[var(--lineHeight-normal)] font-medium transition-all duration-150 whitespace-nowrap border border-transparent;
-  /* Use --fontSize-xs defined in theme.css */
 }
 
 /* === Form Components === */

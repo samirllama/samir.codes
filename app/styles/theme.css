@@ -5,8 +5,9 @@
 
 :root {
   /* === Base OKLCH Color Definitions === */
-  /* ... (Your existing OKLCH color definitions) ... */
-  --oklch-moth-green: oklch(20.3% 0.037 138); /* #0e1b07 */
+  --oklch-white: oklch(100% 0 0);
+  --oklch-black: oklch(0% 0 0);
+  --oklch-moth-green: oklch(20.376% 0.0415 135.545); /* #0e1b07 */
   --oklch-moth-brown: oklch(24.6% 0.062 48); /* #35170c */
   --oklch-moth-mousse: oklch(55.8% 0.053 51); /* #9e7967 */
   --oklch-moth-light: oklch(93.5% 0.016 53);
@@ -17,9 +18,6 @@
   --oklch-accent-warm-tan: oklch(77.5% 0.054 77); /* #d2b48c */
   --oklch-accent-deep-ochre: oklch(51.2% 0.098 53); /* #a0522d */
   --oklch-accent-soft-grey: oklch(79.2% 0 0); /* #c0c0c0 */
-
-  --oklch-white: oklch(100% 0 0);
-  --oklch-black: oklch(0% 0 0);
 
   /* Monaspace OKLCH Variables */
   --oklch-neon-primary: oklch(85% 0.3 145); /* Vibrant Green */
@@ -34,24 +32,18 @@
   --oklch-krypton-dark: var(--oklch-krypton-primary);
 
   /* === Semantic Color Mapping (LIGHT THEME) === */
-  --color-surface-page: var(--oklch-moth-green); /* Light background */
-  --color-surface-card: var(
-    --oklch-moth-light
-  ); /* Assuming moth-light for light card background */
-  --color-surface-secondary: var(
-    --oklch-moth-light
-  ); /* Assuming moth-light for light surface secondary */
-  --color-text-default: var(
-    --oklch-white
-  ); /* Dark text (on green background, white is better) */
-  --color-text-muted: var(--oklch-moth-mousse); /* Muted text */
+  --color-text-default: var(--oklch-white);
   --color-text-inverted: var(--oklch-white); /* Text on dark backgrounds */
+  --color-surface-page: var(--oklch-moth-green); /* Light background */
+  /* Assuming moth-light for light card background */
+  --color-surface-card: var(--oklch-moth-light);
+  /* Assuming moth-light for light surface secondary */
+  --color-surface-secondary: var(--oklch-moth-light);
+  --color-text-muted: var(--oklch-moth-mousse); /* Muted text */
   --color-accent-primary: var(--oklch-moth-orange); /* Keep accent */
   --color-accent-secondary: var(--oklch-accent-deep-ochre); /* Keep accent */
   --color-border-default: var(--oklch-accent-soft-grey); /* Lighter borders */
-  --color-border-subtle: var(
-    --oklch-moth-light
-  ); /* Assuming moth-light for subtle borders */
+  --color-border-subtle: var(--oklch-moth-light);
   --color-interactive-primary: var(--oklch-accent-deep-ochre);
   --color-interactive-secondary: var(--oklch-moth-orange);
   --color-interactive-muted: var(--oklch-moth-mousse);
@@ -91,16 +83,16 @@
     var(--color-surface-page);
 
   /* === Shadows (LIGHT THEME) === */
-  --shadow-highlight-rgb: 255, 255, 255; /* White */
-  --shadow-base-rgb: 200, 200, 200; /* Light Grey */
-  --shadow-outer-rgb: 150, 150, 150; /* Medium Grey */
+  --shadow-highlight-rgb: 255, 255, 255;
+  --shadow-base-rgb: 200, 200, 200;
+  --shadow-outer-rgb: 150, 150, 150;
 
   /* === Typography === */
   --font-cinzel: "Cinzel", serif;
   --font-cinzel-deco: "Cinzel Decorative", serif;
-  --font-sans: "Geist Mono", monospace; /* temp */
+  --font-sans: "Geist Mono", monospace;
 
-  /* === Typography Scale === */
+  /* === Type Scale === */
   --type-scale-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
   --type-scale-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
   --type-scale-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
@@ -132,9 +124,6 @@
   --pf-slnt: 0;
   --pf-wght: 300;
 
-  /* Core Spacing & Typography Tokens */
-  --spacing-base: 1rem;
-
   /* Layout Tokens */
   --nav-height: 5rem;
   --max-width: 70rem;
@@ -153,8 +142,7 @@
   --maxSize: 1440;
   --media-d: 1440px; /* desktop */
   --media-l: 1439px; /* large laptop/tablet landscape */
-  --media-t: 1024px; /* tablet portrait */
-  --media-tp: 1024px; /* tablet portrait (duplicate, keep one or alias) */
+  --media-tp: 1024px; /* tablet portrait */
   --media-m: 767px; /* mobile landscape/small tablet */
   --media-mp: 600px; /* mobile portrait */
   --media-nom: 768px; /* "no mobile" breakpoint */
@@ -169,10 +157,8 @@
   --alias-black40: rgba(0, 0, 0, 0.4);
   --alias-black50: rgba(0, 0, 0, 0.5);
 
-  --alias-theme: #000; /* From original HTML root */
-  --alias-dark: #000; /* From original HTML root */
-  --alias-light: #fff; /* From original HTML root */
-
+  --alias-dark: var(--oklch-black);
+  --alias-light: var(--oklch-white);
   /* Easing Aliases (Referenced by Tailwind.config.ts) */
   --alias-easeOut: cubic-bezier(0.43, 0.195, 0.02, 1);
   --alias-easeOut2: cubic-bezier(0.77, 0, 0.175, 1);
@@ -185,20 +171,6 @@
   --unit-fx: calc(var(--vw) / 1440);
   --unit-fy: calc(var(--vh) / 900);
   --unit-c: calc(var(--vw) / 14);
-
-  --baseColor: var(--alias-dark);
-  --baseBackground: var(--alias-light);
-
-  --alias-between: space-between;
-  --alias-around: space-around;
-  --alias-evenly: space-evenly;
-  --alias-start: flex-start;
-  --alias-end: flex-end;
-  --alias-fit: 100%;
-  --alias-current: currentColor;
-  --alias-abs: absolute;
-  --alias-col: column;
-  --alias-trans: transparent;
   /* Line Heights */
   --lineHeight-tight: 1.1; /* Example value, adjust as needed */
   --lineHeight-normal: 1.5;
@@ -246,7 +218,7 @@
   --color-xenon-primary: var(--oklch-xenon-dark);
   --color-radon-primary: var(--oklch-radon-dark);
   --color-krypton-primary: var(--oklch-krypton-dark);
-  /* Ensure -dark vars are distinct if needed for dark theme */
+
   --color-neon-dark: var(--oklch-neon-dark);
   --color-argon-dark: var(--oklch-argon-dark);
   --color-xenon-dark: var(--oklch-xenon-dark);
@@ -283,42 +255,4 @@
   --shadow-highlight-rgb: 70, 70, 70;
   --shadow-base-rgb: 30, 30, 30;
   --shadow-outer-rgb: 0, 0, 0;
-}
-
-/* === Component Styles (Keep minimal) === */
-
-.scroll-watcher {
-  height: 10px;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  background-color: var(--color-accent);
-  width: 100%;
-  scale: 0 1;
-  transform-origin: left;
-  animation: scroll-watcher linear;
-  animation-timeline: scroll(y);
-}
-
-@keyframes scroll-watcher {
-  to {
-    scale: 1 1;
-  }
-}
-
-/* Scroll controls */
-.scroll-controls {
-  position: sticky;
-  bottom: theme("spacing.8", "2rem");
-  z-index: 50;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
-}
-
-/* Scroll Utilities */
-[data-scroll-section] {
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  overscroll-behavior: contain;
 }

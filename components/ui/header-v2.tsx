@@ -106,8 +106,11 @@ export function AppHeader({ toggleAction, isMenuOpen }: AppHeaderProps) {
         <Link
           href="/"
           className={`pointer-events-auto ${
-            isMenuOpen ? "text-black" : "text-white"
+            isMenuOpen ? "text-default" : "text-white"
           }`}
+          // className={`pointer-events-auto ${
+          //   isMenuOpen ? "text-black" : "text-white"
+          // }`}
         >
           <Logo />
         </Link>

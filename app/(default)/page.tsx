@@ -2,14 +2,11 @@
 
 import { cn } from "@/lib/utils";
 import ProjectStack from "@/components/project-stack";
-import HeroSection from "@/components/HeroSection";
-import ProfessionalSummary from "@/components/professional-summary";
 import TechStack from "@/components/tech-stack";
 import TypefaceShowcase from "@/components/typeface-section";
 import ScrollSection from "@/components/ScrollSection";
 import {
   myProjects,
-  jobExperiences,
   languages,
   frameworksAndLibraries,
   databasesAndCaching,
@@ -36,38 +33,21 @@ export default function Home() {
         <section className="h-screen flex flex-col items-center justify-center px-10">
           <figure className="quote">
             <blockquote
-              className={cn(
-                "font-sans",
-                // var(--fontSize-h2) maps to var(--type-scale-step-4)
-                "text-h3",
-                "font-light",
-                "leading-normal" // var(--lineHeight-normal)
-              )}
+              className={cn(["text-h3", "font-sans font-light leading-normal"])}
             >
               LIFE IS NOT EASY FOR ANY OF US. BUT WHAT OF THAT? WE MUST HAVE
               PERSEVERANCE AND ABOVE ALL CONFIDENCE IN OURSELVES. WE MUST
               BELIEVE THAT WE ARE GIFTED FOR SOMETHING AND THAT THIS THING MUST
               BE ATTAINED.
             </blockquote>
-            <figcaption
-              className={cn(
-                "font-cinzel",
-                "text-h3",
-                "font-light",
-                "leading-tight"
-              )}
-            >
+            <figcaption className={cn("text-h3")}>
               &mdash; MARIE CURIE, <cite>Role models</cite>
             </figcaption>
           </figure>
         </section>
 
-        <HeroSection />
-
-        <ProjectStack projects={myProjects} />
-
         {/* === Professional Summary Section === */}
-        <ProfessionalSummary experiences={jobExperiences} />
+        <ProjectStack projects={myProjects} />
 
         <TechStack skillCategories={skillCategories} />
         <TypefaceShowcase />
