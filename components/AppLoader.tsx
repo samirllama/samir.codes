@@ -1,32 +1,71 @@
-import React from "react";
+"use client";
+
+import React, { useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import clsx from "clsx";
 
 interface AppLoaderProps {
   active: boolean;
 }
 
 const AppLoader: React.FC<AppLoaderProps> = ({ active }) => {
+  const loaderRef = useRef<HTMLDivElement>(null);
+  const backgroundLayerRef = useRef<HTMLDivElement>(null);
+  const slideLayerRef = useRef<HTMLDivElement>(null);
+
+  const [shouldRender, setShouldRender] = useState(true);
+
+  useGSAP(
+    () => {
+      if (!active && loaderRef.current) {
+        const tl = gsap.timeline({
+          onComplete: () => {
+            setShouldRender(false);
+          },
+        });
+
+        tl.to(backgroundLayerRef.current, {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        }).to(
+          slideLayerRef.current,
+          {
+            y: "-100%",
+            duration: 1.3,
+            ease: "power3.inOut",
+          },
+          "<0.2"
+        );
+
+        gsap.set(loaderRef.current, { pointerEvents: "none" });
+      } else if (active && loaderRef.current) {
+        gsap.set(backgroundLayerRef.current, { opacity: 1 });
+        gsap.set(slideLayerRef.current, { y: "0%" });
+        setShouldRender(true);
+      }
+    },
+    { dependencies: [active], scope: loaderRef }
+  );
+
+  if (!shouldRender) {
+    return null;
+  }
+
   return (
     <div
-      className={`
-      top-0 left-0 fixed w-fit h-screen z-[100] pointer-events-none
-      ${active ? "is-ready is-active" : ""}
-    `}
+      ref={loaderRef}
+      className={clsx("fixed inset-0 z-[9999] h-screen overflow-hidden")}
     >
-      <div className="h-screen">
-        <div
-          className={`absolute top-0 left-0 w-fit h-fit bg-black transition-opacity duration-[500ms] ease-out delay-[400ms] ${
-            active ? "opacity-100" : "opacity-0"
-          }`}
-        ></div>
+      {/* Black background layer */}
+      <div ref={backgroundLayerRef} className="absolute inset-0 bg-black"></div>
 
-        <div
-          className={`
-          absolute top-0 left-0 w-full h-full bg-white transform
-          transition-all duration-[1300ms] ease-out
-          ${active ? "translate-y-0" : "-translate-y-full"}
-        `}
-        ></div>
-      </div>
+      {/* White slide-up layer */}
+      <div
+        ref={slideLayerRef}
+        className="absolute inset-0 bg-white transform"
+      ></div>
     </div>
   );
 };

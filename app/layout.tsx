@@ -59,7 +59,6 @@ export default function RootLayout({
           enableSystem={true}
           themes={["dark", "light"]}
         >
-          {/* <div className="scroll-watcher" /> */}
           {children}
         </ThemeProvider>
       </body>

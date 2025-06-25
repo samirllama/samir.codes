@@ -1,19 +1,14 @@
 // (auth)/layout.tsx
 import Link from "next/link";
 import type { Route } from "next";
-import { cn } from "@/lib/utils"; // Import cn utility
-import "aos/dist/aos.css";
-import Header from "@/components/ui/header";
+import { cn } from "@/lib/utils";
 import Footer from "@/components/ui/footer";
-import Animate from "@/components/animate";
 
 const NAV_ITEMS = ["Tag", "View", "Behavior"] as const;
 
 export function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className="grow bg-[#0e1b07] bg-[radial-gradient(circle,_#173C2B_4%,_#44705F_62%,_#173E2C_88%)] text-gray-200">
-      {/* Nebula Background Container (Fixed Fullscreen) */}
-      {/* Content Area */}
       <section>
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
           <div
@@ -34,7 +29,6 @@ export default function WelcomeLayout({
 }) {
   return (
     <>
-      <Animate />
       <div
         className={cn([
           "grow min-h-screen",

@@ -1,7 +1,9 @@
 // app/page.tsx
 
-import ProjectStack from "@/components/project-stack";
+import Hero from "@/components/Hero";
 import TechStack from "@/components/tech-stack";
+import ProjectStack from "@/components/project-stack";
+
 import {
   myProjects,
   languages,
@@ -12,19 +14,27 @@ import {
 } from "@/lib/data/port-data";
 import type { SkillCategory } from "@/types";
 
-export default function Home() {
-  const skillCategories: SkillCategory[] = [
-    { title: "Languages", skills: languages },
-    { title: "Frameworks & Libraries", skills: frameworksAndLibraries },
-    { title: "Database", skills: databasesAndCaching },
-    { title: "Cloud & DevOps", skills: cloudAndDevOps },
-    { title: "Developer Tools", skills: developerTools },
-  ];
+const skillCategories: SkillCategory[] = [
+  { title: "Languages", skills: languages },
+  { title: "Frameworks & Libraries", skills: frameworksAndLibraries },
+  { title: "Database", skills: databasesAndCaching },
+  { title: "Cloud & DevOps", skills: cloudAndDevOps },
+  { title: "Developer Tools", skills: developerTools },
+];
 
+export default function Home() {
   return (
     <>
       <article>
-        {/* Hero Section */}
+        <Hero />
+
+        <div className="h-[200vh] bg-blue-100 flex items-center justify-center text-3xl text-gray-600">
+          Scroll further down!
+        </div>
+        <div className="h-[100vh] bg-green-100 flex items-center justify-center text-3xl text-gray-600">
+          End of demo.
+        </div>
+
         <section className="h-screen flex items-center justify-start">
           <div
             className="px-[calc(118/16*1rem)] accelerate"

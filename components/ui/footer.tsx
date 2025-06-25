@@ -15,13 +15,13 @@ export default function Footer() {
 
           <div className="flex justify-center gap-6 mb-8">
             <a
-              href="github"
+              href="https://github.com/samirllama"
               className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110"
             >
               <Github size={24} />
             </a>
             <a
-              href="linkedin/in/samirllama"
+              href="linkedin.com/in/samirlama-dev"
               className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110"
             >
               <Linkedin size={24} />
