@@ -1,5 +1,5 @@
 // lib/data.ts
-import type { Project, Experience, Skill } from '@/types'; // Assuming '@/' path alias is set in tsconfig.json
+import type { Project, Experience, Skill } from '@/types';
 
 export const myProjects: Project[] = [
     { id: 1, name: "British Petroleum", link: "https://www.bp.com/" },
@@ -10,7 +10,7 @@ export const myProjects: Project[] = [
 ];
 
 export const jobExperiences: Experience[] = [
-    { company: "British Petroleum", startYear: 2021, title: "Senior Software Engineer" }, // endYear is optional now
+    { company: "British Petroleum", startYear: 2021, title: "Senior Software Engineer" },
     { company: "Wells Fargo", startYear: 2020, endYear: 2021, title: "Senior Software Engineer" },
     { company: "Dealer Inspire", startYear: 2019, endYear: 2020, title: "Software Engineer" },
 ];

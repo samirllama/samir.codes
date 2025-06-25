@@ -12,18 +12,27 @@ const config: Config = {
     ],
     darkMode: 'class',
     theme: {
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: '1rem',
+                sm: '1.5rem',
+                lg: '2rem',
+            },
+            screens: {
+                'sm': '640px',
+                'md': '768px',
+                'lg': '1024px',
+                'xl': '1280px',
+                '2xl': 'var(--content-max-width)',
+            },
+        },
         extend: {
             backgroundImage: {
                 'hdr-gradient': 'var(--nerdy-gradient)',
             },
             boxShadow: {
                 'default': 'var(--shadow-default)',
-                "clay-light": `
-          inset 6px 6px 10px 0 rgba(var(--shadow-base-rgb), 0.2),
-          inset -6px -6px 10px 0 rgba(var(--shadow-highlight-rgb), 0.7),
-          10px 10px 20px 0 rgba(var(--shadow-outer-rgb), 0.2),
-          -4px -4px 12px 0 rgba(var(--shadow-highlight-rgb), 0.5)
-        `,
             },
             colors: {
                 'surface-page': 'var(--color-surface-page)',
@@ -35,22 +44,15 @@ const config: Config = {
                 'accent-secondary': 'var(--color-accent-secondary)',
                 'border-default': 'var(--color-border-default)',
                 'code-background': 'var(--color-code-background)',
-                'neon-primary': 'var(--color-neon-primary)',
-                'neon-dark': 'var(--color-neon-dark)',
-                'radon-primary': 'var(--color-radon-primary)',
-                'krypton-primary': 'var(--color-krypton-primary)',
-                'argon-primary': 'var(--color-argon-primary)',
-                'xenon-primary': 'var(--color-xenon-primary)',
             },
             fontFamily: {
-                'cal-sans': ['Cal Sans', 'sans-serif'],
-                'cinzel': ['Cinzel', 'sans'],
-                'cinzel-deco': ['Cinzel Decorative', 'sans'],
-                mono: ['MonaspaceNeon', 'monospace'],
-                'mona-argon': ['MonaspaceArgon', 'monospace'],
-                'mona-xenon': ['MonaspaceXenon', 'monospace'],
-                'mona-radon': ['MonaspaceRadon', 'monospace'],
-                'mona-krypton': ['MonaspaceKrypton', 'monospace'],
+                'body': 'var(--font-sans)',
+                'heading': 'var(--font-cinzel)',
+                'sans': 'var(--font-sans)',
+                'cinzel': 'var(--font-cinzel)',
+                'cinzel-deco': 'var(--font-cinzel-deco)',
+                'inter': 'var(--font-inter)',
+                'mono': 'var(--font-mono)',
             },
             fontSize: {
                 'step--2': 'var(--type-scale-step--2)',
@@ -67,25 +69,18 @@ const config: Config = {
                 'h4': 'var(--type-scale-step-2)',
                 'sm': 'var(--type-scale-step-0)',
                 'xs': 'var(--type-scale-step--1)',
-                '300px': '300px',
                 '15fx': 'calc(15 * var(--unit-fx))',
             },
             lineHeight: {
-                tight: "var(--lineHeight-tight)",
-                normal: "var(--lineHeight-normal)",
-                '1.2': '1.2',
+                'tight': "var(--lineHeight-tight)",
+                'normal': "var(--lineHeight-normal)",
+                'base': 'var(--lineHeight-base)',
+                'heading': 'var(--lineHeight-heading)',
             },
             letterSpacing: {
-                wide: 'var(--tracking-wide)',
                 '-3.5p': '-0.035em',
             },
-            filter: {
-                "saturate-0": "saturate(0%)",
-                "saturate-30": "saturate(30%)",
-            },
-            scrollSnapType: {
-                y: 'y mandatory',
-            },
+
             gridTemplateColumns: {
                 'scroll-slide': '40fr 5fr 5fr 40fr',
             },
@@ -94,7 +89,8 @@ const config: Config = {
                 easeOut2: "var(--alias-easeOut2)",
                 easeOut3: "var(--alias-easeOut3)",
                 easeOutSlow: "var(--alias-easeOutSlow)",
-                bounce: "cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                'bounce': "var(--bounce)",
+                'ease-in-out-quad': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
             },
             animation: {
                 'float': 'float 6s ease-in-out infinite',
@@ -169,13 +165,38 @@ const config: Config = {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },
                 },
-                'burger-line1-start': {
-                    '0%': { transform: 'translateY(-2.5px) rotate(0deg)' }, '100%': { transform: 'translateY(0px) rotate(45deg)' },
+                'burger-line1-start-hover': {
+                    '0%': { transform: 'scaleX(1)' },
+                    '20%': { transform: 'scaleX(0.8)' },
+                    '40%': { transform: 'scaleX(1.1)' },
+                    '60%': { transform: 'scaleX(0.9)' },
+                    '80%': { transform: 'scaleX(1.05)' },
+                    '100%': { transform: 'scaleX(1)' },
                 },
-                'burger-line1-end': { '0%': { transform: 'translateY(2.5px) rotate(0deg)' }, '100%': { transform: 'translateY(0px) rotate(-45deg)' } },
-                'burger-line2-start': { '0%': {}, '100%': {} },
-                'burger-line2-end': { '0%': { /* initial */ }, '100%': { /* final */ } },
-
+                'burger-line1-end-hover': {
+                    '0%': { transform: 'scaleX(1)' },
+                    '15%': { transform: 'scaleX(0.7)' },
+                    '35%': { transform: 'scaleX(1.2)' },
+                    '55%': { transform: 'scaleX(0.85)' },
+                    '75%': { transform: 'scaleX(1.08)' },
+                    '100%': { transform: 'scaleX(1)' },
+                },
+                'burger-line2-start-hover': {
+                    '0%': { transform: 'scaleX(1)' },
+                    '18%': { transform: 'scaleX(0.9)' },
+                    '38%': { transform: 'scaleX(1.15)' },
+                    '58%': { transform: 'scaleX(0.88)' },
+                    '78%': { transform: 'scaleX(1.06)' },
+                    '100%': { transform: 'scaleX(1)' },
+                },
+                'burger-line2-end-hover': {
+                    '0%': { transform: 'scaleX(1)' },
+                    '22%': { transform: 'scaleX(0.75)' },
+                    '42%': { transform: 'scaleX(1.18)' },
+                    '62%': { transform: 'scaleX(0.92)' },
+                    '82%': { transform: 'scaleX(1.04)' },
+                    '100%': { transform: 'scaleX(1)' },
+                },
                 'burger-close-line1': {
                     '0%': { transform: 'translateY(-2.5px) rotate(0deg) scale(1,1)' },
                     '100%': { transform: 'translateY(0px) rotate(45deg) scale(0.7, 1) translateZ(0px)' },
@@ -185,13 +206,12 @@ const config: Config = {
                     '100%': { transform: 'translateY(0px) rotate(-45deg) scale(0.7, 1) translateZ(0px)' },
                 },
             },
+
+            maxWidth: {
+                'content-container': 'var(--content-max-width)',
+            },
+
             spacing: {
-                xs: "var(--spacing-xs)",
-                sm: "var(--spacing-s)",
-                md: "var(--spacing-m)",
-                l: "var(--spacing-l)",
-                xl: "var(--spacing-xl)",
-                "2xl": "var(--spacing-2xl)",
                 "150fy": "calc(150 * var(--unit-fy))",
                 "80fy": "calc(80 * var(--unit-fy))",
                 "100fy": "calc(100 * var(--unit-fy))",
@@ -200,27 +220,29 @@ const config: Config = {
                 "195fy": "calc(195 * var(--unit-fy))",
                 "130fy": "calc(130 * var(--unit-fy))",
                 "217fy": "calc(217 * var(--unit-fy))",
-                '1px': '1px',
-                '2.5px': '2.5px',
-                '15px': '15px',
-                '30px': '30px',
-                '36px': '36px',
-                '60px': '60px',
-
+                '18': '4.5rem',
+                '22': '5.5rem',
+                '26': '6.5rem',
+                '30': '7.5rem',
+                '34': '8.5rem',
+                '38': '9.5rem',
+                '42': '10.5rem',
+                '46': '11.5rem',
+                '50': '12.5rem',
             },
             transitionProperty: {
                 'opacity': 'opacity',
                 'transform': 'transform',
-                'color': 'color',
+                'color': 'color', 'height': 'height',
+                'spacing': 'margin, padding',
+
             },
             transitionDuration: {
                 '500': '0.5s',
                 '600': '0.6s',
                 '1300': '1.3s',
             },
-            opacity: {
-                '1': '1',
-            }
+
         },
     },
     plugins: [
@@ -228,23 +250,7 @@ const config: Config = {
         containerQueries,
         forms,
         typography({ className: 'mdx-prose' }),
-        function ({ addUtilities, addComponents }) {
-            addUtilities(
-                {
-                    ".dashoffset-0": { "stroke-dashoffset": "0" },
-                    ".backface-hidden": {
-                        "-webkit-backface-visibility": "hidden",
-                        "backface-visibility": "hidden",
-                    },
-                    ".space-y-195px > :not([hidden]) ~ :not([hidden])": {
-                        marginBottom: "195px",
-                    },
-                },
-                {
-                    variants: ["responsive", "hover", "group-hover"],
-                }
-            );
-
+        function ({ addComponents, addUtilities }) {
             addComponents({
                 ".burger-line-segment": {
                     "@apply inline-block absolute top-0 left-0 w-full h-full bg-current origin-[0%_50%] transform backface-hidden": {},
@@ -252,7 +258,21 @@ const config: Config = {
                 ".burger-line-container": {
                     "@apply absolute top-1/2 left-0 w-[36px] h-[1px] block opacity-100 transform backface-hidden": {},
                 },
+                ".text-gradient": {
+                    "@apply bg-clip-text text-transparent": {},
+                    "background-image": "var(--nerdy-gradient)",
+                },
             });
+
+            addUtilities(
+                {
+                    ".dashoffset-0": { "stroke-dashoffset": "0" },
+                    ".backface-hidden": {
+                        "backface-visibility": "hidden",
+                    },
+                },
+                { variants: ["responsive", "hover", "group-hover"] }
+            );
         },
     ],
 };

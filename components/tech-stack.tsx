@@ -18,7 +18,6 @@ const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
           rel="noreferrer noopener"
           className="relative group a11y-focus overflow-hidden inline-block" // Group class for hover
         >
-          {/* Skill Name */}
           {skill.name}
 
           {/* --- ALWAYS Apply Animated Gradient Underline for Links --- */}
@@ -38,7 +37,6 @@ const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
       </li>
     );
   } else {
-    // Render as plain text in a span if no URL
     return (
       <li className={liClasses}>
         <span>{skill.name}</span>
@@ -48,30 +46,26 @@ const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
 };
 
 interface TechStackProps {
-  skillCategories: SkillCategory[]; // Use the defined type
+  skillCategories: SkillCategory[];
 }
 
 export default function TechStack({ skillCategories }: TechStackProps) {
   return (
-    <section className="grid grid-cols-12 pb-[20vw] lg:pb-[12.5vw]" id="tools">
+    <section
+      className="grid grid-cols-12 pb-[20vw] lg:pb-[12.5vw] px-[calc(118/16*1rem)]"
+      id="tools"
+    >
       <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
-        <h2 className="font-mono uppercase tracking-tight leading-none text-[10px] mb-3 pb-0">
-          Technical Skills
+        <h2 className="font-mono uppercase tracking-tight leading-none mb-3 pb-0 leading-[1] block text-[clamp(30px,0.92rem+2vw,45px)] font-display uppercase">
+          Skills
         </h2>
       </div>
 
       <div className="col-span-12 lg:col-span-7">
         <div className="max-w-[820px]">
-          <h2 className="leading-[1] block text-[clamp(30px,0.92rem+2vw,45px)] font-display tracking-tight mb-12 uppercase">
-            Expertise
-          </h2>
-
-          {/* Two-column layout for the lists */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
             {skillCategories?.map((category, index) => (
               <div
-                // Distribute categories between columns somewhat evenly
-                // This basic logic puts first half in col 1, second half in col 2
                 className={cn(
                   "mb-8 lg:mb-12",
                   index < Math.ceil(skillCategories.length / 2)
@@ -80,7 +74,7 @@ export default function TechStack({ skillCategories }: TechStackProps) {
                 )}
                 key={category.title}
               >
-                <span className="uppercase block font-mono tracking-tight leading-none text-[10px] mb-3 pb-0">
+                <span className="uppercase block font-mono tracking-tight leading-none text-[14px] mb-3 pb-0">
                   {category.title}
                 </span>
                 <ul className="bouncy-hover">

@@ -34,7 +34,6 @@ export const getCurrentUser = cache(async () => {
   }
 })
 
-// Get user by email
 export const getUserByEmail = cache(async (email: string) => {
   try {
     const result = await db.select().from(users).where(eq(users.email, email))

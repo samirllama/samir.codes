@@ -39,259 +39,107 @@
 @tailwind utilities;
 
 @layer base {
-  /* Base HTML & Body styles (use variables from theme.css) */
   html {
+    @apply font-body text-base leading-base;
     scroll-behavior: smooth;
-    font-size: 100%;
-    --vw: 1px; /* Initialize these here if not done via JS or config */
-    --vh: 1px;
-    display: block;
-    font-family: var(--font-sans); /* Use the variable defined in theme.css */
-    -webkit-locale: "en";
-    box-sizing: border-box; /* Part of reset */
-    margin: 0;
-    padding: 0;
-  }
-
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-    margin: 0;
-    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+    -webkit-tap-highlight-color: transparent;
+    @apply bg-surface-page text-text-default;
   }
 
   body {
-    color: var(--color-text-default); /* Use variable from theme.css */
-    background-color: var(
-      --color-surface-page
-    ); /* Use variable from theme.css */
-    font-family: var(--font-sans); /* Use variable from theme.css */
-    font-feature-settings: "kern" on, "liga" on;
-    font-size: var(--type-scale-step-0); /* Use variable from theme.css */
-    letter-spacing: normal;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght); /* Use variables from theme.css */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
     text-rendering: optimizelegibility;
     overscroll-behavior: none;
     scroll-snap-type: y mandatory;
   }
-
-  /* Blockquote styles */
-  blockquote::before {
-    content: open-quote;
-  }
-  blockquote::after {
-    content: close-quote;
-  }
-  blockquote {
-    quotes: "“" "”" "‘" "’";
-  }
-
-  /* resets */
-  ol,
-  ul,
-  li {
-    list-style: none;
-  }
-
-  button,
-  input,
-  a {
-    outline: none;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  fieldset,
-  button,
-  input,
-  select,
-  textarea,
-  hr {
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-  }
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  /* Responsive font-variation-settings  */
-  @media screen and (min-width: 40em) {
-    body,
-    input {
-      --pf-opsz: 20;
-    }
-  }
-  @media screen and (min-width: 45em) {
-    body,
-    input {
-      line-height: 1.4725;
-      --pf-opsz: 40;
-    }
-  }
-
-  @media screen and (min-width: 55em) {
-    body,
-    input {
-      line-height: 1.5;
-    }
-  }
-
-  @media screen and (min-width: 65em) {
-    body,
-    input {
-      --pf-opsz: 80;
-    }
-  }
-
-  @media screen and (min-width: 80em) {
-    body,
-    input {
-      line-height: 1.45;
-      --pf-opsz: 160;
-    }
-  }
-  @media screen and (min-width: 35em) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-      --pf-opsz: 600;
-    }
-  }
-
-  @media screen and (min-width: 50em) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p {
-      --pf-opsz: 850;
-    }
-  }
-
-  /* Font styles for strong, em, i, blockquote p */
-  strong {
-    font-synthesis: none;
-    --pf-wght: 700;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-  em,
-  i,
-  blockquote p {
-    font-style: italic;
-    font-synthesis: none;
-    --pf-slnt: 10;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    padding-bottom: var(--spacing-xs);
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-  h1 {
-    font-size: var(--type-scale-step-5);
-    line-height: var(--type-scale-step-5);
-    padding-bottom: var(--spacing-lg);
-    --pf-wght: 300;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  @media screen and (min-width: 40em) {
-    h1 {
-      line-height: calc(var(--type-scale-step-5) * 0.825);
-    }
-  }
-
-  h1 span {
-    --pf-wght: 100;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  h2 {
-    font-size: var(--type-scale-step-3);
-    line-height: var(--type-scale-step-3);
-    --pf-wght: 100;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  h3 {
-    font-size: var(--type-scale-step-2);
-    line-height: var(--type-scale-step-2);
-    --pf-wght: 700;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  h3 a {
-    text-decoration-thickness: 0.025em;
-  }
-
-  h4 {
-    font-size: var(--type-scale-step-0);
-    line-height: var(--type-scale-step-0);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    --pf-wght: 560;
-    font-variation-settings: "opsz" var(--pf-opsz), "slnt" var(--pf-slnt),
-      "wght" var(--pf-wght);
-  }
-
-  figcaption,
-  button {
-    font-size: var(--type-scale-step--1);
-  }
-  figcaption {
-    margin-bottom: var(--spacing-l);
-  }
-
-  .transform-custom {
-    will-change: transform;
-    transform: translate(var(--translateX, 0), var(--translateY, 0))
-      rotate(var(--rotate, 0deg)) scale(var(--scaleX, 1), var(--scaleY, 1))
-      translateZ(0);
-  }
-
-  /* Reduced motion preference */
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
 }
 
 @layer components {
-  /* Hamburger Menu Animations - can remain here as they are specific to a component structure */
+  .group:hover .arrow-button--theme-dark {
+    color: var(--color-dark);
+  }
+
+  .header-container {
+    z-index: 50;
+    position: fixed;
+    pointer-events: none;
+    width: calc(100 * var(--unit-vw));
+  }
+
+  .section-grid-wrapper {
+    @apply py-10;
+  }
+  .section-grid-inner {
+    @apply flex relative w-full h-auto items-stretch flex-shrink flex-row flex-nowrap container;
+    gap: var(--grid-column-gap, 0px);
+  }
+
+  .section-grid-inner > *:nth-child(odd) {
+    width: calc((100% - 2 * var(--grid-column-gap, 0px)) * 4 / 12);
+  }
+  .section-grid-inner > *:nth-child(2n + 2) {
+    width: calc((100% - 2 * var(--grid-column-gap, 0px)) * 8 / 12);
+  }
+
+  @media (max-width: 639px) {
+    .section-grid-inner {
+      @apply flex-wrap;
+      min-width: 0;
+    }
+    .section-grid-inner > *:nth-child(n + 1) {
+      width: calc((100% - 1 * var(--grid-column-gap, 0px)) * 12 / 12);
+      @apply w-full;
+    }
+  }
+
+  .grid-col-left {
+    @apply flex relative flex-col w-full h-auto max-w-full justify-start items-start min-w-0;
+  }
+
+  @media (max-width: 639px) {
+    .grid-col-left {
+      padding: 0 0 24px;
+    }
+  }
+
+  .overview-sticky-text {
+    @apply sticky w-full h-auto max-w-full left-0 top-6 z-10 min-w-0;
+    font-size: var(--fontSize-base);
+  }
+
+  @media (max-width: 639px) {
+    .overview-sticky-text {
+      @apply relative left-auto top-auto;
+    }
+  }
+
+  .bouncy-hover > li {
+    transform-origin: left center;
+    transition: transform 1s var(--bounce), opacity 0.3s linear;
+  }
+  .bouncy-hover:has(> li:hover) > li:not(:hover),
+  .bouncy-hover:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
   .hamburger-button {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+
   .hamburger-line-1,
   .hamburger-line-2 {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.4s var(--hamburger);
   }
 
   .hamburger-line-1-start,
@@ -300,40 +148,32 @@
   .hamburger-line-2-end {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transition: transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 1.3s var(--hamburger);
   }
 
-  /* Hover Effects */
+  /* Hamburger Hover Effects */
   .hamburger-button:hover .hamburger-line-1-start {
-    animation: burger-line-1-start-hover 1.3s
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+    animation: burger-line1-start-hover 1.3s var(--hamburger) 0.1s forwards;
   }
-
   .hamburger-button:hover .hamburger-line-1-end {
-    animation: burger-line-1-end-hover 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      0s forwards;
+    animation: burger-line1-end-hover 1.3s var(--hamburger) 0s forwards;
   }
-
   .hamburger-button:hover .hamburger-line-2-start {
-    animation: burger-line-2-start-hover 1.3s
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+    animation: burger-line2-start-hover 1.3s var(--hamburger) 0.1s forwards;
   }
-
   .hamburger-button:hover .hamburger-line-2-end {
-    animation: burger-line-2-end-hover 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      0s forwards;
+    animation: burger-line2-end-hover 1.3s var(--hamburger) 0s forwards;
   }
 
-  /* === Active/Open State === */
+  /* Hamburger Active/Open State */
   .hamburger-button.is-active .hamburger-line-1 {
     transform: translateY(0) rotate(45deg);
   }
-
   .hamburger-button.is-active .hamburger-line-2 {
     transform: translateY(0) rotate(-45deg);
   }
 
-  /* Mobile Menu States */
+  /* Menu States */
   .mobile-menu.open {
     opacity: 1;
     visibility: visible;
@@ -343,345 +183,30 @@
   .menu-slide-transition-custom {
     transition: transform 1.3s var(--alias-easeOut2);
   }
-
   .menu-panel-transition-custom {
     transition: all 1.3s var(--alias-easeOut2);
   }
-
   .menu-black-overlay-transition {
     transition: opacity 1.3s var(--alias-easeOut2);
   }
 
-  .project_list {
-    @media screen and (min-width: 55em) {
-      li.project {
-        display: grid;
-        grid-gap: 0 5%;
-        grid-template-columns: 33% 62%;
-        grid-template-areas: "head body";
-        padding: var(--spacing-2xl) 0;
-      }
-    }
+  .scrollbar-thin {
+    scrollbar-width: thin;
   }
-  .project_header {
-    grid-area: head;
-    padding-top: var(--spacing-lg);
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
   }
-  .project_body {
-    grid-area: body;
-    padding-top: var(--spacing-l);
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
   }
-  .portfolio_intro {
-    font-size: var(--type-scale-step-2);
-    line-height: calc(var(--type-scale-step-2) * 1.125);
-    max-width: 50ch;
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary-default);
+    border-radius: 9999px;
+    border: 1px solid var(--color-primary-accent);
   }
-  .portfolio_intro > a {
-    color: #333;
-    text-decoration-thickness: 0.05em;
-    text-underline-offset: 0.07em;
-    transition: color 0.25s ease, text-decoration-color 0.25s ease;
-  }
-  .quote {
-    margin: 0;
-    background: var(--hdr-gradient);
-    padding: 1em;
-    border-radius: 1em;
-  }
-  .quote figcaption,
-  .quote blockquote {
-    margin: 1em;
-    line-height: var(--lineHeight-tight);
-    font-weight: 300;
-    font-family: Cinzel, sans;
-  }
-
-  /* Scroll Watcher & Controls */
-  .scroll-watcher {
-    height: 10px;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--color-accent-primary); /* variable from theme.css */
-    width: 100%;
-    scale: 0 1;
-    transform-origin: left;
-    animation: scroll-watcher linear;
-    animation-timeline: scroll(y);
-  }
-
-  /* Keyframe Animations */
-  @keyframes scroll-watcher {
-    to {
-      scale: 1 1;
-    }
-  }
-  @keyframes burger-line-1-start-hover {
-    0% {
-      transform: scaleX(1);
-    }
-    20% {
-      transform: scaleX(0.8);
-    }
-    40% {
-      transform: scaleX(1.1);
-    }
-    60% {
-      transform: scaleX(0.9);
-    }
-    80% {
-      transform: scaleX(1.05);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-
-  @keyframes burger-line-1-end-hover {
-    0% {
-      transform: scaleX(1);
-    }
-    15% {
-      transform: scaleX(0.7);
-    }
-    35% {
-      transform: scaleX(1.2);
-    }
-    55% {
-      transform: scaleX(0.85);
-    }
-    75% {
-      transform: scaleX(1.08);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-
-  @keyframes burger-line-2-start-hover {
-    0% {
-      transform: scaleX(1);
-    }
-    18% {
-      transform: scaleX(0.9);
-    }
-    38% {
-      transform: scaleX(1.15);
-    }
-    58% {
-      transform: scaleX(0.88);
-    }
-    78% {
-      transform: scaleX(1.06);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-
-  @keyframes burger-line-2-end-hover {
-    0% {
-      transform: scaleX(1);
-    }
-    22% {
-      transform: scaleX(0.75);
-    }
-    42% {
-      transform: scaleX(1.18);
-    }
-    62% {
-      transform: scaleX(0.92);
-    }
-    82% {
-      transform: scaleX(1.04);
-    }
-    100% {
-      transform: scaleX(1);
-    }
-  }
-  @keyframes light-pulse {
-    0% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.7;
-    }
-    50% {
-      transform: translate(10px, 10px) scale(1.1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.7;
-    }
-  }
-
-  @keyframes letter_enter_animation {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes exit-fade {
-    from {
-      opacity: 1;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(0.98);
-    }
-  }
-  @keyframes enter-fade {
-    from {
-      opacity: 0;
-      transform: scale(1.02);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  .scroll-controls {
-    position: sticky;
-    bottom: theme("spacing.8");
-    z-index: 50;
-    display: flex;
-    justify-content: flex-end;
-    margin-right: calc(var(--scrollbar-width, 0px) + 1rem);
-  }
-  [data-scroll-section] {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
-  }
-
-  /* Lighting Effect */
-  .lighting-effect {
-    position: relative;
-    overflow: hidden;
-  }
-  .lighting-effect::before,
-  .lighting-effect::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.7;
-    z-index: -1;
-  }
-  .lighting-effect::before {
-    background: radial-gradient(
-      circle,
-      var(--color-accent-primary) 0%,
-      transparent 70%
-    ); /* Use variable from theme.css */
-    top: -50px;
-    left: -50px;
-    width: 200px;
-    height: 200px;
-    animation: light-pulse 5s infinite alternate ease-in-out;
-  }
-  .lighting-effect::after {
-    background: radial-gradient(
-      circle,
-      var(--color-accent-secondary) 0% /* Vars from theme.css */,
-      transparent 70%
-    );
-    bottom: -50px;
-    right: -50px;
-    width: 250px;
-    height: 250px;
-    animation: light-pulse 6s infinite alternate-reverse ease-in-out;
-  }
-
-  /* Container for entire scrollable block */
-  .scrollBlockContainer {
-    position: relative; /* Needed for absolute positioning of child */
-    background-color: var(
-      --alias-light
-    ); /* Default to white as placeholder's background */
-    z-index: -1; /* Place it behind other content if necessary */
-    /* This outer div acts like the `rel bg:#fff z:-1` container in the snippet */
-  }
-
-  /* The placeholder div to create initial scroll space */
-  .placeholder {
-    height: 150vh; /* Equivalent to h:150vh, h:100vh@m from snippet */
-    width: 100%;
-    /* For mobile, add a media query for height: 100vh; */
-  }
-
-  /* The absolute container that creates the extended scroll space for pinning */
-  .absolutePinContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 250vh;
-    /* For mobile, add a media query for height: 100vh; */
-  }
-
-  /* The actual "sticky" element that will hold the animating content */
-  .stickyContentWrapper {
-    position: sticky;
-    top: 0; /* Pins to the top of the viewport */
-    height: 100vh; /* This makes the sticky area exactly one viewport high */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Important for masking content that slides in/out */
-    /* This is equivalent to `w:fit h:100vh pos:sticky t:0px` from the snippet */
-  }
-
-  /* The main section (like <scroll-object> or a section holding it) that contains content */
-  .scrollSection {
-    height: 100vh; /* Each section is full viewport height */
-    width: 100vw;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* Optional: background transition for smoother section background changes */
-    transition: background-image 1s ease-in-out, background-color 1s ease-in-out;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    /* Important: This section itself needs to snap for smooth transitions between sections */
-    scroll-snap-align: start;
-
-    /* Actual content inside this section, could also be a nested animatable */
-    position: relative; /* For absolute positioned children if needed */
-    text-align: center;
-    color: var(--alias-light); /* Default content color */
-    padding: 2rem;
-    max-width: 80%; /* Constrain content width */
-  }
-
-  .animatableInnerContent {
-    transform: scale(1.2);
-    opacity: 0;
-    --translateY: 100%;
-
-    transition: transform 1.6s var(--alias-easeOut),
-      opacity 1.3s var(--alias-easeOut2),
-      /* Adding translateY for slide animation */ transform 1.3s
-        var(--alias-easeOut2);
-    /* Apply to transform for translateY as well */
-
-    /* We need to separate the scale transform and translateY transform to apply both */
-    /* One way is to chain them or animate different elements.
-     For simplicity, let's make `animatableInnerContent` scale and its child `contentWrapper` translateY.
-     OR, better, use a CSS variable for the base scale/translate and only transition the value.
-     Let's stick to the CSS variable for scale and translateY too, and apply to same element.
-  */
-    transform: scale(var(--scale-value, 1.2))
-      translateY(var(--translateY-value, 100%));
-    opacity: var(--opacity-value, 0);
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary-accent);
   }
 }
 
@@ -714,33 +239,10 @@
   .rotate-neg-45deg {
     --rotate: -45deg;
   }
-
-  /* Prefer direct Tailwind classes for width/height or arbitrary values */
-  .w-100vw {
-    width: 100vw;
-  }
-  .h-100vh {
-    height: 100vh;
-  }
-  .min-h-100vh {
-    min-height: 100vh;
-  }
-
   .z-neg-1 {
     z-index: -1;
   } /* Tailwind doesn't have negative z-index by default */
-
-  .bg-transparent {
-    background: transparent;
-  }
-  .bg-current-color {
-    background: currentColor;
-  }
-  .bg-black {
-    background: black;
-  }
-
-  /* Space Between: Use Tailwind's space-x/y utils */
+  /* Custom Space Between (Requires --unit-fx/fy in theme.css) */
   .space-x-10px > *:not(:last-child) {
     margin-right: 10px;
   }
@@ -753,14 +255,26 @@
   .space-y-195fy > *:not(:last-child) {
     margin-bottom: calc(195 * var(--unit-fy));
   }
-
-  .align-y-middle {
-    vertical-align: middle;
+  /* Hover-specific utility classes for transforms */
+  .group-hover-scale-x-full:hover {
+    transform: scaleX(1);
+  }
+  .group-hover-scale-x-partial:hover {
+    transform: scaleX(0.15);
+  }
+  .group-hover-shift-x-100:hover {
+    transform: translateX(100%);
+  }
+  .group-hover-shift-x-neg-100:hover {
+    transform: translateX(-100%);
+  }
+  /* This utility is for the .arrow-button__icon-default for fade out */
+  .opacity-0-on-hover:hover {
+    opacity: 0;
   }
 }
 
 @import "./utility-patterns.css";
-@import "./animations.css";
 @import "./mdx.css";
 
 ::view-transition-old(root) {
@@ -862,31 +376,20 @@
   will-change: transform, opacity;
 }
 
-/* State when the animation should be "in" or "active" */
-/* Equivalent to `is-ready .is-active .anim-in:scale:1` etc. */
-/* We'll add this class `is-anim-active` via JS when section is in view */
 html.is-ready .animatableInnerContent.is-anim-active {
-  transform: scale(1) translateY(0%); /* Target scale:1, translateY:0% */
-  opacity: 1; /* Target opacity:1 */
-
-  /* The transition should apply when this class is added/removed */
-  /* The `transition` property needs to be defined on the element itself, not just its active state.
-     It's already defined above.
-  */
+  transform: scale(1) translateY(0%);
+  opacity: 1;
 }
 
-/* Styles for the last section's background (if it's just black) */
 .scrollSection.bgBlack {
   background-color: var(--alias-dark);
-  background-image: none !important; /* Ensure no image if solid color is desired */
+  background-image: none !important;
 }
 
-/*  Responsive Adjustments (from snippet) --- */
 @media (max-width: 768px) {
-  /* Assuming @m means tablet/mobile */
   .placeholder,
   .absolutePinContainer {
-    height: 100vh; /* For mobile */
+    height: 100vh; /* mobile */
   }
 }
 
@@ -951,4 +454,15 @@ html.is-ready .scroll-object.is-active .anim-in-zoom-out-left {
 
 .burger-wrapper.active {
   animation: none !important;
+}
+
+header {
+  padding-top: calc(102 * var(--unit-fy));
+  padding-right: calc(102 * var(--unit-fx));
+  padding-left: calc(102 * var(--unit-fx));
+  padding-top: calc(62 * var(--unit-fy));
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

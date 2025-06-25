@@ -1,13 +1,13 @@
 // lib/data/experience.ts
 
 export interface ExperienceItemData {
-  id: string; // Unique identifier for keys
+  id: string;
   dateRange: string; // e.g., "June 2022 - Present"
-  title: string; // Job Title
+  title: string;
   company: string;
   location: string;
-  description: string[]; // Array of bullet points
-  tags?: string[]; // Optional relevant skills/tech used
+  description: string[];
+  tags?: string[];
 }
 
 export const professionalExperience: ExperienceItemData[] = [
@@ -28,7 +28,7 @@ export const professionalExperience: ExperienceItemData[] = [
   {
     id: 'wf',
     dateRange: 'Dec 2021 – June 2022',
-    title: 'Software Engineer', // Adjusted title slightly for progression narrative
+    title: 'Software Engineer',
     company: 'Wells Fargo',
     location: 'Chicago, IL',
     description: [
@@ -69,15 +69,15 @@ export const professionalExperience: ExperienceItemData[] = [
 ];
 
 export interface TechSkill {
-    category: string;
-    items: string[];
+  category: string;
+  items: string[];
 }
 
 export const techSkills: TechSkill[] = [
-    { category: 'Languages', items: ['Go', 'Modern JavaScript (ES6+)', 'TypeScript', 'Python', 'SQL'] },
-    { category: 'Client-Side', items: ['React', 'Next.js', 'Redux', 'GraphQL (Apollo Client)', 'MSAL', 'Testing (Jest, RTL)', 'Headless CMS (Contentful, Strapi)'] },
-    { category: 'Server-Side', items: ['Node.js (Apollo Server, Prisma, Drizzle)', 'Python (SQLAlchemy)', 'GraphQL (Server)', 'AWS API Gateway'] },
-    { category: 'Databases', items: ['PostgreSQL', 'MySQL', 'SQLite', 'MongoDB', 'DynamoDB', 'Redis', 'AWS Aurora'] },
-    { category: 'Cloud & Infra', items: ['AWS (Lambda, S3, Aurora, AppSync, CloudWatch)', 'Azure', 'Kubernetes', 'Docker', 'IaC (Terraform, CloudFormation)'] },
-    { category: 'Dev Tools & Practices', items: ['Git', 'GitHub Actions', 'Jenkins', 'DataDog', 'LaunchDarkly', 'Agile', 'CI/CD'] },
+  { category: 'Languages', items: ['Go', 'Modern JavaScript (ES6+)', 'TypeScript', 'Python', 'SQL'] },
+  { category: 'Client-Side', items: ['React', 'Next.js', 'Redux', 'GraphQL (Apollo Client)', 'MSAL', 'Testing (Jest, RTL)', 'Headless CMS (Contentful, Strapi)'] },
+  { category: 'Server-Side', items: ['Node.js (Apollo Server, Prisma, Drizzle)', 'Python (SQLAlchemy)', 'GraphQL (Server)', 'AWS API Gateway'] },
+  { category: 'Databases', items: ['PostgreSQL', 'MySQL', 'SQLite', 'MongoDB', 'DynamoDB', 'Redis', 'AWS Aurora'] },
+  { category: 'Cloud & Infra', items: ['AWS (Lambda, S3, Aurora, AppSync, CloudWatch)', 'Azure', 'Kubernetes', 'Docker', 'IaC (Terraform, CloudFormation)'] },
+  { category: 'Dev Tools & Practices', items: ['Git', 'GitHub Actions', 'Jenkins', 'DataDog', 'LaunchDarkly', 'Agile', 'CI/CD'] },
 ];
