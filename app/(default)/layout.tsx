@@ -21,7 +21,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const webAppClasses = cn([
     "web-app",
-    "ff:main",
     "text-15fx",
     {
       "is-ready": !isLoading, // Apply is-ready when not loading
@@ -30,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ]);
 
   return (
-    <div className={webAppClasses} style={{ display: "block" }}>
+    <div className={webAppClasses}>
       <AppHeader toggleAction={toggleMenu} isMenuOpen={isMenuOpen} />
       <main className="rel z:1 fs:0 min-h:100vh scroll-content">
         {children}

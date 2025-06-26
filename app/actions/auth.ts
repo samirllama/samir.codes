@@ -1,3 +1,5 @@
+// app/actions/auth
+
 'use server'
 
 import { z } from 'zod'
@@ -41,25 +43,12 @@ export type ActionResponse = {
 
 export async function signIn(formData: FormData): Promise<ActionResponse> {
   try {
-    // Add a small delay to simulate network latency
     await mockDelay(700)
-
     // Extract data from form
     const data = {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
     }
-
-    // Validate with Zod
-    const validationResult = SignInSchema.safeParse(data)
-    if (!validationResult.success) {
-      return {
-        success: false,
-        message: 'Validation failed',
-        errors: validationResult.error.flatten().fieldErrors,
-      }
-    }
-
     // Find user by email
     const user = await getUserByEmail(data.email)
     if (!user) {
@@ -71,7 +60,15 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
         },
       }
     }
-
+    // Validate with Zod
+    const validationResult = SignInSchema.safeParse(data)
+    if (!validationResult.success) {
+      return {
+        success: false,
+        message: 'Validation failed',
+        errors: validationResult.error.flatten().fieldErrors,
+      }
+    }
     // Verify password
     const isPasswordValid = await verifyPassword(data.password, user.password)
     if (!isPasswordValid) {
@@ -83,7 +80,6 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
         },
       }
     }
-
     // Create session
     await createSession(user.id)
 

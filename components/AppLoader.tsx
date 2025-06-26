@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import gsap from "gsap";
+import { gsap, Expo } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 
@@ -29,21 +29,33 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active }) => {
           opacity: 0,
           duration: 0.5,
           ease: "power2.out",
-        }).to(
-          slideLayerRef.current,
-          {
-            y: "-100%",
-            duration: 1.3,
-            ease: "power3.inOut",
-          },
-          "<0.2"
-        );
+        })
+          .to(
+            slideLayerRef.current,
+            {
+              y: "-100%",
+              duration: 1.3,
+              ease: "power3.inOut",
+            },
+            "<0.2"
+          )
+          .to(".accelerate", {
+            display: "block",
+            ease: Expo.easeOut,
+            duration: 0.2,
+          })
+          .to(".accelerate", {
+            opacity: 1,
+            ease: Expo.easeOut,
+            duration: 0.6,
+          });
 
         gsap.set(loaderRef.current, { pointerEvents: "none" });
       } else if (active && loaderRef.current) {
         gsap.set(backgroundLayerRef.current, { opacity: 1 });
         gsap.set(slideLayerRef.current, { y: "0%" });
         setShouldRender(true);
+        gsap.set(loaderRef.current, { pointerEvents: "auto" });
       }
     },
     { dependencies: [active], scope: loaderRef }

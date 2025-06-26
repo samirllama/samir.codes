@@ -1,3 +1,5 @@
+// lib/session
+
 import { compare, hash } from 'bcrypt'
 import { nanoid } from 'nanoid'
 import { cookies } from 'next/headers'

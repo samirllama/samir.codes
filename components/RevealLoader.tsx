@@ -28,11 +28,10 @@ export default function RevealLoader({
   const titleLine1Ref = useRef<HTMLDivElement>(null); // Example elements within revealed content
   const titleLine2Ref = useRef<HTMLDivElement>(null);
 
-  // Effect to handle loading percentage counter
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined;
 
-    // Only run the counter if the loader is active and count is less than 100
+    // Only run the counter if loader is active and count is less than 100
     if (loaderActive && count < 100) {
       interval = setInterval(() => {
         setCount((prevCount) => {
@@ -57,12 +56,11 @@ export default function RevealLoader({
 
   // GSAP Reveal Animation function
   const revealAnimation = () => {
-    // Create a GSAP timeline to sequence the animations
     const tl = gsap.timeline({
       onComplete: () => {
-        // Callback when entire timeline animation is complete
         if (loadingRef.current) {
-          gsap.set(loadingRef.current, { display: "none" }); // Fully hide loading container
+          // hide loading container
+          gsap.set(loadingRef.current, { display: "none" });
         }
         setLoaderActive(false); // Mark the loader as inactive
         if (onAnimationComplete) {

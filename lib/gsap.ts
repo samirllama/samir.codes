@@ -1,10 +1,9 @@
 // lib/gsap.ts
 
-import { gsap } from 'gsap';
+import { gsap, Expo } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(Expo, ScrollTrigger, MotionPathPlugin);
 
-export { gsap, useGSAP, ScrollTrigger, MotionPathPlugin };
+export { gsap, Expo, ScrollTrigger, MotionPathPlugin };

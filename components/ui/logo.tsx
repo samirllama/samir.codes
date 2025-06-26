@@ -1,12 +1,9 @@
-import Image from "next/image";
-import LogoImg from "@/public/logo-name.svg";
-
 const LogoSVG = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="134"
+    width="160"
     height="108"
-    viewBox="0 0 134 108"
+    viewBox="0 0 160 108"
   >
     <path
       fill="currentColor"

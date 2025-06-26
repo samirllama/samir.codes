@@ -3,7 +3,8 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import { useRef } from "react";
-import { useGSAP, gsap } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
 
 const Hero = () => {
   const heroRef = useRef(null);

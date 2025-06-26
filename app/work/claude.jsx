@@ -12,6 +12,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/Button";
 
 const borderRadius = "rounded-md";
 const spacingS = 2;
@@ -146,6 +147,10 @@ export default function DevLanding() {
 
               {/* CTA Buttons */}
               <div className="flex gap-4">
+                <Button variant="primary">
+                  View My Work
+                  <ArrowRight size={20} />
+                </Button>
                 <button className="bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-all hover:scale-105 flex items-center gap-2">
                   View My Work
                   <ArrowRight size={20} />

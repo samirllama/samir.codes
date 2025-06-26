@@ -16,7 +16,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
     <section>
       <div className="pb-[20vw] lg:pb-[12.5vw] pl-[calc(118/16*1rem)]">
         <h2 className="font-mono uppercase tracking-tight leading-none font-mono mb-3 lg:mb-3 pb-0">
-          An overview of my work/projects
+          My work/projects
         </h2>
 
         <ul className="border-t border-accent-secondary bouncy-hover">

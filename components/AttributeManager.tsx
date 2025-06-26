@@ -6,34 +6,21 @@ import { useEffect } from "react";
 export function HTMLAttributeManager() {
   useEffect(() => {
     const html = document.documentElement;
-    console.log("useEffect(() => HTMLAttributeManager:", html);
 
     html.classList.add("is-ready");
 
-    // Function to update --vw and --vh
-    const updateViewportVariables = () => {
-      html.style.setProperty("--vw", `${window.innerWidth}px`);
-      html.style.setProperty("--vh", `${window.innerHeight}px`);
-    };
-
-    updateViewportVariables(); // Set initial values
-
-    window.addEventListener("resize", updateViewportVariables); // resize event listener
-
     return () => {
       html.classList.remove("is-ready");
-      window.removeEventListener("resize", updateViewportVariables);
     };
   }, []);
 
-  return null; // Doesn't render any DOM elements itself
+  return null;
 }
 
-// Adjust these patterns based routes
 const detailPagePatterns: (string | RegExp)[] = [
-  "/posts/", // Matches any starting with /posts/
+  "/posts/",
   "/projects/", // Matches any starting with /projects/
-  "/items/", // Example: Add other detail route prefixes
+  "/items/",
   /^\/users\/[^\/]+$/, // Example: Regex for /users/some-id (but not /users/settings)
 ];
 

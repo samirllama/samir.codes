@@ -6,69 +6,6 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "./logo";
-import StaggeredText from "./staggered-text";
-
-interface BurgerButtonProps {
-  isActive: boolean;
-  onClick: () => void;
-  className?: string;
-}
-
-function BurgerBtn({ isActive, onClick, className }: BurgerButtonProps) {
-  return (
-    <div
-      onClick={onClick}
-      role="button"
-      aria-label={isActive ? "Close menu" : "Open menu"}
-      className={cn([
-        "pointer-events-auto relative group inline-block w-36px h-15px bg-none text-current",
-        "line-wrapper",
-        { "is-active": isActive },
-        className,
-      ])}
-    >
-      <span
-        className={cn([
-          "line-wrapper-1",
-          "transform-custom h-5px w-fit-fx block",
-        ])}
-        style={
-          isActive
-            ? ({
-                "--translateY": "0px",
-                "--rotate": "45deg",
-                "--scaleX": "0.7",
-                "--scaleY": "1",
-              } as React.CSSProperties)
-            : {}
-        }
-      ></span>
-
-      <span
-        className={cn([
-          "line-wrapper-2",
-          "transform-custom h-5px w-fit-fx block",
-        ])}
-        style={
-          isActive
-            ? ({
-                "--translateY": "0px",
-                "--rotate": "-45deg",
-                "--scaleX": "0.7",
-                "--scaleY": "1",
-              } as React.CSSProperties)
-            : {}
-        } // Type assertion for custom CSS properties
-      ></span>
-    </div>
-  );
-}
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/contact", label: "Contact" },
-];
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
@@ -79,27 +16,39 @@ export default function AppHeader({
   toggleAction,
   isMenuOpen,
 }: AppHeaderProps) {
-  const headerBlockClasses = cn([
-    "pointer-events-auto",
-    "flex items-center justify-between flex-1",
-    "transition-colors duration-500 ease-out-alias",
-    "bg-transparent",
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setHasScrolled(window.scrollY > 0);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerContainerStyles = cn("header-container", {
+    "header-container-scrolled": hasScrolled && !isMenuOpen,
+  });
+
+  const headerBStyles = cn([
+    "app-header-block",
     {
       "text-white": !isMenuOpen,
       "text-black": isMenuOpen,
     },
   ]);
 
-  const burgerClasses = cn([
+  const burgerStyles = cn([
     "hamburger-button",
-    "group cursor-pointer relative inline-block w-9 h-4 bg-transparent text-current",
+    "hidden group cursor-pointer relative inline-block w-9 h-4 bg-transparent text-current",
     { "is-active": isMenuOpen },
   ]);
 
   return (
-    <div className="header-container">
+    <div className={headerContainerStyles}>
       <header>
-        <div className={headerBlockClasses}>
+        <div className={headerBStyles}>
           <Link href="/">
             <Logo />
           </Link>
@@ -109,7 +58,7 @@ export default function AppHeader({
             role="button"
             onClick={toggleAction}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className={burgerClasses}
+            className={burgerStyles}
           >
             <span className="hamburger-line-1 line-wrapper-1 absolute top-1/2 left-0 w-full block h-px opacity-100 tra-translate-y-1.5">
               <span className="hamburger-line-1-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
