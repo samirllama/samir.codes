@@ -1,5 +1,4 @@
 // @/components/ui/header.tsx
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -32,7 +31,7 @@ export default function AppHeader({
   });
 
   const headerBStyles = cn([
-    "app-header-block",
+    "app-header-block px-12",
     {
       "text-white": !isMenuOpen,
       "text-black": isMenuOpen,

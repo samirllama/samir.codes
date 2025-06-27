@@ -30,7 +30,7 @@ export default function WorkLayout({
     "text-15fx",
     {
       "is-active": isMenuOpen,
-      "is-ready": !isLoading, // Apply "is-ready" when content is fully loaded and revealed
+      "is-ready": !isLoading,
     },
   ]);
 

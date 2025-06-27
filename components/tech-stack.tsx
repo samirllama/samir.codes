@@ -1,13 +1,16 @@
+// components/tech-stack.tsx
 import { cn } from "@/lib/utils";
-import type { Skill, SkillCategory } from "@/types";
+import type { Skill } from "@/types";
 
 interface SkillLinkProps {
   skill: Skill;
 }
 
-const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
+const SkillLink: React.FC<SkillLinkProps> = ({ skill }) => {
   const liClasses =
     "leading-[1.1] block text-2xl tracking-tight relative mb-[3px]";
+
+  const linkClasses = "relative group a11y-focus inline-block";
 
   if (skill.url) {
     return (
@@ -16,23 +19,17 @@ const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
           href={skill.url}
           target="_blank"
           rel="noreferrer noopener"
-          className="relative group a11y-focus overflow-hidden inline-block" // Group class for hover
+          className={linkClasses}
         >
           {skill.name}
-
-          {/* --- ALWAYS Apply Animated Gradient Underline for Links --- */}
           <span
             className={cn(
-              "absolute bottom-0 left-0 w-full h-[2px]", // Height of the underline
-              "opacity-0 transition-opacity duration-300 ease-out", // Fade in/out
-              "group-hover:opacity-100", // Visible on hover
-              // Gradient Colors
-              "bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500",
-              "bg-[length:200%_auto]", // Background size for animation
-              "group-hover:animate-slideGradient" // Apply animation only on hover
+              "absolute bottom-0 left-0 h-[2px] bg-white",
+              "w-0 transition-all duration-300 ease-out",
+              "group-hover:w-full",
+              skill.animatedGradientUnderline && "opacity-0"
             )}
           ></span>
-          {/* --- End Underline --- */}
         </a>
       </li>
     );
@@ -45,6 +42,8 @@ const SkillLink: React.FC<{ skill: Skill }> = ({ skill }: SkillLinkProps) => {
   }
 };
 
+import type { SkillCategory } from "@/types";
+
 interface TechStackProps {
   skillCategories: SkillCategory[];
 }
@@ -52,39 +51,26 @@ interface TechStackProps {
 export default function TechStack({ skillCategories }: TechStackProps) {
   return (
     <section
-      className="grid grid-cols-12 pb-[20vw] lg:pb-[12.5vw] px-[calc(118/16*1rem)]"
+      className="pb-[20vw] lg:pb-[12.5vw] px-4 md:px-8 lg:px-12"
       id="tools"
     >
-      <div className="col-span-12 lg:col-span-4 mb-2 lg:mb-0">
-        <h2 className="font-mono uppercase tracking-tight leading-none mb-3 pb-0 leading-[1] block text-[clamp(30px,0.92rem+2vw,45px)] font-display uppercase">
+      <div className="max-w-screen-xl mx-auto">
+        <h2 className="font-mono uppercase tracking-tight leading-none mb-8 text-center text-[clamp(30px,0.92rem+2vw,45px)] font-display">
           Skills
         </h2>
-      </div>
-
-      <div className="col-span-12 lg:col-span-7">
-        <div className="max-w-[820px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-            {skillCategories?.map((category, index) => (
-              <div
-                className={cn(
-                  "mb-8 lg:mb-12",
-                  index < Math.ceil(skillCategories.length / 2)
-                    ? "col-span-1"
-                    : "col-span-1"
-                )}
-                key={category.title}
-              >
-                <span className="uppercase block font-mono tracking-tight leading-none text-[14px] mb-3 pb-0">
-                  {category.title}
-                </span>
-                <ul className="bouncy-hover">
-                  {category.skills.map((skill: Skill) => (
-                    <SkillLink key={skill.name} skill={skill} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mt-10">
+          {skillCategories?.map((category) => (
+            <div key={category.title} className="flex flex-col items-start">
+              <h3 className="font-mono uppercase tracking-widest text-sm text-gray-400 mb-4 pb-0 border-b border-gray-700 pb-1">
+                {category.title}
+              </h3>
+              <ul className="bouncy-hover">
+                {category.skills.map((skill: Skill) => (
+                  <SkillLink key={skill.name} skill={skill} />
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>

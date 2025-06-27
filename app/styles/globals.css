@@ -40,7 +40,6 @@
 
 @layer base {
   html {
-    @apply font-body text-base leading-base;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     -moz-tab-size: 4;
@@ -49,6 +48,7 @@
     font-feature-settings: normal;
     font-variation-settings: normal;
     -webkit-tap-highlight-color: transparent;
+    @apply font-mona text-base leading-base;
     @apply bg-surface-page text-text-default;
   }
   body {
@@ -69,19 +69,6 @@
     max-width: var(--max-width);
     margin-left: auto;
     margin-right: auto;
-
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-
-    @media (min-width: 768px) {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    @media (min-width: 1024px) {
-      padding-left: 3rem;
-      padding-right: 3rem;
-    }
   }
   .web-app.is-active body {
     overflow: hidden;
@@ -119,7 +106,12 @@
     justify-content: space-between;
     flex: 1;
     height: var(--nav-height);
-    padding: 0 1.5rem;
+  }
+
+  .text-word {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+    display: inline-block; /* Essential for translateY to work on inline spans */
   }
 
   .section-grid-wrapper {

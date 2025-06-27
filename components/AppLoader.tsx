@@ -1,15 +1,15 @@
+// components/AppLoader.tsx
 "use client";
-
 import React, { useRef, useState } from "react";
-import { gsap, Expo } from "@/lib/gsap";
-import { useGSAP } from "@gsap/react";
+import { gsap, Expo, useGSAP } from "@/lib/gsap"; // Expo is now used
 import clsx from "clsx";
 
 interface AppLoaderProps {
   active: boolean;
+  gsapContextRef: React.RefObject<HTMLElement | null>;
 }
 
-const AppLoader: React.FC<AppLoaderProps> = ({ active }) => {
+const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
   const loaderRef = useRef<HTMLDivElement>(null);
   const backgroundLayerRef = useRef<HTMLDivElement>(null);
   const slideLayerRef = useRef<HTMLDivElement>(null);
@@ -18,45 +18,73 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active }) => {
 
   useGSAP(
     () => {
-      if (!active && loaderRef.current) {
-        const tl = gsap.timeline({
-          onComplete: () => {
-            setShouldRender(false);
-          },
-        });
+      const ctx = gsap.context(
+        () => {
+          const heroTitleWrapper = gsapContextRef.current?.querySelector(
+            '[data-gsap-target="hero-title-wrapper"]'
+          );
+          const heroTextWords =
+            heroTitleWrapper?.querySelectorAll(".text-word");
 
-        tl.to(backgroundLayerRef.current, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        })
-          .to(
-            slideLayerRef.current,
-            {
-              y: "-100%",
-              duration: 1.3,
-              ease: "power3.inOut",
-            },
-            "<0.2"
-          )
-          .to(".accelerate", {
-            display: "block",
-            ease: Expo.easeOut,
-            duration: 0.2,
-          })
-          .to(".accelerate", {
-            opacity: 1,
-            ease: Expo.easeOut,
-            duration: 0.6,
-          });
+          if (
+            !active &&
+            loaderRef.current &&
+            heroTextWords &&
+            heroTextWords.length > 0
+          ) {
+            const tl = gsap.timeline({
+              onComplete: () => {
+                setShouldRender(false);
+              },
+              onStart: () => {
+                gsap.set(heroTextWords, { opacity: 0, y: 50, scale: 0.8 });
+              },
+            });
 
-        gsap.set(loaderRef.current, { pointerEvents: "none" });
-      } else if (active && loaderRef.current) {
-        gsap.set(backgroundLayerRef.current, { opacity: 1 });
-        gsap.set(slideLayerRef.current, { y: "0%" });
-        setShouldRender(true);
-        gsap.set(loaderRef.current, { pointerEvents: "auto" });
-      }
+            tl.to(backgroundLayerRef.current, {
+              opacity: 0,
+              duration: 0.1,
+              ease: "power2.out",
+            })
+              .to(
+                slideLayerRef.current,
+                {
+                  y: "-100%",
+                  duration: 0.7,
+                  ease: "power3.inOut",
+                },
+                "<0.2"
+              )
+              .to(
+                heroTextWords,
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 1.2, // Slightly increased duration for Expo ease
+                  ease: Expo.easeOut,
+                  stagger: 0.15,
+                },
+                "<0.5"
+              );
+
+            gsap.set(loaderRef.current, { pointerEvents: "none" });
+          } else if (active && loaderRef.current) {
+            gsap.set(backgroundLayerRef.current, { opacity: 1 });
+            gsap.set(slideLayerRef.current, { y: "0%" });
+            setShouldRender(true);
+            gsap.set(loaderRef.current, { pointerEvents: "auto" });
+            if (heroTextWords && heroTextWords.length > 0) {
+              gsap.set(heroTextWords, { opacity: 0 });
+            }
+          }
+        },
+        { scope: loaderRef }
+      );
+
+      return () => {
+        ctx.revert();
+      };
     },
     { dependencies: [active], scope: loaderRef }
   );
@@ -70,10 +98,7 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active }) => {
       ref={loaderRef}
       className={clsx("fixed inset-0 z-[9999] h-screen overflow-hidden")}
     >
-      {/* Black background layer */}
       <div ref={backgroundLayerRef} className="absolute inset-0 bg-black"></div>
-
-      {/* White slide-up layer */}
       <div
         ref={slideLayerRef}
         className="absolute inset-0 bg-white transform"

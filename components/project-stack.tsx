@@ -14,7 +14,7 @@ interface ProjectStackProps {
 const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
   return (
     <section>
-      <div className="pb-[20vw] lg:pb-[12.5vw] pl-[calc(118/16*1rem)]">
+      <div className="pb-[20vw] lg:pb-[12.5vw]">
         <h2 className="font-mono uppercase tracking-tight leading-none font-mono mb-3 lg:mb-3 pb-0">
           My work/projects
         </h2>

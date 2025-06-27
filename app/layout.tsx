@@ -22,17 +22,10 @@ const defaultSans = Geist_Mono({
 });
 
 const cinzel = Cinzel({
-  weight: ["400", "700", "900"], // Choose the weights
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-cinzel",
-});
-
-const cinzelDecorative = Cinzel_Decorative({
   weight: ["400", "700", "900"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-cinzel-deco",
+  variable: "--font-cinzel",
 });
 
 export default function RootLayout({
@@ -45,13 +38,12 @@ export default function RootLayout({
       <HTMLAttributeManager />
       <BodyAttributeManager />
       <body
-        className={cn([
+        className={cn(
           cinzel.variable,
-          cinzelDecorative.variable,
           defaultSans.variable,
           "antialiased",
-          "tracking-tight",
-        ])}
+          "tracking-tight"
+        )}
       >
         <ThemeProvider
           attribute="class"

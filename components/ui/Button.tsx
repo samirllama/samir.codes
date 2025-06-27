@@ -37,19 +37,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export { Button };
-
-// export default function ExampleComponent() {
-//   return (
-//     <div>
-//       <div className="flex gap-4">
-//         <Button variant="primary">
-//           View My Work
-//           <ArrowRight size={20} />
-//         </Button>
-//         <Button variant="outline">
-//           Download Resume
-//         </Button>
-//       </div>
-//     </div>
-//   );
-//}

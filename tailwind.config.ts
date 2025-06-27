@@ -1,5 +1,6 @@
 // tailwind.config.ts
 import type { Config } from 'tailwindcss';
+import { fontFamily } from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
 import aspectRatio from '@tailwindcss/aspect-ratio';
@@ -46,13 +47,12 @@ const config: Config = {
                 'code-background': 'var(--color-code-background)',
             },
             fontFamily: {
-                'body': 'var(--font-sans)',
-                'heading': 'var(--font-cinzel)',
-                'sans': 'var(--font-sans)',
+                'body': ['var(--font-cinzel-deco)', ...fontFamily.sans],
                 'cinzel': 'var(--font-cinzel)',
                 'cinzel-deco': 'var(--font-cinzel-deco)',
                 'inter': 'var(--font-inter)',
-                'mono': 'var(--font-mono)',
+                mona: ['"MonaspaceNeon"', ...fontFamily.mono],
+                'mo-argon': ['"MonaspaceArgon"', ...fontFamily.mono],
             },
             fontSize: {
                 'step--2': 'var(--type-scale-step--2)',
@@ -80,7 +80,6 @@ const config: Config = {
             letterSpacing: {
                 '-3.5p': '-0.035em',
             },
-
             gridTemplateColumns: {
                 'scroll-slide': '40fr 5fr 5fr 40fr',
             },
