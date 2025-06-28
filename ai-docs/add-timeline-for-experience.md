@@ -1,7 +1,7 @@
 # Task: Develop Visually Stunning Work Experience Timeline
 
 **Date:** 2025-06-27
-**Author:** Your Name
+**Author:** Name
 **Status:** Draft
 
 ## 1. Objective
@@ -35,17 +35,6 @@ This timeline feature will be integrated into our existing Next.js 15 App Router
 - **Placement & Routing:** The timeline will reside on a new dedicated page, e.g., `/app/experience/page.tsx`. Implement clear navigation pathways **to and from** this page, ensuring smooth user flow.
 
 ## 3. Requirements (Phased Approach Recommended)
-
-### Phase 0: Data Definition & Initial Planning
-
-- **Data Structure Definition (TypeScript):** Define a TypeScript `interface` or `type` for an `ExperienceEntry`. Each entry should include:
-    - `id`: Unique identifier (string or number).
-    - `company`: Company name (string).
-    - `title`: Job title (string, e.g., "Senior Software Engineer").
-    - `startDate`: String representing start date (e.g., "June 2022").
-    - `endDate`: String representing end date (or "Present").
-    - `description`: Concise, single-sentence description of role/project context and key technologies. (e.g., "Designing and developing mission-critical supply chain platforms, React, D3.js, AWS Microservices, GraphQL"). This will directly use the content we outlined.
-- **In-Memory Data Array:** Create a TypeScript file (e.g., `app/data/experience.ts`) that exports a `const` array of `ExperienceEntry` objects, populated with your actual work experience data in the concise format.
 
 ### Phase 1: Frontend (Core UI Layout & Styling) & Routing
 

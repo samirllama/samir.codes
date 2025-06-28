@@ -25,52 +25,52 @@ The authentication system is built on a token-based model using JSON Web Tokens 
 
 A full authentication lifecycle has been created, from user registration to session-protected routes and sign-out.
 
-1.  **`app/(auth)/signin/page.tsx`**:
+1. **`app/(auth)/signin/page.tsx`**:
 
-    - Client Component (`'use client'`) for user sign-in form.
-    - Uses `useFormState` and `useFormStatus` hooks for `signIn` Server Action calls and UI state management.
+   - Client Component (`'use client'`) for user sign-in form.
+   - Uses `useFormState` and `useFormStatus` hooks for `signIn` Server Action calls and UI state management.
 
-2.  **`app/(auth)/signup/page.tsx`**:
+2. **`app/(auth)/signup/page.tsx`**:
 
-    - Client Component for user registration, similar to `signin/page.tsx`.
-    - Calls the `signUp` Server Action for new user creation.
+   - Client Component for user registration, similar to `signin/page.tsx`.
+   - Calls the `signUp` Server Action for new user creation.
 
-3.  **`app/work/page.tsx`**:
+3. **`app/work/page.tsx`**:
 
-    - Protected Server Component (user dashboard).
-    - Fetches current user data using `getCurrentUser` from `lib/dal.ts`.
-    - Includes a "Sign Out" button within a `<form>` calling the `signOut` Server Action.
+   - Protected Server Component (user dashboard).
+   - Fetches current user data using `getCurrentUser` from `lib/dal.ts`.
+   - Includes a "Sign Out" button within a `<form>` calling the `signOut` Server Action.
 
-4.  **`app/actions/auth.ts`**:
+4. **`app/actions/auth.ts`**:
 
-    - Core server-side logic containing three primary Server Actions:
-      - `signIn`: Validates credentials, verifies password, creates session.
-      - `signUp`: Validates user input, checks for existing users, hashes password, creates new user, creates session.
-      - `signOut`: Deletes session cookie and redirects.
+   - Core server-side logic containing three primary Server Actions:
+     - `signIn`: Validates credentials, verifies password, creates session.
+     - `signUp`: Validates user input, checks for existing users, hashes password, creates new user, creates session.
+     - `signOut`: Deletes session cookie and redirects.
 
-5.  **`middleware.ts`**:
+5. **`middleware.ts`**:
 
-    - Application gatekeeper, runs on the edge.
-    - Inspects requests for `auth_token` cookie, verifies JWT, and handles routing protection:
-      - Redirects unauthenticated users from protected pages to `/signin`.
-      - Redirects authenticated users from `/signin` or `/signup` to `/work`.
+   - Application gatekeeper, runs on the edge.
+   - Inspects requests for `auth_token` cookie, verifies JWT, and handles routing protection:
+     - Redirects unauthenticated users from protected pages to `/signin`.
+     - Redirects authenticated users from `/signin` or `/signup` to `/work`.
 
-6.  **`package.json`**:
-    - Build script modified to `"drizzle-kit push && next build"`.
-    - **Crucial for CI/CD:** Ensures Drizzle schema push to production database _before_ Next.js build on Vercel deployments, maintaining database-code synchronization within the pipeline.
+6. **`package.json`**:
+   - Build script modified to `"drizzle-kit push && next build"`.
+   - **Crucial for CI/CD:** Ensures Drizzle schema push to production database _before_ Next.js build on Vercel deployments, maintaining database-code synchronization within the pipeline.
 
 ---
 
 ### III. End-to-End Authentication Flow
 
-1.  User visits a protected page (e.g., `/work`).
-2.  `middleware.ts` intercepts, finds no valid `auth_token`, redirects to `/signin`.
-3.  User fills Sign-In Form. `signIn` Server Action called on submission.
-4.  Action verifies credentials, generates JWT, sets as secure `httpOnly` cookie.
-5.  Client-side form receives a success state and redirects the user to `/work`.
-6.  Middleware finds/validates JWT cookie, granting access to protected pages.
-7.  On `/work` page, "Sign Out" button calls `signOut` Server Action.
-8.  Server deletes cookie, and the action redirects the user back to `/signin`. Session terminated.
+1. User visits a protected page (e.g., `/work`).
+2. `middleware.ts` intercepts, finds no valid `auth_token`, redirects to `/signin`.
+3. User fills Sign-In Form. `signIn` Server Action called on submission.
+4. Action verifies credentials, generates JWT, sets as secure `httpOnly` cookie.
+5. Client-side form receives a success state and redirects the user to `/work`.
+6. Middleware finds/validates JWT cookie, granting access to protected pages.
+7. On `/work` page, "Sign Out" button calls `signOut` Server Action.
+8. Server deletes cookie, and the action redirects the user back to `/signin`. Session terminated.
 
 ---
 
@@ -78,39 +78,39 @@ A full authentication lifecycle has been created, from user registration to sess
 
 Our codebase is ready for initial deployment and establishing the CI/CD pipeline with Vercel.
 
-1.  **Generate Secure JWT Secret:**
+1. **Generate Secure JWT Secret:**
 
-    ```bash
-    node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-    ```
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+   ```
 
-    _Save this output as your production `JWT_SECRET`._
+   _Save this output as your production `JWT_SECRET`._
 
-2.  **Commit Your Changes:**
+2. **Commit Your Changes:**
 
-    ```bash
-    git add .
-    git commit -m "feat: implement complete auth flow and prepare for production"
-    ```
+   ```bash
+   git add .
+   git commit -m "feat: implement complete auth flow and prepare for production"
+   ```
 
-3.  **Push to Git Repository:**
+3. **Push to Git Repository:**
 
-    ```bash
-    git push
-    ```
+   ```bash
+   git push
+   ```
 
-4.  **Configure and Deploy on Vercel (CI/CD Setup):**
+4. **Configure and Deploy on Vercel (CI/CD Setup):**
 
-    - Import project into Vercel from your Git repository.
-    - In the project settings, navigate to the Environment Variables section.
-    - Add the following two secrets:
-      - `DATABASE_URL`: Your production database connection string from Neon.
-      - `JWT_SECRET`: The secure key you generated in Step 1.
-    - Click Deploy. **Vercel will automatically establish a CI/CD pipeline**:
-      - It will run the `"drizzle-kit push && next build"` command on every new deployment (e.g., pushes to `main` branch).
-      - This ensures the database schema is updated _before_ the application builds, maintaining synchronization for every deployment.
+   - Import project into Vercel from your Git repository.
+   - In the project settings, navigate to the Environment Variables section.
+   - Add the following two secrets:
+     - `DATABASE_URL`: Your production database connection string from Neon.
+     - `JWT_SECRET`: The secure key you generated in Step 1.
+   - Click Deploy. **Vercel will automatically establish a CI/CD pipeline**:
+     - It will run the `"drizzle-kit push && next build"` command on every new deployment (e.g., pushes to `main` branch).
+     - This ensures the database schema is updated _before_ the application builds, maintaining synchronization for every deployment.
 
-5.  **Verify on Production:** Test the entire sign-up, sign-in, and sign-out flow on your live Vercel URL to confirm the successful deployment and authentication functionality.
+5. **Verify on Production:** Test the entire sign-up, sign-in, and sign-out flow on your live Vercel URL to confirm the successful deployment and authentication functionality.
 
 ---
 
@@ -202,30 +202,43 @@ You are an expert Next.js, React, and TypeScript developer, deeply familiar with
 
 The following are some options we can implement in order to enhance our application.
 
-Demonstrate Dynamic Open Graph (OG) Image Generation in Next.js using ImageResponse and Edge Functions
-Performance Optimization:
-Libraries: @next/bundle-analyzer, critters, rehype-img-size.
-Strategy:
-Bundle Analysis: Regularly run ANALYZE=true pnpm build-next to monitor and optimize your JavaScript bundle size.
-Critical CSS Inlining: Use critters to inline critical CSS, improving the First Contentful Paint (FCP).
-Image Optimization: Employ rehype-img-size to automatically add dimensions to images, preventing layout shifts (CLS).
-Content Management & Data Fetching:
-Libraries: globby, gray-matter, @octokit/rest, @supabase/supabase-js, rss-parser, rss.
-Strategy:
-File-based CMS: Leverage Markdown/MDX files with frontmatter (gray-matter) as a lightweight CMS.
-External APIs: Integrate with services like GitHub (@octokit/rest) or Supabase (@supabase/supabase-js) for dynamic data.
-RSS Feeds: Generate RSS feeds (rss, rss-parser) for content syndication.
-Enhanced Developer Experience (DX):
-Libraries: ts-node, concurrently, lodash.debounce, next-remote-watch, next-themes, @vercel/toolbar, clsx, typescript-plugin-css-modules.
-Strategy:
-Concurrent Operations: Utilize concurrently to speed up build processes by running tasks in parallel.
-Theming: Implement next-themes for easy light/dark mode switching.
-Remote Content Hot Reload: next-remote-watch is invaluable for content-heavy sites where content might be updated externally.
-Accessibility (A11y):
-Libraries: @fec/remark-a11y-emoji, @radix-ui/react-tabs.
-Strategy: Prioritize accessibility. Use libraries like @fec/remark-a11y-emoji and accessible UI components like Radix UI.
-Advanced Styling with PostCSS:
-Libraries: postcss, postcss-flexbugs-fixes, postcss-hover-media-feature, postcss-nested, postcss-preset-env.
-Strategy: Utilize PostCSS for powerful CSS transformations, including fixing bugs, enabling modern CSS features, and simplifying styling with nesting.
+1. Demonstrate Dynamic Open Graph (OG) Image Generation in Next.js using ImageResponse and Edge Functions
+
+2. Performance Optimization:
+   Libraries: @next/bundle-analyzer, critters, rehype-img-size.
+   Strategy:
+   Bundle Analysis: Regularly run ANALYZE=true pnpm build-next to monitor and optimize your JavaScript bundle size.
+   Critical CSS Inlining: Use critters to inline critical CSS, improving the First Contentful Paint (FCP).
+   Image Optimization: Employ rehype-img-size to automatically add dimensions to images, preventing layout shifts (CLS).
+
+3. Accessibility (A11y):
+   Libraries: @fec/remark-a11y-emoji, @radix-ui/react-tabs.
+   Strategy: Prioritize accessibility. Use libraries like @fec/remark-a11y-emoji and accessible UI components like Radix UI.
+   Advanced Styling with PostCSS:
+   Libraries: postcss, postcss-flexbugs-fixes, postcss-hover-media-feature, postcss-nested, postcss-preset-env.
+   Strategy: Utilize PostCSS for powerful CSS transformations, including fixing bugs, enabling modern CSS features, and simplifying styling with nesting.
+
+4. Content Management & Data Fetching:
+   Libraries: globby, gray-matter, @octokit/rest, @supabase/supabase-js, rss-parser, rss.
+   Strategy:
+   File-based CMS: Leverage Markdown/MDX files with frontmatter (gray-matter) as a lightweight CMS.
+   External APIs: Integrate with services like GitHub (@octokit/rest) or Supabase (@supabase/supabase-js) for dynamic data.
+   RSS Feeds: Generate RSS feeds (rss, rss-parser) for content syndication.
+
+5. Enhanced Developer Experience (DX):
+   Libraries: ts-node, concurrently, lodash.debounce, next-remote-watch, next-themes, @vercel/toolbar, clsx, typescript-plugin-css-modules.
+   Strategy:
+   Concurrent Operations: Utilize concurrently to speed up build processes by running tasks in parallel.
+   Theming: Implement next-themes for easy light/dark mode switching.
+   Remote Content Hot Reload: next-remote-watch is invaluable for content-heavy sites where content might be updated externally.
 
 ---
+
+### VIII. Fix Errors
+
+```bash
+Error: Invalid src prop (https://placehold.co/600x450/333333/FFFFFF?text=Project+Screenshot) on `next/image`, hostname "placehold.co" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+
+components/WorkTimeLine.tsx (149:9) @ ProjectCard
+```

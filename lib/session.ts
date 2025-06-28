@@ -8,8 +8,7 @@ import { db } from '@/db'
 import { users } from '@/db/schema'
 import * as jose from 'jose'
 import { cache } from 'react'
-import { hash } from 'bcryptjs';
-
+import { hashPassword } from '@/lib/auth-server'
 // JWT types
 interface JWTPayload {
   userId: string
@@ -28,11 +27,6 @@ const JWT_EXPIRATION = '7d' // 7 days
 const REFRESH_THRESHOLD = 24 * 60 * 60 // 24 hours in seconds
 
 
-
-// Hash a password
-export async function hashPassword(password: string) {
-  return hash(password, 10)
-}
 
 // Create a new user
 export async function createUser(email: string, password: string) {

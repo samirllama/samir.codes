@@ -109,8 +109,8 @@
   }
 
   .text-word {
-    opacity: 0;
-    transform: translateY(50px) scale(0.8);
+    /* opacity: 0; */
+    /* transform: translateY(50px) scale(0.8); */
     display: inline-block; /* Essential for translateY to work on inline spans */
   }
 
@@ -248,6 +248,16 @@
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-primary-accent);
   }
+}
+
+@keyframes glow-animation {
+  0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+}
+
+.glow-animation {
+  animation: glow-animation 2s infinite alternate;
 }
 
 @layer utilities {

@@ -18,7 +18,7 @@ export interface Post extends PostMeta {
   content: string;
 }
 
-const postsDirectory = path.join(process.cwd(), 'app/playbook');
+const postsDirectory = path.join(process.cwd(), 'content/posts');
 
 /**
  * Gets metadata for all posts, sorted by date descending.

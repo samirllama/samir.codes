@@ -78,7 +78,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
       >
         {/* Left Column: Menu Items Section */}
         <ul className="grid grid-cols-1 gap-y-2 md:gap-4 text-xl md:text-2xl lg:text-3xl font-light leading-tight tracking-tighter w-fit">
-          {["Home", "About", "Notes", "Contact"].map((item, index) => (
+          {["Home", "Work", "About", "Notes", "Contact"].map((item, index) => (
             <li
               key={item}
               className={cn(

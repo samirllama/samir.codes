@@ -1,17 +1,16 @@
-// app/actions/auth
-
-'use server'
-
 import { z } from 'zod'
 import {
   createSession,
   createUser,
   deleteSession,
 } from '@/lib/session'
-import { verifyPassword } from '@/lib/auth'
+import { verifyPassword } from '@/lib/auth-server'
 import { getUserByEmail } from '@/lib/dal'
 import { mockDelay } from '@/lib/utils'
 import { redirect } from 'next/navigation'
+import { ratelimit } from '@/lib/rate-limiter'
+
+import { getIpAddress } from '@/lib/server-utils'
 
 // Define Zod schema for signin validation
 const SignInSchema = z.object({
@@ -42,13 +41,35 @@ export type ActionResponse = {
 }
 
 export async function signIn(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
+  // Rate limit based on IP address
+  const ip = await getIpAddress()
+  const { success } = await ratelimit.limit(ip)
+
+  if (!success) {
+    return {
+      success: false,
+      message: 'Too many requests. Please try again later.',
+      error: 'Rate limit exceeded',
+    }
+  }
+
   try {
-    await mockDelay(700)
     // Extract data from form
     const data = {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
     }
+
+    // Validate with Zod
+    const validationResult = SignInSchema.safeParse(data)
+    if (!validationResult.success) {
+      return {
+        success: false,
+        message: 'Validation failed',
+        errors: validationResult.error.flatten().fieldErrors,
+      }
+    }
+
     // Find user by email
     const user = await getUserByEmail(data.email)
     if (!user) {
@@ -60,15 +81,7 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
         },
       }
     }
-    // Validate with Zod
-    const validationResult = SignInSchema.safeParse(data)
-    if (!validationResult.success) {
-      return {
-        success: false,
-        message: 'Validation failed',
-        errors: validationResult.error.flatten().fieldErrors,
-      }
-    }
+
     // Verify password
     const isPasswordValid = await verifyPassword(data.password, user.password)
     if (!isPasswordValid) {
@@ -80,6 +93,7 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
         },
       }
     }
+
     // Create session
     await createSession(user.id)
 
@@ -98,9 +112,19 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
 }
 
 export async function signUp(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
+  // Rate limit based on IP address
+  const ip = await getIpAddress()
+  const { success } = await ratelimit.limit(ip)
+
+  if (!success) {
+    return {
+      success: false,
+      message: 'Too many requests. Please try again later.',
+      error: 'Rate limit exceeded',
+    }
+  }
+
   try {
-    // Add a small delay to simulate network latency
-    await mockDelay(700)
 
     // Extract data from form
     const data = {

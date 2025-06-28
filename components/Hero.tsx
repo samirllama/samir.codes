@@ -3,6 +3,8 @@
 
 import AnimatedSection from "@/components/AnimatedSection";
 import { useRef } from "react";
+
+
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -66,18 +68,6 @@ const Hero = () => {
       });
 
       scrollTl
-        .fromTo(
-          "body",
-          {
-            backgroundColor: "#FDE047",
-          },
-          {
-            backgroundColor: "#D9F99D",
-            overwrite: "auto",
-            ease: "none",
-          },
-          0
-        )
         .from(
           ".text-side-heading .split-char",
           {
@@ -113,7 +103,7 @@ const Hero = () => {
     >
       <div className="flex flex-col gap-8 md:gap-12 lg:gap-16 items-center">
         <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-gray-900 drop-shadow-lg word-animation-container">
-          {"Welcome to the ".split(" ").map((word, index) => (
+          {"My Professional Journey".split(" ").map((word, index) => (
             <span
               key={index}
               className="hero-header-word inline-block mr-2 last:mr-0"
@@ -121,35 +111,19 @@ const Hero = () => {
               {word}
             </span>
           ))}
-          <span className="hero-header-word inline-block">Future!</span>
         </h1>
 
         <p className="hero-subheading text-xl md:text-2xl text-gray-700 max-w-2xl px-4">
-          Experience a new way to build interactive web applications with
-          Next.js, Tailwind, and GSAP.
+          Explore my experience, projects, and contributions in the world of software development.
         </p>
 
         <p className="hero-body text-lg md:text-xl text-gray-600 max-w-xl px-4">
-          This demo showcases basic scroll-triggered and initial load
-          animations. Scroll down to see more!
+          This timeline showcases my professional growth and the diverse challenges I&apos;ve tackled.
         </p>
 
         <button className="hero-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
-          Learn More
+          View Projects
         </button>
-
-        <div className="mt-40 md:mt-60 lg:mt-80 p-8 bg-white/50 backdrop-blur-sm rounded-lg shadow-xl text-center">
-          <h2 className="text-side-heading text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-            {"Scroll Effects".split("").map((char, index) => (
-              <span key={index} className="split-char inline-block">
-                {char}
-              </span>
-            ))}
-          </h2>
-          <p className="text-side-body text-lg text-gray-700">
-            Watch the background change and text animate as you scroll.
-          </p>
-        </div>
       </div>
     </AnimatedSection>
   );

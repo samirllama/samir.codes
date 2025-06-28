@@ -3,10 +3,10 @@ import type { NextRequest } from 'next/server'
 import { verifyJWT } from '@/lib/session'
 
 // Define public paths that do not require authentication
-const PUBLIC_PATHS = ['/signin', '/signup', '/']
+const PUBLIC_PATHS = ['/signin', '/signup', '/', '/home', '/work']
 
 // Define the path to redirect to after successful login
-const PROTECTED_ROOT = '/work'
+const PROTECTED_ROOT = '/playground'
 
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl

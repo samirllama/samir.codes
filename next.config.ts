@@ -4,6 +4,7 @@ import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import createMDX from '@next/mdx';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeImgSize from 'rehype-img-size';
 import type { Options as PrettyCodeOptions } from 'rehype-pretty-code';
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -28,7 +29,7 @@ const nextConfig = (phase: string): NextConfig => {
     extension: /\.mdx?$/,
     options: {
       remarkPlugins: [remarkGfm],
-      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeImgSize, { dir: 'public' }]],
     },
   });
 
@@ -47,6 +48,10 @@ const nextConfig = (phase: string): NextConfig => {
       // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
     },
 
+
+    images: {
+      domains: ['logo.clearbit.com'],
+    },
 
     // TODO: Replace https://* with the exact domains needed for the application.
     async headers() {

@@ -10,6 +10,7 @@ export const experience: ExperienceEntry[] = [
         techTags: ['React', 'D3.js', 'AWS', 'GraphQL', 'Apollo Client'],
         projectScreenshotUrl: null,
         projectUrl: "https://www.bp.com/",
+        companyLogoUrl: "https://logo.clearbit.com/bp.com",
     },
     {
         id: 'wf-lse',
@@ -20,6 +21,7 @@ export const experience: ExperienceEntry[] = [
         techTags: ['React', 'JavaScript', 'PostgreSQL', 'RESTful Web Services', 'GitHub Actions'],
         projectScreenshotUrl: null,
         projectUrl: "https://www.wellsfargo.com/",
+        companyLogoUrl: "https://logo.clearbit.com/wellsfargo.com",
     },
     {
         id: 'di-fse',
@@ -30,6 +32,7 @@ export const experience: ExperienceEntry[] = [
         techTags: ['React', 'Redux', 'TypeScript', 'Docker', 'Kubernetes', 'D3.js'],
         projectScreenshotUrl: null,
         projectUrl: "https://www.dealerinspire.com/",
+        companyLogoUrl: "https://logo.clearbit.com/dealerinspire.com",
     },
     {
         id: 'eg-se',
@@ -40,6 +43,7 @@ export const experience: ExperienceEntry[] = [
         techTags: ['Web Performance', 'Frontend Architecture', 'SEO'],
         projectScreenshotUrl: null, // Placeholder
         projectUrl: "https://www.wellsfargo.com/",
+        companyLogoUrl: "https://logo.clearbit.com/expediagroup.com",
     },
     {
         id: 'nexient-lse',
@@ -50,6 +54,7 @@ export const experience: ExperienceEntry[] = [
         techTags: ['AWS', 'Terraform', 'Docker', 'Kubernetes', 'SAP'],
         projectScreenshotUrl: null,
         projectUrl: null,
+        companyLogoUrl: "https://logo.clearbit.com/nexient.com",
     },
     {
         id: 'dominos-sd',
@@ -59,6 +64,7 @@ export const experience: ExperienceEntry[] = [
         description: 'Domino\'s Pizza Enterprises operates a large e-commerce platform for ordering food. As a Software Developer, I focused on optimizing A/B testing processes to increase conversion rates and improve overall site performance through targeted code refactoring.',
         techTags: ['A/B Testing', 'Web Performance', 'E-commerce', 'Full-Stack'],
         projectScreenshotUrl: null, // Placeholder
-        projectUrl: "https://www.dominos.com/"
+        projectUrl: "https://www.dominos.com/",
+        companyLogoUrl: "https://logo.clearbit.com/dominos.com.au",
     }
 ];

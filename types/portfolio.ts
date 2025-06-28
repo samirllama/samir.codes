@@ -33,6 +33,7 @@ export interface ExperienceEntry {
   techTags: string[];
   projectUrl?: string | null;
   projectScreenshotUrl?: string | null;
+  companyLogoUrl?: string | null;
 }
 
 export interface ProjectEntry {
