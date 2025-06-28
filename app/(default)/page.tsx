@@ -1,7 +1,7 @@
-// app/page.tsx
 import TechStack from "@/components/tech-stack";
 import ProjectStack from "@/components/project-stack";
 import { myProjects, skillCategories } from "@/lib/data/port-data";
+import AnimatedHeroText from "@/components/AnimatedHeroText";
 
 export default function HomePage() {
   return (
@@ -13,13 +13,7 @@ export default function HomePage() {
               data-gsap-target="hero-title-wrapper"
               className="transform-gpu"
             >
-              <div data-text="Code.Create.Catalyze" className="glowtext">
-                <span className="text-word">Code.</span>
-                <span className="text-word">Create.</span>
-                <span className="text-word ghost2 animate-ghostpulse2">
-                  Catalyze
-                </span>
-              </div>
+              <AnimatedHeroText text="Code.Create.Catalyze" />
             </div>
           </h1>
         </div>

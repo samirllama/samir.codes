@@ -1,15 +1,15 @@
 // components/AppLoader.tsx
 "use client";
 import React, { useRef, useState } from "react";
-import { gsap, Expo, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import clsx from "clsx";
 
 interface AppLoaderProps {
   active: boolean;
-  gsapContextRef: React.RefObject<HTMLElement | null>;
+  onLoaderComplete: () => void;
 }
 
-const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
+const AppLoader: React.FC<AppLoaderProps> = ({ active, onLoaderComplete }) => {
   const loaderRef = useRef<HTMLDivElement>(null);
   const backgroundLayerRef = useRef<HTMLDivElement>(null);
   const slideLayerRef = useRef<HTMLDivElement>(null);
@@ -20,24 +20,12 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
     () => {
       const ctx = gsap.context(
         () => {
-          const heroTitleWrapper = gsapContextRef.current?.querySelector(
-            '[data-gsap-target="hero-title-wrapper"]'
-          );
-          const heroTextWords =
-            heroTitleWrapper?.querySelectorAll(".text-word");
-
-          if (
-            !active &&
-            loaderRef.current &&
-            heroTextWords &&
-            heroTextWords.length > 0
-          ) {
+          if (!active && loaderRef.current) {
             const tl = gsap.timeline({
               onComplete: () => {
                 setShouldRender(false);
-              },
-              onStart: () => {
-                gsap.set(heroTextWords, { opacity: 0, y: 50, scale: 0.8 });
+                onLoaderComplete();
+                window.dispatchEvent(new Event('loaderComplete'));
               },
             });
 
@@ -45,28 +33,15 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
               opacity: 0,
               duration: 0.1,
               ease: "power2.out",
-            })
-              .to(
-                slideLayerRef.current,
-                {
-                  y: "-100%",
-                  duration: 0.7,
-                  ease: "power3.inOut",
-                },
-                "<0.2"
-              )
-              .to(
-                heroTextWords,
-                {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  duration: 1.2, // Slightly increased duration for Expo ease
-                  ease: Expo.easeOut,
-                  stagger: 0.15,
-                },
-                "<0.5"
-              );
+            }).to(
+              slideLayerRef.current,
+              {
+                y: "-100%",
+                duration: 0.7,
+                ease: "power3.inOut",
+              },
+              "<0.2"
+            );
 
             gsap.set(loaderRef.current, { pointerEvents: "none" });
           } else if (active && loaderRef.current) {
@@ -74,9 +49,6 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
             gsap.set(slideLayerRef.current, { y: "0%" });
             setShouldRender(true);
             gsap.set(loaderRef.current, { pointerEvents: "auto" });
-            if (heroTextWords && heroTextWords.length > 0) {
-              gsap.set(heroTextWords, { opacity: 0 });
-            }
           }
         },
         { scope: loaderRef }
@@ -91,7 +63,7 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
 
   if (!shouldRender) {
     return null;
-  }
+  };
 
   return (
     <div

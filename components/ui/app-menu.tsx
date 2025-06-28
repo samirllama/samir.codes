@@ -2,6 +2,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+
 
 export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
   const menuContainerClasses = cn([
@@ -61,6 +63,12 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     },
   ]);
 
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Work", href: "/work" },
+    { name: "Blog", href: "/blog" },
+  ];
+
   return (
     <div className={menuContainerClasses}>
       <div className={blackOverlayClasses}></div>
@@ -77,10 +85,10 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
         data-testid="menu-content"
       >
         {/* Left Column: Menu Items Section */}
-        <ul className="grid grid-cols-1 gap-y-2 md:gap-4 text-xl md:text-2xl lg:text-3xl font-light leading-tight tracking-tighter w-fit">
-          {["Home", "Work", "About", "Notes", "Contact"].map((item, index) => (
+        <ul className="grid grid-cols-1 gap-y-4 md:gap-6 text-3xl md:text-4xl lg:text-5xl font-light leading-tight tracking-tighter w-fit">
+          {navItems.map((item, index) => (
             <li
-              key={item}
+              key={item.name}
               className={cn(
                 "opacity-0 transform -translate-y-full transition-all ease-out-quad duration-700",
                 {
@@ -90,39 +98,19 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
               style={{
                 transitionDelay: isMenuOpen
                   ? `${index * 0.08}s`
-                  : `${(5 - index) * 0.08}s`,
+                  : `${(navItems.length - index) * 0.08}s`,
               }}
             >
-              <a
-                className="relative group inline-block transition-opacity duration-500 hover:opacity-70"
-                href={`/${item.toLowerCase()}`}
+              <Link
+                className="relative group inline-flex items-center transition-opacity duration-500 hover:opacity-70"
+                href={item.href}
               >
-                {item}
-              </a>
+                {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 ease-out-quad group-hover:w-full"></span>
+                
+              </Link>
             </li>
           ))}
-
-          <li
-            key="Resume"
-            className={cn(
-              "opacity-0 transform -translate-y-full transition-all ease-out-quad duration-700",
-              {
-                "opacity-100 translate-y-0": isMenuOpen,
-              }
-            )}
-            style={{
-              transitionDelay: isMenuOpen
-                ? `${4 * 0.08}s`
-                : `${(5 - 4) * 0.08}s`,
-            }}
-          >
-            <a
-              className="relative group inline-block transition-opacity duration-500 hover:opacity-70"
-              href="/Samir_Resume.pdf" // IMPORTANT: Place resume file (e.g., Samir_Resume.pdf) in `public`
-            >
-              Download Resume
-            </a>
-          </li>
         </ul>
       </div>
     </div>
