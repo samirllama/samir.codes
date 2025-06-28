@@ -1,12 +1,14 @@
+'use server'
+
 // lib/session
 
-import { compare, hash } from 'bcrypt'
 import { nanoid } from 'nanoid'
 import { cookies } from 'next/headers'
 import { db } from '@/db'
 import { users } from '@/db/schema'
 import * as jose from 'jose'
 import { cache } from 'react'
+import { hash } from 'bcryptjs';
 
 // JWT types
 interface JWTPayload {
@@ -25,14 +27,11 @@ const JWT_EXPIRATION = '7d' // 7 days
 // Token refresh threshold (refresh if less than this time left)
 const REFRESH_THRESHOLD = 24 * 60 * 60 // 24 hours in seconds
 
+
+
 // Hash a password
 export async function hashPassword(password: string) {
   return hash(password, 10)
-}
-
-// Verify a password
-export async function verifyPassword(password: string, hashedPassword: string) {
-  return compare(password, hashedPassword)
 }
 
 // Create a new user

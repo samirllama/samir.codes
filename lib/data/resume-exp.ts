@@ -12,7 +12,7 @@ export interface ExperienceItemData {
 
 export const professionalExperience: ExperienceItemData[] = [
   {
-    id: 'bp',
+    id: 'bp-sse',
     dateRange: 'June 2022 - Present',
     title: 'Senior Software Engineer',
     company: 'British Petroleum (BP)',
@@ -26,7 +26,7 @@ export const professionalExperience: ExperienceItemData[] = [
     tags: ['React', 'GraphQL', 'Python', 'AWS', 'Next.js', 'TypeScript', 'Agile'],
   },
   {
-    id: 'wf',
+    id: 'wf-lse',
     dateRange: 'Dec 2021 – June 2022',
     title: 'Software Engineer',
     company: 'Wells Fargo',
@@ -40,7 +40,7 @@ export const professionalExperience: ExperienceItemData[] = [
     tags: ['AWS Lambda', 'API Gateway', 'Serverless', 'React', 'REST API', 'Mentorship'],
   },
   {
-    id: 'di',
+    id: 'di-fse',
     dateRange: 'Sept 2020 – Dec 2021',
     title: 'Software Engineer',
     company: 'Dealer Inspire',
@@ -65,6 +65,7 @@ export const professionalExperience: ExperienceItemData[] = [
     ],
     tags: ['React', 'GraphQL', 'BDD', 'Testing', 'CI/CD'],
   },
+
   // Add Education or other sections if desired
 ];
 

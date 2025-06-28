@@ -1,7 +1,7 @@
 // components/AppLoader.tsx
 "use client";
 import React, { useRef, useState } from "react";
-import { gsap, Expo, useGSAP } from "@/lib/gsap"; // Expo is now used
+import { gsap, Expo, useGSAP } from "@/lib/gsap";
 import clsx from "clsx";
 
 interface AppLoaderProps {

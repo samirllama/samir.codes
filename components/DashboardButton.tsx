@@ -1,5 +1,5 @@
 // import { getCurrentUser } from "@/lib/dal"
-import Button from "./ui/Button";
+import { Button } from "./ui/Button";
 import Link from "next/link";
 
 // const DashboardButtonSignedIn = async () => {
@@ -13,7 +13,7 @@ import Link from "next/link";
 //       ) : (
 //         <div className="flex items-center space-x-4">
 //           <Link href="/signin">
-//             <Button variant="outline">Sign in</Button>
+//             <Button variant="dark">Sign in</Button>
 //           </Link>
 //           <Link href="/signup">
 //             <Button>Sign up</Button>
@@ -28,7 +28,7 @@ const DashboardButton = () => {
   return (
     <div className="flex items-center space-x-4">
       <Link href="/signin">
-        <Button variant="outline">Sign in</Button>
+        <Button variant="dark">Sign in</Button>
       </Link>
       <Link href="/signup">
         <Button>Sign up</Button>

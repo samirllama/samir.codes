@@ -7,7 +7,6 @@ interface StaggeredTextProps {
   baseDelay?: number;
   delayIncrement?: number;
   isActive?: boolean;
-  isReady?: boolean;
 }
 
 const StaggeredText: React.FC<StaggeredTextProps> = ({
@@ -15,7 +14,6 @@ const StaggeredText: React.FC<StaggeredTextProps> = ({
   baseDelay = 0,
   delayIncrement = 0.05,
   isActive = false,
-  isReady = false,
 }) => {
   return (
     <>

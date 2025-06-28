@@ -4,11 +4,11 @@
 
 import { z } from 'zod'
 import {
-  verifyPassword,
   createSession,
   createUser,
   deleteSession,
 } from '@/lib/session'
+import { verifyPassword } from '@/lib/auth'
 import { getUserByEmail } from '@/lib/dal'
 import { mockDelay } from '@/lib/utils'
 import { redirect } from 'next/navigation'
@@ -41,7 +41,7 @@ export type ActionResponse = {
   error?: string
 }
 
-export async function signIn(formData: FormData): Promise<ActionResponse> {
+export async function signIn(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
   try {
     await mockDelay(700)
     // Extract data from form
@@ -97,7 +97,7 @@ export async function signIn(formData: FormData): Promise<ActionResponse> {
   }
 }
 
-export async function signUp(formData: FormData): Promise<ActionResponse> {
+export async function signUp(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
   try {
     // Add a small delay to simulate network latency
     await mockDelay(700)

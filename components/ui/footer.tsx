@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="py-20 px-6 border-t border-current">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8">
-            Let's build something{" "}
+            Let&apos;s build something{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               extraordinary
             </span>

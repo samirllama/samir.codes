@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon } from "lucide-react";
-import Button from "./ui/Button";
+import { Button } from "./ui/Button";
 
 const themes = ["light", "dark", "mocha-mousse"];
 export default function ThemeToggle() {
@@ -53,8 +53,6 @@ export default function ThemeToggle() {
 
   return (
     <Button
-      variant="ghost"
-      size="sm" // Use a smaller size consistent with header icons
       onClick={toggleTheme}
       aria-label={
         theme === "dark" ? "Activate light mode" : "Activate dark mode"

@@ -1,5 +1,5 @@
 import { db } from '@/db'
-import { getSession } from './auth'
+import { getSession } from './session'
 import { eq } from 'drizzle-orm'
 import { cache } from 'react'
 import { issues, users } from '@/db/schema'
@@ -62,7 +62,7 @@ export async function getIssue(id: number) {
 }
 
 export async function getIssues() {
-  'use cache'
+  
   cacheTag('issues')
   try {
     await mockDelay(700)

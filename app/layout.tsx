@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { Cinzel, Cinzel_Decorative, Geist_Mono } from "next/font/google";
+import { Cinzel, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";

@@ -1,0 +1,64 @@
+import { ExperienceEntry } from '@/types';
+
+export const experience: ExperienceEntry[] = [
+    {
+        id: 'bp-sse',
+        company: 'bp',
+        title: 'Senior Software Engineer',
+        dateRange: 'June 2022 — Present',
+        description: 'At bp, I design and develop mission-critical supply chain platforms, building user-centric interfaces and robust back-end systems for real-time operations. My work has focused on leveraging AWS microservices to drive significant cost savings and empower data-driven decision-making.',
+        techTags: ['React', 'D3.js', 'AWS', 'GraphQL', 'Apollo Client'],
+        projectScreenshotUrl: null,
+        projectUrl: "https://www.bp.com/",
+    },
+    {
+        id: 'wf-lse',
+        company: 'Wells Fargo',
+        title: 'Lead Software Engineer',
+        dateRange: 'December 2021 — June 2022',
+        description: 'I led the development of automated credit limit adjustment systems and financial product enrollment portals at Wells Fargo. My primary focus was on enhancing real-time data processing and optimizing core database performance for high-volume financial transactions.',
+        techTags: ['React', 'JavaScript', 'PostgreSQL', 'RESTful Web Services', 'GitHub Actions'],
+        projectScreenshotUrl: null,
+        projectUrl: "https://www.wellsfargo.com/",
+    },
+    {
+        id: 'di-fse',
+        company: 'Dealer Inspire',
+        title: 'Full Stack Engineer',
+        dateRange: 'November 2020 — December 2021',
+        description: 'Dealer Inspire develops omnichannel messaging and AI chatbot platforms for automotive dealerships. As a Full Stack Engineer, I led greenfield development efforts, specifically designing and implementing the core architecture for their AI-driven customer engagement solutions.',
+        techTags: ['React', 'Redux', 'TypeScript', 'Docker', 'Kubernetes', 'D3.js'],
+        projectScreenshotUrl: null,
+        projectUrl: "https://www.dealerinspire.com/",
+    },
+    {
+        id: 'eg-se',
+        company: 'Expedia Group',
+        title: 'Software Engineer',
+        dateRange: 'February 2020 — October 2020',
+        description: 'Expedia Group is a leading global travel platform. My role as a Software Engineer focused on optimizing web performance and front-end architecture for high-traffic travel applications, directly impacting user experience and SEO.',
+        techTags: ['Web Performance', 'Frontend Architecture', 'SEO'],
+        projectScreenshotUrl: null, // Placeholder
+        projectUrl: "https://www.wellsfargo.com/",
+    },
+    {
+        id: 'nexient-lse',
+        company: 'Nexient',
+        title: 'Lead Software Engineer',
+        dateRange: 'December 2018 — February 2020',
+        description: 'Nexient specializes in custom software development and cloud solutions for enterprise clients. I oversaw end-to-end cloud migration initiatives and led full-stack development for critical energy management systems, leveraging AWS and modern containerization techTags.',
+        techTags: ['AWS', 'Terraform', 'Docker', 'Kubernetes', 'SAP'],
+        projectScreenshotUrl: null,
+        projectUrl: null,
+    },
+    {
+        id: 'dominos-sd',
+        company: "Domino's Pizza Enterprises Limited",
+        title: 'Software Developer',
+        dateRange: 'January 2014 — December 2018',
+        description: 'Domino\'s Pizza Enterprises operates a large e-commerce platform for ordering food. As a Software Developer, I focused on optimizing A/B testing processes to increase conversion rates and improve overall site performance through targeted code refactoring.',
+        techTags: ['A/B Testing', 'Web Performance', 'E-commerce', 'Full-Stack'],
+        projectScreenshotUrl: null, // Placeholder
+        projectUrl: "https://www.dominos.com/"
+    }
+];

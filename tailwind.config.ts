@@ -1,5 +1,5 @@
 // tailwind.config.ts
-import type { Config } from 'tailwindcss';
+import type { Config, PluginAPI } from 'tailwindcss/types/config';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
@@ -249,7 +249,7 @@ const config: Config = {
         containerQueries,
         forms,
         typography({ className: 'mdx-prose' }),
-        function ({ addComponents, addUtilities }) {
+        function ({ addComponents, addUtilities }: PluginAPI) {
             addComponents({
                 ".burger-line-segment": {
                     "@apply inline-block absolute top-0 left-0 w-full h-full bg-current origin-[0%_50%] transform backface-hidden": {},
@@ -269,8 +269,7 @@ const config: Config = {
                     ".backface-hidden": {
                         "backface-visibility": "hidden",
                     },
-                },
-                { variants: ["responsive", "hover", "group-hover"] }
+                }
             );
         },
     ],

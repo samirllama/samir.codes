@@ -1,8 +1,5 @@
 // components/highlighter.tsx (Refactored with Tailwind v3)
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-"use client";
-
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import useMousePosition from "./hooks/mouse-position"; // Assuming hook is moved or path updated
 import { cn } from "@/lib/utils";
 

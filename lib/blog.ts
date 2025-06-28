@@ -19,7 +19,7 @@ export interface PostData extends PostMeta {
 }
 
 // Path to blog posts directory within the app router structure
-const postsDirectory = path.join(process.cwd(), 'app/blog');
+
 
 export function getAllPostSlugs(): string[] {
   try {

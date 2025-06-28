@@ -23,3 +23,28 @@ export interface Experience {
   title: string;
 }
 
+
+export interface ExperienceEntry {
+  id: string;
+  company: string;
+  title: string;
+  dateRange: string;
+  description: string;
+  techTags: string[];
+  projectUrl?: string | null;
+  projectScreenshotUrl?: string | null;
+}
+
+export interface ProjectEntry {
+  id?: string;
+  role?: string;
+  altText?: string;
+  subtitle?: string;
+  company: string;
+  title: string;
+  dateRange: string;
+  description: string;
+  techTags: string[];
+  projectUrl?: string | null;
+  projectScreenshotUrl?: string | null;
+}

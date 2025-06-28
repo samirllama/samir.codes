@@ -6,6 +6,10 @@ import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import type { Options as PrettyCodeOptions } from 'rehype-pretty-code';
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const prettyCodeOptions: PrettyCodeOptions = {
   theme: { dark: 'github-dark', light: 'github-light' },
   onVisitLine(node) {
@@ -39,6 +43,7 @@ const nextConfig = (phase: string): NextConfig => {
     experimental: {
       dynamicIO: true,
       typedRoutes: true,
+      useCache: true,
       // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
     },
 
@@ -101,4 +106,4 @@ const nextConfig = (phase: string): NextConfig => {
   return withMDX(nextConfigOptions);
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
