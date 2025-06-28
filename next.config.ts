@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import createMDX from '@next/mdx';
 import remarkGfm from 'remark-gfm';
+import remarkA11yEmoji from '@fec/remark-a11y-emoji';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeImgSize from 'rehype-img-size';
 import type { Options as PrettyCodeOptions } from 'rehype-pretty-code';
@@ -28,7 +29,7 @@ const nextConfig = (phase: string): NextConfig => {
   const withMDX = createMDX({
     extension: /\.mdx?$/,
     options: {
-      remarkPlugins: [remarkGfm],
+      remarkPlugins: [remarkGfm, remarkA11yEmoji],
       rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeImgSize, { dir: 'public' }]],
     },
   });

@@ -1,7 +1,9 @@
 import TechStack from "@/components/tech-stack";
 import ProjectStack from "@/components/project-stack";
 import { myProjects, skillCategories } from "@/lib/data/port-data";
-import AnimatedHeroText from "@/components/AnimatedHeroText";
+import { Suspense } from "react";
+import SlowAnimatedHeroText from "@/components/SlowAnimatedHeroText";
+import HeroTextSkeleton from "@/components/HeroTextSkeleton";
 
 export default function HomePage() {
   return (
@@ -13,7 +15,7 @@ export default function HomePage() {
               data-gsap-target="hero-title-wrapper"
               className="transform-gpu"
             >
-              <AnimatedHeroText text="Code.Create.Catalyze" />
+              <SlowAnimatedHeroText />
             </div>
           </h1>
         </div>

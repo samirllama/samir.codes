@@ -10,31 +10,18 @@ interface AnimatedHeroTextProps {
 
 export default function AnimatedHeroText({ text }: AnimatedHeroTextProps) {
   const compRef = useRef(null);
-  const words = text.split(".");
+  const words = text.split(/(?<=\.)/);
 
   useGSAP(
     () => {
-      const handleLoaderComplete = () => {
-        gsap.from(".char", {
-          y: () => Math.random() * 400 - 200, // Random Y position
-          x: () => Math.random() * 400 - 200, // Random X position
-          rotation: () => Math.random() * 360 - 180, // Random rotation
-          opacity: 0,
-          scale: 0,
-          stagger: {
-            each: 0.02,
-            from: "random",
-          },
-          ease: "power3.out",
-          duration: 1.5,
-        });
-      };
-
-      window.addEventListener("loaderComplete", handleLoaderComplete);
-
-      return () => {
-        window.removeEventListener("loaderComplete", handleLoaderComplete);
-      };
+      gsap.from(".text-word", {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        duration: 1.2,
+        ease: "power3.out",
+        stagger: 0.15,
+      });
     },
     { scope: compRef }
   );
@@ -42,16 +29,9 @@ export default function AnimatedHeroText({ text }: AnimatedHeroTextProps) {
   return (
     <div className="accelerate" ref={compRef}>
       <h1 className="hero-title mb-8 text-[max(5rem,min(6.5rem,6.5vw))] font-mono tracking-tighter bg-opacity-0 py-3 lg:py-4 xl:py-5 whitespace-nowrap relative min-w-full self-end text-right right-0">
-        {words.map((word, wordIndex) => (
-          <span key={wordIndex} className="inline-block">
-            {word.split("").map((char, charIndex) => (
-              <span key={charIndex} className="char inline-block">
-                {char}
-              </span>
-            ))}
-            {wordIndex < words.length - 1 && (
-              <span className="char inline-block">.</span>
-            )}
+        {words.map((word, index) => (
+          <span key={index} className="text-word inline-block">
+            {word}
           </span>
         ))}
       </h1>

@@ -13,10 +13,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fec/remark-a11y-emoji": "^4.0.2",
     "@gsap/react": "^2.1.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@neondatabase/serverless": "^1.0.1",
+    "@radix-ui/react-tabs": "^1.1.12",
     "@react-three/drei": "^10.0.7",
     "@react-three/fiber": "^9.1.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
