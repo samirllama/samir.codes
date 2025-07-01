@@ -1,11 +1,14 @@
 import { z } from 'zod'
 import {
   createSession,
-  createUser,
   deleteSession,
 } from '@/lib/session'
-import { verifyPassword } from '@/lib/auth-server'
-import { getUserByEmail } from '@/lib/dal'
+import { verifyPassword, hashPassword } from '@/lib/auth-server'
+import { db } from '@/db'
+import { users } from '@/db/schema'
+import { eq } from 'drizzle-orm'
+import { nanoid } from 'nanoid'
+
 import { mockDelay } from '@/lib/utils'
 import { redirect } from 'next/navigation'
 import { ratelimit } from '@/lib/rate-limiter'
@@ -71,7 +74,7 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
     }
 
     // Find user by email
-    const user = await getUserByEmail(data.email)
+    const [user] = await db.select().from(users).where(eq(users.email, data.email))
     if (!user) {
       return {
         success: false,
@@ -144,7 +147,7 @@ export async function signUp(prevState: ActionResponse, formData: FormData): Pro
     }
 
     // Check if user already exists
-    const existingUser = await getUserByEmail(data.email)
+    const [existingUser] = await db.select().from(users).where(eq(users.email, data.email))
     if (existingUser) {
       return {
         success: false,
@@ -156,8 +159,16 @@ export async function signUp(prevState: ActionResponse, formData: FormData): Pro
     }
 
     // Create new user
-    const user = await createUser(data.email, data.password)
-    if (!user) {
+    const hashedPassword = await hashPassword(data.password)
+    const id = nanoid()
+
+    const [newUser] = await db.insert(users).values({
+      id,
+      email: data.email,
+      password: hashedPassword,
+    }).returning()
+
+    if (!newUser) {
       return {
         success: false,
         message: 'Failed to create user',
@@ -166,7 +177,7 @@ export async function signUp(prevState: ActionResponse, formData: FormData): Pro
     }
 
     // Create session for the newly registered user
-    await createSession(user.id)
+    await createSession(newUser.id)
 
     return {
       success: true,

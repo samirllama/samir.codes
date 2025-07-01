@@ -272,6 +272,21 @@ functioning as intended. This could be due to issues with:
 
 ---
 
-### 5. Finding to be continiued
+### 5. Finding: `DATABASE_URL is not set` Error in Middleware
+
+**Problem:** The application throws a `DATABASE_URL is not set` error when unauthenticated users are routed to the sign-in page, specifically when the `middleware.ts` is executed. This occurs despite the `verifyJWT` function (used by the middleware) being designed for stateless verification without direct database interaction.
+
+**Root Cause:** The `middleware.ts` file runs on the Edge runtime, which has a restricted environment. While `verifyJWT` itself doesn't directly query the database, its containing file (`lib/session.ts`) imports database-related modules (`@/db`, `@/db/schema`). The mere presence of these imports in a file that is part of the Edge bundle causes the Next.js runtime to attempt to resolve `process.env.DATABASE_URL`, leading to the error because this environment variable is not available in the Edge context.
+
+**Proposed Solution (Option): Decouple JWT Logic from Database Imports**
+
+To resolve this, the JWT-related functions (`generateJWT`, `verifyJWT`, `shouldRefreshToken`) should be moved to a new, isolated file (e.g., `lib/jwt.ts`) that has *no* database-related imports.
+
+**Steps for Proposed Solution:**
+1.  **Create `lib/jwt.ts`**: A new file containing only the JWT generation, verification, and refresh logic, along with its necessary dependencies (`jose`, `TextEncoder`). This file must *not* import any database-related modules.
+2.  **Update `lib/session.ts`**: Modify `lib/session.ts` to import `generateJWT`, `verifyJWT`, and `shouldRefreshToken` from the new `lib/jwt.ts` file instead of defining them internally.
+3.  **Update `middleware.ts`**: Modify `middleware.ts` to import `verifyJWT` directly from the new `lib/jwt.ts` file.
+
+This refactoring ensures that the middleware's execution path remains free of database dependencies, allowing it to run correctly on the Edge without encountering the `DATABASE_URL is not set` error.
 
 ---

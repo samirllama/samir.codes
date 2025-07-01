@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { verifyJWT } from '@/lib/session'
+import { verifyJWT } from '@/lib/jwt'
 
 const PROTECTED_ROOT = '/playground'
 const PUBLIC_PATHS = ['/signin', '/signup', '/', '/home']
