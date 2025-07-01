@@ -4,10 +4,7 @@ import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
-import {
-  BodyAttributeManager,
-  HTMLAttributeManager,
-} from "@/components/AttributeManager";
+
 
 export const metadata: Metadata = {
   title: "Samir Codes",
@@ -35,8 +32,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
-      <HTMLAttributeManager />
-      <BodyAttributeManager />
       <body
         className={cn(
           cinzel.variable,

@@ -51,8 +51,8 @@ const config: Config = {
                 'cinzel': 'var(--font-cinzel)',
                 'cinzel-deco': 'var(--font-cinzel-deco)',
                 'inter': 'var(--font-inter)',
-                mona: ['"MonaspaceNeon"', ...fontFamily.mono],
-                'mo-argon': ['"MonaspaceArgon"', ...fontFamily.mono],
+                mona: ['MonaspaceNeon', ...fontFamily.mono],
+                'mo-argon': ["MonaspaceArgon", ...fontFamily.mono],
             },
             fontSize: {
                 'step--2': 'var(--type-scale-step--2)',

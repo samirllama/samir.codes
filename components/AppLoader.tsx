@@ -96,7 +96,7 @@ const AppLoader: React.FC<AppLoaderProps> = ({ active, gsapContextRef }) => {
   return (
     <div
       ref={loaderRef}
-      className={clsx("fixed inset-0 z-[9999] h-screen overflow-hidden")}
+      className={clsx("fixed inset-0 z-10 h-screen overflow-hidden")}
     >
       <div ref={backgroundLayerRef} className="absolute inset-0 bg-black"></div>
       <div

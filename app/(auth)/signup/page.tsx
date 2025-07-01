@@ -31,11 +31,9 @@ export default function SignUpPage() {
   const [state, formAction] = useFormState(signUp, initialState)
   const router = useRouter()
 
-  // Effect to handle redirection on successful sign-up
   useEffect(() => {
     if (state.success) {
-      // Redirect to a protected route
-      router.push('/work')
+      router.push('/')
     }
   }, [state.success, router])
 

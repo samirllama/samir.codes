@@ -1,20 +1,18 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { signIn, type ActionResponse } from '@/app/actions/auth'
+import { useEffect } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { signIn, type ActionResponse } from "@/app/actions/auth";
 
-// Initial state for the form
 const initialState: ActionResponse = {
   success: false,
-  message: '',
-}
+  message: "",
+};
 
-// A separate component for the submit button to use the useFormStatus hook
 function SubmitButton() {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
   return (
     <button
@@ -22,24 +20,20 @@ function SubmitButton() {
       disabled={pending}
       className="flex justify-center w-full px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 rounded-md shadow-sm bg-accent-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-primary disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      {pending ? 'Signing In...' : 'Sign In'}
+      {pending ? "Signing In..." : "Sign In"}
     </button>
-  )
+  );
 }
 
 export default function SignInPage() {
-  const [state, formAction] = useFormState(signIn, initialState)
-  const router = useRouter()
+  const [state, formAction] = useFormState(signIn, initialState);
+  const router = useRouter();
 
-  // Effect to handle redirection on successful sign-in
   useEffect(() => {
     if (state.success) {
-      // Redirect to a protected route
-      router.push('/work')
-      // router.refresh() is often not needed here as Next.js automatically re-validates
-      // the layout when navigating after a server action.
+      router.push("/work");
     }
-  }, [state.success, router])
+  }, [state.success, router]);
 
   return (
     <main className="flex items-center justify-center w-full min-h-screen bg-surface-page text-text-default">
@@ -77,7 +71,9 @@ export default function SignInPage() {
               placeholder="you@example.com"
             />
             {state.errors?.email && (
-              <p className="mt-1 text-xs text-red-500">{state.errors.email[0]}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {state.errors.email[0]}
+              </p>
             )}
           </div>
 
@@ -98,7 +94,9 @@ export default function SignInPage() {
               placeholder="••••••••"
             />
             {state.errors?.password && (
-              <p className="mt-1 text-xs text-red-500">{state.errors.password[0]}</p>
+              <p className="mt-1 text-xs text-red-500">
+                {state.errors.password[0]}
+              </p>
             )}
           </div>
 
@@ -108,7 +106,7 @@ export default function SignInPage() {
         </form>
 
         <p className="text-sm text-center text-text-muted">
-          Don&apos;t have an account?{' '}
+          Don&apos;t have an account?{" "}
           <Link
             href="/signup"
             className="font-medium transition-colors text-accent-primary hover:text-opacity-80"
@@ -118,5 +116,5 @@ export default function SignInPage() {
         </p>
       </div>
     </main>
-  )
+  );
 }

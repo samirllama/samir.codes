@@ -65,7 +65,6 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Work", href: "/work" },
     { name: "Blog", href: "/blog" },
   ];
 

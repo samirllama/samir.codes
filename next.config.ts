@@ -51,7 +51,7 @@ const nextConfig = (phase: string): NextConfig => {
 
 
     images: {
-      domains: ['logo.clearbit.com'],
+      domains: [],
     },
 
     // TODO: Replace https://* with the exact domains needed for the application.
