@@ -8,12 +8,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "light", children, ...props }, ref) => {
     const baseStyles =
-      "px-8 py-4 rounded-full font-semibold transition-all duration-300 ease-in-out flex items-center gap-2";
+      "rounded-full font-semibold transition-all duration-300 ease-in-out flex items-center gap-2";
 
     const variantStyles = {
       light:
-        "bg-[var(--color-light)] text-[var(--color-dark)] hover:bg-[var(--color-dark)] hover:text-[var(--color-light)]",
-      dark: "border border-[var(--color-white20)] text-[var(--color-light)] hover:bg-[var(--color-light)] hover:text-[var(--color-dark)] hover:border-[var(--color-light)]",
+        "px-8 py-4 bg-[var(--color-light)] text-[var(--color-dark)] hover:bg-[var(--color-dark)] hover:text-[var(--color-light)]",
+      dark: "px-8 py-4 border border-[var(--color-white20)] text-[var(--color-light)] hover:bg-[var(--color-light)] hover:text-[var(--color-dark)] hover:border-[var(--color-light)]",
+      ghost: "bg-transparent border-none px-2 py-2",
     };
 
     return (

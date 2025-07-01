@@ -41,6 +41,8 @@ const config: Config = {
                 'text-default': 'var(--color-text-default)',
                 'text-muted': 'var(--color-text-muted)',
                 'text-inverted': 'var(--color-text-inverted)',
+                'menu-bg': 'var(--color-menu-bg)',
+                'menu-text': 'var(--color-menu-text)',
                 'accent-primary': 'var(--color-accent-primary)',
                 'accent-secondary': 'var(--color-accent-secondary)',
                 'border-default': 'var(--color-border-default)',
@@ -53,6 +55,7 @@ const config: Config = {
                 'inter': 'var(--font-inter)',
                 mona: ['MonaspaceNeon', ...fontFamily.mono],
                 'mo-argon': ["MonaspaceArgon", ...fontFamily.mono],
+                'transitional': 'var(--font-transitional)',
             },
             fontSize: {
                 'step--2': 'var(--type-scale-step--2)',

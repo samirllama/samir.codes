@@ -6,9 +6,10 @@ import "./styles/globals.css";
 import { cn } from "@/lib/utils";
 
 
+import { defaultMetadata } from "./metadata";
+
 export const metadata: Metadata = {
-  title: "Samir Codes",
-  description: "Personal website and portfolio",
+  ...defaultMetadata,
 };
 
 const defaultSans = Geist_Mono({

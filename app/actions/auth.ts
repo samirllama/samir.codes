@@ -15,13 +15,11 @@ import { ratelimit } from '@/lib/rate-limiter'
 
 import { getIpAddress } from '@/lib/server-utils'
 
-// Define Zod schema for signin validation
 const SignInSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Invalid email format'),
   password: z.string().min(1, 'Password is required'),
 })
 
-// Define Zod schema for signup validation
 const SignUpSchema = z
   .object({
     email: z.string().min(1, 'Email is required').email('Invalid email format'),
@@ -44,7 +42,6 @@ export type ActionResponse = {
 }
 
 export async function signIn(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
-  // Rate limit based on IP address
   const ip = await getIpAddress()
   const { success } = await ratelimit.limit(ip)
 
@@ -57,13 +54,11 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
   }
 
   try {
-    // Extract data from form
     const data = {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
     }
 
-    // Validate with Zod
     const validationResult = SignInSchema.safeParse(data)
     if (!validationResult.success) {
       return {
@@ -73,7 +68,6 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
       }
     }
 
-    // Find user by email
     const [user] = await db.select().from(users).where(eq(users.email, data.email))
     if (!user) {
       return {
@@ -85,7 +79,6 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
       }
     }
 
-    // Verify password
     const isPasswordValid = await verifyPassword(data.password, user.password)
     if (!isPasswordValid) {
       return {
@@ -97,7 +90,6 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
       }
     }
 
-    // Create session
     await createSession(user.id)
 
     return {
@@ -115,7 +107,6 @@ export async function signIn(prevState: ActionResponse, formData: FormData): Pro
 }
 
 export async function signUp(prevState: ActionResponse, formData: FormData): Promise<ActionResponse> {
-  // Rate limit based on IP address
   const ip = await getIpAddress()
   const { success } = await ratelimit.limit(ip)
 

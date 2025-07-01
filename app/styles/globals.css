@@ -48,7 +48,7 @@
     font-feature-settings: normal;
     font-variation-settings: normal;
     -webkit-tap-highlight-color: transparent;
-    @apply font-mona text-base leading-base;
+    @apply font-body text-base leading-base;
     @apply bg-surface-page text-text-default;
   }
   body {
@@ -99,11 +99,11 @@
       box-shadow 500ms var(--alias-easeOut2);
   }
   .header-container-scrolled {
-    background-color: var(--color-black40);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px); /* For Safari compatibility */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    background: hsl(from var(--color-surface-card) h s l / 0.25); /* Semi-transparent background */
+    backdrop-filter: blur(12px); /* The blur effect */
+    -webkit-backdrop-filter: blur(12px); /* For Safari compatibility */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -2px rgba(0, 0, 0, 0.2);
   }
 
   .app-header-block {
@@ -254,6 +254,121 @@
   }
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-primary-accent);
+  }
+}
+
+/* New Form Card Styles */
+@layer components {
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  form {
+    display: grid;
+    gap: 1rem;
+
+    @media (width > 720px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-group {
+    display: grid;
+    gap: 0.5cap;
+  }
+
+  label {
+    text-transform: uppercase;
+    font-size: 1rem;
+
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+
+  input {
+    /* IMPORTANT!! Frosty glass effect: slightly transparent background */
+    background: hsl(from var(--color-surface-card) h s l / 0.7);
+    color: var(--color-text-default);
+    border: 1px solid var(--border-1);
+    border-radius: 16px;
+    padding: 1ex 2ex;
+
+    accent-color: var(--color-primary-default);
+  }
+
+  input:not([type="checkbox"], [type="radio"]) {
+    width: 100%;
+  }
+
+  .form-group:has(.fine-print) {
+    grid-column: 1 / -1;
+
+    display: flex;
+    gap: 0.5ch;
+  }
+
+  .contact-form button {
+    justify-self: start;
+  }
+
+  .fine-print {
+    font-size: 0.925rem;
+    text-transform: revert;
+    line-height: 1.4;
+  }
+
+  /* Updated .contact-form styles with frosty glass effect */
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+
+    /* Frosty glass effect properties */
+    background: hsl(
+      from var(--color-surface-card) h s l / 0.25
+    ); /* Semi-transparent background */
+    backdrop-filter: blur(12px); /* The blur effect */
+
+    padding: 3rem;
+    border-radius: 24px;
+    width: min(100% - 4rem, 1200px);
+    margin-inline: auto;
+
+    /* Required for the ::before pseudo-element border */
+    position: relative;
+    --border-width: 1px; /* Custom property for border thickness */
+  }
+
+  /* ::before pseudo-element for the gradient border */
+  .contact-form::before {
+    content: "";
+    position: absolute;
+    z-index: -1; /* Ensures the border is behind the content */
+    inset: 0; /* Covers the entire element */
+    border-radius: inherit; /* Matches the parent's border-radius */
+    border: var(--border-width) solid transparent; /* Transparent border for the mask */
+
+    /* Gradient background for the border */
+    background: linear-gradient(var(--border-1), var(--border-2)) border-box;
+    /* Masking to show only the border */
+    mask: linear-gradient(black, black) border-box, linear-gradient(black, black) padding-box;
+    mask-composite: subtract; /* Subtracts the inner area, leaving only the border */
+  }
+
+  .contact-form button {
+    cursor: pointer;
+    background-color: var(--color-primary-default);
+    color: var(--color-text-inverted);
+    padding: 1em 1.5em;
+    border: 0;
+    border-radius: 16px;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-primary-accent);
+    }
   }
 }
 

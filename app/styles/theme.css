@@ -75,6 +75,10 @@
   --color-black40: oklch(0% 0 0 / 0.4);
   --color-white20: oklch(100% 0 0 / 0.2);
 
+  /* NEW: Added border variables for the frosty glass effect from the card example */
+  --border-1: hsl(259, 13%, 28%); /* Corresponds to --primary-500 from the card */
+  --border-2: hsl(252, 9%, 22%); /* Corresponds to --primary-600 from the card */
+
   /* Gradients */
   --hdr-gradient: radial-gradient(
     farthest-corner circle at 50% 50% in oklab,
@@ -141,6 +145,8 @@
   --color-text-default: oklch(98.8% 0.007 260);
   --color-text-muted: oklch(70% 0.01 260);
   --color-text-inverted: oklch(12% 0.015 260);
+  --color-menu-bg: oklch(100% 0 0);
+  --color-menu-text: oklch(0% 0 0);
   --shadow-base-rgb: 255, 255, 255;
   --shadow-highlight-rgb: 0, 0, 0;
   --shadow-outer-rgb: 0, 0, 0;
@@ -149,6 +155,7 @@
 :root {
   --font-inter: "Inter", sans-serif;
   --font-mono: "MonaspaceNeon", monospace;
-  --font-body: var(--font-inter);
+  --font-body: var(--font-transitional);
   --font-heading: var(--font-inter);
+  --font-transitional: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Merriweather, Georgia, 'Liberation Serif', serif;
 }

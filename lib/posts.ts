@@ -28,12 +28,12 @@ export function getAllPostsMeta(): PostMeta[] {
   try {
     postFolders = fs.readdirSync(postsDirectory).filter((item) => {
       const itemPath = path.join(postsDirectory, item);
-      // Ensure it's a directory and NOT the blog index page itself or other special files/folders
+      // Ensure it's a directory and NOT the posts index page itself or other special files/folders
       return fs.statSync(itemPath).isDirectory() && !item.startsWith('_') && !item.startsWith('.');
 
     });
   } catch (error) {
-    console.error('Error reading blog directory:', postsDirectory, error);
+    console.error('Error reading posts directory:', postsDirectory, error);
     return [];
   }
 

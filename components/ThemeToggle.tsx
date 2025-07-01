@@ -4,8 +4,10 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon } from "lucide-react";
 import { Button } from "./ui/Button";
+import { useRef } from "react";
+import gsap from "gsap";
 
-const themes = ["light", "dark", "mocha-mousse"];
+const themes = ["light", "dark"];
 export default function ThemeToggle() {
   // useTheme hook provides the current theme and the setTheme function
   // 'theme' can be 'light', 'dark', 'mocha-mousse', 'system', or undefined on initial render
@@ -28,6 +30,18 @@ export default function ThemeToggle() {
   useEffect(() => {
     console.log("THEME TOGGLE:", { theme });
   }, [theme]);
+
+  const iconRef = useRef(null);
+
+  useEffect(() => {
+    if (mounted && iconRef.current) {
+      gsap.fromTo(
+        iconRef.current,
+        { rotation: -180, opacity: 0 },
+        { rotation: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, [theme, mounted]);
 
   // If the component is not mounted, render a placeholder or null
   // This prevents rendering a UI that might not match the server-rendered HTML
@@ -57,13 +71,13 @@ export default function ThemeToggle() {
       aria-label={
         theme === "dark" ? "Activate light mode" : "Activate dark mode"
       }
+      variant="ghost"
       className="px-2" // Adjust padding for icon-only button
     >
-      {currentThemeDisplay}
       {theme === "dark" ? (
-        <SunIcon className="h-5 w-5 text-slate-400 hover:text-slate-200" />
+        <SunIcon ref={iconRef} className="h-6 w-6 text-slate-400 hover:text-slate-200" />
       ) : (
-        <MoonIcon className="h-5 w-5 text-slate-500 hover:text-slate-800" />
+        <MoonIcon ref={iconRef} className="h-6 w-6 text-slate-500 hover:text-slate-800" />
       )}
     </Button>
   );

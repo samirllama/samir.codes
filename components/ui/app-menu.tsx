@@ -21,8 +21,6 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
       "-translate-y-full": !isMenuOpen,
       "pointer-events-auto": isMenuOpen,
       "pointer-events-none": !isMenuOpen,
-      visible: isMenuOpen,
-      invisible: !isMenuOpen,
     },
   ]);
 
@@ -31,7 +29,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     "inset-x-0",
     "top-0",
     "w-full",
-    "bg-white",
+    "bg-menu-bg",
     "menu-panel-transition-custom",
     "h-[75vh]",
   ]);
@@ -39,7 +37,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
   const blackOverlayClasses = cn([
     "absolute",
     "inset-0",
-    "bg-black",
+    "bg-menu-bg",
     "menu-black-overlay-transition",
     {
       "opacity-100": isMenuOpen,
@@ -56,7 +54,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     "items-start",
     "pt-[calc(230/16*1rem)]",
     "px-[calc(150/16*1rem)]",
-    "text-black", // Ensure all text content in the menu is black
+    "text-menu-text", // Ensure all text content in the menu is black
     {
       "is-ready": true,
       "is-active": isMenuOpen,
@@ -65,14 +63,13 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Blog", href: "/blog" },
+    { name: "Posts", href: "/posts" },
   ];
 
   return (
     <div className={menuContainerClasses}>
       <div className={blackOverlayClasses}></div>
 
-      <div className={lightBackgroundPanelClasses}></div>
       <div
         className={cn(
           "absolute",
@@ -105,7 +102,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
                 href={item.href}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 ease-out-quad group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-menu-text transition-all duration-300 ease-out-quad group-hover:w-full"></span>
                 
               </Link>
             </li>

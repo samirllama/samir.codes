@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Logo from "./logo";
+import ThemeToggle from "../ThemeToggle";
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
@@ -33,8 +34,8 @@ export default function AppHeader({
   const headerBStyles = cn([
     "app-header-block px-12",
     {
-      "text-white": !isMenuOpen,
-      "text-black": isMenuOpen,
+      "text-menu-text": isMenuOpen,
+      "text-text-default": !isMenuOpen,
     },
   ]);
 
@@ -51,22 +52,24 @@ export default function AppHeader({
           <Link href="/">
             <Logo />
           </Link>
-
-          <div
-            id="hamburger-button"
-            role="button"
-            onClick={toggleAction}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className={burgerStyles}
-          >
-            <span className="hamburger-line-1 line-wrapper-1 absolute top-1/2 left-0 w-full block h-px opacity-100 tra-translate-y-1.5">
-              <span className="hamburger-line-1-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
-              <span className="hamburger-line-1-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
-            </span>
-            <span className="hamburger-line-2 line-wrapper-2 absolute top-1/2 left-0 w-full block h-px opacity-100  translate-y-1.5">
-              <span className="hamburger-line-2-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
-              <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
-            </span>
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <div
+              id="hamburger-button"
+              role="button"
+              onClick={toggleAction}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className={burgerStyles}
+            >
+              <span className="hamburger-line-1 line-wrapper-1 absolute top-1/2 left-0 w-full block h-px opacity-100 tra-translate-y-1.5">
+                <span className="hamburger-line-1-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
+                <span className="hamburger-line-1-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-left transform scale-x-100"></span>
+              </span>
+              <span className="hamburger-line-2 line-wrapper-2 absolute top-1/2 left-0 w-full block h-px opacity-100  translate-y-1.5">
+                <span className="hamburger-line-2-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
+                <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
+              </span>
+            </div>
           </div>
         </div>
       </header>

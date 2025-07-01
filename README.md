@@ -7,7 +7,7 @@ Welcome to the codebase for my personal website, portfolio, and digital garden, 
 ## ✨ Features
 
 - **Portfolio Showcase:** Sections detailing professional experience and key projects.
-- **Digital Garden / Blog:** Content managed via MDX, featuring articles, notes, and code snippets under `/playbook`.
+- **Digital Garden / Posts:** Content managed via MDX, featuring articles, notes, and code snippets under `/playbook`.
 - **Interactive Elements:** Engaging UI elements including custom animations (`aos`, CSS keyframes), dynamic text effects (`TypingEffect`), particle backgrounds (`Particles`), and 3D visuals (`@react-three/fiber`).
 - **Syntax Highlighting:** Beautiful code blocks in MDX content using `rehype-pretty-code`.
 - **Theming:** Dark mode support implemented with `next-themes` and CSS variables.
