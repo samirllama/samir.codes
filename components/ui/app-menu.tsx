@@ -24,15 +24,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     },
   ]);
 
-  const lightBackgroundPanelClasses = cn([
-    "absolute",
-    "inset-x-0",
-    "top-0",
-    "w-full",
-    "bg-menu-bg",
-    "menu-panel-transition-custom",
-    "h-[75vh]",
-  ]);
+  
 
   const blackOverlayClasses = cn([
     "absolute",

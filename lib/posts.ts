@@ -4,6 +4,11 @@ import path from 'path';
 import matter from 'gray-matter';
 
 // The metadata structure we expect from frontmatter
+export interface OGImage {
+  url: string;
+  alt?: string;
+}
+
 export interface PostMeta {
   slug: string; // URL slug derived from the folder name
   title: string;
@@ -11,6 +16,7 @@ export interface PostMeta {
   description: string;
   tags?: string[]; // Optional tags
   author?: string; // Optional author
+  image?: OGImage | OGImage[]; // Optional image for Open Graph
 }
 
 // Define the structure for the full post including content

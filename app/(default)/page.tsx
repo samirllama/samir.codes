@@ -1,8 +1,10 @@
 import TechStack from "@/components/tech-stack";
 import CreativeCanvas from "@/components/CreativeCanvas";
 import WorkExperienceTimeline from "@/components/WorkExperienceTimeline";
-import { myProjects, skillCategories } from "@/lib/data/port-data";
-import AnimatedLetterText from "@/components/AnimatedLetterText";
+import { skillCategories } from "@/lib/data/port-data";
+import TestAnimatedText from "@/components/TestAnimatedText";
+import Footer from "@/components/ui/footer";
+import ParallaxSection from "@/components/ui/ParallaxSection";
 
 export default function HomePage() {
   return (
@@ -14,16 +16,23 @@ export default function HomePage() {
               data-gsap-target="hero-title-wrapper"
               className="transform-gpu"
             >
-              <AnimatedLetterText text="Code.Create.Catalyze" />
+              <TestAnimatedText text="Code.Create.Catalyze" />
             </div>
           </h1>
         </div>
       </section>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4">
-        <CreativeCanvas text="Art is the expression of the soul." />
-      </div>
+
       <WorkExperienceTimeline />
       <TechStack skillCategories={skillCategories} />
+
+      <ParallaxSection>
+        <div className="creative-canvas-section flex flex-col items-center justify-center min-h-screen text-white p-4 relative z-10">
+          <CreativeCanvas text="Art is the expression of the soul." />
+        </div>
+        <div className="absolute inset-x-0 bottom-0 z-0 w-full">
+          <Footer />
+        </div>
+      </ParallaxSection>
     </article>
   );
 }

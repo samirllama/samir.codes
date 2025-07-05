@@ -12,7 +12,7 @@ const TypographyShowcasePage = () => {
           <h2 className="text-2xl font-semibold mb-4">Current Typography (Geist Mono)</h2>
           <p className="font-mono text-lg mb-4">
             This is a sample paragraph using the current default font, Geist Mono.
-            It's a monospace font, often used for code or technical documentation.
+            It&apos;s a monospace font, often used for code or technical documentation.
             It has a distinct, uniform character width.
           </p>
           <h3 className="text-xl font-bold mb-2">Heading 3 Example</h3>

@@ -15,7 +15,7 @@ export default function ThemeToggle() {
   // 'themes' is the list of themes provided to ThemeProvider (['light', 'dark', 'mocha-mousse'] in your case)
   // 'setTheme' is the function to change the theme
   // 'systemTheme' is 'light' or 'dark' based on the user's OS preference
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   // State to track if the component has mounted. This is crucial for
   // avoiding hydration mismatches as next-themes reads localStorage
@@ -53,8 +53,7 @@ export default function ThemeToggle() {
 
   // Determine the currently displayed theme for the button text/icon
   // Use 'resolvedTheme' if 'enableSystem' is true and 'theme' is 'system'
-  const currentThemeDisplay =
-    theme === "system" ? `${resolvedTheme} (System)` : theme;
+  
 
   // Function to cycle through the defined themes
   const toggleTheme = () => {

@@ -25,6 +25,7 @@ const WorkExperienceTimeline = () => {
           scaleY: 1,
           transformOrigin: "top",
           ease: "none",
+          boxShadow: "0 0 8px 2px rgba(255, 255, 255, 0.4)", // Subtle white glow
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top center", // Start when the top of the container hits the center of the viewport
@@ -50,13 +51,13 @@ const WorkExperienceTimeline = () => {
           },
         });
 
-        // Animate the dot
+        // Animate dot
         tl.fromTo(
           dot,
-          { scale: 0.5, backgroundColor: "#4B5563" }, // gray-600
+          { scale: 0.5, backgroundColor: "var(--color-timeline-border)" },
           {
-            scale: 1.25,
-            backgroundColor: "#FFFFFF", // white
+            scale: 0.95,
+            backgroundColor: "var(--color-timeline-dot)",
             boxShadow: "0 0 15px 5px rgba(255, 255, 255, 0.5)",
             ease: "power2.inOut",
           }
@@ -76,14 +77,15 @@ const WorkExperienceTimeline = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-black text-white font-sans">
+    <section className="py-12 sm:py-16 lg:py-20 text-timeline-text font-sans">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 sm:mb-16">My Professional Journey</h2>
+        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12 sm:mb-16">
+          My Professional Journey
+        </h2>
         <div ref={containerRef} className="relative">
-          {/* The vertical timeline bar */}
           <div
             ref={timelineRef}
-            className="absolute left-[25%] transform -translate-x-1/2 top-0 w-0.5 h-full bg-gray-800"
+            className="absolute left-[25%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border"
             style={{ transform: "scaleY(0)" }}
           ></div>
 
@@ -102,18 +104,20 @@ import TimelineRightContentCard from "./TimelineRightContentCard";
 
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
-    <div className="timeline-entry-new relative flex items-start mb-16">
+    <div className="timeline-entry-new relative flex items-center mb-16">
       {/* Left Side: Date and Role */}
-      <div className="timeline-meta w-full md:w-1/4 pr-8 text-right">
-        <p className="text-sm text-gray-400 mt-0.5">{entry.dateRange}</p>
-        <h3 className="text-xl font-semibold text-white">{entry.title}</h3>
+      <div className="timeline-meta w-full md:w-[25%] text-left">
+        <p className="text-sm text-timeline-text mt-0.5">{entry.dateRange}</p>
+        <h3 className="text-xl font-semibold text-timeline-text">
+          {entry.title}
+        </h3>
       </div>
 
       {/* Dot */}
-      <div className="timeline-dot-new absolute left-[25%] transform -translate-x-1/2 w-4 h-4 rounded-full bg-gray-600 z-10"></div>
+      <div className="timeline-dot-new absolute left-[25%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-timeline-dot z-10"></div>
 
       {/* Right Side: Content Card */}
-      <div className="timeline-content-new w-full md:w-3/4 pl-8 text-left">
+      <div className="timeline-content-new w-full md:w-[75%] pl-8 text-left">
         <TimelineRightContentCard entry={entry} />
       </div>
     </div>

@@ -36,6 +36,7 @@ yarn-error.log*
 # vercel
 .vercel
 
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -44,6 +45,7 @@ next-env.d.ts
 notes*
 
 # Gemini CLI context
+/.gemini/
 GEMINI.md
 
 # AI documentation and notes

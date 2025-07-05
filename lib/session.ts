@@ -5,7 +5,7 @@
 import { cookies } from 'next/headers'
 
 import { cache } from 'react'
-import { generateJWT, verifyJWT, shouldRefreshToken, JWTPayload } from '@/lib/jwt'
+import { generateJWT, verifyJWT } from '@/lib/jwt'
 
 // Create a session using JWT
 export async function createSession(userId: string) {

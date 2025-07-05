@@ -6,8 +6,7 @@ import { eq } from 'drizzle-orm'
 import { cache } from 'react'
 import { issues, users } from '@/db/schema'
 import { mockDelay } from './utils'
-import { nanoid } from 'nanoid'
-import { hashPassword } from '@/lib/auth-server'
+
 
 // Current user
 export const getCurrentUser = cache(async () => {

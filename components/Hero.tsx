@@ -4,7 +4,6 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { useRef } from "react";
 
-
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -106,7 +105,9 @@ const Hero = () => {
           {"My Professional Journey".split(" ").map((word, index) => (
             <span
               key={index}
-              className="hero-header-word inline-block mr-2 last:mr-0"
+              className={`hero-header-word inline-block mr-2 last:mr-0 ${
+                word === "Professional" ? "font-transitional" : ""
+              }`}
             >
               {word}
             </span>
@@ -114,11 +115,13 @@ const Hero = () => {
         </h1>
 
         <p className="hero-subheading text-xl md:text-2xl text-gray-700 max-w-2xl px-4">
-          Explore my experience, projects, and contributions in the world of software development.
+          Explore my experience, projects, and contributions in the world of
+          software development.
         </p>
 
         <p className="hero-body text-lg md:text-xl text-gray-600 max-w-xl px-4">
-          This timeline showcases my professional growth and the diverse challenges I&apos;ve tackled.
+          This timeline showcases my professional growth and the diverse
+          challenges I&apos;ve tackled.
         </p>
 
         <button className="hero-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">

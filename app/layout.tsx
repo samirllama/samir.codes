@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
-
+import InitialAppWrapper from "@/components/InitialAppWrapper";
 
 import { defaultMetadata } from "./metadata";
 
@@ -47,7 +47,7 @@ export default function RootLayout({
           enableSystem={true}
           themes={["dark", "light"]}
         >
-          {children}
+          <InitialAppWrapper>{children}</InitialAppWrapper>
         </ThemeProvider>
       </body>
     </html>

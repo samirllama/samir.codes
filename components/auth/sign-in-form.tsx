@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
 import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { signIn, type ActionResponse } from "@/app/actions/auth";
 
 const initialState: ActionResponse = {
@@ -55,9 +54,7 @@ export default function SignInForm() {
             placeholder="you@example.com"
           />
           {state.errors?.email && (
-            <p className="mt-1 text-xs text-red-500">
-              {state.errors.email[0]}
-            </p>
+            <p className="mt-1 text-xs text-red-500">{state.errors.email[0]}</p>
           )}
         </div>
 

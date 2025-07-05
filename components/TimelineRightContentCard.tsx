@@ -2,29 +2,31 @@ import Image from "next/image";
 import { ExperienceEntry } from "@/types";
 
 const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
-  
-
   return (
-    <div className="overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:shadow-white/20 flex flex-col md:flex-row bg-gray-900 rounded-lg">
+    <div className="overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:shadow-white/20 flex flex-col md:flex-row shadow-lg rounded-lg">
       {entry.projectScreenshotUrl && (
-        <div className="relative w-full md:w-1/2 pt-[60%] md:pt-0 md:h-auto bg-gray-800 flex-shrink-0">
+        <div className="relative w-full md:w-1/2 pt-[60%] md:pt-0 md:h-auto flex-shrink-0 shadow-md">
           <Image
             src={entry.projectScreenshotUrl}
             alt={`Screenshot of ${entry.company}`}
             fill
-            className="absolute inset-0 w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+            className="absolute inset-0 w-full h-full object-contain rounded-t-lg md:rounded-l-lg md:rounded-t-none"
           />
         </div>
       )}
-      <div className="p-6 flex flex-col justify-between w-full md:w-1/2">
+      <div className="p-6 flex flex-col justify-between w-full md:w-1/2 bg-timeline-bg">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-2">{entry.company}</h2>
-          <p className="text-gray-300 leading-relaxed mb-4">{entry.description}</p>
+          <h2 className="text-2xl font-bold text-timeline-text mb-2">
+            {entry.company}
+          </h2>
+          <p className="text-timeline-text leading-relaxed mb-4">
+            {entry.description}
+          </p>
           <div className="flex flex-wrap gap-2 mb-6">
             {entry.techTags.map((tag) => (
               <span
                 key={tag}
-                className="bg-gray-800 text-white text-xs font-medium px-3 py-1 rounded-full border border-gray-700"
+                className="border-timeline-border text-timeline-text text-xs font-medium px-3 py-1 rounded-md border border-timeline-border"
               >
                 {tag}
               </span>
@@ -36,9 +38,24 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
             href={entry.projectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-block bg-white text-black px-6 py-2 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+            className="mt-4 relative group inline-flex items-center text-timeline-text transition-colors duration-300 hover:text-timeline-accent"
           >
             View Project
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="ml-1 w-4 h-4 transform -rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+              />
+            </svg>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-timeline-accent transition-all duration-300 ease-out-quad group-hover:w-full"></span>
           </a>
         )}
       </div>

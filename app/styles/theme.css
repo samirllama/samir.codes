@@ -60,6 +60,9 @@
   /* Semantic Color Palette (Light Theme Defaults) */
   --color-surface-page: oklch(98.8% 0.007 260);
   --color-surface-card: oklch(100% 0 0);
+
+  --color-timeline-border: oklch(12% 0.015 260);
+  --color-timeline-dot: oklch(12% 0.015 260);
   --color-text-default: oklch(12% 0.015 260);
   --color-text-muted: oklch(58% 0.03 260);
   --color-text-inverted: oklch(100% 0 0);
@@ -76,8 +79,16 @@
   --color-white20: oklch(100% 0 0 / 0.2);
 
   /* NEW: Added border variables for the frosty glass effect from the card example */
-  --border-1: hsl(259, 13%, 28%); /* Corresponds to --primary-500 from the card */
-  --border-2: hsl(252, 9%, 22%); /* Corresponds to --primary-600 from the card */
+  --border-1: hsl(
+    259,
+    13%,
+    28%
+  ); /* Corresponds to --primary-500 from the card */
+  --border-2: hsl(
+    252,
+    9%,
+    22%
+  ); /* Corresponds to --primary-600 from the card */
 
   /* Gradients */
   --hdr-gradient: radial-gradient(
@@ -130,6 +141,9 @@
   --grid-column-gap: 0px;
   --lineHeight-base: var(--lineHeight-normal);
   --lineHeight-heading: var(--lineHeight-tight);
+
+  --color-menu-bg: oklch(0% 0 0); /* Black for light mode menu background */
+  --color-menu-text: oklch(100% 0 0); /* White for light mode menu text */
 }
 
 @media screen and (max-width: 600px) {
@@ -147,8 +161,13 @@
   --color-text-inverted: oklch(12% 0.015 260);
   --color-menu-bg: oklch(100% 0 0);
   --color-menu-text: oklch(0% 0 0);
-  --shadow-base-rgb: 255, 255, 255;
-  --shadow-highlight-rgb: 0, 0, 0;
+  --color-timeline-bg: oklch(12% 0.015 260);
+  --color-timeline-text: oklch(98.8% 0.007 260);
+  --color-timeline-dot: oklch(100% 0 0);
+  --color-timeline-border: oklch(100% 0 0);
+  --color-timeline-accent: #6366f1;
+  --shadow-base-rgb: 0, 0, 0;
+  --shadow-highlight-rgb: 255, 255, 255;
   --shadow-outer-rgb: 0, 0, 0;
 }
 /* Base Font Fams (Used as fallback or default) */
@@ -157,5 +176,6 @@
   --font-mono: "MonaspaceNeon", monospace;
   --font-body: var(--font-transitional);
   --font-heading: var(--font-inter);
-  --font-transitional: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Merriweather, Georgia, 'Liberation Serif', serif;
+  --font-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria,
+    Merriweather, Georgia, "Liberation Serif", serif;
 }

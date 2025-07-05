@@ -1,8 +1,12 @@
 {
   "cSpell.words": ["cinzel", "nmsregular"],
-  "workbench.colorTheme": "Ayu Adapta",
+  "workbench.colorTheme": "Rosé Pine Moon (no italics)",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.formatOnSave": true,
-  "notebook.formatOnSave.enabled": true
+  "notebook.formatOnSave.enabled": true,
+  "terminal.integrated.fontFamily": "'Monaspace Neon','Dank Mono', 'FiraCode Nerd Font'",
+  "terminal.integrated.fontLigatures.enabled": true,
+  // "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'calt'"
+  "editor.fontLigatures": true
 }

@@ -257,6 +257,12 @@
   }
 }
 
+.creative-canvas-section {
+  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Dark gradient placeholder */
+  background-size: cover;
+  background-position: center;
+}
+
 /* New Form Card Styles */
 @layer components {
   input,

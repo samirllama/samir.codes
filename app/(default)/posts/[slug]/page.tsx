@@ -4,6 +4,7 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import { componentsForMdx } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { defaultMetadata } from '@/app/metadata';
+import { OGImage } from '@/lib/posts';
 
 export async function generateStaticParams() {
   const posts = getAllPostsMeta();
@@ -18,8 +19,23 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const title = `${post.title} | Samir S. S. Llama`;
-  const description = post.description || defaultMetadata.description;
-  const ogImage = post.image || defaultMetadata.openGraph?.images?.[0]?.url;
+  const description = post.description || defaultMetadata.description || '';
+
+  let ogImageUrl: string | undefined;
+  if (post.image) {
+    if (Array.isArray(post.image)) {
+      ogImageUrl = post.image[0]?.url;
+    } else {
+      ogImageUrl = post.image.url;
+    }
+  } else if (defaultMetadata.openGraph?.images && Array.isArray(defaultMetadata.openGraph.images) && defaultMetadata.openGraph.images.length > 0) {
+    ogImageUrl = (defaultMetadata.openGraph.images[0] as OGImage).url;
+  }
+
+  // Ensure ogImageUrl is a string before using it in arrays
+  const finalOgImages = ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630 }] : defaultMetadata.openGraph?.images || [];
+  const finalTwitterImages = ogImageUrl ? [ogImageUrl] : defaultMetadata.twitter?.images || [];
+
 
   return {
     title,
@@ -30,13 +46,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description,
       url: `https://samir.codes/posts/${post.slug}`,
       type: 'article',
-      images: ogImage ? [{ url: ogImage }] : defaultMetadata.openGraph?.images,
+      images: finalOgImages,
     },
     twitter: {
       ...defaultMetadata.twitter,
       title,
       description,
-      images: ogImage ? [ogImage] : defaultMetadata.twitter?.images,
+      images: finalTwitterImages,
     },
   };
 }
