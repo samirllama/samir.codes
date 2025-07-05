@@ -30,10 +30,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
 .env*
 
-# vercel
 .vercel
 
 
@@ -41,13 +39,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# notes
-notes*
-
 # Gemini CLI context
 /.gemini/
 GEMINI.md
 
 # AI documentation and notes
+/ai-docs/
 notes.md
-ai-docs/
+notes*
