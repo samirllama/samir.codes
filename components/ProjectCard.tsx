@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ProjectEntry } from "@/types";
 
-// Displays the detailed information for a project
+
 const ProjectCard = ({
   title,
   subtitle,
@@ -13,7 +13,7 @@ const ProjectCard = ({
 }: ProjectEntry) => {
   const finalScreenshotUrl =
     projectScreenshotUrl ||
-    "/placeholder.svg"; // Using local placeholder image
+    
   const finalAltText = altText || "Placeholder image for project";
 
   return (
@@ -25,7 +25,7 @@ const ProjectCard = ({
           layout="fill"
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
-            e.currentTarget.src = "/placeholder.svg"; // Fallback to local placeholder
+            
           }}
         />
       </div>

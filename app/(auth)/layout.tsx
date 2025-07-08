@@ -1,4 +1,4 @@
-// (auth)/layout.tsx
+
 import { cn } from "@/lib/utils";
 import Footer from "@/components/ui/footer";
 

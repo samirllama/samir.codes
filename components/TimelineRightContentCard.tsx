@@ -19,14 +19,14 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
           <h2 className="text-2xl font-bold text-timeline-text mb-2">
             {entry.company}
           </h2>
-          <p className="text-timeline-text leading-relaxed mb-4">
+          <p className="text-base text-timeline-text leading-relaxed mb-4">
             {entry.description}
           </p>
           <div className="flex flex-wrap gap-2 mb-6">
             {entry.techTags.map((tag) => (
               <span
                 key={tag}
-                className="border-timeline-border text-timeline-text text-xs font-medium px-3 py-1 rounded-md border border-timeline-border"
+                className="border-timeline-border text-timeline-text text-sm font-medium px-3 py-1 rounded-md border border-timeline-border"
               >
                 {tag}
               </span>

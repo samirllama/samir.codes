@@ -14,7 +14,7 @@ interface ScrollObjectProps extends React.ComponentPropsWithoutRef<"div"> {
 export const ScrollObject: React.FC<ScrollObjectProps> = ({
   children,
   threshold = 0.1,
-  rootMargin = "0%", // Use '0%' for rootMargin's default as per hook
+  
   freezeOnceVisible = false,
   className,
   ...props

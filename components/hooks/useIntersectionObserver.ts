@@ -1,10 +1,10 @@
-// hooks/useIntersectionObserver.ts
+
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
 interface IntersectionObserverOptions extends IntersectionObserverInit {
-    freezeOnceVisible?: boolean; // Option to stop observing once element is active
+
 }
 
 export const useIntersectionObserver = (
@@ -38,7 +38,7 @@ export const useIntersectionObserver = (
         return () => {
             observer.disconnect();
         };
-    }, [threshold, root, rootMargin, freezeOnceVisible]); // Re-run if options change
+    }, [threshold, root, rootMargin, freezeOnceVisible])
 
     return { entry, targetRef };
 };

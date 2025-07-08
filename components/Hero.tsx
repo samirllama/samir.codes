@@ -1,4 +1,4 @@
-// components/Hero.tsx
+
 "use client";
 
 import AnimatedSection from "@/components/AnimatedSection";

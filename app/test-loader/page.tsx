@@ -8,7 +8,7 @@ export default function TestLoaderPage() {
 
   const handleLoaderComplete = () => {
     setLoaderComplete(true);
-    console.log("Loader animation complete in test page.");
+    
   };
 
   return (

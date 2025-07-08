@@ -1,4 +1,4 @@
-// app/layout.tsx
+
 import { Cinzel, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";

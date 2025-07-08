@@ -11,8 +11,9 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     return {};
@@ -23,16 +24,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   let ogImageUrl: string | undefined;
   if (post.image) {
-    if (Array.isArray(post.image)) {
-      ogImageUrl = post.image[0]?.url;
-    } else {
-      ogImageUrl = post.image.url;
-    }
+    ogImageUrl = Array.isArray(post.image) ? post.image[0]?.url : post.image.url;
   } else if (defaultMetadata.openGraph?.images && Array.isArray(defaultMetadata.openGraph.images) && defaultMetadata.openGraph.images.length > 0) {
     ogImageUrl = (defaultMetadata.openGraph.images[0] as OGImage).url;
   }
 
-  // Ensure ogImageUrl is a string before using it in arrays
+  
   const finalOgImages = ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630 }] : defaultMetadata.openGraph?.images || [];
   const finalTwitterImages = ogImageUrl ? [ogImageUrl] : defaultMetadata.twitter?.images || [];
 
@@ -57,8 +54,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function PostPage({ params }: { params: any /* eslint-disable-line @typescript-eslint/no-explicit-any */ }) {
-  const post = getPostBySlug(params.slug);
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function PostPage({ params }: PostPageProps) {
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     notFound();

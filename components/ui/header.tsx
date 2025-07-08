@@ -53,7 +53,6 @@ export default function AppHeader({
             <Logo />
           </Link>
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
             <div
               id="hamburger-button"
               role="button"
@@ -70,6 +69,8 @@ export default function AppHeader({
                 <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
               </span>
             </div>
+
+            <ThemeToggle />
           </div>
         </div>
       </header>

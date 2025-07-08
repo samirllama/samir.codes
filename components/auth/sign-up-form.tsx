@@ -6,13 +6,13 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { signUp, type ActionResponse } from '@/app/actions/auth'
 
-// Initial state for the form
+
 const initialState: ActionResponse = {
   success: false,
   message: '',
 }
 
-// A separate component for the submit button to use the useFormStatus hook
+
 function SubmitButton() {
   const { pending } = useFormStatus()
 

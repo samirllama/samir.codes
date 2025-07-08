@@ -16,7 +16,7 @@ const AppLoader: React.FC<AppLoaderProps> = ({ onCurtainRevealComplete }) => {
 
   useGSAP(
     () => {
-      console.log("AppLoader GSAP animation initialized.");
+      
 
       // Ensure initial state is visible
       gsap.set(backgroundLayerRef.current, { opacity: 1 });
@@ -27,27 +27,23 @@ const AppLoader: React.FC<AppLoaderProps> = ({ onCurtainRevealComplete }) => {
           onCurtainRevealComplete(); // Set isPageReady to true first
           setShouldRender(false); // Then unmount the loader
         },
-        onStart: () => {
-          // No text animation here, handled by AnimatedLetterText
-        },
+        
       });
 
-      // Animation sequence:
-      // 1. White curtain slides up
-      // 2. Black background fades out (can start slightly before white curtain finishes)
+      
       tl.to(slideLayerRef.current, {
         y: "-100%",
-        duration: 0.8, // Slightly longer duration for smoother slide
+        
         ease: "power3.inOut",
       });
       tl.to(
         backgroundLayerRef.current,
         {
           opacity: 0,
-          duration: 0.4, // Shorter fade for black background
+          
           ease: "power2.out",
         },
-        "<0.3" // Starts 0.3 seconds before the white slide finishes
+        
       );
 
       // Ensure pointer events are disabled on the loader once animation starts

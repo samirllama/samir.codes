@@ -1,9 +1,7 @@
-// components/ui/app-menu.tsx
 "use client";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
 
 export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
   const menuContainerClasses = cn([
@@ -11,7 +9,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     "fixed",
     "inset-x-0",
     "top-0",
-    "h-screen",
+    "h-[80vh]",
     "transform",
     "menu-slide-transition-custom",
     "z-[9]",
@@ -23,8 +21,6 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
       "pointer-events-none": !isMenuOpen,
     },
   ]);
-
-  
 
   const blackOverlayClasses = cn([
     "absolute",
@@ -46,7 +42,7 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
     "items-start",
     "pt-[calc(230/16*1rem)]",
     "px-[calc(150/16*1rem)]",
-    "text-menu-text", // Ensure all text content in the menu is black
+    "text-menu-text",
     {
       "is-ready": true,
       "is-active": isMenuOpen,
@@ -72,7 +68,6 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
         )}
         data-testid="menu-content"
       >
-        {/* Left Column: Menu Items Section */}
         <ul className="grid grid-cols-1 gap-y-4 md:gap-6 text-3xl md:text-4xl lg:text-5xl font-light leading-tight tracking-tighter w-fit">
           {navItems.map((item, index) => (
             <li
@@ -95,7 +90,6 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-menu-text transition-all duration-300 ease-out-quad group-hover:w-full"></span>
-                
               </Link>
             </li>
           ))}

@@ -1,4 +1,3 @@
-// next.config.ts
 import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import createMDX from '@next/mdx';
@@ -25,36 +24,26 @@ const prettyCodeOptions: PrettyCodeOptions = {
   },
 };
 
-const nextConfig = (phase: string): NextConfig => {
-  const withMDX = createMDX({
-    extension: /\.mdx?$/,
-    options: {
-      remarkPlugins: [remarkGfm, remarkA11yEmoji],
-      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeImgSize, { dir: 'public' }]],
-    },
-  });
-
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    console.log('happy building session ;)');
-  }
-
-  const nextConfigOptions: NextConfig = {
+const nextConfigBase = (phase: string): NextConfig => {
+  const config: NextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
     reactStrictMode: true,
     poweredByHeader: false,
     experimental: {
-      dynamicIO: true,
+      
       typedRoutes: true,
       useCache: true,
-      // mdxRs: false, // Explicitly ensure Rust compiler is off if relying on @mdx-js/loader
+
     },
-
-
     images: {
-      domains: [],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'jwdtwbbgwku6ttxc.public.blob.vercel-storage.com',
+          pathname: '**',
+        },
+      ],
     },
-
-    // TODO: Replace https://* with the exact domains needed for the application.
     async headers() {
       const csp = `
         default-src 'self';
@@ -62,7 +51,7 @@ const nextConfig = (phase: string): NextConfig => {
         style-src 'self' 'unsafe-inline';
         img-src 'self' data: https://*;
         connect-src 'self' vitals.vercel-insights.com https://*;
-        font-src 'self' https://*;
+        font-src 'self' https://*;;
         object-src 'none';
         base-uri 'self';
         form-action 'self';
@@ -77,23 +66,7 @@ const nextConfig = (phase: string): NextConfig => {
       return [
         {
           source: '/(.*)',
-          // headers: [
-          //   {
-          //     key: 'Content-Security-Policy',
-          //     value: `
-          //       default-src 'self' 'unsafe-eval';
-          //       script-src 'self' 'unsafe-inline' 'unsafe-eval';
-          //       style-src 'self' 'unsafe-inline';
-          //       img-src 'self' data:;
-          //       connect-src 'self';
-          //       font-src 'self';
-          //       object-src 'none';
-          //       base-uri 'self';
-          //       form-action 'self';
-          //       frame-ancestors 'none';
-          //     `.replace(/\s{2,}/g, ' ').trim(),
-          //   },
-          // ],
+
 
           headers: [
             {
@@ -109,7 +82,16 @@ const nextConfig = (phase: string): NextConfig => {
       ];
     },
   };
-  return withMDX(nextConfigOptions);
+
+  const withMDXConfig = createMDX({
+    extension: /\.mdx?$/,
+    options: {
+      remarkPlugins: [remarkGfm, remarkA11yEmoji],
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions], [rehypeImgSize, { dir: 'public' }]],
+    },
+  })(config);
+
+  return withBundleAnalyzer(withMDXConfig);
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default nextConfigBase;

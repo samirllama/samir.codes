@@ -7,7 +7,7 @@ const TypographyShowcasePage = () => {
       <h1 className="text-4xl font-bold mb-8">Typography Showcase</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Current Typography */}
+        
         <div className="border p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">Current Typography (Geist Mono)</h2>
           <p className="font-mono text-lg mb-4">
@@ -22,7 +22,7 @@ const TypographyShowcasePage = () => {
           </p>
         </div>
 
-        {/* New Typography (Transitional) */}
+        
         <div className="border p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">New Typography (Transitional)</h2>
           <p className="font-transitional text-lg mb-4">

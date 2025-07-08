@@ -1,4 +1,4 @@
-// components/tech-stack.tsx
+
 import { cn } from "@/lib/utils";
 import type { Skill } from "@/types";
 

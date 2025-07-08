@@ -24,10 +24,10 @@ export const defaultMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    creator: '@samir_llama', // Replace with your Twitter handle
+    
     title: 'Samir S. S. Llama - Software Engineer & Full-Stack Developer',
     description: 'Personal website and posts of Samir S. S. Llama, a software engineer specializing in full-stack development, cloud architecture, and developer tools.',
     images: ['https://samir.codes/assets/og-img-of-lego.png'],
   },
-  // Add other metadata as needed (e.g., icons, manifest)
+  
 };

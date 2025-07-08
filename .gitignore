@@ -47,3 +47,4 @@ GEMINI.md
 /ai-docs/
 notes.md
 notes*
+.env*.local

@@ -14,6 +14,9 @@ export interface Project {
   id: number;
   name: string;
   link: string;
+  projectScreenshotUrl?: string;
+  altText?: string;
+  subtitle?: string;
 }
 
 export interface Experience {

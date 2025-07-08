@@ -41,7 +41,7 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
     () => {
       if (isHtmlReady) {
         const tl = gsap.timeline({
-          delay: 0.2, // Small delay after html is ready
+          
           defaults: {
             duration: 1.2,
             ease: "power3.out",
@@ -49,16 +49,16 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
         });
 
         const chars = compRef.current?.querySelectorAll(".text-char");
-        if (!chars) return; // Add null check
-        const codeChars = Array.from(chars).slice(0, 4); // "Code"
-        const firstDot = chars[4]; // The first "."
-        const restOfChars = Array.from(chars).slice(5); // "Create.Catalyze"
+        if (!chars) return;
+        
+        const firstDot = chars[4];
+        const restOfChars = Array.from(chars).slice(5);
 
-        // Initial state for all characters
+        
         gsap.set(chars, { opacity: 0, y: 100, scale: 0.5, rotation: 0, skewX: 0 });
 
-        // 1. Animate "Code" characters
-        tl.from(codeChars, {
+        
+        tl.from(chars, {
           y: 100,
           opacity: 0,
           scale: 0.5,
@@ -68,8 +68,7 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
             each: 0.08,
             from: "center",
           },
-        }, "codeCharsStart") // Add label here
-        .to(codeChars, {
+        }).to(chars, {
           rotation: 0,
           skewX: 0,
           duration: 0.5,
@@ -80,22 +79,12 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
           },
         });
 
-        // 2. Animate the first dot bouncing over "Code"
         tl.from(firstDot, {
           opacity: 0,
-          y: -50, // Start above
-          x: -100, // Start further to the left
           scale: 1.5,
           duration: 0.3,
           ease: "power2.out",
-        }, "codeCharsStart+=0.2") // Start 0.2s after "Code" starts animating
-        .to(firstDot, {
-          x: 0, // Move to its final X position
-          duration: 0.8, // Duration for the horizontal travel, matching codeChars settling
-          ease: "linear", // Linear horizontal movement
-        }, "<") // Start at the same time as the from tween
-        // Bounce over 'Code' characters
-        .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" }, "<")
+        }).to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" }, "<")
         .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
         .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
         .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
@@ -107,9 +96,8 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
           scale: 1,
           duration: 0.2,
           ease: "power2.out",
-        }, ">-0.2"); // Settle scale at the end
+        });
 
-        // 3. Animate the rest of the characters ("Create.Catalyze")
         tl.from(restOfChars, {
           y: 100,
           opacity: 0,
@@ -120,8 +108,7 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
             each: 0.08,
             from: "center",
           },
-        }, ">-0.5") // Start after the first dot has settled
-        .to(restOfChars, {
+        }).to(restOfChars, {
           rotation: 0,
           skewX: 0,
           duration: 0.5,
@@ -131,31 +118,6 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
             from: "center",
           },
         });
-
-        // 4. Animate the second dot (if it exists) with a bounce
-        const secondDot = chars[11]; // Assuming this is the second dot
-        if (secondDot) {
-          tl.to(
-            secondDot,
-            {
-              y: -20, // Bounce up
-              duration: 0.3,
-              ease: "power1.out",
-              yoyo: true,
-              repeat: 1, // Bounce once
-            },
-            ">0.2" // Start 0.2 seconds after the previous animation (character settling) ends
-          )
-          .to(
-            secondDot,
-            {
-              y: 0, // Settle down
-              duration: 0.2,
-              ease: "power1.in",
-            },
-            ">" // After the bounce up
-          );
-        } // Start this part 0.5 seconds before the previous one ends
       }
     },
     { scope: compRef, dependencies: [isHtmlReady] }
