@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
 
 interface AppLoaderProps {
   onCurtainRevealComplete: () => void;
@@ -16,38 +16,31 @@ const AppLoader: React.FC<AppLoaderProps> = ({ onCurtainRevealComplete }) => {
 
   useGSAP(
     () => {
-      
-
-      // Ensure initial state is visible
-      gsap.set(backgroundLayerRef.current, { opacity: 1 });
-      gsap.set(slideLayerRef.current, { y: "0%" });
-
       const tl = gsap.timeline({
+        delay: 0.2, // Small delay before starting
         onComplete: () => {
-          onCurtainRevealComplete(); // Set isPageReady to true first
+          onCurtainRevealComplete(); // Set isPageReady to true
           setShouldRender(false); // Then unmount the loader
         },
-        
       });
 
-      
+      // Instead of animating styles, we add a class using our `cn` utility.
       tl.to(slideLayerRef.current, {
-        y: "-100%",
-        
+        className: cn(slideLayerRef.current?.className, "is-revealing"),
         ease: "power3.inOut",
-      });
-      tl.to(
+      }).to(
         backgroundLayerRef.current,
         {
-          opacity: 0,
-          
+          className: cn(
+            backgroundLayerRef.current?.className,
+            "is-revealing"
+          ),
           ease: "power2.out",
         },
-        
+        "<0.2" // Start this animation 0.2s after the previous one starts
       );
 
-      // Ensure pointer events are disabled on the loader once animation starts
-      gsap.set(loaderRef.current, { pointerEvents: "none" });
+      tl.set(loaderRef.current, { className: cn(loaderRef.current?.className, "pointer-events-none") });
     },
     { scope: loaderRef }
   );
@@ -59,12 +52,16 @@ const AppLoader: React.FC<AppLoaderProps> = ({ onCurtainRevealComplete }) => {
   return (
     <div
       ref={loaderRef}
-      className={clsx("fixed inset-0 z-[999] h-screen overflow-hidden")}
+      className={cn("fixed inset-0 z-[999] h-screen overflow-hidden")}
     >
-      <div ref={backgroundLayerRef} className="absolute inset-0 bg-black"></div>
+      {/* Base classes are now defined in globals.css */}
+      <div
+        ref={backgroundLayerRef}
+        className="absolute inset-0 app-loader-background"
+      ></div>
       <div
         ref={slideLayerRef}
-        className="absolute inset-0 bg-white transform"
+        className="absolute inset-0 app-loader-slide"
       ></div>
     </div>
   );

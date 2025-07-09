@@ -5,6 +5,7 @@ import React, { useRef, useEffect } from "react";
 import { ScrollTrigger, gsap } from "@/lib/gsap";
 import { experience } from "@/lib/data/work-exp";
 import { ExperienceEntry } from "@/types";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,9 +19,9 @@ const WorkExperienceTimeline = () => {
 
       gsap.fromTo(
         timelineRef.current,
-        { scaleY: 0 },
+        { className: cn("timeline-line-initial") },
         {
-          scaleY: 1,
+          className: cn("timeline-line-final"),
           transformOrigin: "top",
           ease: "none",
 
@@ -50,19 +51,17 @@ const WorkExperienceTimeline = () => {
         // Animate dot
         tl.fromTo(
           dot,
-          { scale: 0.5, backgroundColor: "var(--color-timeline-border)" },
+          { className: cn("timeline-dot-initial") },
           {
-            scale: 0.95,
-            backgroundColor: "var(--color-timeline-dot)",
-            boxShadow: "0 0 15px 5px rgba(255, 255, 255, 0.5)",
+            className: cn("timeline-dot-final"),
             ease: "power2.inOut",
           }
         );
 
         tl.fromTo(
           content,
-          { opacity: 0, x: 100 },
-          { opacity: 1, x: 0, ease: "power2.out" },
+          { className: cn("timeline-content-initial") },
+          { className: cn("timeline-content-final"), ease: "power2.out" },
           "<"
         );
       });
@@ -74,14 +73,11 @@ const WorkExperienceTimeline = () => {
   return (
     <section className="py-12 sm:py-16 lg:py-20 text-timeline-text font-transitional">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-h2 text-left mb-12 sm:mb-16">
-          Experience / Work
-        </h2>
+        <h2 className="text-h2 text-left mb-12 sm:mb-16">Experience / Work</h2>
         <div ref={containerRef} className="relative">
           <div
             ref={timelineRef}
-            className="absolute left-[25%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border"
-            style={{ transform: "scaleY(0)" }}
+            className="absolute left-[25%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
           ></div>
 
           <div className="relative space-y-16">

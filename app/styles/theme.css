@@ -3,14 +3,93 @@
   --oklch-white: oklch(100% 0 0);
   --oklch-black: oklch(0% 0 0);
 
-  --type-scale-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
-  --type-scale-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
-  --type-scale-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
-  --type-scale-step-1: clamp(0.9338rem, 0.7592rem + 0.8727vw, 1.4138rem);
-  --type-scale-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
-  --type-scale-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
-  --type-scale-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
-  --type-scale-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 4.7125rem);
+  --fluid-min-width: 320;
+  --fluid-max-width: 1140;
+
+  --fluid-screen: 100vw;
+  --fluid-bp: calc(
+    (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
+      (var(--fluid-max-width) - var(--fluid-min-width))
+  );
+
+  --f-0-min: 16;
+  --f-0-max: 18;
+  --step-0: calc(
+    ((var(--f-0-min) / 16) * 1rem) + (var(--f-0-max) - var(--f-0-min)) *
+      var(--fluid-bp)
+  );
+
+  --f-1-min: 16;
+  --f-1-max: 22.5;
+  --step-1: calc(
+    ((var(--f-1-min) / 16) * 1rem) + (var(--f-1-max) - var(--f-1-min)) *
+      var(--fluid-bp)
+  );
+
+  --f-2-min: 23.04;
+  --f-2-max: 28.13;
+  --step-2: calc(
+    ((var(--f-2-min) / 16) * 1rem) + (var(--f-2-max) - var(--f-2-min)) *
+      var(--fluid-bp)
+  );
+
+  --f-3-min: 27.65;
+  --f-3-max: 35.16;
+  --step-3: calc(
+    ((var(--f-3-min) / 16) * 1rem) + (var(--f-3-max) - var(--f-3-min)) *
+      var(--fluid-bp)
+  );
+
+  --f-4-min: 33.18;
+  --f-4-max: 46;
+  --step-4: calc(
+    ((var(--f-4-min) / 16) * 1rem) + (var(--f-4-max) - var(--f-4-min)) *
+      var(--fluid-bp)
+  );
+
+  --fc-s-min: (var(--f-0-min, 21));
+  --fc-s-max: (var(--f-0-max, 24));
+
+  --fc-m-min: (var(--fc-s-min) * 6);
+  --fc-m-max: (var(--fc-s-max) * 6);
+
+  --fc-l-min: (var(--fc-s-min) * 8);
+  --fc-l-max: (var(--fc-s-max) * 8);
+
+  --fc-xl-min: (var(--fc-s-min) * 10);
+  --fc-xl-max: (var(--fc-s-max) * 10);
+
+  /* T-shirt sizes */
+  --space-s: calc(
+    ((var(--fc-s-min) / 16) * 1rem) + (var(--fc-s-max) - var(--fc-s-min)) *
+      var(--fluid-bp)
+  );
+  --space-m: calc(
+    ((var(--fc-m-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-m-min)) *
+      var(--fluid-bp)
+  );
+  --space-l: calc(
+    ((var(--fc-l-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-l-min)) *
+      var(--fluid-bp)
+  );
+  --space-xl: calc(
+    ((var(--fc-xl-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-xl-min)) *
+      var(--fluid-bp)
+  );
+
+  /* One-up pairs */
+  --space-s-m: calc(
+    ((var(--fc-s-min) / 16) * 1rem) + (var(--fc-m-max) - var(--fc-s-min)) *
+      var(--fluid-bp)
+  );
+  --space-m-l: calc(
+    ((var(--fc-m-min) / 16) * 1rem) + (var(--fc-l-max) - var(--fc-m-min)) *
+      var(--fluid-bp)
+  );
+  --space-l-xl: calc(
+    ((var(--fc-l-min) / 16) * 1rem) + (var(--fc-xl-max) - var(--fc-l-min)) *
+      var(--fluid-bp)
+  );
 
   --pf-opsz: 1;
   --pf-slnt: 0;
@@ -106,16 +185,16 @@
   --shadow-outer-rgb: 0, 0, 0;
 
   /* Font Sizes (Mapping to fluid Type Scale) */
-  --fontSize-xs: var(--type-scale-step--1);
-  --fontSize-sm: var(--type-scale-step-0);
-  --fontSize-base: var(--type-scale-step-0);
-  --fontSize-lg: var(--type-scale-step-1);
-  --fontSize-xl: var(--type-scale-step-2);
-  --fontSize-2xl: var(--type-scale-step-3);
-  --fontSize-3xl: var(--type-scale-step-4);
-  --fontSize-4xl: var(--type-scale-step-4);
-  --fontSize-5xl: var(--type-scale-step-5);
-  --fontSize-6xl: var(--type-scale-step-5);
+  --fontSize-xs: var(--step-0);
+  --fontSize-sm: var(--step-0);
+  --fontSize-base: var(--step-0);
+  --fontSize-lg: var(--step-1);
+  --fontSize-xl: var(--step-2);
+  --fontSize-2xl: var(--step-3);
+  --fontSize-3xl: var(--step-4);
+  --fontSize-4xl: var(--step-4);
+  --fontSize-5xl: var(--step-4);
+  --fontSize-6xl: var(--step-4);
   --fontSize-7xl: clamp(4.5rem, 3.5rem + 5vw, 6rem);
   --fontSize-8xl: clamp(6rem, 5rem + 7vw, 8rem);
   --fontSize-9xl: clamp(8rem, 7rem + 9vw, 10rem);
@@ -135,6 +214,12 @@
 
   --color-menu-bg: oklch(0% 0 0);
   --color-menu-text: oklch(100% 0 0);
+}
+
+@media screen and (min-width: 1140px) {
+  :root {
+    --fluid-screen: calc(var(--fluid-max-width) * 1px);
+  }
 }
 
 @media screen and (max-width: 600px) {

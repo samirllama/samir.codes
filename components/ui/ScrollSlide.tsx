@@ -25,7 +25,7 @@ export default function ScrollSlide() {
     <div
       ref={containerRef}
       className="h-screen overflow-y-auto relative"
-      style={{ scrollBehavior: 'smooth' }}
+      className="scroll-smooth"
     >
       {/* Main Grid Container */}
       <div className="grid grid-cols-[40fr_5fr_5fr_40fr] min-h-[var(--slide-height)]">

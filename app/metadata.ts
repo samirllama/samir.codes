@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 
 export const defaultMetadata: Metadata = {
   title: {
-    default: 'Samir S. S. Llama',
-    template: '%s | Samir S. S. Llama',
+    default: 'Samir Lama',
+    template: '%s | Samir Lama',
   },
   description: 'Personal website and posts of Samir S. S. Llama, a software engineer specializing in full-stack development, cloud architecture, and developer tools.',
   openGraph: {
@@ -24,10 +24,10 @@ export const defaultMetadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    
+
     title: 'Samir S. S. Llama - Software Engineer & Full-Stack Developer',
     description: 'Personal website and posts of Samir S. S. Llama, a software engineer specializing in full-stack development, cloud architecture, and developer tools.',
     images: ['https://samir.codes/assets/og-img-of-lego.png'],
   },
-  
+
 };

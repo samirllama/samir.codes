@@ -6,7 +6,7 @@ const AnimatedTitle = () => {
         <div
           key={index} // Using index as key is acceptable here as the list is static
           className="inline-block opacity-100" // Tailwind for opacity: 1
-          style={{ transform: "matrix(1, 0, 0, 1, 0, 0)" }} // Keeping complex transform as inline style
+          className="transform-none"
         >
           {char}
         </div>

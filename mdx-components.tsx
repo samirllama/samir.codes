@@ -2,21 +2,15 @@ import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
-// Define reusable gradient classes using Tailwind v3 utility classes
-// Make sure primary/secondary are mapped in tailwind.config.ts
 const gradientPrimaryText =
   "bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent";
 const gradientSecondaryText =
-  "bg-gradient-to-r from-accent-500 to-primary-500 dark:from-accent-400 dark:to-primary-400 bg-clip-text text-transparent"; // Assumes accent is mapped
+  "bg-gradient-to-r from-accent-500 to-primary-500 dark:from-accent-400 dark:to-primary-400 bg-clip-text text-transparent";
 
 export const componentsForMdx = {
   h2: ({ children, className, ...props }: ComponentPropsWithoutRef<"h2">) => (
     <h2
-      className={cn(
-        "mt-[2em] mb-[1em]",
-        gradientPrimaryText,
-        className
-      )}
+      className={cn("mt-[2em] mb-[1em]", gradientPrimaryText, className)}
       {...props}
     >
       {children}
@@ -24,11 +18,7 @@ export const componentsForMdx = {
   ),
   h3: ({ children, className, ...props }: ComponentPropsWithoutRef<"h3">) => (
     <h3
-      className={cn(
-        "mt-[1.8em] mb-[0.8em]",
-        gradientSecondaryText,
-        className
-      )}
+      className={cn("mt-[1.8em] mb-[0.8em]", gradientSecondaryText, className)}
       {...props}
     >
       {children}

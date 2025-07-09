@@ -1,5 +1,4 @@
-
-import { Cinzel, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
@@ -19,13 +18,6 @@ const defaultSans = Geist_Mono({
   subsets: ["latin"],
 });
 
-const cinzel = Cinzel({
-  weight: ["400", "700", "900"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-cinzel",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,12 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
       <body
-        className={cn(
-          cinzel.variable,
-          defaultSans.variable,
-          "antialiased",
-          "tracking-tight"
-        )}
+        className={cn(defaultSans.variable, "antialiased", "tracking-tight")}
       >
         <ThemeProvider
           attribute="class"

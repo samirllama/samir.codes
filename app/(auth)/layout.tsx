@@ -15,7 +15,7 @@ export default function WelcomeLayout({
           "bg-hdr-gradient",
           "[background-attachment:fixed]",
         ])}
-        style={{ opacity: 1 }}
+        className="opacity-100"
       >
         
 

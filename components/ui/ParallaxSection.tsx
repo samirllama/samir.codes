@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +18,7 @@ export default function ParallaxSection({ children }: ParallaxSectionProps) {
     const parallaxContainer = parallaxContainerRef.current;
     if (parallaxContainer) {
       gsap.to(".creative-canvas-section", {
-        yPercent: -100,
+        className: cn("parallax-section-final"),
         ease: "none",
         scrollTrigger: {
           trigger: parallaxContainer,
@@ -31,7 +32,7 @@ export default function ParallaxSection({ children }: ParallaxSectionProps) {
   }, []);
 
   return (
-    <div ref={parallaxContainerRef} className="h-[100vh]">
+    <div ref={parallaxContainerRef} className={cn("h-[100vh]", "parallax-section-initial")}>
       {children}
     </div>
   );

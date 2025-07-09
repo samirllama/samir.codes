@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { cn } from "@/lib/utils";
 
 interface AnimatedLetterTextProps {
   text: string;
@@ -41,7 +42,6 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
     () => {
       if (isHtmlReady) {
         const tl = gsap.timeline({
-          
           defaults: {
             duration: 1.2,
             ease: "power3.out",
@@ -50,18 +50,11 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
 
         const chars = compRef.current?.querySelectorAll(".text-char");
         if (!chars) return;
-        
+
         const firstDot = chars[4];
         const restOfChars = Array.from(chars).slice(5);
 
-        
-        gsap.set(chars, { opacity: 0, y: 100, scale: 0.5, rotation: 0, skewX: 0 });
-
-        
         tl.from(chars, {
-          y: 100,
-          opacity: 0,
-          scale: 0.5,
           rotation: gsap.utils.random(-30, 30),
           skewX: gsap.utils.random(-10, 10),
           stagger: {
@@ -69,6 +62,7 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
             from: "center",
           },
         }).to(chars, {
+          className: cn("text-char", "!opacity-100", "!translate-y-0", "!scale-100"),
           rotation: 0,
           skewX: 0,
           duration: 0.5,
@@ -84,24 +78,22 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
           scale: 1.5,
           duration: 0.3,
           ease: "power2.out",
-        }).to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" }, "<")
-        .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
-        .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
-        .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
-        .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
-        .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
-        .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
-        .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
-        .to(firstDot, {
-          scale: 1,
-          duration: 0.2,
-          ease: "power2.out",
-        });
+        })
+          .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" }, "<")
+          .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
+          .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
+          .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
+          .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
+          .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
+          .to(firstDot, { y: -20, duration: 0.1, ease: "power1.out" })
+          .to(firstDot, { y: 0, duration: 0.1, ease: "power1.in" })
+          .to(firstDot, {
+            scale: 1,
+            duration: 0.2,
+            ease: "power2.out",
+          });
 
         tl.from(restOfChars, {
-          y: 100,
-          opacity: 0,
-          scale: 0.5,
           rotation: gsap.utils.random(-30, 30),
           skewX: gsap.utils.random(-10, 10),
           stagger: {
@@ -109,6 +101,7 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
             from: "center",
           },
         }).to(restOfChars, {
+          className: cn("text-char", "!opacity-100", "!translate-y-0", "!scale-100"),
           rotation: 0,
           skewX: 0,
           duration: 0.5,
@@ -129,7 +122,11 @@ export default function AnimatedLetterText({ text }: AnimatedLetterTextProps) {
         {text.split("").map((char, index) => (
           <span
             key={index}
-            className={`text-char inline-block ${char === "." ? "text-dot" : ""} ${index === 4 ? "first-dot" : ""}`}
+            className={cn(
+              "text-char inline-block text-char-initial",
+              char === "." ? "text-dot" : "",
+              index === 4 ? "first-dot" : ""
+            )}
           >
             {char === " " ? "\u00A0" : char}{" "}
             {/* Handle spaces with non-breaking space */}

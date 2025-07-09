@@ -6,6 +6,7 @@ import { useRef } from "react";
 
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
+import { cn } from "@/lib/utils";
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -22,8 +23,7 @@ const Hero = () => {
       introTL
         .set(heroElement, { opacity: 1 })
         .from(".hero-header-word", {
-          scale: 4,
-          opacity: 0,
+          className: cn("hero-header-word", "hero-header-word-initial"),
           ease: "power4.in",
           delay: 0.3,
           stagger: 0.2,
@@ -32,8 +32,7 @@ const Hero = () => {
         .from(
           ".hero-subheading",
           {
-            opacity: 0,
-            y: 30,
+            className: cn("hero-subheading", "hero-subheading-initial"),
             duration: 0.8,
           },
           "<+=0.4"
@@ -41,8 +40,7 @@ const Hero = () => {
         .from(
           ".hero-body",
           {
-            opacity: 0,
-            y: 10,
+            className: cn("hero-body", "hero-body-initial"),
             duration: 0.6,
           },
           "<+=0.2"
@@ -50,8 +48,7 @@ const Hero = () => {
         .from(
           ".hero-button",
           {
-            opacity: 0,
-            y: 10,
+            className: cn("hero-button", "hero-button-initial"),
             duration: 0.6,
           },
           "<+=0.2"
@@ -70,11 +67,10 @@ const Hero = () => {
         .from(
           ".text-side-heading .split-char",
           {
-            scale: 1.3,
-            y: 40,
-            rotate: -25,
-            opacity: 0,
-            stagger: 0.05,
+            className: cn(
+              ".text-side-heading .split-char",
+              "text-side-heading-char-initial"
+            ),
             ease: "back.out(3)",
             duration: 0.5,
           },
@@ -83,8 +79,7 @@ const Hero = () => {
         .from(
           ".text-side-body",
           {
-            y: 20,
-            opacity: 0,
+            className: cn("text-side-body", "text-side-body-initial"),
             duration: 0.6,
           },
           "<+=0.1"
@@ -105,9 +100,10 @@ const Hero = () => {
           {"My Professional Journey".split(" ").map((word, index) => (
             <span
               key={index}
-              className={`hero-header-word inline-block mr-2 last:mr-0 ${
+              className={cn(
+                `hero-header-word inline-block mr-2 last:mr-0`,
                 word === "Professional" ? "font-transitional" : ""
-              }`}
+              )}
             >
               {word}
             </span>

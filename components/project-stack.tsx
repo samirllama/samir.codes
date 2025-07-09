@@ -52,7 +52,7 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
                   <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:opacity-100">
                     <span
                       className="block"
-                      style={{ transform: "translateY(0%) translateZ(0px)" }}
+                      className="transform-none"
                     >
                       View Project
                     </span>

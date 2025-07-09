@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useRouter } from "next/navigation";
-import { signIn, type ActionResponse } from "@/app/actions/auth";
+import { signIn } from "@/app/actions/auth";
+import type { ActionResponse } from "@/app/actions/utils";
 
 const initialState: ActionResponse = {
   success: false,

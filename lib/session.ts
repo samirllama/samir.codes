@@ -1,19 +1,15 @@
-'use server'
-
 // lib/session
+'use server'
 
 import { cookies } from 'next/headers'
 
 import { cache } from 'react'
 import { generateJWT, verifyJWT } from '@/lib/jwt'
 
-// Create a session using JWT
 export async function createSession(userId: string) {
   try {
-    // Create JWT with user data
     const token = await generateJWT({ userId })
 
-    // Store JWT in a cookie
     const cookieStore = await cookies()
     cookieStore.set({
       name: 'auth_token',
@@ -43,7 +39,6 @@ export const getSession = cache(async () => {
 
     return payload ? { userId: payload.userId } : null
   } catch (error) {
-    // Handle the specific prerendering error
     if (
       error instanceof Error &&
       error.message.includes('During prerendering, `cookies()` rejects')

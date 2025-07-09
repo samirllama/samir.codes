@@ -39,7 +39,7 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
 
   useGSAP(
     () => {
-      gsap.set(compRef.current, { opacity: 1 });
+      // gsap.set(compRef.current, { opacity: 1 }); // Handled by CSS class
 
       const chars = compRef.current?.querySelectorAll(".text-char");
 
