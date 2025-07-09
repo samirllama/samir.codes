@@ -78,17 +78,8 @@
   --color-black40: oklch(0% 0 0 / 0.4);
   --color-white20: oklch(100% 0 0 / 0.2);
 
-  /* NEW: Added border variables for the frosty glass effect from the card example */
-  --border-1: hsl(
-    259,
-    13%,
-    28%
-  ); /* Corresponds to --primary-500 from the card */
-  --border-2: hsl(
-    252,
-    9%,
-    22%
-  ); /* Corresponds to --primary-600 from the card */
+  --border-1: hsl(259, 13%, 28%);
+  --border-2: hsl(252, 9%, 22%);
 
   /* Gradients */
   --hdr-gradient: radial-gradient(
@@ -142,8 +133,8 @@
   --lineHeight-base: var(--lineHeight-normal);
   --lineHeight-heading: var(--lineHeight-tight);
 
-  --color-menu-bg: oklch(0% 0 0); /* Black for light mode menu background */
-  --color-menu-text: oklch(100% 0 0); /* White for light mode menu text */
+  --color-menu-bg: oklch(0% 0 0);
+  --color-menu-text: oklch(100% 0 0);
 }
 
 @media screen and (max-width: 600px) {

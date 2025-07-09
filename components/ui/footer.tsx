@@ -1,7 +1,9 @@
-import { Timestamp } from "@/components/Timestamp";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { Timestamp } from "@/components/Timestamp";
+import { ArrowLink, AnimatedArrow } from "@/components/ui/arrow";
+import ArrowDemo from "@/components/ui/arrow-line";
 
 export default function Footer() {
   return (
@@ -41,7 +43,9 @@ export default function Footer() {
               rel="noopener noreferrer"
             >
               <FaLinkedin className="mr-2 text-3xl" /> LinkedIn
+              <AnimatedArrow />
             </a>
+            <ArrowLink href="" />
             <a
               href="https://twitter.com/samirllama"
               className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
@@ -50,6 +54,7 @@ export default function Footer() {
             >
               <FaTwitter className="mr-2 text-3xl" /> Twitter
             </a>
+
             <a
               href="https://mastodon.social/@samirllama"
               className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
@@ -57,6 +62,22 @@ export default function Footer() {
               rel="noopener noreferrer"
             >
               <FaMastodon className="mr-2 text-3xl" /> Mastodon
+            </a>
+            <a
+              href=""
+              className="link-w-arrow"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <AnimatedArrow />X
+            </a>
+            <a
+              href=""
+              className="link-w-arrow"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ArrowDemo />X
             </a>
           </div>
 

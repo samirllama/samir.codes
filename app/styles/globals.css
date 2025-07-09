@@ -81,8 +81,104 @@
     overflow: hidden;
   }
 
+  .link-w-arrow {
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .arrow-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 20px;
+    height: 14px;
+    cursor: pointer;
+  }
+
+  .arrow-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 2px;
+    width: 20px;
+    overflow: hidden;
+    transform: translateY(-50%);
+  }
+
+  .line-fill,
+  .line-tip,
+  .chev-fill,
+  .chev-tip {
+    position: absolute;
+    height: 100%;
+    background-color: var(--color-text-inverted);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  .line-fill {
+    width: 100%;
+  }
+  .line-tip {
+    width: 3px;
+    transform-origin: left center;
+  }
+  .arrow-chevron {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 2px;
+    width: 10px;
+    overflow: hidden;
+    transform: translateY(-50%) rotate(45deg);
+    transform-origin: right center;
+  }
+  .chevron-left {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+  .chev-fill,
+  .chev-tip {
+    transform-origin: right center;
+  }
+  .chev-fill {
+    width: 100%;
+  }
+  .chev-tip {
+    width: 3px;
+  }
+  .line-fill-static,
+  .line-tip-static,
+  .chev-fill-static,
+  .chev-tip-static {
+    position: absolute;
+    height: 100%;
+    background-color: var(--color-text-inverted);
+    transform: scaleX(1);
+  }
+  .line-fill-static {
+    width: 100%;
+  }
+  .line-tip-static {
+    width: 3px;
+  }
+  .chev-fill-static {
+    width: 100%;
+  }
+  .chev-tip-static {
+    width: 3px;
+  }
+
   .group:hover .arrow-button--theme-dark {
-    color: var(--color-dark);
+    color: var(--color-text-inverted);
   }
 
   .header-container {
@@ -99,9 +195,9 @@
       box-shadow 500ms var(--alias-easeOut2);
   }
   .header-container-scrolled {
-    background: hsl(from var(--color-surface-card) h s l / 0.25); /* Semi-transparent background */
-    backdrop-filter: blur(12px); /* The blur effect */
-    -webkit-backdrop-filter: blur(12px); /* For Safari compatibility */
+    background: hsl(from var(--color-surface-card) h s l / 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2),
       0 2px 4px -2px rgba(0, 0, 0, 0.2);
   }
@@ -116,7 +212,6 @@
   }
 
   .text-word {
-    /* opacity: 0; */
     /* transform: translateY(50px) scale(0.8); */
     display: inline-block; /* Essential for translateY to work on inline spans */
   }
@@ -199,7 +294,6 @@
     transition: transform 1.3s var(--hamburger);
   }
 
-  /* Hamburger Hover Effects */
   .hamburger-button:hover .hamburger-line-1-start {
     animation: burger-line1-start-hover 1.3s var(--hamburger) 0.1s forwards;
   }
@@ -213,7 +307,6 @@
     animation: burger-line2-end-hover 1.3s var(--hamburger) 0s forwards;
   }
 
-  /* Hamburger Active/Open State */
   .hamburger-button.is-active .hamburger-line-1 {
     transform: translateY(0) rotate(45deg);
   }
@@ -258,12 +351,11 @@
 }
 
 .creative-canvas-section {
-  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Dark gradient placeholder */
+  background: linear-gradient(to bottom, #1a1a1a, #000000);
   background-size: cover;
   background-position: center;
 }
 
-/* New Form Card Styles */
 @layer components {
   input,
   button,
@@ -295,7 +387,6 @@
   }
 
   input {
-    /* IMPORTANT!! Frosty glass effect: slightly transparent background */
     background: hsl(from var(--color-surface-card) h s l / 0.7);
     color: var(--color-text-default);
     border: 1px solid var(--border-1);
@@ -326,40 +417,35 @@
     line-height: 1.4;
   }
 
-  /* Updated .contact-form styles with frosty glass effect */
   .contact-form {
     display: grid;
     gap: 1rem;
 
-    /* Frosty glass effect properties */
-    background: hsl(
-      from var(--color-surface-card) h s l / 0.25
-    ); /* Semi-transparent background */
-    backdrop-filter: blur(12px); /* The blur effect */
+    background: hsl(from var(--color-surface-card) h s l / 0.25);
+    backdrop-filter: blur(12px);
 
     padding: 3rem;
     border-radius: 24px;
     width: min(100% - 4rem, 1200px);
     margin-inline: auto;
 
-    /* Required for the ::before pseudo-element border */
     position: relative;
-    --border-width: 1px; /* Custom property for border thickness */
+    --border-width: 1px;
   }
 
-  /* ::before pseudo-element for the gradient border */
   .contact-form::before {
     content: "";
     position: absolute;
-    z-index: -1; /* Ensures the border is behind the content */
-    inset: 0; /* Covers the entire element */
-    border-radius: inherit; /* Matches the parent's border-radius */
-    border: var(--border-width) solid transparent; /* Transparent border for the mask */
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    border: var(--border-width) solid transparent;
 
     /* Gradient background for the border */
     background: linear-gradient(var(--border-1), var(--border-2)) border-box;
     /* Masking to show only the border */
-    mask: linear-gradient(black, black) border-box, linear-gradient(black, black) padding-box;
+    mask: linear-gradient(black, black) border-box,
+      linear-gradient(black, black) padding-box;
     mask-composite: subtract; /* Subtracts the inner area, leaving only the border */
   }
 
@@ -379,9 +465,15 @@
 }
 
 @keyframes glow-animation {
-  0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
-  100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
 }
 
 .glow-animation {
@@ -419,8 +511,7 @@
   }
   .z-neg-1 {
     z-index: -1;
-  } /* Tailwind doesn't have negative z-index by default */
-  /* Custom Space Between (Requires --unit-fx/fy in theme.css) */
+  }
   .space-x-10px > *:not(:last-child) {
     margin-right: 10px;
   }
@@ -433,7 +524,7 @@
   .space-y-195fy > *:not(:last-child) {
     margin-bottom: calc(195 * var(--unit-fy));
   }
-  /* Hover-specific utility classes for transforms */
+
   .group-hover-scale-x-full:hover {
     transform: scaleX(1);
   }
@@ -446,7 +537,6 @@
   .group-hover-shift-x-neg-100:hover {
     transform: translateX(-100%);
   }
-  /* This utility is for the .arrow-button__icon-default for fade out */
   .opacity-0-on-hover:hover {
     opacity: 0;
   }

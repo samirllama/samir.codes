@@ -32,7 +32,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/posts/[slug]/fibonacci-spiral.mdx",
-    "components/ScrollSection.js"
+    "components/ScrollSection.js",
+    "components/ui/arrow.jsx"
   ],
   "exclude": ["node_modules"]
 }
