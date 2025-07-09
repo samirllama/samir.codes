@@ -1,3 +1,5 @@
+"use server";
+
 import { z } from "zod";
 import { createSession, deleteSession } from "@/lib/session";
 import { verifyPassword, hashPassword } from "@/lib/auth-server";

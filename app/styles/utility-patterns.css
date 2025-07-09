@@ -1,7 +1,3 @@
-/* app/styles/utility-patterns.css */
-
-
-
 /* === Typography (Using CSS Variables from theme.css) === */
 .heading-1 {
   font-size: var(--fontSize-h1);
@@ -93,7 +89,6 @@
   -webkit-appearance: none;
 }
 
-/* Custom classes for refactored inline styles */
 .opacity-100 {
   opacity: 1;
 }

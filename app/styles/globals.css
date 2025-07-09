@@ -61,6 +61,37 @@
 }
 
 @layer components {
+  .loader-container {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    pointer-events: none; /* CSP-safe */
+  }
+
+  .curtain {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+    transform: translateY(0%);
+    transition: transform 0.8s ease-out;
+  }
+
+  /* Individual layers for depth styling */
+  .layer-1 {
+    z-index: 3;
+    background: linear-gradient(to bottom right, #111111, #1f1f1f);
+  }
+  .layer-2 {
+    z-index: 2;
+    background: linear-gradient(to bottom left, #181818, #242424);
+  }
+
+  .layer-3 {
+    z-index: 1;
+    background-color: #202020;
+  }
+
   .web-app {
     display: block;
     position: relative;
