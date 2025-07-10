@@ -30,7 +30,7 @@ const config: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: {
-    typedRoutes: true,
+    typedRoutes: false,
     // Note: `useCache` is a valid flag, but modern data fetching in Next.js
     // relies more on the React `cache` function for granular control.
     // This flag can remain, but be aware of the new patterns.

@@ -5,11 +5,11 @@ import { z } from 'zod';
 export type ActionResponse = {
   success: boolean;
   message: string;
-  errors?: Record<string, string[]>;
+  errors?: Record<string, string[] | undefined>;
   error?: string;
 };
 
-export async function withRateLimit(
+export function withRateLimit(
   action: (prevState: ActionResponse, formData: FormData) => Promise<ActionResponse>
 ) {
   return async (prevState: ActionResponse, formData: FormData): Promise<ActionResponse> => {
@@ -31,7 +31,7 @@ export async function withRateLimit(
 export function validateFormData<T extends z.ZodType<any, any>>(
   schema: T,
   formData: FormData
-): { success: true; data: z.infer<T> } | { success: false; errors: Record<string, string[]> } {
+): { success: true; data: z.infer<T> } | { success: false; errors: Record<string, string[] | undefined> } {
   const data = Object.fromEntries(formData.entries());
   const validationResult = schema.safeParse(data);
 

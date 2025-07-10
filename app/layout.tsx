@@ -8,7 +8,7 @@ import InitialAppWrapper from "@/components/InitialAppWrapper";
 import { SafeThemeProvider } from "../components/SafeThemeProvider";
 import { defaultMetadata } from "./metadata";
 
-const nonce = cookies().get("nonce")?.value ?? "";
+const nonce = (await cookies()).get("nonce")?.value ?? "";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -38,9 +38,6 @@ export default function RootLayout({
       <body
         className={cn(defaultSans.variable, "antialiased", "tracking-tight")}
       >
-        {/* <ThemeProvider attribute="class" themes={["dark", "light"]}>
-          <InitialAppWrapper>{children}</InitialAppWrapper>
-        </ThemeProvider> */}
         <SafeThemeProvider>
           <InitialAppWrapper>{children}</InitialAppWrapper>
         </SafeThemeProvider>

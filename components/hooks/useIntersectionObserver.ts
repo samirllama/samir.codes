@@ -3,19 +3,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-interface IntersectionObserverOptions extends IntersectionObserverInit {
-
-}
-
 export const useIntersectionObserver = (
-    options?: IntersectionObserverOptions
+    options?: IntersectionObserverInit & { freezeOnceVisible?: boolean }
 ) => {
     const {
         threshold = 0,
         root = null,
         rootMargin = "0%",
-        freezeOnceVisible = false,
     } = options || {};
+    const freezeOnceVisible = options?.freezeOnceVisible || false;
     const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
     const targetRef = useRef<HTMLElement | null>(null);
 

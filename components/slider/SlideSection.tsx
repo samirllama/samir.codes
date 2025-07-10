@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import SlideColumn from "./SlideColumn";
+import { SlideContent } from "./slideData";
 
 
 interface SlideSectionProps {

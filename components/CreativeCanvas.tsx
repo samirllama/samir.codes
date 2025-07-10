@@ -35,7 +35,7 @@ export default function CreativeCanvas({ text, className }: CreativeCanvasProps)
   );
 
   return (
-    <div ref={compRef} className={cn("w-full py-8", className)} className="perspective-1000">
+    <div ref={compRef} className={cn("w-full py-8", className, "perspective-1000")}>
       <h2 className="text-center text-[clamp(2rem,10vw,6rem)] font-serif leading-none tracking-tight">
         {words.map((word, wordIndex) => (
           <span key={wordIndex} className="word inline-block mr-[0.25em]">

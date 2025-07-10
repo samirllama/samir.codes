@@ -10,12 +10,12 @@ export default function WelcomeLayout({
   return (
     <>
       <div
-        className={cn([
+        className={cn(
           "grow min-h-screen",
           "bg-hdr-gradient",
           "[background-attachment:fixed]",
-        ])}
-        className="opacity-100"
+          "opacity-100"
+        )}
       >
         
 

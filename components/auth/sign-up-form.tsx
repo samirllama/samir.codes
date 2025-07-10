@@ -1,37 +1,36 @@
-'use client'
+"use client";
 
-import { useEffect, useActionState } from 'react'
-import { useFormStatus } from 'react-dom'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { signUp, type ActionResponse } from '@/app/actions/auth'
-
+import { useEffect, useActionState } from "react";
+import { useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { signUp } from "@/app/actions/auth";
+import type { ActionResponse } from "@/app/actions/utils";
 
 const initialState: ActionResponse = {
   success: false,
-  message: '',
-}
-
+  message: "",
+};
 
 function SubmitButton() {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
   return (
     <button type="submit" disabled={pending}>
-      {pending ? 'Creating Account...' : 'Create Account'}
+      {pending ? "Creating Account..." : "Create Account"}
     </button>
-  )
+  );
 }
 
 export default function SignUpForm() {
-  const [state, formAction] = useActionState(signUp, initialState)
-  const router = useRouter()
+  const [state, formAction] = useActionState(signUp, initialState);
+  const router = useRouter();
 
   useEffect(() => {
     if (state.success) {
-      router.push('/playground')
+      router.push("/playground");
     }
-  }, [state.success, router])
+  }, [state.success, router]);
 
   return (
     <div className="contact-form">
@@ -39,7 +38,7 @@ export default function SignUpForm() {
         <h1>Create Your Account</h1>
         <p>Join us! Fill in your details to get started.</p>
       </div>
-      <form action={formAction}>
+      <form action={formAction} method="post">
         {!state.success && state.message && (
           <div className="p-3 text-center text-sm text-red-800 bg-red-100 border border-red-200 rounded-md">
             {state.message}
@@ -72,7 +71,9 @@ export default function SignUpForm() {
             placeholder="••••••••"
           />
           {state.errors?.password && (
-            <p className="mt-1 text-xs text-red-500">{state.errors.password[0]}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {state.errors.password[0]}
+            </p>
           )}
         </div>
 
@@ -87,7 +88,9 @@ export default function SignUpForm() {
             placeholder="••••••••"
           />
           {state.errors?.confirmPassword && (
-            <p className="mt-1 text-xs text-red-500">{state.errors.confirmPassword[0]}</p>
+            <p className="mt-1 text-xs text-red-500">
+              {state.errors.confirmPassword[0]}
+            </p>
           )}
         </div>
 
@@ -104,5 +107,5 @@ export default function SignUpForm() {
         </div>
       </form>
     </div>
-  )
+  );
 }

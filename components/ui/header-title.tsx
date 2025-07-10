@@ -1,17 +1,12 @@
 const AnimatedTitle = () => {
-  // Helper function to render a word
   const renderWord = (word: string) => (
     <div className="inline-block whitespace-nowrap">
       {word.split("").map((char, index) => (
-        <div
-          key={index} // Using index as key is acceptable here as the list is static
-          className="inline-block opacity-100" // Tailwind for opacity: 1
-          className="transform-none"
-        >
+        <div key={index} className="inline-block opacity-100 transform-none">
           {char}
         </div>
       ))}
-      {"\u00A0"} {/* Unicode for non-breaking space */}
+      {"\u00A0"}
     </div>
   );
 

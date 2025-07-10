@@ -14,7 +14,7 @@ interface ScrollObjectProps extends React.ComponentPropsWithoutRef<"div"> {
 export const ScrollObject: React.FC<ScrollObjectProps> = ({
   children,
   threshold = 0.1,
-  
+  rootMargin = "0%",
   freezeOnceVisible = false,
   className,
   ...props

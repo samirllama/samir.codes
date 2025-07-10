@@ -12,8 +12,7 @@ const ProjectCard = ({
   projectScreenshotUrl,
 }: ProjectEntry) => {
   const finalScreenshotUrl =
-    projectScreenshotUrl ||
-    
+    projectScreenshotUrl || "/placeholder.svg";
   const finalAltText = altText || "Placeholder image for project";
 
   return (

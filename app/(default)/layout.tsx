@@ -12,6 +12,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
+  const closeMenu = () => setIsMenuOpen(false);
+
   const webAppClasses = cn([
     "web-app",
     "text-15fx",
@@ -27,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Footer />
-      <AppMenu isMenuOpen={isMenuOpen} />
+      <AppMenu isMenuOpen={isMenuOpen} onCloseMenu={closeMenu} />
     </div>
   );
 }
