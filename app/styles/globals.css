@@ -438,7 +438,7 @@
   }
 
   .contact-form .flow h1 {
-    font-size: 2rem;
+    font-size: var(--step-3);
     font-weight: 700;
     color: var(--color-text-default);
   }
