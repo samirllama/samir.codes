@@ -39,8 +39,6 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
 
   useGSAP(
     () => {
-      // gsap.set(compRef.current, { opacity: 1 }); // Handled by CSS class
-
       const chars = compRef.current?.querySelectorAll(".text-char");
 
       if (!chars) return; // Add null check
@@ -235,6 +233,8 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
         tl.add(secondDotTl, "allWordsSettled+=" + firstDotTl.duration());
 
         tl.set(chars, { opacity: 1, y: 0, scale: 1, rotation: 0, skewX: 0 });
+        tl.set(chars[5], { marginLeft: "12px" }); // Space after "Code."
+        tl.set(chars[12], { marginLeft: "12px" }); // Space after "Create."
       }
     },
     { scope: compRef, dependencies: [isHtmlReady] }
@@ -242,7 +242,7 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
 
   return (
     <div
-      className="accelerate hero-title mb-8 text-[max(5rem,min(6.5rem,6.5vw))] font-transitional tracking-tighter bg-opacity-0 py-3 lg:py-4 xl:py-5 whitespace-nowrap relative min-w-full text-right"
+      className="accelerate hero-title mb-8 text-[max(5rem,min(6.5rem,6.5vw))] font-transitional bg-opacity-0 py-3 lg:py-4 xl:py-5 whitespace-nowrap relative min-w-full text-right"
       ref={compRef}
     >
       {text.split("").map((char, index) => (
