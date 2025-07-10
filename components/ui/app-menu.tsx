@@ -3,7 +3,13 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
+export default function AppMenu({
+  isMenuOpen,
+  onCloseMenu,
+}: {
+  isMenuOpen: boolean;
+  onCloseMenu: () => void;
+}) {
   const menuContainerClasses = cn([
     "app-menu",
     "fixed",
@@ -76,17 +82,16 @@ export default function AppMenu({ isMenuOpen }: { isMenuOpen: boolean }) {
                 "opacity-0 transform -translate-y-full transition-all ease-out-quad duration-700",
                 {
                   "opacity-100 translate-y-0": isMenuOpen,
-                }
+                },
+                isMenuOpen
+                  ? `[--delay:${index * 0.08}s]`
+                  : `[--delay:${(navItems.length - index) * 0.08}s]`
               )}
-              style={{
-                transitionDelay: isMenuOpen
-                  ? `${index * 0.08}s`
-                  : `${(navItems.length - index) * 0.08}s`,
-              }}
             >
               <Link
                 className="relative group inline-flex items-center transition-opacity duration-500 hover:opacity-70"
                 href={item.href}
+                onClick={onCloseMenu}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-menu-text transition-all duration-300 ease-out-quad group-hover:w-full"></span>
