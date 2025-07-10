@@ -53,7 +53,7 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
           },
         });
 
-        const codeChars = Array.from(chars).slice(0, 4);
+        const codeChars = Array.from(chars).slice(0, 4) as HTMLElement[];
         const firstDot = chars[4];
         const createChars = Array.from(chars).slice(5, 11);
         const secondDot = chars[11];
@@ -138,6 +138,19 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
           },
           "allWordsSettled"
         );
+
+        tl.to(chars, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          skewX: 0,
+          duration: 0.1,
+          ease: "power1.out",
+        });
+        tl.set(chars[5], { marginLeft: "12px" }); // Space after "Code."
+        tl.set(chars[12], { marginLeft: "12px" }); // Space after "Create."
+
         const firstDotTl = gsap.timeline();
         firstDotTl
           .from(firstDot, {
@@ -231,10 +244,6 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
           });
 
         tl.add(secondDotTl, "allWordsSettled+=" + firstDotTl.duration());
-
-        tl.set(chars, { opacity: 1, y: 0, scale: 1, rotation: 0, skewX: 0 });
-        tl.set(chars[5], { marginLeft: "12px" }); // Space after "Code."
-        tl.set(chars[12], { marginLeft: "12px" }); // Space after "Create."
       }
     },
     { scope: compRef, dependencies: [isHtmlReady] }

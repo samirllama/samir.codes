@@ -1,41 +1,38 @@
 import { put } from '@vercel/blob';
 import { promises as fs } from 'fs';
 import path from 'path';
-import { projects } from '../lib/data/port-data.ts';
 
-async function uploadImages() {
+async function uploadImagesToVercelBlob(imagePaths: string[]) {
   console.log('Starting image upload to Vercel Blob...');
 
-  for (const project of projects) {
-    if (!project.projectScreenshotUrl) {
-      console.warn(`Skipping project ${project.name}: projectScreenshotUrl is missing.`);
-      continue;
-    }
-    const localImagePath = path.join(process.cwd(), 'public', project.projectScreenshotUrl);
+  for (const relativeImagePath of imagePaths) {
+    const localImagePath = path.join(process.cwd(), 'public', relativeImagePath);
 
     try {
       const imageBuffer = await fs.readFile(localImagePath);
-      const filename = path.basename(project.projectScreenshotUrl);
+      const filename = path.basename(relativeImagePath);
 
       const blob = await put(filename, imageBuffer, {
         access: 'public',
         addRandomSuffix: false,
       });
 
-      console.log(`Uploaded ${filename} to: ${blob.url}`);
-
-      project.projectScreenshotUrl = blob.url;
+      console.log(`Uploaded ${relativeImagePath} to: ${blob.url}`);
 
     } catch (error) {
       console.error(`Failed to upload ${localImagePath}:`, error);
     }
   }
 
-  const updatedPortDataPath = path.join(process.cwd(), 'lib', 'data', 'port-data.ts');
-  const updatedContent = `export const projects = ${JSON.stringify(projects, null, 2)};`;
-  await fs.writeFile(updatedPortDataPath, updatedContent);
-
-  console.log('Image upload complete and port-data.ts updated.');
+  console.log('Image upload complete.');
 }
 
-uploadImages().catch(console.error);
+// Example Usage:
+// To use this script, you would call it with an array of relative paths
+// to images within your 'public' directory.
+// For example: uploadImagesToVercelBlob(['/assets/my-new-image.png', '/assets/another-image.jpg']);
+
+// If you want to run this script directly from the command line with specific images,
+// you can modify the following line:
+// For now, it's commented out as it's a utility function.
+// uploadImagesToVercelBlob(['/placeholder.svg']).catch(console.error);

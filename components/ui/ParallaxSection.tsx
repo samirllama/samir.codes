@@ -17,8 +17,8 @@ export default function ParallaxSection({ children }: ParallaxSectionProps) {
   useEffect(() => {
     const parallaxContainer = parallaxContainerRef.current;
     if (parallaxContainer) {
-      gsap.to(".creative-canvas-section", {
-        className: cn("parallax-section-final"),
+      gsap.to(parallaxContainer, {
+        yPercent: -20,
         ease: "none",
         scrollTrigger: {
           trigger: parallaxContainer,

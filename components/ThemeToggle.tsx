@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon } from "lucide-react";
 import { Button } from "./ui/Button";
 import { useRef } from "react";
-import gsap from "gsap";
-import { cn } from "@/lib/utils";
 
 const themes = ["light", "dark"];
 export default function ThemeToggle() {
@@ -14,29 +12,9 @@ export default function ThemeToggle() {
 
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    console.log("THEME TOGGLE:", { theme });
-  }, [theme]);
+  useEffect(() => setMounted(true), []);
 
   const iconRef = useRef(null);
-
-  useEffect(() => {
-    if (mounted && iconRef.current) {
-      gsap.fromTo(
-        iconRef.current,
-        { className: cn("theme-toggle-icon-initial") },
-        {
-          className: cn("theme-toggle-icon-final"),
-          duration: 0.5,
-          ease: "power2.out",
-        }
-      );
-    }
-  }, [theme, mounted]);
 
   if (!mounted) {
     return null;
@@ -56,7 +34,7 @@ export default function ThemeToggle() {
         theme === "dark" ? "Activate light mode" : "Activate dark mode"
       }
       variant="ghost"
-      className="px-2" // Adjust padding for icon-only button
+      className="px-2"
     >
       {theme === "dark" ? (
         <SunIcon

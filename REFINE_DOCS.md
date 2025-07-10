@@ -1333,4 +1333,123 @@ export function useMDXComponents(
 }
 ```
 
-## We now have a complete, performant, and customizable blog feature. To test it, create our first post at `content/posts/my-first-post/page.mdx` with the required frontmatter, and then navigate to `/blog`.
+We now have a complete, performant, and customizable blog feature. To test it, create our first post at `content/posts/my-first-post/page.mdx` with the required frontmatter, and then navigate to `/blog`.
+
+---
+
+## TS Error: SIgnInForm
+
+You are absolutely correct. My apologies. I was so focused on the runtime logic that I missed this crucial TypeScript error. You have pinpointed a very subtle but important bug.
+
+The error message is the key:
+
+> `Argument of type 'Promise<(prevState: ActionResponse, formData: FormData) => Promise<ActionResponse>>' is not assignable to parameter of type '(state: ActionResponse) => ActionResponse | Promise<ActionResponse>'.`
+
+Let's break down what this means and why it's happening.
+
+### The Root Cause: A Flaw in the Higher-Order Function
+
+The problem lies in the `withRateLimit` function in **`app/actions/utils.ts`**.
+
+Here is the original, incorrect code:
+
+```typescript
+// Incorrect version in app/actions/utils.ts
+export async function withRateLimit( // <--- The 'async' here is the problem
+  action: (
+    prevState: ActionResponse,
+    formData: FormData
+  ) => Promise<ActionResponse>
+) {
+  return async (
+    prevState: ActionResponse,
+    formData: FormData
+  ): Promise<ActionResponse> => {
+    // ... rate limiting logic ...
+    return action(prevState, formData);
+  };
+}
+```
+
+When we declare a function as `async`, its return type is **always wrapped in a `Promise`**.
+
+Therefore, `withRateLimit` doesn't actually return the Server Action function itself. It returns a _`Promise` that resolves to_ the Server Action function.
+
+The `useFormState` hook expects to be given the action function directly, not a promise of the function. This mismatch is what causes the TypeScript overload error.
+
+### The Solution: Correcting the `withRateLimit` Function
+
+The fix is simple: `withRateLimit` is a higher-order function that should _synchronously_ return the new `async` function. We just need to remove the `async` keyword from its own definition.
+
+**Refactored `app/actions/utils.ts`:**
+
+```typescript
+import { ratelimit } from "@/lib/rate-limiter";
+import { getIpAddress } from "@/lib/server-utils";
+import { z } from "zod";
+
+export type ActionResponse = {
+  success: boolean;
+  message: string;
+  errors?: Record<string, string[]>;
+  error?: string;
+};
+
+// --- REFINEMENT ---
+// The 'async' keyword is removed from the function signature.
+// This function should synchronously return the new action, not a promise of it.
+export function withRateLimit(
+  action: (
+    prevState: ActionResponse,
+    formData: FormData
+  ) => Promise<ActionResponse>
+) {
+  // The returned function is correctly async because it performs async operations inside.
+  return async (
+    prevState: ActionResponse,
+    formData: FormData
+  ): Promise<ActionResponse> => {
+    const ip = await getIpAddress();
+    const { success } = await ratelimit.limit(ip);
+
+    if (!success) {
+      return {
+        success: false,
+        message: "Too many requests. Please try again later.",
+        error: "Rate limit exceeded",
+      };
+    }
+    return action(prevState, formData);
+  };
+}
+
+export function validateFormData<T extends z.ZodType<any, any>>(
+  schema: T,
+  formData: FormData
+):
+  | { success: true; data: z.infer<T> }
+  | { success: false; errors: Record<string, string[]> } {
+  const data = Object.fromEntries(formData.entries());
+  const validationResult = schema.safeParse(data);
+  if (!validationResult.success) {
+    return {
+      success: false,
+      errors: validationResult.error.flatten().fieldErrors,
+    };
+  }
+  return {
+    success: true,
+    data: validationResult.data,
+  };
+}
+```
+
+With this change, `withRateLimit` now returns a function whose signature is `(prevState, formData) => Promise<ActionResponse>`, which perfectly matches the type that `useFormState` expects for a form action.
+
+Your `SignInForm.tsx` component was already correct and requires **no changes**. The error was purely in the type signature of the action it was receiving.
+
+This was a fantastic and critical catch. It highlights the power of TypeScript in preventing subtle runtime bugs.
+
+Now that we have fixed this, the `signIn` flow is fully vetted. The next logical step is to apply the same level of scrutiny to the `signUp` flow. Please provide the code for your sign-up form component.
+
+---

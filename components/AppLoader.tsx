@@ -24,23 +24,22 @@ const AppLoader: React.FC<AppLoaderProps> = ({ onCurtainRevealComplete }) => {
         },
       });
 
-      // Instead of animating styles, we add a class using our `cn` utility.
+      // Animate properties directly instead of using className for robustness
       tl.to(slideLayerRef.current, {
-        className: cn(slideLayerRef.current?.className, "is-revealing"),
+        yPercent: -100,
+        duration: 1,
         ease: "power3.inOut",
       }).to(
         backgroundLayerRef.current,
         {
-          className: cn(
-            backgroundLayerRef.current?.className,
-            "is-revealing"
-          ),
+          autoAlpha: 0,
+          duration: 0.8,
           ease: "power2.out",
         },
         "<0.2" // Start this animation 0.2s after the previous one starts
       );
 
-      tl.set(loaderRef.current, { className: cn(loaderRef.current?.className, "pointer-events-none") });
+      tl.set(loaderRef.current, { pointerEvents: "none" });
     },
     { scope: loaderRef }
   );

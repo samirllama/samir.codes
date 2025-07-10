@@ -2,8 +2,7 @@ import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Timestamp } from "@/components/Timestamp";
-import { ArrowLink, AnimatedArrow } from "@/components/ui/arrow";
-import ArrowDemo from "@/components/ui/arrow-line";
+import { AnimatedArrow } from "@/components/ui/arrow";
 
 export default function Footer() {
   return (
@@ -24,60 +23,48 @@ export default function Footer() {
           <div className="flex flex-wrap justify-around gap-8 text-xl">
             <a
               href="mailto:samirllama@gmail.com"
-              className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
+              className="flex items-center hover:text-text transition-all duration-300 ease-in-out transform hover:scale-110"
             >
               <MdEmail className="mr-2 text-3xl" /> Email
+              <AnimatedArrow />
             </a>
             <a
               href="https://github.com/samirllama"
-              className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
+              className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaGithub className="mr-2 text-3xl" /> GitHub
+              <AnimatedArrow />
             </a>
             <a
               href="https://linkedin.com/in/samirlama-dev"
-              className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
+              className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaLinkedin className="mr-2 text-3xl" /> LinkedIn
               <AnimatedArrow />
             </a>
-            <ArrowLink href="" />
             <a
               href="https://twitter.com/samirllama"
-              className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
+              className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
             >
               <FaTwitter className="mr-2 text-3xl" /> Twitter
+              <AnimatedArrow />
             </a>
 
             <a
               href="https://mastodon.social/@samirllama"
-              className="flex items-center hover:text-timeline-accent transition-all duration-300 ease-in-out transform hover:scale-110"
+              className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaMastodon className="mr-2 text-3xl" /> Mastodon
-            </a>
-            <a
-              href=""
-              className="link-w-arrow"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <AnimatedArrow />X
-            </a>
-            <a
-              href=""
-              className="link-w-arrow"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ArrowDemo />X
+              <FaMastodon className="mr-2 text-3xl" />
+              Mastodon
+              <AnimatedArrow />
             </a>
           </div>
 

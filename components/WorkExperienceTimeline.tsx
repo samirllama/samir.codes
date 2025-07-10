@@ -5,7 +5,7 @@ import React, { useRef, useEffect } from "react";
 import { ScrollTrigger, gsap } from "@/lib/gsap";
 import { experience } from "@/lib/data/work-exp";
 import { ExperienceEntry } from "@/types";
-import { cn } from "@/lib/utils";
+import TimelineRightContentCard from "./TimelineRightContentCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,9 +19,9 @@ const WorkExperienceTimeline = () => {
 
       gsap.fromTo(
         timelineRef.current,
-        { className: cn("timeline-line-initial") },
+        { scaleY: 0 },
         {
-          className: cn("timeline-line-final"),
+          scaleY: 1,
           transformOrigin: "top",
           ease: "none",
 
@@ -51,17 +51,18 @@ const WorkExperienceTimeline = () => {
         // Animate dot
         tl.fromTo(
           dot,
-          { className: cn("timeline-dot-initial") },
+          { scale: 0.5, autoAlpha: 0 },
           {
-            className: cn("timeline-dot-final"),
+            scale: 1,
+            autoAlpha: 1,
             ease: "power2.inOut",
           }
         );
 
         tl.fromTo(
           content,
-          { className: cn("timeline-content-initial") },
-          { className: cn("timeline-content-final"), ease: "power2.out" },
+          { y: 20, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, ease: "power2.out" },
           "<"
         );
       });
@@ -90,8 +91,6 @@ const WorkExperienceTimeline = () => {
     </section>
   );
 };
-
-import TimelineRightContentCard from "./TimelineRightContentCard";
 
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (

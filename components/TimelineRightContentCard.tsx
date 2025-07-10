@@ -10,6 +10,7 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
             src={entry.projectScreenshotUrl}
             alt={`Screenshot of ${entry.company}`}
             fill
+            sizes="(max-width: 768px) 100vw, (min-width: 769px) and (max-width: 1200px) 50vw, 50vw"
             className="absolute inset-0 w-full h-full object-contain rounded-t-lg md:rounded-l-lg md:rounded-t-none"
           />
         </div>
@@ -38,7 +39,7 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
             href={entry.projectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 relative group inline-flex items-center text-timeline-text transition-colors duration-300 hover:text-timeline-accent"
+            className="mt-4 relative group inline-flex items-center text-timeline-text transition-colors duration-300"
           >
             View Project
             <svg

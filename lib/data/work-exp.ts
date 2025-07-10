@@ -1,4 +1,4 @@
-import { ExperienceEntry } from '@/types';
+import { ExperienceEntry, SkillCategory } from '@/types';
 
 export const experience: ExperienceEntry[] = [
     {
@@ -67,4 +67,65 @@ export const experience: ExperienceEntry[] = [
         projectUrl: "https://www.dominos.com/",
         companyLogoUrl: "https://logo.clearbit.com/dominos.com.au",
     }
+];
+
+export const skillCategories: SkillCategory[] = [
+    {
+        title: "Languages",
+        skills: [
+            { name: "TypeScript", url: "https://www.typescriptlang.org/", },
+            { name: "JavaScript (ES6+)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+            { name: "Python", url: "https://www.python.org/" },
+            { name: "Go", url: "https://go.dev/" },
+            { name: "SQL", url: "https://en.wikipedia.org/wiki/SQL" },
+        ],
+    },
+    {
+        title: "Frameworks & Libraries",
+        skills: [
+            { name: "React / React Native", url: "https://react.dev/", },
+            { name: "Next.js", url: "https://nextjs.org/" },
+            { name: "Node.js", url: "https://nodejs.org/" },
+            { name: "Express.js", url: "https://expressjs.com/" },
+            { name: "Django", url: "https://www.djangoproject.com/" },
+            { name: "FastAPI", url: "https://fastapi.tiangolo.com/" },
+            { name: "Redux", url: "https://redux.js.org/" },
+            { name: "Ionic", url: "https://ionicframework.com/" },
+        ],
+    },
+    {
+        title: "Databases & Caching",
+        skills: [
+            { name: "PostgreSQL", url: "https://www.postgresql.org/", },
+            { name: "MySQL", url: "https://www.mysql.com/" },
+            { name: "MongoDB", url: "https://www.mongodb.com/" },
+            { name: "Redis", url: "https://redis.io/" },
+            { name: "DynamoDB", url: "https://aws.amazon.com/dynamodb/" },
+            { name: "SQLite", url: "https://www.sqlite.org/index.html" },
+        ],
+    },
+    {
+        title: "Developer Tools",
+        skills: [
+            { name: "Github", url: "https://github.com" },
+            { name: "CircleCI", url: "https://circleci.com/" },
+            { name: "DataDog", url: "https://www.datadoghq.com/" },
+            { name: "Sentry", url: "https://sentry.io/" },
+            { name: "Launchdarkly", url: "https://launchdarkly.com/" },
+            { name: "Optimizely", url: "https://www.optimizely.com/" },
+        ],
+    },
+    {
+        title: "Cloud & DevOps",
+        skills: [
+            { name: "AWS", url: "https://aws.amazon.com/" },
+            { name: "Azure", url: "https://azure.microsoft.com/" },
+            { name: "Docker", url: "https://www.docker.com/" },
+            { name: "Kubernetes", url: "https://kubernetes.io/", },
+            { name: "GitHub Actions", url: "https://github.com/features/actions" },
+            { name: "Jenkins", url: "https://www.jenkins.io/" },
+            { name: "IaC (Terraform/CloudFormation)", url: "https://www.terraform.io/" },
+            { name: "Convox", url: "https://convox.com/" },
+        ],
+    },
 ];

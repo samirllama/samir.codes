@@ -1,11 +1,14 @@
+import Script from "next/script";
+import { cookies } from "next/headers";
 import { Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
 import InitialAppWrapper from "@/components/InitialAppWrapper";
-
+import { SafeThemeProvider } from "../components/SafeThemeProvider";
 import { defaultMetadata } from "./metadata";
+
+const nonce = cookies().get("nonce")?.value ?? "";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -25,17 +28,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
+      <head>
+        <Script
+          src="/theme-init.js"
+          strategy="beforeInteractive"
+          nonce={nonce}
+        />
+      </head>
       <body
         className={cn(defaultSans.variable, "antialiased", "tracking-tight")}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={true}
-          themes={["dark", "light"]}
-        >
+        {/* <ThemeProvider attribute="class" themes={["dark", "light"]}>
           <InitialAppWrapper>{children}</InitialAppWrapper>
-        </ThemeProvider>
+        </ThemeProvider> */}
+        <SafeThemeProvider>
+          <InitialAppWrapper>{children}</InitialAppWrapper>
+        </SafeThemeProvider>
       </body>
     </html>
   );

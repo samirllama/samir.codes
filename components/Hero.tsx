@@ -21,9 +21,10 @@ const Hero = () => {
       });
 
       introTL
-        .set(heroElement, { opacity: 1 })
+        .set(heroElement, { autoAlpha: 1 })
         .from(".hero-header-word", {
-          className: cn("hero-header-word", "hero-header-word-initial"),
+          y: 20,
+          autoAlpha: 0,
           ease: "power4.in",
           delay: 0.3,
           stagger: 0.2,
@@ -32,7 +33,8 @@ const Hero = () => {
         .from(
           ".hero-subheading",
           {
-            className: cn("hero-subheading", "hero-subheading-initial"),
+            y: 20,
+            autoAlpha: 0,
             duration: 0.8,
           },
           "<+=0.4"
@@ -40,7 +42,8 @@ const Hero = () => {
         .from(
           ".hero-body",
           {
-            className: cn("hero-body", "hero-body-initial"),
+            y: 20,
+            autoAlpha: 0,
             duration: 0.6,
           },
           "<+=0.2"
@@ -48,7 +51,8 @@ const Hero = () => {
         .from(
           ".hero-button",
           {
-            className: cn("hero-button", "hero-button-initial"),
+            y: 20,
+            autoAlpha: 0,
             duration: 0.6,
           },
           "<+=0.2"
@@ -67,10 +71,8 @@ const Hero = () => {
         .from(
           ".text-side-heading .split-char",
           {
-            className: cn(
-              ".text-side-heading .split-char",
-              "text-side-heading-char-initial"
-            ),
+            y: 10,
+            autoAlpha: 0,
             ease: "back.out(3)",
             duration: 0.5,
           },
@@ -79,7 +81,8 @@ const Hero = () => {
         .from(
           ".text-side-body",
           {
-            className: cn("text-side-body", "text-side-body-initial"),
+            y: 10,
+            autoAlpha: 0,
             duration: 0.6,
           },
           "<+=0.1"

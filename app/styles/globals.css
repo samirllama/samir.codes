@@ -58,9 +58,20 @@
     overscroll-behavior: none;
     scroll-snap-type: y mandatory;
   }
+  li {
+    transition-delay: var(--delay);
+  }
 }
 
 @layer components {
+  .menu-slide-transition-custom {
+    transition: transform 0.7s ease-out-quad;
+  }
+
+  .menu-black-overlay-transition {
+    transition: opacity 0.5s ease-out-quad;
+  }
+
   .loader-container {
     position: fixed;
     inset: 0;
@@ -140,7 +151,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    height: 2px;
+    height: 1.5px;
     width: 20px;
     overflow: hidden;
     transform: translateY(-50%);
@@ -160,14 +171,14 @@
     width: 100%;
   }
   .line-tip {
-    width: 3px;
+    width: 1.5px;
     transform-origin: left center;
   }
   .arrow-chevron {
     position: absolute;
     top: 50%;
     right: 0;
-    height: 2px;
+    height: 1.5px;
     width: 10px;
     overflow: hidden;
     transform: translateY(-50%) rotate(45deg);
@@ -184,7 +195,7 @@
     width: 100%;
   }
   .chev-tip {
-    width: 3px;
+    width: 1.5px;
   }
   .line-fill-static,
   .line-tip-static,
