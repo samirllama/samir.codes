@@ -138,6 +138,7 @@
   --lineHeight-normal: 1.5;
   /* Semantic Color Palette (Light Theme Defaults) */
   --color-surface-page: oklch(98.8% 0.007 260);
+  --color-surface-muted: oklch(58% 0.03 260);
   --color-surface-card: oklch(100% 0 0);
 
   --color-timeline-border: oklch(12% 0.015 260);
@@ -145,9 +146,9 @@
   --color-text-default: oklch(12% 0.015 260);
   --color-text-muted: oklch(58% 0.03 260);
   --color-text-inverted: oklch(100% 0 0);
-  --color-primary-default: #4f46e5;
+  --color-primary-default: #f97316;
   --color-primary-accent: #6366f1;
-  --color-secondary-default: #f97316;
+  --color-secondary-default: #4f46e5;
   --color-secondary-accent: #fb923c;
   --color-danger-default: #ef4444;
 
@@ -156,6 +157,12 @@
   --color-dark: var(--oklch-black);
   --color-black40: oklch(0% 0 0 / 0.4);
   --color-white20: oklch(100% 0 0 / 0.2);
+
+  --color-border: #e5e7eb;
+  --color-primary: #0f62fe;
+  --color-secondary: #6366f1;
+  --color-highlight: #fffdd0;
+  --color-code: #1e293b;
 
   --border-1: hsl(259, 13%, 28%);
   --border-2: hsl(252, 9%, 22%);
@@ -231,10 +238,20 @@
 /*  Dark Theme Overrides */
 .dark {
   --color-surface-page: oklch(8% 0.02 260);
+  --color-surface-muted: #161b22;
   --color-surface-card: oklch(12% 0.015 260);
+
   --color-text-default: oklch(98.8% 0.007 260);
   --color-text-muted: oklch(70% 0.01 260);
   --color-text-inverted: oklch(12% 0.015 260);
+  --color-text-accent: #60a5fa;
+
+  --color-border: #30363d;
+  --color-primary: #60a5fa;
+  --color-secondary: #a78bfa;
+  --color-highlight: #1e293b;
+  --color-code: #f3f4f6;
+
   --color-menu-bg: oklch(100% 0 0);
   --color-menu-text: oklch(0% 0 0);
   --color-timeline-bg: oklch(12% 0.015 260);

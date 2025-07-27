@@ -1,6 +1,5 @@
 import { ratelimit } from '@/lib/rate-limiter';
 import { getIpAddress } from '@/lib/server-utils';
-import { z } from 'zod';
 
 export type ActionResponse = {
   success: boolean;
@@ -28,22 +27,3 @@ export function withRateLimit(
   };
 }
 
-export function validateFormData<T extends z.ZodType<any, any>>(
-  schema: T,
-  formData: FormData
-): { success: true; data: z.infer<T> } | { success: false; errors: Record<string, string[] | undefined> } {
-  const data = Object.fromEntries(formData.entries());
-  const validationResult = schema.safeParse(data);
-
-  if (!validationResult.success) {
-    return {
-      success: false,
-      errors: validationResult.error.flatten().fieldErrors,
-    };
-  }
-
-  return {
-    success: true,
-    data: validationResult.data,
-  };
-}

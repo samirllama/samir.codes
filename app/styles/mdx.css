@@ -1,7 +1,23 @@
 /* app/styles/mdx.css (Simplified for v3 & Typography Plugin) */
 
 /* Overrides or Additions to Typography Plugin --- */
+pre {
+  @apply rounded-lg border border-border p-4 my-6 overflow-x-auto text-sm;
+}
 
+code {
+  @apply font-mo-argon;
+}
+
+pre code {
+  display: grid;
+}
+
+/* Optional: style highlighted line */
+[data-highlighted-line] {
+  background-color: rgba(255, 255, 255, 0.05); /* adjust for theme */
+  @apply px-2;
+}
 /*  Link Styling Enhancements --- */
 /* Base color/decoration comes from --tw-prose-links */
 .mdx-prose a {

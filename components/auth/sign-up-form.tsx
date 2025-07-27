@@ -1,111 +1,89 @@
 "use client";
 
-import { useEffect, useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { signUp } from "@/app/actions/auth";
-import type { ActionResponse } from "@/app/actions/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-const initialState: ActionResponse = {
-  success: false,
-  message: "",
-};
+import { Button } from "@/components/ui/Button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "react-hot-toast";
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  confirmPassword: z.string().min(8),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
+export function SignUpForm() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("Simulating sign-up with values:", values);
+    toast.success("Account created successfully! (Simulated)");
+  }
 
   return (
-    <button type="submit" disabled={pending}>
-      {pending ? "Creating Account..." : "Create Account"}
-    </button>
-  );
-}
-
-export default function SignUpForm() {
-  const [state, formAction] = useActionState(signUp, initialState);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state.success) {
-      router.push("/playground");
-    }
-  }, [state.success, router]);
-
-  return (
-    <div className="contact-form">
-      <div className="flow">
-        <h1>Create Your Account</h1>
-        <p>Join us! Fill in your details to get started.</p>
-      </div>
-      <form action={formAction} method="post">
-        {!state.success && state.message && (
-          <div className="p-3 text-center text-sm text-red-800 bg-red-100 border border-red-200 rounded-md">
-            {state.message}
-          </div>
-        )}
-
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            placeholder="you@example.com"
-          />
-          {state.errors?.email && (
-            <p className="mt-1 text-xs text-red-500">{state.errors.email[0]}</p>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            required
-            placeholder="••••••••"
-          />
-          {state.errors?.password && (
-            <p className="mt-1 text-xs text-red-500">
-              {state.errors.password[0]}
-            </p>
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            autoComplete="new-password"
-            required
-            placeholder="••••••••"
-          />
-          {state.errors?.confirmPassword && (
-            <p className="mt-1 text-xs text-red-500">
-              {state.errors.confirmPassword[0]}
-            </p>
+        />
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
-        </div>
-
-        <div className="form-group">
-          <input type="checkbox" id="signup-privacy" />
-          <label htmlFor="signup-privacy" className="fine-print">
-            I agree to the <Link href="#">Terms of Service</Link> and{" "}
-            <Link href="#">Privacy Policy</Link>
-          </label>
-        </div>
-
-        <div>
-          <SubmitButton />
-        </div>
+        />
+        <Button type="submit">Submit</Button>
       </form>
-    </div>
+    </Form>
   );
 }

@@ -38,8 +38,6 @@ const config: Config = {
             colors: {
                 'surface-page': 'var(--color-surface-page)',
                 'surface-card': 'var(--color-surface-card)',
-                'text-default': 'var(--color-text-default)',
-                'text-muted': 'var(--color-text-muted)',
                 'inverted': 'var(--color-text-inverted)',
                 'menu-bg': 'var(--color-menu-bg)',
                 'menu-text': 'var(--color-menu-text)',
@@ -49,8 +47,18 @@ const config: Config = {
                 'timeline-border': 'var(--color-timeline-border)',
                 'accent-primary': 'var(--color-accent-primary)',
                 'accent-secondary': 'var(--color-accent-secondary)',
-                'border-default': 'var(--color-border-default)',
-                'code-background': 'var(--color-code-background)',
+
+                // Text
+                'text-default': 'var(--color-text-default)',
+                'text-muted': 'var(--color-text-muted)',
+                'text-inverted': 'var(--color-text-inverted)',
+                'text-accent': 'var(--color-text-accent)',
+                // UI + interactive
+                'border': 'var(--color-border-default)',
+                primary: 'var(--color-primary)',
+                secondary: 'var(--color-secondary)',
+                highlight: 'var(--color-highlight)',
+                'code': 'var(--color-code-background)',
             },
             fontFamily: {
                 'body': ['var(--font-transitional)', ...fontFamily.sans],

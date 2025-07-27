@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={webAppClasses}>
       <AppHeader toggleAction={toggleMenu} isMenuOpen={isMenuOpen} />
-      <main ref={mainRef} className="relative  min-h:100vh scroll-content">
+      <main ref={mainRef} className="pt-40 relative min-h:100vh scroll-content">
         {children}
       </main>
       <Footer />

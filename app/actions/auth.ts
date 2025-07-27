@@ -1,130 +1,157 @@
 "use server";
 
 import { z } from "zod";
-import { createSession, deleteSession } from "@/lib/session";
-import { verifyPassword, hashPassword } from "@/lib/auth-server";
 import { db } from "@/db";
-import { users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { users, passwordResetTokens } from "@/db/schema";
+import bcrypt from 'bcryptjs';
 import { nanoid } from "nanoid";
-import { redirect } from "next/navigation";
-import { withRateLimit, validateFormData } from "./utils";
-import type { ActionResponse } from "./utils";
+import { eq } from "drizzle-orm";
 
-const SignInSchema = z.object({
-  email: z.string().min(1, 'Email is required').email('Invalid email format'),
-  password: z.string().min(1, 'Password is required'),
+const signupSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
 });
 
-const SignUpSchema = z
-  .object({
-    email: z.string().min(1, "Email is required").email("Invalid email format"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string().min(1, "Please confirm your password"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
+const forgotPasswordSchema = z.string().email();
+
+export async function actionSignUpUser(values: unknown) {
+  const validatedFields = signupSchema.safeParse(values);
+
+  if (!validatedFields.success) {
+    return {
+      error: "Invalid fields",
+    };
+  }
+
+  const { email, password } = validatedFields.data;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const userId = nanoid();
+
+  try {
+    await db.insert(users).values({
+      id: userId,
+      email: email,
+      password: hashedPassword,
+    });
+  } catch (e) {
+    return {
+      error: "Email already in use",
+    };
+  }
+
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/", // Redirect to home page after successful signup and login
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.message.includes("CredentialsSignin")) {
+        return {
+          error: "Invalid credentials.",
+        };
+      }
+    }
+    throw error; // Re-throw other errors
+  }
+
+  return {
+    success: true,
+  };
+}
+
+export async function actionForgotPassword(email: string) {
+  const validatedEmail = forgotPasswordSchema.safeParse(email);
+
+  if (!validatedEmail.success) {
+    return {
+      error: "Invalid email address",
+    };
+  }
+
+  const user = await db.query.users.findFirst({
+    where: eq(users.email, validatedEmail.data),
   });
 
-export type SignInData = z.infer<typeof SignInSchema>;
-export type SignUpData = z.infer<typeof SignUpSchema>;
-
-async function signInAction(
-  prevState: ActionResponse,
-  formData: FormData
-): Promise<ActionResponse> {
-  const validation = validateFormData(SignInSchema, formData);
-  if (!validation.success) {
+  // Always return a generic success message to prevent email enumeration
+  if (!user) {
     return {
-      success: false,
-      message: "Validation failed",
-      errors: validation.errors,
+      success: true,
+      message: "If an account with that email exists, a password reset link has been sent.",
     };
   }
 
-  const { email, password } = validation.data;
+  const token = nanoid(32); // Generate a secure, random token
+  const expiresAt = new Date(Date.now() + 3600 * 1000); // Token valid for 1 hour
 
   try {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    if (!user) {
-      return { success: false, message: "Invalid email or password" };
-    }
-
-    const isPasswordValid = await verifyPassword(password, user.password);
-    if (!isPasswordValid) {
-      return { success: false, message: "Invalid email or password" };
-    }
-
-    await createSession(user.id);
-    return { success: true, message: "Signed in successfully" };
-  } catch (error) {
-    console.error("Sign-in error:", error);
+    await db.insert(passwordResetTokens).values({
+      token: token,
+      userId: user.id,
+      expiresAt: expiresAt,
+    });
+  } catch (e) {
+    console.error("Error inserting password reset token:", e);
     return {
-      success: false,
-      message: "An internal error occurred. Please try again.",
+      error: "Failed to generate password reset link. Please try again.",
+    };
+  }
+
+  // TODO: Send email with the reset link
+  console.log(`Password reset link for ${user.email}: /reset-password/${token}`);
+
+  return {
+    success: true,
+    message: "If an account with that email exists, a password reset link has been sent.",
+  };
+}
+
+export async function actionResetPassword(token: string, newPassword: string) {
+  const resetPasswordSchema = z.object({
+    token: z.string().min(1, "Token is required"),
+    newPassword: z.string().min(8),
+  });
+
+  const validatedFields = resetPasswordSchema.safeParse({ token, newPassword });
+
+  if (!validatedFields.success) {
+    return {
+      error: "Invalid fields",
+    };
+  }
+
+  const { token: validatedToken, newPassword: validatedNewPassword } = validatedFields.data;
+
+  const resetTokenEntry = await db.query.passwordResetTokens.findFirst({
+    where: eq(passwordResetTokens.token, validatedToken),
+  });
+
+  if (!resetTokenEntry || resetTokenEntry.expiresAt < new Date()) {
+    return {
+      error: "Invalid or expired token.",
+    };
+  }
+
+  const hashedPassword = await bcrypt.hash(validatedNewPassword, 10);
+
+  try {
+    await db.update(users)
+      .set({ password: hashedPassword })
+      .where(eq(users.id, resetTokenEntry.userId));
+
+    await db.delete(passwordResetTokens)
+      .where(eq(passwordResetTokens.token, validatedToken));
+
+    return {
+      success: true,
+      message: "Password has been reset successfully.",
+    };
+  } catch (e) {
+    console.error("Error resetting password:", e);
+    return {
+      error: "Failed to reset password. Please try again.",
     };
   }
 }
-
-async function signUpAction(
-  prevState: ActionResponse,
-  formData: FormData
-): Promise<ActionResponse> {
-  const validation = validateFormData(SignUpSchema, formData);
-  if (!validation.success) {
-    return {
-      success: false,
-      message: "Validation failed",
-      errors: validation.errors,
-    };
-  }
-
-  const { email, password } = validation.data;
-
-  try {
-    const [existingUser] = await db
-      .select()
-      .from(users)
-      .where(eq(users.email, email));
-    if (existingUser) {
-      return { success: false, message: "User with this email already exists" };
-    }
-
-    const hashedPassword = await hashPassword(password);
-    const id = nanoid();
-
-    const [newUser] = await db
-      .insert(users)
-      .values({ id, email, password: hashedPassword })
-      .returning();
-    if (!newUser) {
-      return { success: false, message: "Failed to create user" };
-    }
-
-    await createSession(newUser.id);
-    return { success: true, message: "Account created successfully" };
-  } catch (error) {
-    console.error("Sign-up error:", error);
-    return {
-      success: false,
-      message: "An error occurred while creating your account.",
-    };
-  }
-}
-
-export const signIn = withRateLimit(signInAction);
-export const signUp = withRateLimit(signUpAction);
-
-export async function signOut(): Promise<void> {
-  try {
-    await deleteSession();
-  } catch (error) {
-    // redirect the finally block and log the error.
-    console.error("Sign-out error:", error);
-    throw new Error("Failed to sign out");
-  } finally {
-    redirect("/signin");
-  }
-}
-

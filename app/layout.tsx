@@ -1,14 +1,11 @@
 import Script from "next/script";
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
-import InitialAppWrapper from "@/components/InitialAppWrapper";
-import { SafeThemeProvider } from "../components/SafeThemeProvider";
 import { defaultMetadata } from "./metadata";
-
-const nonce = (await cookies()).get("nonce")?.value ?? "";
+import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -21,11 +18,13 @@ const defaultSans = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const hdrs = await headers();
+  const nonce = hdrs.get("x-nonce") || "";
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
       <head>
@@ -38,9 +37,7 @@ export default function RootLayout({
       <body
         className={cn(defaultSans.variable, "antialiased", "tracking-tight")}
       >
-        <SafeThemeProvider>
-          <InitialAppWrapper>{children}</InitialAppWrapper>
-        </SafeThemeProvider>
+        <Providers nonce={nonce}>{children}</Providers>
       </body>
     </html>
   );

@@ -1,63 +1,139 @@
+import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
-import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
+import { Gif } from "@/components/mdx/Gif";
 
-const gradientPrimaryText =
-  "bg-gradient-to-r from-primary-500 to-secondary-500 dark:from-primary-400 dark:to-secondary-400 bg-clip-text text-transparent";
-const gradientSecondaryText =
-  "bg-gradient-to-r from-accent-500 to-primary-500 dark:from-accent-400 dark:to-primary-400 bg-clip-text text-transparent";
+export function getMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    h1: ({ className, ...props }) => (
+      <h1
+        className={cn(
+          "mt-12 scroll-m-20 text-4xl font-bold tracking-tight text-text-default",
+          className
+        )}
+        {...props}
+      />
+    ),
 
-export const componentsForMdx = {
-  h2: ({ children, className, ...props }: ComponentPropsWithoutRef<"h2">) => (
-    <h2
-      className={cn("mt-[2em] mb-[1em]", gradientPrimaryText, className)}
-      {...props}
-    >
-      {children}
-    </h2>
-  ),
-  h3: ({ children, className, ...props }: ComponentPropsWithoutRef<"h3">) => (
-    <h3
-      className={cn("mt-[1.8em] mb-[0.8em]", gradientSecondaryText, className)}
-      {...props}
-    >
-      {children}
-    </h3>
-  ),
+    h2: ({ className, ...props }) => (
+      <h2
+        className={cn(
+          "mt-10 scroll-m-20 border-b border-border pb-1 text-3xl font-semibold text-text-default",
+          className
+        )}
+        {...props}
+      />
+    ),
 
-  a: ({ children, href, ...props }: ComponentPropsWithoutRef<"a">) => {
-    const isExternal =
-      href && (href.startsWith("http") || href.startsWith("//"));
-    if (isExternal) {
-      return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="prose-a prose-a-external"
+    h3: ({ className, ...props }) => (
+      <h3
+        className={cn(
+          "mt-8 scroll-m-20 text-2xl font-semibold text-text-default",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    p: ({ className, ...props }) => (
+      <p
+        className={cn("leading-7 mt-6 text-text-default", className)}
+        {...props}
+      />
+    ),
+
+    a: ({ className, ...props }) => (
+      <a
+        className={cn(
+          "font-medium underline underline-offset-4 text-text-accent hover:text-text-accent/80",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    blockquote: ({ className, ...props }) => (
+      <blockquote
+        className={cn(
+          "mt-6 border-l-4 pl-6 italic text-text-muted border-border",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    ul: ({ className, ...props }) => (
+      <ul
+        className={cn(
+          "list-disc list-inside mt-6 text-text-default",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    ol: ({ className, ...props }) => (
+      <ol
+        className={cn(
+          "list-decimal list-inside mt-6 text-text-default",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    code: ({ className, ...props }) => (
+      <code
+        className={cn(
+          "rounded bg-surface-muted px-1.5 py-1 font-mono text-sm text-code",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    pre: ({ className, ...props }) => (
+      <pre
+        className={cn(
+          "rounded-md border border-border bg-surface-muted p-4 overflow-x-auto text-sm",
+          className
+        )}
+        {...props}
+      />
+    ),
+
+    hr: ({ className, ...props }) => (
+      <hr className={cn("my-10 border-border", className)} {...props} />
+    ),
+
+    img: ({ className, alt = "", ...props }) => (
+      <Image
+        className={cn("rounded-lg border border-border my-6", className)}
+        alt={alt}
+        {...props}
+      />
+    ),
+    gif: ({
+      className,
+      alt = "",
+      src = "",
+      width = 800,
+      height = 450,
+      ...props
+    }) => (
+      <div className="my-6 flex justify-center">
+        <Image
+          src={src}
+          alt={alt}
+          className={cn("rounded-md border border-border shadow-sm", className)}
+          width={width}
+          height={height}
+          unoptimized
           {...props}
-        >
-          {children}
-        </a>
-      );
-    }
-    return (
-      <a href={href} className="prose-a prose-a-internal" {...props}>
-        {children}
-      </a>
-    );
-  },
-
-  hr: ({ className, ...props }: ComponentPropsWithoutRef<"hr">) => (
-    <hr
-      className={cn(
-        "my-12 h-0.5 border-none rounded",
-        "bg-primary-500 dark:bg-primary-400",
-        "shadow-[0_0_10px_rgb(var(--primary-rgb)),0_0_20px_rgb(var(--primary-rgb)),0_0_30px_rgb(var(--accent-rgb))]",
-        "animate-neonPulse",
-        className
-      )}
-      {...props}
-    />
-  ),
-} as MDXComponents;
+        />
+      </div>
+    ),
+    Gif,
+    ...components,
+  };
+}

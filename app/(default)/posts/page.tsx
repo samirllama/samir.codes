@@ -1,43 +1,85 @@
+// lib/posts.ts
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
+export interface OGImage {
+  url: string;
+  alt?: string;
+}
+
+export interface PostMeta {
+  slug: string;
+  title: string;
+  date: string; // YYYY-MM-DD
+  description: string;
+  tags?: string[];
+  author?: string;
+  image?: OGImage | OGImage[];
+}
+
+const postsPath = path.join(process.cwd(), "app", "(default)", "posts");
+
+export function getAllPostsMeta(): PostMeta[] {
+  const slugs = fs
+    .readdirSync(postsPath, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
+
+  const all = slugs
+    .map((slug) => {
+      const mdxFile = path.join(postsPath, slug, "page.mdx");
+      if (!fs.existsSync(mdxFile)) return null;
+      const { data } = matter(fs.readFileSync(mdxFile, "utf8"));
+      if (!data.title || !data.date || !data.description) return null;
+      return {
+        slug,
+        title: String(data.title),
+        date: String(data.date),
+        description: String(data.description),
+        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+        author: typeof data.author === "string" ? data.author : undefined,
+        image: data.image as any,
+      };
+    })
+    .filter((m): m is PostMeta => Boolean(m));
+
+  return all.sort((a, b) => (a.date > b.date ? -1 : 1));
+}
+
+// app/(default)/posts/page.tsx
 import Link from "next/link";
-import { getAllPostsMeta } from "@/lib/posts";
+import { getAllPostsMeta, PostMeta } from "@/lib/posts";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "All Posts",
+  description: "Browse all engineering blog posts",
+};
 
 export default function PostsIndexPage() {
-  const posts = getAllPostsMeta();
+  const posts: PostMeta[] = getAllPostsMeta();
+  console.log({ posts });
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Posts</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
-          <Link
-            href={`/posts/${post.slug}`}
-            key={post.slug}
-            className="block bg-surface-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-          >
-            <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-text-muted text-sm mb-4">
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-            <p className="text-text-default mb-4">{post.description}</p>
-            {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="bg-accent-primary/20 text-accent-primary text-xs px-3 py-1 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </Link>
+    <article className="mx-auto py-16 h-screen border border-2">
+      <h1 className="text-4xl font-bold mb-8">Engineering Blog</h1>
+      <ul className="space-y-6">
+        {posts.map((p) => (
+          <li key={p.slug}>
+            <Link
+              href={`/posts/${p.slug}`}
+              className="text-2xl font-semibold text-primary hover:underline"
+            >
+              {p.title}
+            </Link>
+            <div className="text-sm text-muted-foreground">
+              {p.date} • {p.author}
+            </div>
+            <p className="mt-2 text-base">{p.description}</p>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </article>
   );
 }

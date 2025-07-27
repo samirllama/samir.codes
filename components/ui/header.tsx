@@ -4,7 +4,8 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import Logo from "./logo";
+import AnimatedFigmaLogo from "../AnimatedNameLogo";
+
 import ThemeToggle from "../ThemeToggle";
 
 interface AppHeaderProps {
@@ -47,10 +48,10 @@ export default function AppHeader({
 
   return (
     <div className={headerContainerStyles}>
-      <header>
+      <header className="items-center justify-center">
         <div className={headerBStyles}>
           <Link href="/">
-            <Logo />
+            <AnimatedFigmaLogo />
           </Link>
           <div className="flex items-center space-x-4">
             <div

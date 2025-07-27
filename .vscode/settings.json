@@ -1,6 +1,6 @@
 {
-  "cSpell.words": ["cinzel", "nmsregular"],
-  "workbench.colorTheme": "Catppuccin Frappé",
+  "cSpell.words": ["cinzel", "hdrs", "nmsregular"],
+  "workbench.colorTheme": "GitHub Dark",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.formatOnSave": true,
