@@ -1,34 +1,27 @@
-/* app/styles/mdx.css (Simplified for v3 & Typography Plugin) */
+/* app/styles/mdx.css */
 
-/* Overrides or Additions to Typography Plugin --- */
+/* Overrides or Additions to Typography Plugin */
 pre {
-  @apply rounded-lg border border-border p-4 my-6 overflow-x-auto text-sm;
+  @apply rounded-lg border border-border-subtle p-4 my-6 overflow-x-auto text-sm bg-code-bg;
 }
 
 code {
-  @apply font-mo-argon;
+  @apply font-mono;
 }
 
 pre code {
   display: grid;
 }
 
-/* Optional: style highlighted line */
-[data-highlighted-line] {
-  background-color: rgba(255, 255, 255, 0.05); /* adjust for theme */
-  @apply px-2;
-}
-/*  Link Styling Enhancements --- */
-/* Base color/decoration comes from --tw-prose-links */
+/* Link Styling Enhancements */
 .mdx-prose a {
   text-underline-offset: 2px;
   transition: color 150ms ease-in-out, text-decoration-color 150ms ease-in-out;
-  /* Optionally override decoration color alpha */
-  text-decoration-color: rgba(var(--primary-rgb), 0.5);
+  text-decoration-color: rgba(var(--my-color-primary-rgb), 0.5);
 }
+
 .mdx-prose a:hover {
-  /* Hover color comes from plugin/theme vars, just adjust decoration */
-  text-decoration-color: rgba(var(--secondary-rgb), 0.7);
+  text-decoration-color: rgba(var(--my-color-secondary-rgb), 0.7);
 }
 
 /* External Link Indicator */
@@ -40,57 +33,50 @@ pre code {
   opacity: 0.7;
   transition: opacity 0.2s ease-out;
 }
+
 .mdx-prose a[target="_blank"]:hover::after {
   opacity: 1;
 }
 
-/* List Styling --- */
-/* Marker color comes from --tw-prose-bullets */
-/* .mdx-prose ul li::marker { color: rgb(var(--primary-rgb)); } */
-
-/*  Inline Code Styling --- */
-/* Let plugin handle color via its defaults, just add bg/padding */
+/* Inline Code Styling */
 .mdx-prose :not(pre) > code {
-  background-color: var(--gray-alpha-100);
+  background-color: var(--my-gray-alpha-100);
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  font-size: var(--fontSize-sm);
-  font-family: var(--font-geist-mono), monospace;
+  font-size: var(--my-font-size-step--1);
+  font-family: var(--my-font-geist-mono), monospace;
+  color: var(--my-color-code-text);
 }
 
-/* Rehype Pretty Code Styling --- */
+/* Rehype Pretty Code Styling */
 .mdx-prose figure[data-rehype-pretty-code-figure] {
   margin-block: 1.5em;
 }
 
 .mdx-prose figure[data-rehype-pretty-code-figure] > pre {
-  border: 1px solid rgb(var(--border-subtle-rgb)); /* Use border variable */
+  border: 1px solid rgb(var(--my-color-border-subtle-rgb));
   border-radius: 6px;
-  padding: var(--spacing-md);
+  padding: var(--my-spacing-md);
   overflow-x: auto;
-  font-size: 0.9em; /* Slightly smaller than base */
+  font-size: 0.9em;
   line-height: 1.6;
-  /* Background comes from --tw-prose-pre-bg */
 }
 
 .mdx-prose figure[data-rehype-pretty-code-figure] > pre > code {
   display: grid;
-  font-family: var(--font-geist-mono), monospace; /* Ensure monospace font */
-  background-color: transparent !important; /* Override theme bg */
+  font-family: var(--my-font-geist-mono), monospace;
+  background-color: transparent !important;
   font-size: inherit;
-  /* Text color comes from --tw-prose-pre-code (theme) or highlighting spans */
 }
 
 /* Code Highlights */
 .mdx-prose .line--highlighted {
-  background-color: rgba(var(--primary-rgb), 0.1); /* Use primary with alpha */
-  box-shadow: inset 3px 0 0 0 rgb(var(--primary-rgb));
+  background-color: rgba(var(--my-color-primary-rgb), 0.1);
+  box-shadow: inset 3px 0 0 0 rgb(var(--my-color-primary-rgb));
 }
+
 .mdx-prose .word--highlighted {
-  background-color: rgba(
-    var(--secondary-rgb),
-    0.2
-  ); /* Use secondary with alpha */
+  background-color: rgba(var(--my-color-secondary-rgb), 0.2);
   padding: 0.1em 0.2em;
   border-radius: 3px;
 }
@@ -98,11 +84,11 @@ pre code {
 /* Code Block Titles */
 .mdx-prose [data-rehype-pretty-code-title] {
   font-size: 0.85em;
-  font-family: var(--font-geist-mono), monospace;
-  color: rgba(var(--foreground-rgb), 0.7);
-  background-color: var(--gray-alpha-200); /* Slightly darker alpha gray */
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: 1px solid rgb(var(--border-subtle-rgb));
+  font-family: var(--my-font-geist-mono), monospace;
+  color: rgba(var(--my-color-foreground-rgb), 0.7);
+  background-color: var(--my-gray-alpha-200);
+  padding: var(--my-spacing-sm) var(--my-spacing-md);
+  border: 1px solid rgb(var(--my-color-border-subtle-rgb));
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;

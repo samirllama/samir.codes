@@ -19,6 +19,19 @@ export interface PostMeta {
 }
 
 
+function isOGImage(image: unknown): image is OGImage {
+  return (
+    typeof image === "object" &&
+    image !== null &&
+    "url" in image &&
+    typeof (image as OGImage).url === "string"
+  );
+}
+
+function isOGImageArray(images: unknown): images is OGImage[] {
+  return Array.isArray(images) && images.every(isOGImage);
+}
+
 const postsPath = path.join(process.cwd(), 'app', '(default)', 'posts')
 
 export function getAllPostsMeta(): PostMeta[] {
@@ -33,6 +46,14 @@ export function getAllPostsMeta(): PostMeta[] {
       if (!fs.existsSync(mdxFile)) return null
       const { data } = matter(fs.readFileSync(mdxFile, 'utf8'))
       if (!data.title || !data.date || !data.description) return null
+      
+      let image: OGImage | OGImage[] | undefined = undefined;
+      if (isOGImage(data.image)) {
+        image = data.image;
+      } else if (isOGImageArray(data.image)) {
+        image = data.image;
+      }
+
       return {
         slug,
         title: String(data.title),
@@ -40,7 +61,7 @@ export function getAllPostsMeta(): PostMeta[] {
         description: String(data.description),
         tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
         author: typeof data.author === 'string' ? data.author : undefined,
-        image: data.image as any,
+        image,
       }
     })
     .filter((m): m is PostMeta => Boolean(m))

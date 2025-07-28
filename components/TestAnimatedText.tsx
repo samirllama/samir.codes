@@ -251,7 +251,7 @@ export default function TestAnimatedText({ text }: TestAnimatedTextProps) {
 
   return (
     <div
-      className="accelerate hero-title mb-8 text-[max(5rem,min(6.5rem,6.5vw))] font-transitional bg-opacity-0 py-3 lg:py-4 xl:py-5 whitespace-nowrap relative min-w-full text-right"
+      className="accelerate hero-title mb-8 text-[max(5rem,min(6.5rem,6.5vw))] font-transitional bg-opacity-0 py-3 lg:py-4 xl:py-5 whitespace-nowrap relative min-w-full text-right text-text-default"
       ref={compRef}
     >
       {text.split("").map((char, index) => (

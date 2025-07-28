@@ -2,8 +2,7 @@
 
 import { db } from '@/db'
 import { eq } from 'drizzle-orm'
-import { cache } from 'react'
-import { issues, users } from '@/db/schema'
+
 import { mockDelay } from './utils'
 
 

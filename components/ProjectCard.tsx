@@ -23,7 +23,7 @@ const ProjectCard = ({
           alt={finalAltText}
           layout="fill"
           className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => {
+          onError={() => {
             
           }}
         />

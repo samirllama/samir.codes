@@ -99,13 +99,13 @@ const Hero = () => {
       ref={heroRef}
     >
       <div className="flex flex-col gap-8 md:gap-12 lg:gap-16 items-center">
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-gray-900 drop-shadow-lg word-animation-container">
+        <h1 className="text-step-4 md:text-7xl lg:text-8xl font-extrabold leading-tight text-text-default drop-shadow-lg word-animation-container">
           {"My Professional Journey".split(" ").map((word, index) => (
             <span
               key={index}
               className={cn(
                 `hero-header-word inline-block mr-2 last:mr-0`,
-                word === "Professional" ? "font-transitional" : ""
+                word === "Professional" ? "font-transitional" : "font-heading"
               )}
             >
               {word}
@@ -113,17 +113,17 @@ const Hero = () => {
           ))}
         </h1>
 
-        <p className="hero-subheading text-xl md:text-2xl text-gray-700 max-w-2xl px-4">
+        <p className="hero-subheading text-xl md:text-2xl text-text-muted max-w-2xl px-4">
           Explore my experience, projects, and contributions in the world of
           software development.
         </p>
 
-        <p className="hero-body text-lg md:text-xl text-gray-600 max-w-xl px-4">
+        <p className="hero-body text-lg md:text-xl text-text-muted max-w-xl px-4">
           This timeline showcases my professional growth and the diverse
           challenges I&apos;ve tackled.
         </p>
 
-        <button className="hero-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
+        <button className="hero-button bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 active:scale-95">
           View Projects
         </button>
       </div>

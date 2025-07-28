@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
+
 import { toast } from "react-hot-toast";
 import { registerSchema } from "../lib/validation";
 import { Button } from "@/components/ui/Button";

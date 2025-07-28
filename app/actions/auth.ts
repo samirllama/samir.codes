@@ -6,6 +6,7 @@ import { users, passwordResetTokens } from "@/db/schema";
 import bcrypt from 'bcryptjs';
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
+import { signIn } from "@/auth";
 
 const signupSchema = z.object({
   email: z.string().email(),
@@ -34,7 +35,7 @@ export async function actionSignUpUser(values: unknown) {
       email: email,
       password: hashedPassword,
     });
-  } catch (e) {
+  } catch (_error: unknown) {
     return {
       error: "Email already in use",
     };
@@ -92,8 +93,8 @@ export async function actionForgotPassword(email: string) {
       userId: user.id,
       expiresAt: expiresAt,
     });
-  } catch (e) {
-    console.error("Error inserting password reset token:", e);
+  } catch (_error: unknown) {
+    console.error("Error inserting password reset token:", error);
     return {
       error: "Failed to generate password reset link. Please try again.",
     };
@@ -148,8 +149,8 @@ export async function actionResetPassword(token: string, newPassword: string) {
       success: true,
       message: "Password has been reset successfully.",
     };
-  } catch (e) {
-    console.error("Error resetting password:", e);
+  } catch (_error: unknown) {
+    console.error("Error resetting password:", error);
     return {
       error: "Failed to reset password. Please try again.",
     };
