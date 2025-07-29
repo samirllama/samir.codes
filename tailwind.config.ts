@@ -5,6 +5,81 @@ import typography from '@tailwindcss/typography';
 import forms from '@tailwindcss/forms';
 import aspectRatio from '@tailwindcss/aspect-ratio';
 import containerQueries from '@tailwindcss/container-queries';
+import plugin from 'tailwindcss/plugin';
+
+export const typographyFluidPlugin = plugin(function ({ addUtilities }: PluginAPI) {
+    const fontUtilities = {
+        '.text-fluid-h1': {
+            fontSize: 'var(--font-size-step-5)',
+            lineHeight: '1.1',
+            fontWeight: '600',
+            fontFamily: 'var(--font-display)',
+        },
+        '.text-fluid-h2': {
+            fontSize: 'var(--font-size-step-4)',
+            lineHeight: '1.2',
+            fontWeight: '500',
+            fontFamily: 'var(--font-display)',
+        },
+        '.text-fluid-h3': {
+            fontSize: 'var(--font-size-step-3)',
+            lineHeight: '1.3',
+            fontWeight: '500',
+            fontFamily: 'var(--font-display, "Helvetica Now Display", sans-serif)',
+        },
+        '.text-fluid-body': {
+            fontSize: 'var(--font-size-step-0)',
+            lineHeight: '1.75',
+            fontWeight: '400',
+            fontFamily: 'var(--font-body, "Inter", sans-serif)',
+        },
+        // testing this Typography
+        '.text-fluid-body-libre': {
+            fontSize: 'var(--font-size-step-0)',
+            lineHeight: '1.75',
+            fontWeight: '400',
+            fontFamily: 'var(--font-body-libre, "Inter", sans-serif)',
+        },
+        '.text-fluid-meta': {
+            fontSize: 'var(--font-size-step--1)',
+            lineHeight: '1.6',
+            fontWeight: '400',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            fontFamily: 'var(--font-body, "Inter", sans-serif)',
+        },
+        '.text-fluid-caption': {
+            fontSize: 'var(--font-size-step--2)',
+            lineHeight: '1.4',
+            fontWeight: '300',
+            fontFamily: 'var(--font-body, "Inter", sans-serif)',
+        },
+    };
+
+    const spacingVars = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+
+    const spacingUtilities = spacingVars.flatMap((size) => {
+        const varRef = `var(--my-spacing-${size})`;
+        return [
+            { [`.pt-fluid-${size}`]: { paddingTop: varRef } },
+            { [`.pb-fluid-${size}`]: { paddingBottom: varRef } },
+            { [`.pl-fluid-${size}`]: { paddingLeft: varRef } },
+            { [`.pr-fluid-${size}`]: { paddingRight: varRef } },
+            { [`.px-fluid-${size}`]: { paddingLeft: varRef, paddingRight: varRef } },
+            { [`.py-fluid-${size}`]: { paddingTop: varRef, paddingBottom: varRef } },
+            { [`.mt-fluid-${size}`]: { marginTop: varRef } },
+            { [`.mb-fluid-${size}`]: { marginBottom: varRef } },
+            { [`.ml-fluid-${size}`]: { marginLeft: varRef } },
+            { [`.mr-fluid-${size}`]: { marginRight: varRef } },
+            { [`.mx-fluid-${size}`]: { marginLeft: varRef, marginRight: varRef } },
+            { [`.my-fluid-${size}`]: { marginTop: varRef, marginBottom: varRef } },
+        ];
+    });
+
+    addUtilities(fontUtilities);
+    addUtilities(spacingUtilities, { respectPrefix: false });
+});
+
 
 const config: Config = {
     content: [
@@ -33,44 +108,43 @@ const config: Config = {
                 'default': 'var(--my-shadow-default)',
             },
             colors: {
-                'surface-page': 'var(--my-color-surface-page)',
-                'surface-card': 'var(--my-color-surface-card)',
-                'surface-muted': 'var(--my-color-surface-muted)',
-                'menu-bg': 'var(--my-color-menu-bg)',
-                'menu-text': 'var(--my-color-menu-text)',
-                'timeline-bg': 'var(--my-color-timeline-bg)',
-                'timeline-dot': 'var(--my-color-timeline-dot)',
-                'timeline-border': 'var(--my-color-timeline-border)',
-                'text-default': 'var(--my-color-text-default)',
-                'text-muted': 'var(--my-color-text-muted)',
-                'text-inverted': 'var(--my-color-text-inverted)',
-                'border-default': 'var(--my-color-border-default)',
-                'border-subtle': 'var(--my-color-border-subtle)',
-                'primary': 'var(--my-color-primary)',
-                'secondary': 'var(--my-color-secondary)',
-                'accent-primary': 'var(--my-color-accent-primary)',
-                'accent-secondary': 'var(--my-color-accent-secondary)',
-                'danger': 'var(--my-color-danger)',
-                'highlight': 'var(--my-color-highlight)',
-                'code-bg': 'var(--my-color-code-bg)',
-                'code-text': 'var(--my-color-code-text)',
+                'surface-page': 'var(--color-surface-page)',
+                'surface-card': 'var(--color-surface-card)',
+                'surface-muted': 'var(--color-surface-muted)',
+                'menu-bg': 'var(--color-menu-bg)',
+                'menu-text': 'var(--color-menu-text)',
+                'timeline-bg': 'var(--color-timeline-bg)',
+                'timeline-dot': 'var(--color-timeline-dot)',
+                'timeline-border': 'var(--color-timeline-border)',
+                'text-default': 'var(--color-text-default)',
+                'text-muted': 'var(--color-text-muted)',
+                'text-inverted': 'var(--color-text-inverted)',
+                'border-default': 'var(--color-border-default)',
+                'border-subtle': 'var(--color-border-subtle)',
+                'primary': 'var(--color-primary)',
+                'secondary': 'var(--color-secondary)',
+                'accent-primary': 'var(--color-accent-primary)',
+                'accent-secondary': 'var(--color-accent-secondary)',
+                'danger': 'var(--color-danger)',
+                'highlight': 'var(--color-highlight)',
+                'code-bg': 'var(--color-code-bg)',
+                'code-text': 'var(--color-code-text)',
             },
             fontFamily: {
-                'body': ['var(--my-font-body)', ...fontFamily.sans],
-                'heading': ['var(--my-font-heading)', ...fontFamily.sans],
-                'mono': ['var(--my-font-mono)', ...fontFamily.mono],
-                'transitional': ['var(--my-font-transitional)', ...fontFamily.serif],
-                'geist-mono': ['var(--my-font-geist-mono)', ...fontFamily.mono],
+                'body': ['var(--font-body)', ...fontFamily.sans],
+                'mona': ['var(--font-mona)', ...fontFamily.mono],
+                'mono': ['var(--font-geist-mono)', ...fontFamily.mono],
+                'transitional': ['var(--font-transitional)', ...fontFamily.serif],
             },
             fontSize: {
-                'step--2': 'var(--my-font-size-step--2)',
-                'step--1': 'var(--my-font-size-step--1)',
-                'step-0': 'var(--my-font-size-step-0)',
-                'step-1': 'var(--my-font-size-step-1)',
-                'step-2': 'var(--my-font-size-step-2)',
-                'step-3': 'var(--my-font-size-step-3)',
-                'step-4': 'var(--my-font-size-step-4)',
-                'step-5': 'var(--my-font-size-step-5)',
+                'step--2': 'var(--font-size-step--2)',
+                'step--1': 'var(--font-size-step--1)',
+                'step-0': 'var(--font-size-step-0)',
+                'step-1': 'var(--font-size-step-1)',
+                'step-2': 'var(--font-size-step-2)',
+                'step-3': 'var(--font-size-step-3)',
+                'step-4': 'var(--font-size-step-4)',
+                'step-5': 'var(--font-size-step-5)',
             },
             lineHeight: {
                 'tight': "var(--my-line-height-tight)",
@@ -156,15 +230,16 @@ const config: Config = {
         },
     },
     plugins: [
+        typographyFluidPlugin,
+        typography({ className: 'mdx-prose' }),
         aspectRatio,
         containerQueries,
         forms,
-        typography({ className: 'mdx-prose' }),
         function ({ addComponents, addUtilities }: PluginAPI) {
             addComponents({
                 ".text-gradient": {
                     "@apply bg-clip-text text-transparent": {},
-                    "background-image": "linear-gradient(to right, var(--my-color-primary), var(--my-color-secondary))",
+                    "background-image": "linear-gradient(to right, var(--color-primary), var(--color-secondary))",
                 },
             });
 

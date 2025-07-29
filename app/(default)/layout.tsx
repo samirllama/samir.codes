@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import AppHeader from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import AppMenu from "@/components/ui/app-menu";
+import AppHeaderV2 from "../../components/ui/HeaderV2";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={webAppClasses}>
+      {/* <AppHeaderV2 toggleAction={toggleMenu} isMenuOpen={isMenuOpen} /> */}
       <AppHeader toggleAction={toggleMenu} isMenuOpen={isMenuOpen} />
       <main ref={mainRef} className="pt-40 relative min-h:100vh scroll-content">
         {children}

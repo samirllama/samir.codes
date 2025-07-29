@@ -17,11 +17,11 @@ pre code {
 .mdx-prose a {
   text-underline-offset: 2px;
   transition: color 150ms ease-in-out, text-decoration-color 150ms ease-in-out;
-  text-decoration-color: rgba(var(--my-color-primary-rgb), 0.5);
+  text-decoration-color: rgba(var(--color-primary-rgb), 0.5);
 }
 
 .mdx-prose a:hover {
-  text-decoration-color: rgba(var(--my-color-secondary-rgb), 0.7);
+  text-decoration-color: rgba(var(--color-secondary-rgb), 0.7);
 }
 
 /* External Link Indicator */
@@ -43,9 +43,9 @@ pre code {
   background-color: var(--my-gray-alpha-100);
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  font-size: var(--my-font-size-step--1);
-  font-family: var(--my-font-geist-mono), monospace;
-  color: var(--my-color-code-text);
+  font-size: var(--font-size-step--1);
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--color-code-text);
 }
 
 /* Rehype Pretty Code Styling */
@@ -54,7 +54,7 @@ pre code {
 }
 
 .mdx-prose figure[data-rehype-pretty-code-figure] > pre {
-  border: 1px solid rgb(var(--my-color-border-subtle-rgb));
+  border: 1px solid rgb(var(--color-border-subtle-rgb));
   border-radius: 6px;
   padding: var(--my-spacing-md);
   overflow-x: auto;
@@ -64,19 +64,19 @@ pre code {
 
 .mdx-prose figure[data-rehype-pretty-code-figure] > pre > code {
   display: grid;
-  font-family: var(--my-font-geist-mono), monospace;
+  font-family: var(--font-geist-mono), monospace;
   background-color: transparent !important;
   font-size: inherit;
 }
 
 /* Code Highlights */
 .mdx-prose .line--highlighted {
-  background-color: rgba(var(--my-color-primary-rgb), 0.1);
-  box-shadow: inset 3px 0 0 0 rgb(var(--my-color-primary-rgb));
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  box-shadow: inset 3px 0 0 0 rgb(var(--color-primary-rgb));
 }
 
 .mdx-prose .word--highlighted {
-  background-color: rgba(var(--my-color-secondary-rgb), 0.2);
+  background-color: rgba(var(--color-secondary-rgb), 0.2);
   padding: 0.1em 0.2em;
   border-radius: 3px;
 }
@@ -84,11 +84,11 @@ pre code {
 /* Code Block Titles */
 .mdx-prose [data-rehype-pretty-code-title] {
   font-size: 0.85em;
-  font-family: var(--my-font-geist-mono), monospace;
-  color: rgba(var(--my-color-foreground-rgb), 0.7);
+  font-family: var(--font-geist-mono), monospace;
+  color: rgba(var(--color-foreground-rgb), 0.7);
   background-color: var(--my-gray-alpha-200);
   padding: var(--my-spacing-sm) var(--my-spacing-md);
-  border: 1px solid rgb(var(--my-color-border-subtle-rgb));
+  border: 1px solid rgb(var(--color-border-subtle-rgb));
   border-bottom: none;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;

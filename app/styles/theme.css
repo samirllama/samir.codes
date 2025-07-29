@@ -22,70 +22,70 @@
   );
 
   /* Fluid Type Scale */
-  --my-font-size-step--2-min: 12;
-  --my-font-size-step--2-max: 14;
-  --my-font-size-step--1-min: 14;
-  --my-font-size-step--1-max: 16;
-  --my-font-size-step-0-min: 16;
-  --my-font-size-step-0-max: 18;
-  --my-font-size-step-1-min: 19.2;
-  --my-font-size-step-1-max: 22.5;
-  --my-font-size-step-2-min: 23.04;
-  --my-font-size-step-2-max: 28.13;
-  --my-font-size-step-3-min: 27.65;
-  --my-font-size-step-3-max: 35.16;
-  --my-font-size-step-4-min: 33.18;
-  --my-font-size-step-4-max: 43.95;
-  --my-font-size-step-5-min: 39.81;
-  --my-font-size-step-5-max: 54.93;
+  --font-size-step--2-min: 12;
+  --font-size-step--2-max: 14;
+  --font-size-step--1-min: 14;
+  --font-size-step--1-max: 16;
+  --font-size-step-0-min: 16;
+  --font-size-step-0-max: 18;
+  --font-size-step-1-min: 19.2;
+  --font-size-step-1-max: 22.5;
+  --font-size-step-2-min: 23.04;
+  --font-size-step-2-max: 28.13;
+  --font-size-step-3-min: 27.65;
+  --font-size-step-3-max: 35.16;
+  --font-size-step-4-min: 33.18;
+  --font-size-step-4-max: 43.95;
+  --font-size-step-5-min: 39.81;
+  --font-size-step-5-max: 54.93;
 
-  --my-font-size-step--2: calc(
-    ((var(--my-font-size-step--2-min) / 16) * 1rem) +
-      (var(--my-font-size-step--2-max) - var(--my-font-size-step--2-min)) *
+  --font-size-step--2: calc(
+    ((var(--font-size-step--2-min) / 16) * 1rem) +
+      (var(--font-size-step--2-max) - var(--font-size-step--2-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step--1: calc(
-    ((var(--my-font-size-step--1-min) / 16) * 1rem) +
-      (var(--my-font-size-step--1-max) - var(--my-font-size-step--1-min)) *
+  --font-size-step--1: calc(
+    ((var(--font-size-step--1-min) / 16) * 1rem) +
+      (var(--font-size-step--1-max) - var(--font-size-step--1-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-0: calc(
-    ((var(--my-font-size-step-0-min) / 16) * 1rem) +
-      (var(--my-font-size-step-0-max) - var(--my-font-size-step-0-min)) *
+  --font-size-step-0: calc(
+    ((var(--font-size-step-0-min) / 16) * 1rem) +
+      (var(--font-size-step-0-max) - var(--font-size-step-0-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-1: calc(
-    ((var(--my-font-size-step-1-min) / 16) * 1rem) +
-      (var(--my-font-size-step-1-max) - var(--my-font-size-step-1-min)) *
+  --font-size-step-1: calc(
+    ((var(--font-size-step-1-min) / 16) * 1rem) +
+      (var(--font-size-step-1-max) - var(--font-size-step-1-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-2: calc(
-    ((var(--my-font-size-step-2-min) / 16) * 1rem) +
-      (var(--my-font-size-step-2-max) - var(--my-font-size-step-2-min)) *
+  --font-size-step-2: calc(
+    ((var(--font-size-step-2-min) / 16) * 1rem) +
+      (var(--font-size-step-2-max) - var(--font-size-step-2-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-3: calc(
-    ((var(--my-font-size-step-3-min) / 16) * 1rem) +
-      (var(--my-font-size-step-3-max) - var(--my-font-size-step-3-min)) *
+  --font-size-step-3: calc(
+    ((var(--font-size-step-3-min) / 16) * 1rem) +
+      (var(--font-size-step-3-max) - var(--font-size-step-3-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-4: calc(
-    ((var(--my-font-size-step-4-min) / 16) * 1rem) +
-      (var(--my-font-size-step-4-max) - var(--my-font-size-step-4-min)) *
+  --font-size-step-4: calc(
+    ((var(--font-size-step-4-min) / 16) * 1rem) +
+      (var(--font-size-step-4-max) - var(--font-size-step-4-min)) *
       var(--my-fluid-bp)
   );
-  --my-font-size-step-5: calc(
-    ((var(--my-font-size-step-5-min) / 16) * 1rem) +
-      (var(--my-font-size-step-5-max) - var(--my-font-size-step-5-min)) *
+  --font-size-step-5: calc(
+    ((var(--font-size-step-5-min) / 16) * 1rem) +
+      (var(--font-size-step-5-max) - var(--font-size-step-5-min)) *
       var(--my-fluid-bp)
   );
 
   /* Fluid Spacing */
-  --my-spacing-xs: calc(var(--my-font-size-step-0) * 0.5);
-  --my-spacing-sm: calc(var(--my-font-size-step-0) * 0.75);
-  --my-spacing-md: calc(var(--my-font-size-step-0) * 1);
-  --my-spacing-lg: calc(var(--my-font-size-step-0) * 1.5);
-  --my-spacing-xl: calc(var(--my-font-size-step-0) * 2);
+  --my-spacing-xs: calc(var(--font-size-step-0) * 0.5);
+  --my-spacing-sm: calc(var(--font-size-step-0) * 0.75);
+  --my-spacing-md: calc(var(--font-size-step-0) * 1);
+  --my-spacing-lg: calc(var(--font-size-step-0) * 1.5);
+  --my-spacing-xl: calc(var(--font-size-step-0) * 2);
 
   /* Layout & Sizing */
   --my-nav-height: 5rem;
@@ -120,33 +120,37 @@
   --my-z-index-loader: 9999;
 
   /* Semantic Color Palette (Light Theme) */
-  --my-color-surface-page: oklch(98.8% 0.007 260);
-  --my-color-surface-card: oklch(100% 0 0);
-  --my-color-surface-muted: oklch(94% 0.01 260);
-  --my-color-text-default: oklch(12% 0.015 260);
-  --my-color-text-muted: oklch(58% 0.03 260);
-  --my-color-text-inverted: oklch(100% 0 0);
-  --my-color-border-default: oklch(90% 0.01 260);
-  --my-color-border-subtle: oklch(95% 0.005 260);
-  --my-color-primary: #0f62fe;
-  --my-color-secondary: #6366f1;
-  --my-color-accent-primary: #f97316;
-  --my-color-accent-secondary: #fb923c;
-  --my-color-danger: #ef4444;
-  --my-color-code-bg: #f1f5f9;
-  --my-color-code-text: #1e293b;
-  --my-color-highlight: #fffdd0;
-  --my-color-menu-bg: var(--my-oklch-black);
-  --my-color-menu-text: var(--my-oklch-white);
-  --my-color-timeline-bg: var(--my-color-surface-page);
-  --my-color-timeline-border: var(--my-color-text-default);
-  --my-color-timeline-dot: var(--my-color-text-default);
+  --color-surface-page: oklch(98.8% 0.007 260);
+  --color-surface-card: oklch(100% 0 0);
+  --color-surface-muted: oklch(94% 0.01 260);
+  --color-text-default: oklch(12% 0.015 260);
+  --color-text-muted: oklch(58% 0.03 260);
+  --color-text-inverted: oklch(100% 0 0);
+  --color-border-default: oklch(90% 0.01 260);
+  --color-border-subtle: oklch(95% 0.005 260);
+  --color-primary: #0f62fe;
+  --color-secondary: #6366f1;
+  --color-accent-primary: #f97316;
+  --color-accent-secondary: #fb923c;
+  --color-danger: #ef4444;
+  --color-code-bg: #f1f5f9;
+  --color-code-text: #1e293b;
+  --color-highlight: #fffdd0;
+  --color-menu-bg: var(--my-oklch-black);
+  --color-menu-text: var(--my-oklch-white);
+  --color-timeline-bg: var(--color-surface-page);
+  --color-timeline-border: var(--color-text-default);
+  --color-timeline-dot: var(--color-text-default);
+  --sc-surface-header: var(--color-surface-page);
+  --sc-red-1: #ff4d4d;
+  --sc-orange-2: #ff9a4d;
+  --gray-lightest: #f8f9fa;
 
   /* RGB versions for alpha transparency */
-  --my-color-primary-rgb: 15, 98, 254;
-  --my-color-secondary-rgb: 99, 102, 241;
-  --my-color-foreground-rgb: 30, 41, 59; /* Corresponds to text-default dark text */
-  --my-color-border-subtle-rgb: 235, 237, 240;
+  --color-primary-rgb: 15, 98, 254;
+  --color-secondary-rgb: 99, 102, 241;
+  --color-foreground-rgb: 30, 41, 59; /* Corresponds to text-default dark text */
+  --color-border-subtle-rgb: 235, 237, 240;
   --my-gray-alpha-100: oklch(0% 0 0 / 0.05);
   --my-gray-alpha-200: oklch(0% 0 0 / 0.1);
 
@@ -158,46 +162,61 @@
     0 2px 4px -2px rgba(var(--my-shadow-base-rgb), 0.1);
 
   /* Font Families */
-  --my-font-inter: "Inter", sans-serif;
-  --my-font-mono: "MonaspaceNeon", monospace;
-  --my-font-geist-mono: "Geist Mono", monospace; /* Added for mdx */
-  --my-font-body: var(--my-font-transitional);
-  --my-font-heading: var(--my-font-inter);
-  --my-font-transitional: Charter, "Bitstream Charter", "Sitka Text", Cambria,
+  --font-heading: "MonaspaceXenon", monospace;
+  --font-body-libre: "Libre Baskerville", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria,
     Merriweather, Georgia, "Liberation Serif", serif;
+  --font-mona: "MonaspaceNeon", monospace;
+  --font-geist-mono: "Geist Mono", monospace;
+
+  /* Glass Effect Variables */
+  --c-glass: var(--color-surface-card);
+  --c-light: var(--my-oklch-white);
+  --c-dark: var(--my-oklch-black);
+  --c-content: var(--color-text-default);
+  --saturation: 120%;
+  --glass-reflex-light: 1;
+  --glass-reflex-dark: 0;
 }
 
 /* Dark Theme Overrides */
 .dark {
-  --my-color-surface-page: oklch(8% 0.02 260);
-  --my-color-surface-card: oklch(12% 0.015 260);
-  --my-color-surface-muted: #161b22;
-  --my-color-text-default: oklch(98.8% 0.007 260);
-  --my-color-text-muted: oklch(70% 0.01 260);
-  --my-color-text-inverted: oklch(12% 0.015 260);
-  --my-color-border-default: #30363d;
-  --my-color-border-subtle: #21262d;
-  --my-color-primary: #60a5fa;
-  --my-color-secondary: #a78bfa;
-  --my-color-accent-primary: #f97316;
-  --my-color-accent-secondary: #fb923c;
-  --my-color-danger: #f87171;
-  --my-color-code-bg: #1e293b;
-  --my-color-code-text: #f3f4f6;
-  --my-color-highlight: #1e293b;
-  --my-color-menu-bg: var(--my-oklch-white);
-  --my-color-menu-text: var(--my-oklch-black);
-  --my-color-timeline-bg: var(--my-color-surface-card);
-  --my-color-timeline-border: var(--my-color-text-default);
-  --my-color-timeline-dot: var(--my-color-text-default);
+  --color-surface-page: oklch(8% 0.02 260);
+  --color-surface-card: oklch(12% 0.015 260);
+  --color-surface-muted: #161b22;
+  --color-text-default: oklch(98.8% 0.007 260);
+  --color-text-muted: oklch(70% 0.01 260);
+  --color-text-inverted: oklch(12% 0.015 260);
+  --color-border-default: #30363d;
+  --color-border-subtle: #21262d;
+  --color-primary: #60a5fa;
+  --color-secondary: #a78bfa;
+  --color-accent-primary: #f97316;
+  --color-accent-secondary: #fb923c;
+  --color-danger: #f87171;
+  --color-code-bg: #1e293b;
+  --color-code-text: #f3f4f6;
+  --color-highlight: #1e293b;
+  --color-menu-bg: var(--my-oklch-white);
+  --color-menu-text: var(--my-oklch-black);
+  --color-timeline-bg: var(--color-surface-card);
+  --color-timeline-border: var(--color-text-default);
+  --color-timeline-dot: var(--color-text-default);
+  --sc-surface-header: var(--color-surface-page);
+  --gray-lightest: #21262d;
 
   /* RGB versions for alpha transparency */
-  --my-color-primary-rgb: 96, 165, 250;
-  --my-color-secondary-rgb: 167, 139, 250;
-  --my-color-foreground-rgb: 248, 250, 252; /* Corresponds to text-default light text */
-  --my-color-border-subtle-rgb: 33, 38, 45;
+  --color-primary-rgb: 96, 165, 250;
+  --color-secondary-rgb: 167, 139, 250;
+  --color-foreground-rgb: 248, 250, 252; /* Corresponds to text-default light text */
+  --color-border-subtle-rgb: 33, 38, 45;
   --my-gray-alpha-100: oklch(100% 0 0 / 0.07);
   --my-gray-alpha-200: oklch(100% 0 0 / 0.14);
+
+  /* Glass Effect Variables (Dark) */
+  --glass-reflex-light: 0;
+  --glass-reflex-dark: 1;
 }
 
 @media screen and (min-width: 1140px) {

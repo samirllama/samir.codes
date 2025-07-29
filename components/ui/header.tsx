@@ -5,8 +5,9 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import AnimatedFigmaLogo from "../AnimatedNameLogo";
-
+import NameLogo from "../NameLogo";
 import ThemeToggle from "../ThemeToggle";
+import GlassFilter from "./GlassFilter";
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
@@ -29,11 +30,11 @@ export default function AppHeader({
   }, []);
 
   const headerContainerStyles = cn("header-container", {
-    "header-container-scrolled": hasScrolled && !isMenuOpen,
+    "header-container-glass": hasScrolled && !isMenuOpen,
   });
 
   const headerBStyles = cn([
-    "app-header-block px-12",
+    "header-main",
     {
       "text-menu-text": isMenuOpen,
       "text-text-default": !isMenuOpen,
@@ -48,11 +49,14 @@ export default function AppHeader({
 
   return (
     <div className={headerContainerStyles}>
-      <header className="items-center justify-center">
-        <div className={headerBStyles}>
+      {/* <header className="items-center justify-center"> */}
+      <header className={headerBStyles}>
+        <nav className="header-nav">
           <Link href="/">
-            <AnimatedFigmaLogo />
+            {/* h-34 px */}
+            <NameLogo />
           </Link>
+
           <div className="flex items-center space-x-4">
             <div
               id="hamburger-button"
@@ -73,8 +77,9 @@ export default function AppHeader({
 
             <ThemeToggle />
           </div>
-        </div>
+        </nav>
       </header>
+      <GlassFilter />
     </div>
   );
 }
