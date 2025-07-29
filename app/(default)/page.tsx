@@ -16,9 +16,21 @@ export default function HomePage() {
   return (
     <article>
       <section id="experience" className="py-fluid-xl px-fluid-xl">
-        <h1 className="text-fluid-h1">Hello, I'm Baki Lama</h1>
-        <h2 className="text-fluid-h2 mt-fluid-lg">Experience</h2>
+        <h1 className="text-fluid-h1">Hello, I'm Samir</h1>
 
+        <p className="text-fluid-h4 mt-fluid-sm">
+          Your host, and the one responsible for just about everything on this
+          site. This is Samir Codes, the personal blog of a curios coder. I'm
+          currently building high‑performance web apps that scale supply chains
+          @BP.
+        </p>
+        <p className="text-fluid-body-1 mt-fluid-sm">
+          Your host, and the one responsible for just about everything on this
+          site. This is Samir Codes, the personal blog of a curios coder. I'm
+          currently building high‑performance web apps that scale supply chains
+          @BP.
+        </p>
+        <h2 className="text-fluid-h2 mt-fluid-lg">Experience</h2>
         <ul className="space-y-12">
           <li>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
@@ -47,15 +59,14 @@ export default function HomePage() {
 
           <li>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
-              <h3 className="text-h3 font-semibold">
-                Frontend Engineer ·{" "}
+              <h3 className="text-fluid-h3">
+                Lead Frontend Engineer ·
                 <span className="text-muted-foreground">Wells Fargo</span>
               </h3>
-              <time className="text-span text-sm text-muted-foreground mt-2 sm:mt-0">
-                2021 – 2023
-              </time>
+
+              <time className="text-fluid-meta mt-fluid-sm">2021 – 2023</time>
             </div>
-            <p className="text-p mt-4 text-muted-foreground">
+            <p className="text-fluid-body-libre mt-fluid-sm">
               Delivered UI components for internal banking tools. Integrated
               analytics, A/B testing, and improved accessibility scores by 30%
               across critical journeys.

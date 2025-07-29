@@ -7,8 +7,7 @@ import { AnimatedArrow } from "@/components/ui/arrow";
 export default function Footer() {
   return (
     <footer className="bg-menu-bg py-16 px-8 md:px-12 w-screen relative left-1/2 -translate-x-1/2 min-h-[70vh] flex flex-col justify-center items-center">
-      <div className="border-2 border-black max-w-8xl mx-auto text-menu-text font-transitional flex-grow flex flex-col pb-10 justify-center items-center">
-        {/* Main content area, now a grid */}
+      <div className="max-w-8xl mx-auto text-menu-text font-transitional flex-grow flex flex-col pb-10 justify-center items-center">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full flex-grow items-center">
           {/* Column 1: Logo */}
           <div className="flex flex-col justify-start h-full">
@@ -19,7 +18,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Social Links (Center and Prominent) */}
           <div className="flex flex-wrap justify-around gap-8 text-xl">
             <a
               href="mailto:samirllama@gmail.com"
@@ -68,7 +66,6 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Column 3: Empty for now */}
           <div></div>
         </div>
 

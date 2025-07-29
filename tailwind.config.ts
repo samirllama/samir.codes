@@ -27,6 +27,18 @@ export const typographyFluidPlugin = plugin(function ({ addUtilities }: PluginAP
             fontWeight: '500',
             fontFamily: 'var(--font-display, "Helvetica Now Display", sans-serif)',
         },
+        '.text-fluid-h4': {
+            fontSize: 'var(--font-size-step-2)',
+            lineHeight: '1.75',
+            fontWeight: '500',
+            fontFamily: 'var(--font-body, "Inter", sans-serif)',
+        },
+        '.text-fluid-body-1': {
+            fontSize: 'var(--font-size-step-1)',
+            lineHeight: '1.75',
+            fontWeight: '500',
+            fontFamily: 'var(--font-body, "Inter", sans-serif)',
+        },
         '.text-fluid-body': {
             fontSize: 'var(--font-size-step-0)',
             lineHeight: '1.75',

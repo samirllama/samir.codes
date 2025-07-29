@@ -89,13 +89,6 @@
       box-shadow 500ms var(--my-ease-out-2);
   }
 
-  .header-container-scrolled {
-    background: hsl(from var(--color-surface-card) h s l / 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: var(--my-shadow-default);
-  }
-
   .header-container-glass {
     height: 68px;
     background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
