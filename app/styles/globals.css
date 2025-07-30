@@ -58,6 +58,16 @@
 }
 
 @layer components {
+  .bouncy-hover > li {
+    transform-origin: left center;
+    transition: transform 1s var(--bounce), opacity 0.3s linear;
+  }
+  .bouncy-hover:has(> li:hover) > li:not(:hover),
+  .bouncy-hover:has(> li:focus-within) > li:not(:focus-within) {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
   .pageLayout--col4 {
     display: grid;
     grid-auto-flow: column;
@@ -247,7 +257,7 @@
     border-image-source: linear-gradient(
       to right,
       var(--sc-red-1),
-      var(--sc-orange-2)
+      var(--color-accent-secondary)
     );
     border-left: 0;
     border-right: 0;
@@ -270,8 +280,12 @@
 
   .nav-stripe {
     flex: 1;
-    height: 2px;
-    background: linear-gradient(to right, var(--sc-red-1), var(--sc-orange-2));
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--sc-red-1),
+      var(--color-accent-secondary)
+    );
     margin: 0 1rem;
   }
 

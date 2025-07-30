@@ -96,10 +96,10 @@ const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className="timeline-entry-new relative flex items-center mb-16">
       <div className="timeline-meta w-full md:w-[25%] text-left">
-        <p className="text-lg text-timeline-text mt-0.5">{entry.dateRange}</p>
-        <h3 className="text-xl font-semibold text-timeline-text">
-          {entry.title}
-        </h3>
+        <p className="text-fluid-meta text-timeline-text mt-0.5">
+          {entry.dateRange}
+        </p>
+        <h3 className="text-fluid-h3 text-timeline-text">{entry.title}</h3>
       </div>
 
       {/* Dot */}

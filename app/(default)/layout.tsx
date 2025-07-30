@@ -114,10 +114,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       scroll={false}
                       onClick={(e) => handleNavClick(id, e)}
                       className={cn(
-                        "text-left transition-all duration-200",
+                        "text-left  transition-all duration-200 block",
                         activeId === id
-                          ? "font-bold scale-105 text-blue-600"
-                          : "text-gray-600 hover:text-gray-900"
+                          ? "text-accent-primary underline scale-105"
+                          : "text-default hover:text-accent-primary"
                       )}
                     >
                       {label}

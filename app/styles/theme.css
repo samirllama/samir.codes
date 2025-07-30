@@ -128,10 +128,11 @@
   --color-text-inverted: oklch(100% 0 0);
   --color-border-default: oklch(90% 0.01 260);
   --color-border-subtle: oklch(95% 0.005 260);
-  --color-primary: #0f62fe;
-  --color-secondary: #6366f1;
+  --color-primary: oklch(12% 0.015 260);
+  --color-secondary: oklch(58% 0.03 260);
   --color-accent-primary: #f97316;
   --color-accent-secondary: #fb923c;
+  --sc-red-1: #ff4d4d;
   --color-danger: #ef4444;
   --color-code-bg: #f1f5f9;
   --color-code-text: #1e293b;
@@ -142,14 +143,12 @@
   --color-timeline-border: var(--color-text-default);
   --color-timeline-dot: var(--color-text-default);
   --sc-surface-header: var(--color-surface-page);
-  --sc-red-1: #ff4d4d;
-  --sc-orange-2: #ff9a4d;
   --gray-lightest: #f8f9fa;
 
   /* RGB versions for alpha transparency */
   --color-primary-rgb: 15, 98, 254;
   --color-secondary-rgb: 99, 102, 241;
-  --color-foreground-rgb: 30, 41, 59; /* Corresponds to text-default dark text */
+  --color-foreground-rgb: 30, 41, 59;
   --color-border-subtle-rgb: 235, 237, 240;
   --my-gray-alpha-100: oklch(0% 0 0 / 0.05);
   --my-gray-alpha-200: oklch(0% 0 0 / 0.1);
@@ -190,8 +189,8 @@
   --color-text-inverted: oklch(12% 0.015 260);
   --color-border-default: #30363d;
   --color-border-subtle: #21262d;
-  --color-primary: #60a5fa;
-  --color-secondary: #a78bfa;
+  --color-primary: oklch(98.8% 0.007 260);
+  --color-secondary: oklch(70% 0.01 260);
   --color-accent-primary: #f97316;
   --color-accent-secondary: #fb923c;
   --color-danger: #f87171;
@@ -209,7 +208,7 @@
   /* RGB versions for alpha transparency */
   --color-primary-rgb: 96, 165, 250;
   --color-secondary-rgb: 167, 139, 250;
-  --color-foreground-rgb: 248, 250, 252; /* Corresponds to text-default light text */
+  --color-foreground-rgb: 248, 250, 252;
   --color-border-subtle-rgb: 33, 38, 45;
   --my-gray-alpha-100: oklch(100% 0 0 / 0.07);
   --my-gray-alpha-200: oklch(100% 0 0 / 0.14);

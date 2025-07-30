@@ -17,17 +17,17 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
       )}
       <div className="p-6 flex flex-col justify-between w-full md:w-1/2 bg-timeline-bg">
         <div>
-          <h2 className="text-2xl font-bold text-timeline-text mb-2">
+          <h2 className="text-fluid-h2 text-timeline-text mb-2">
             {entry.company}
           </h2>
-          <p className="text-base text-timeline-text leading-relaxed mb-4">
+          <p className="text-fluid-body text-timeline-text leading-relaxed mb-4">
             {entry.description}
           </p>
           <div className="flex flex-wrap gap-2 mb-6">
             {entry.techTags.map((tag) => (
               <span
                 key={tag}
-                className="border-timeline-border text-timeline-text text-sm font-medium px-3 py-1 rounded-md border border-timeline-border"
+                className="border-timeline-border text-timeline-text text-fluid-caption font-medium px-3 py-1 rounded-md border border-timeline-border"
               >
                 {tag}
               </span>
@@ -39,7 +39,7 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
             href={entry.projectUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 relative group inline-flex items-center text-timeline-text transition-colors duration-300"
+            className="mt-4 relative group inline-flex items-center text-timeline-text text-fluid-body transition-colors duration-300"
           >
             View Project
             <svg

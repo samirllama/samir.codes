@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 
 interface Project {
@@ -26,11 +25,9 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
                 <a
                   href={project.link}
                   target="_blank"
-                  
                   className="uppercase border-b border-accent-secondary w-full py-2 lg:py-[15px] flex items-end relative group transition-all ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:pl-0 a11y-focus"
                   aria-label={`View Project: ${project.name}`}
                 >
-                  
                   <span className="block overflow-hidden">
                     <span
                       className={cn([
@@ -48,11 +45,8 @@ const ProjectStack: React.FC<ProjectStackProps> = ({ projects }) => {
                     </span>
                   </span>
 
-                  
                   <span className="ml-auto text-right font-mono text-[10px] tracking-tight leading-none hidden lg:block relative overflow-hidden z-[1] transition-opacity ease-[cubic-bezier(0.83,0,0.17,1)] duration-[400ms] lg:opacity-100">
-                    <span className="block transform-none">
-                      View Project
-                    </span>
+                    <span className="block transform-none">View Project</span>
                   </span>
                 </a>
               </li>

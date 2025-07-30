@@ -1,11 +1,11 @@
 import TechStack from "@/components/tech-stack";
 import WorkExperienceTimeline from "@/components/WorkExperienceTimeline";
 import { skillCategories } from "@/lib/data/work-exp";
+import ProjectStack from "@/components/project-stack";
 
 /**
  *Header: “Welcome to My Lab of Rants & Reads”
 Sub‑header:
-
 CTAs:
 Latest Rant →
 Book Summaries →
@@ -14,6 +14,7 @@ Book Summaries →
 export default function HomePage() {
   return (
     <article>
+      {/* INTRO */}
       <section
         id="experience"
         className="py-fluid-xl px-fluid-xl mb-fluid-xl border border-2"
@@ -83,6 +84,7 @@ export default function HomePage() {
       >
         <h2 className="text-fluid-h2">Work Experience Timeline</h2>
       </section>
+
       {/* Section 3: Tech Stack */}
       <section id="tech-stack" className="h-[1024px]  py-fluid-xl px-fluid-xl">
         <h2 className="text-fluid-h2">Tech Stack</h2>

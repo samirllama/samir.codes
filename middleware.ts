@@ -9,7 +9,7 @@ function generateNonce(): string {
 }
 
 // Strict CSP for production only
-const generateCSPV1 = (nonce: string) => [
+const _generateCSPV1 = (nonce: string) => [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}'`,
     "style-src 'self' 'unsafe-inline'",
