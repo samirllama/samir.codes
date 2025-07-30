@@ -4,18 +4,6 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-/*
-
-
-<svg ...>
-  <g id="wavey-line">...</g>
-  <g id="letter-s">...</g>
-  <g id="letters-a-m-i-r">...</g>
-  <circle id="dot-shape-letter-i" />
-  <g id="letter-L">...</g>
-  <g id="letters-a-m-a">...</g>
-</svg>
-*/
 export const FigmaSVG = () => {
   const svgRef = useRef(null);
 
@@ -111,7 +99,7 @@ export const FigmaSVG = () => {
   );
 };
 
-const AnimatedFigmaLogo = () => (
+const _AnimatedFigmaLogo = () => (
   <div
     className="inline-flex items-center"
     style={{ width: "200px", height: "34px" }}
@@ -120,4 +108,4 @@ const AnimatedFigmaLogo = () => (
   </div>
 );
 
-export default AnimatedFigmaLogo;
+export default _AnimatedFigmaLogo;

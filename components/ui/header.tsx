@@ -4,7 +4,6 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import AnimatedFigmaLogo from "../AnimatedNameLogo";
 import NameLogo from "../NameLogo";
 import ThemeToggle from "../ThemeToggle";
 import GlassFilter from "./GlassFilter";

@@ -1,24 +1,9 @@
+// app/api/og/route.tsx
 import { ImageResponse } from "next/og";
 
-// Route segment config - essential for ImageResponse
 export const runtime = "edge";
 
-// Image metadata
-export const alt = "Samir Lama - Full-Stack Developer & Designer";
-export const size = {
-  width: 1200,
-  height: 630,
-};
-export const contentType = "image/png";
-
-export default async function Image() {
-  const monaspaceArgon = await fetch(
-    new URL(
-      "../../../public/fonts/MonaspaceArgon-Regular.woff2",
-      import.meta.url
-    )
-  ).then((res) => res.arrayBuffer());
-
+export async function GET() {
   const monaspaceNeon = await fetch(
     new URL(
       "../../../public/fonts/MonaspaceNeon-Regular.woff2",
@@ -30,50 +15,61 @@ export default async function Image() {
     (
       <div
         style={{
-          fontSize: 128,
-          background: "linear-gradient(to right, #1a202c, #2d3748)",
-          width: "100%",
-          height: "100%",
+          width: "1200px",
+          height: "630px",
+          background: "linear-gradient(to right, #0f172a, #1e293b)",
+          color: "white",
+          padding: "60px",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-          fontFamily: "'Monaspace Argon', sans-serif",
-          padding: "0 50px",
-          textAlign: "center",
+          justifyContent: "space-between",
+          fontFamily: "Monaspace Neon, monospace",
         }}
       >
-        <p
+        {/* Top: Badge */}
+        <div
           style={{
-            fontSize: 160,
-            fontWeight: "bold",
-            marginBottom: -40,
-            fontFamily: "'Monaspace Neon', sans-serif",
+            fontSize: 32,
+            padding: "10px 24px",
+            background: "rgba(255,255,255,0.1)",
+            borderRadius: "999px",
+            display: "inline-block",
+            width: "fit-content",
           }}
         >
-          Samir Lama
-        </p>
-        <p
+          Personal Blog
+        </div>
+
+        {/* Middle: Main content */}
+        <div>
+          <h1 style={{ fontSize: 100, margin: 0 }}>Samir Lama</h1>
+          <p
+            style={{
+              fontSize: 48,
+              opacity: 0.85,
+              marginTop: "20px",
+              maxWidth: "90%",
+            }}
+          >
+            Full‑Stack Developer & Designer
+          </p>
+        </div>
+
+        {/* Bottom: URL or signature */}
+        <div
           style={{
-            fontSize: 60,
-            opacity: 0.8,
-            fontFamily: "'Monaspace Argon', sans-serif",
+            fontSize: 28,
+            opacity: 0.5,
           }}
         >
-          Full-Stack Developer & Designer
-        </p>
+          samirlama.dev
+        </div>
       </div>
     ),
     {
-      ...size,
+      width: 1200,
+      height: 630,
       fonts: [
-        {
-          name: "Monaspace Argon",
-          data: monaspaceArgon,
-          style: "normal",
-          weight: 400,
-        },
         {
           name: "Monaspace Neon",
           data: monaspaceNeon,

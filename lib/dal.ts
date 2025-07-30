@@ -1,7 +1,7 @@
 'use server'
 
 import { db } from '@/db'
-import { eq } from 'drizzle-orm'
+// import { eq } from 'drizzle-orm'
 
 import { mockDelay } from './utils'
 
@@ -11,7 +11,7 @@ export async function getIssue(id: number) {
   try {
     await mockDelay(700)
     const result = await db.query.issues.findFirst({
-      where: eq(issues.id, id),
+      // where: eq(issues.id, id),
       with: {
         user: true,
       },

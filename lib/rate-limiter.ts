@@ -10,7 +10,8 @@ const redis = new Redis({
 
 export const limiter_fixed = new Ratelimit({
   redis,
-  limiter: Ratelimit.fixedWindow(5, '1 m'), // 5 requests per minute
+  // 5 Fixed window requests per minute
+  limiter: Ratelimit.fixedWindow(5, '1 m'),
   analytics: true,
   prefix: 'rate_limiter',
 });
@@ -32,10 +33,10 @@ export async function rateLimit_fixed(request: Request, key?: string) {
   return null;
 }
 
-
 export const limiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, '1 m'), // 5 requests per rolling minute
+  // SlidngWindow 5 requests per rolling minute
+  limiter: Ratelimit.slidingWindow(5, '1 m'),
   analytics: true,
   prefix: 'rate_limit',
 });

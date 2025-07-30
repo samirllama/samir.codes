@@ -9,15 +9,14 @@ export interface OGImage {
 }
 
 export interface PostMeta {
-  slug: string
-  title: string
-  date: string   // YYYY-MM-DD
-  description: string
-  tags?: string[]
-  author?: string
-  image?: OGImage | OGImage[]
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+  author: string | undefined;
+  image: OGImage | OGImage[] | undefined;
 }
-
 
 function isOGImage(image: unknown): image is OGImage {
   return (
@@ -46,7 +45,7 @@ export function getAllPostsMeta(): PostMeta[] {
       if (!fs.existsSync(mdxFile)) return null
       const { data } = matter(fs.readFileSync(mdxFile, 'utf8'))
       if (!data.title || !data.date || !data.description) return null
-      
+
       let image: OGImage | OGImage[] | undefined = undefined;
       if (isOGImage(data.image)) {
         image = data.image;

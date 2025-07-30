@@ -22,3 +22,15 @@ const nextConfig: NextConfig = {
 }
 
 export default withBundleAnalyzer(nextConfig)
+
+
+// import withBundleAnalyzer from '@next/bundle-analyzer';
+// const withConfig = withBundleAnalyzer({
+//   enabled: process.env.ANALYZE === 'true',
+//   openAnalyzer: false, // Optional: prevents opening browser automatically
+// });
+// const nextConfig: NextConfig = {
+//   reactStrictMode: true,
+//   // ... more config
+// };
+// export default withConfig(nextConfig);

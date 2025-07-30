@@ -6,19 +6,32 @@ import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
 
+type Params = Promise<{ slug: string }>;
+
 export const dynamic = "force-static";
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateStaticParams() {
+  const postsDir = path.join(process.cwd(), "app", "(default)", "posts");
+  const entries = await fs.promises.readdir(postsDir, { withFileTypes: true });
+
+  const slugs = entries
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) =>
+      fs.existsSync(path.join(postsDir, entry.name, "page.mdx"))
+    )
+    .map((entry) => ({ slug: entry.name }));
+
+  return slugs;
+}
+
+export default async function PostPage({ params }: { params: Params }) {
+  const { slug } = await params;
   const mdPath = path.join(
     process.cwd(),
     "app",
     "(default)",
     "posts",
-    params.slug,
+    slug,
     "page.mdx"
   );
 

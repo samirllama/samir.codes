@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 function getSVGElement(
   container: React.RefObject<HTMLDivElement | null>,
@@ -9,80 +9,6 @@ function getSVGElement(
   const el = gsap.utils.selector(container)(selector)[0];
   return el instanceof SVGGraphicsElement ? el : null;
 }
-
-const NameLogoV1 = () => {
-  const container = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-      const q = gsap.utils.selector(container);
-
-      const fades = q(
-        "#wavey-line, #letters-a-m-i-r, #dot-shape-letter-i, #letters-a-m-a"
-      );
-
-      const letterS = getSVGElement(container, "#letter-s");
-      const letterL = getSVGElement(container, "#letter-L");
-      if (!letterS || !letterL) return;
-
-      const origBBox = letterL.getBBox();
-      const targetBBox = letterS.getBBox();
-      const compactX = targetBBox.x + targetBBox.width + 10;
-      const originalX = origBBox.x;
-
-      gsap.set(letterL, { x: 0 });
-      gsap.set(fades, { xPercent: 0, opacity: 1 });
-
-      // Flags to avoid retriggering
-      let isCompact = false;
-
-      const fadeOutTl = gsap.timeline({ paused: true });
-      fadeOutTl.to(fades, {
-        xPercent: -20,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.03,
-        ease: "power2.out",
-      });
-
-      const letterLTl = gsap.timeline({ paused: true });
-      letterLTl.to(letterL, {
-        x: compactX - originalX,
-        duration: 0.5,
-        ease: "expo.out",
-      });
-
-      // Scroll trigger to monitor page scroll
-      ScrollTrigger.create({
-        start: 0,
-        end: 99999, // infinite
-        onUpdate: () => {
-          const scrollY = ScrollTrigger.scroll();
-
-          if (scrollY > 200 && !isCompact) {
-            // ➤ User scrolled past threshold, animate into compact state
-            isCompact = true;
-            letterLTl.play();
-            fadeOutTl.play();
-          } else if (scrollY <= 5 && isCompact) {
-            // ➤ User returned to top
-            isCompact = false;
-            letterLTl.reverse();
-            fadeOutTl.reverse();
-          }
-        },
-      });
-    },
-    { scope: container }
-  );
-
-  return (
-    <div ref={container} className="inline-flex items-center h-20 w-[200px]">
-      <FigmaSVG />
-    </div>
-  );
-};
 
 const NameLogo = () => {
   const container = useRef<HTMLDivElement>(null);
@@ -151,8 +77,8 @@ const NameLogo = () => {
   return (
     <div
       ref={container}
-      // className="inline-flex items-center h-6 w-[200px] sticky top-0"
       className="flex items-center w-40 top-0"
+      // className="inline-flex items-center h-6 w-[200px] sticky top-0"
     >
       <FigmaSVG />
     </div>
