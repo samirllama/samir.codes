@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function AppMenu({
   isMenuOpen,
-  onCloseMenu,
+  onCloseMenuAction,
 }: {
   isMenuOpen: boolean;
-  onCloseMenu: () => void;
+  onCloseMenuAction: () => void;
 }) {
   const menuContainerClasses = cn([
     "app-menu",
@@ -57,7 +57,7 @@ export default function AppMenu({
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Posts", href: "/posts" },
+    // { name: "Posts", href: "/posts" },
   ];
 
   return (
@@ -91,7 +91,7 @@ export default function AppMenu({
               <Link
                 className="relative group inline-flex items-center transition-opacity duration-500 hover:opacity-70"
                 href={item.href}
-                onClick={onCloseMenu}
+                onClick={onCloseMenuAction}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-menu-text transition-all duration-300 ease-out-quad group-hover:w-full"></span>

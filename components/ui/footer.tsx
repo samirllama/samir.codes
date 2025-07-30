@@ -53,9 +53,8 @@ export default function Footer() {
               <FaTwitter className="mr-2 text-3xl" /> Twitter
               <AnimatedArrow />
             </a>
-
             <a
-              href="https://mastodon.social/@samirllama"
+              href="https://mastodon.social/@samirdev"
               className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"

@@ -33,7 +33,7 @@ export const typographyFluidPlugin = plugin(function ({ addUtilities }: PluginAP
             fontWeight: '500',
             fontFamily: 'var(--font-body, "Inter", sans-serif)',
         },
-        '.text-fluid-body-1': {
+        '.text-fluid-body-lg': {
             fontSize: 'var(--font-size-step-1)',
             lineHeight: '1.75',
             fontWeight: '500',

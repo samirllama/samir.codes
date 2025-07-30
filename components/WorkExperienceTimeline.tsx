@@ -72,13 +72,13 @@ const WorkExperienceTimeline = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 text-timeline-text font-transitional">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-h2 text-left mb-12 sm:mb-16">Experience / Work</h2>
+    <section id="experience" className="py-fluid-xl text-timeline-text">
+      <div className="max-w-6xl">
+        <h2 className="text-fluid-h2 my-fluid-lg">Work/Experience</h2>
         <div ref={containerRef} className="relative">
           <div
             ref={timelineRef}
-            className="absolute left-[25%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
+            className="absolute left-[20%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
           ></div>
 
           <div className="relative space-y-16">
@@ -95,17 +95,14 @@ const WorkExperienceTimeline = () => {
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className="timeline-entry-new relative flex items-center mb-16">
-      <div className="timeline-meta w-full md:w-[25%] text-left">
-        <p className="text-fluid-meta text-timeline-text mt-0.5">
-          {entry.dateRange}
-        </p>
-        <h3 className="text-fluid-h3 text-timeline-text">{entry.title}</h3>
+      <div className="timeline-meta w-full md:w-[20%] text-left">
+        <time className="text-fluid-meta mt-fluid-sm">{entry.dateRange}</time>
       </div>
 
       {/* Dot */}
-      <div className="timeline-dot-new absolute left-[25%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-timeline-dot z-10"></div>
+      <div className="timeline-dot-new absolute left-[20%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-timeline-dot z-10"></div>
 
-      <div className="timeline-content-new w-full md:w-[75%] pl-8 text-left">
+      <div className="timeline-content-new w-full md:w-[85%] pl-8 text-left">
         <TimelineRightContentCard entry={entry} />
       </div>
     </div>

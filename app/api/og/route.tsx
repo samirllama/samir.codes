@@ -4,13 +4,6 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export async function GET() {
-  const monaspaceNeon = await fetch(
-    new URL(
-      "../../../public/fonts/MonaspaceNeon-Regular.woff2",
-      import.meta.url
-    )
-  ).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div
@@ -23,7 +16,7 @@ export async function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          fontFamily: "Monaspace Neon, monospace",
+          fontFamily: "monospace", // Use system fallback
         }}
       >
         {/* Top: Badge */}
@@ -69,14 +62,6 @@ export async function GET() {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: "Monaspace Neon",
-          data: monaspaceNeon,
-          style: "normal",
-          weight: 400,
-        },
-      ],
     }
   );
 }

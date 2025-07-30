@@ -1,5 +1,6 @@
 "use client";
 
+import { FaMastodon } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
 import Link from "next/link";
@@ -17,8 +18,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   //  nav items to match section IDs
   const navItems = useMemo(
     () => [
+      { id: "about", label: "About" },
       { id: "experience", label: "Experience" },
-      { id: "work-experience", label: "Timeline" },
       { id: "tech-stack", label: "Tech Stack" },
     ],
     []
@@ -92,7 +93,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={cn("web-app", { "is-active": isMenuOpen })}>
       <AppHeader toggleAction={toggleMenu} isMenuOpen={isMenuOpen} />
-      <AppMenu isMenuOpen={isMenuOpen} onCloseMenu={closeMenu} />
+      <AppMenu isMenuOpen={isMenuOpen} onCloseMenuAction={closeMenu} />
 
       <div className="pageLayout--col4">
         <main
@@ -134,32 +135,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="aside-module--pos_center">
                 <nav className="content-nav" aria-label="Socials">
                   <a
+                    href="https://linkedin.com/in/samirlama-dev"
                     className="self-socials-nav--link"
-                    href="https://twitter.com/samirllama"
                     target="_blank"
                     rel="noopener noreferrer me"
-                    aria-label="Follow me on twitter"
+                    aria-label="Follow me on github"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <svg
+                        xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
-                        viewBox="0 0 24 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="socials-nav--icon-svg ariaHidden"
+                        viewBox="0 0 24 24"
+                        className="socials-nav--icon-svg"
                         aria-hidden="true"
                       >
                         <path
-                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"
                           fill="currentColor"
+                          d="M22.247 0H1.753C.741 0 0 .74 0 1.753v20.494C0 23.17.83 24 1.753 24h20.494C23.264 24 24 23.26 24 22.247V1.753C24 .741 23.17 0 22.247 0zM7.383 20.306h-3.69V9.23h3.695v11.076h-.005zM5.54 7.753c-1.2 0-2.218-1.017-2.218-2.217S4.34 3.319 5.54 3.319s2.217 1.017 2.217 2.217S6.74 7.753 5.54 7.753zm14.765 12.553h-3.694V14.77c0-1.476-.37-2.953-1.846-2.953-1.477 0-1.847 1.477-1.847 2.953v5.54H9.225V9.23h3.694v1.293h.183c.459-.923 1.659-1.659 3.046-1.659 3.418 0 4.154 2.217 4.154 4.983v6.46h.004z"
                         ></path>
                       </svg>
                     </div>
                   </a>
                   <a
+                    href="https://github.com/samirllama"
                     className="self-socials-nav--link"
-                    href="https://linkedin.com/in/samirlama-dev"
                     target="_blank"
                     rel="noopener noreferrer me"
                     aria-label="Connect on linkedin"
@@ -185,26 +186,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       </svg>
                     </div>
                   </a>
+
                   <a
+                    href="https://mastodon.social/@samirdev"
                     className="self-socials-nav--link"
-                    href="https://github.com/samirllama"
                     target="_blank"
                     rel="noopener noreferrer me"
                     aria-label="Follow me on github"
                   >
                     <div className="socials-nav--icon-wrapper">
+                      <FaMastodon className="socials-nav--icon-svg" />
+                    </div>
+                  </a>
+                  <a
+                    className="self-socials-nav--link"
+                    href="https://twitter.com/samirllama"
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    aria-label="Follow me on twitter"
+                  >
+                    <div className="socials-nav--icon-wrapper">
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
-                        fill="none"
                         viewBox="0 0 24 24"
-                        className="socials-nav--icon-svg"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="socials-nav--icon-svg ariaHidden"
                         aria-hidden="true"
                       >
                         <path
+                          d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"
                           fill="currentColor"
-                          d="M22.247 0H1.753C.741 0 0 .74 0 1.753v20.494C0 23.17.83 24 1.753 24h20.494C23.264 24 24 23.26 24 22.247V1.753C24 .741 23.17 0 22.247 0zM7.383 20.306h-3.69V9.23h3.695v11.076h-.005zM5.54 7.753c-1.2 0-2.218-1.017-2.218-2.217S4.34 3.319 5.54 3.319s2.217 1.017 2.217 2.217S6.74 7.753 5.54 7.753zm14.765 12.553h-3.694V14.77c0-1.476-.37-2.953-1.846-2.953-1.477 0-1.847 1.477-1.847 2.953v5.54H9.225V9.23h3.694v1.293h.183c.459-.923 1.659-1.659 3.046-1.659 3.418 0 4.154 2.217 4.154 4.983v6.46h.004z"
                         ></path>
                       </svg>
                     </div>

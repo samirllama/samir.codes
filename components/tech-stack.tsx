@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import type { Skill } from "@/types";
 
@@ -52,7 +51,7 @@ export default function TechStack({ skillCategories }: TechStackProps) {
   return (
     <section
       className="pb-[20vw] lg:pb-[12.5vw] px-4 md:px-8 lg:px-12"
-      id="tools"
+      id="tech-stack"
     >
       <div className="max-w-screen-xl mx-auto">
         <h2 className="font-mono uppercase tracking-tight leading-none mb-8 text-center text-[clamp(30px,0.92rem+2vw,45px)] font-display">
