@@ -28,7 +28,7 @@ export const experience: ExperienceEntry[] = [
         company: 'Dealer Inspire',
         title: 'Full Stack Engineer',
         dateRange: 'Nov 2020 — Dec 2021',
-        description: 'Dealer Inspire is provides digital platforms for automotive dealerships. As a Full Stack Engineer, I led greenfield development efforts, specifically designing and implementing the core architecture for their AI-driven customer engagement solutions.',
+        description: 'Dealer Inspire provides digital platforms for automotive dealerships. As a Full Stack Engineer, I led greenfield development efforts, specifically designing and implementing the core architecture for their AI-driven customer engagement solutions.',
         techTags: ['React', 'Redux', 'TypeScript', 'Docker', 'Kubernetes', 'D3.js'],
         projectScreenshotUrl: "https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/dealer-img.webp",
         projectUrl: "https://www.dealerinspire.com/",

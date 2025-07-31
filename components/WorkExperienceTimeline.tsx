@@ -72,7 +72,10 @@ const WorkExperienceTimeline = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-fluid-xl text-timeline-text">
+    <section
+      id="experience"
+      className="my-fluid-lg py-fluid-xl text-timeline-text"
+    >
       <div className="max-w-6xl">
         <h2 className="text-fluid-h2 my-fluid-lg">Work/Experience</h2>
         <div ref={containerRef} className="relative">

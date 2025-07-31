@@ -50,8 +50,8 @@ export const typographyFluidPlugin = plugin(function ({ addUtilities }: PluginAP
             fontFamily: 'var(--font-body, "Inter", sans-serif)',
         },
         '.text-fluid-meta': {
-            fontSize: 'var(--font-size-step--1)',
-            lineHeight: 'var(--font-size-step--1)',
+            fontSize: 'var(--font-size-step-0)',
+            lineHeight: 'var(--font-size-step-0)',
             // lineHeight: '1.6',
             textTransform: 'uppercase',
             fontFamily: 'var(--font-body, "Inter", sans-serif)',

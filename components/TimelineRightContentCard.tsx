@@ -17,11 +17,12 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
       )}
       <div className="p-6 flex flex-col justify-between w-full md:w-1/2 bg-timeline-bg">
         <div>
-          <h3 className="text-fluid-h3 text-timeline-text">
-            {entry.title}
-            <br />
-            <span className="text-muted-foreground"> {entry.company}</span>
+          <h3 className="text-fluid-h3 mb-fluid-xl text-timeline-text">
+            {entry.company}
           </h3>
+          <h4 className="text-fluid-h4 mb-fluid-xl text-timeline-text">
+            {entry.title}
+          </h4>
           <p className="mb-4">{entry.description}</p>
           <div className="flex flex-wrap gap-2 mb-6">
             {entry.techTags.map((tag) => (

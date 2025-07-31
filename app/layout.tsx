@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 import { headers } from "next/headers";
 import { Geist_Mono } from "next/font/google";
@@ -34,10 +35,9 @@ export default async function RootLayout({
           nonce={nonce}
         />
       </head>
-      <body
-        className={cn(defaultSans.variable, "antialiased")}
-      >
+      <body className={cn(defaultSans.variable, "antialiased")}>
         <Providers nonce={nonce}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );
