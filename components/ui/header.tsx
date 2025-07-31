@@ -48,7 +48,6 @@ export default function AppHeader({
 
   return (
     <div className={headerContainerStyles}>
-      {/* <header className="items-center justify-center"> */}
       <header className={headerBStyles}>
         <nav className="header-nav">
           <Link href="/">
@@ -56,8 +55,8 @@ export default function AppHeader({
             <NameLogo />
           </Link>
 
-          <div className="flex items-center space-x-4">
-            <div
+          <div className="flex items-center mr-fluid-xl">
+            {/* <div
               id="hamburger-button"
               role="button"
               onClick={toggleAction}
@@ -72,8 +71,7 @@ export default function AppHeader({
                 <span className="hamburger-line-2-start inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
                 <span className="hamburger-line-2-end inline-block absolute top-0 left-0 w-full h-full bg-current origin-right scale-x-100"></span>
               </span>
-            </div>
-
+            </div> */}
             <ThemeToggle />
           </div>
         </nav>

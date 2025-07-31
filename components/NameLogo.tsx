@@ -77,7 +77,7 @@ const NameLogo = () => {
   return (
     <div
       ref={container}
-      className="flex items-center w-40 top-0"
+      className="flex items-center w-28 md:w-40 top-0"
       // className="inline-flex items-center h-6 w-[200px] sticky top-0"
     >
       <FigmaSVG />

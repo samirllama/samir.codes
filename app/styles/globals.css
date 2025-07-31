@@ -36,22 +36,71 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     -moz-tab-size: 4;
     -o-tab-size: 4;
     tab-size: 4;
     font-feature-settings: normal;
-    font-variation-settings: normal;
+    /* font-variation-settings: normal; */
+
+    line-height: 132.5%;
+    font-synthesis: none;
+    font-variation-settings: "opsz" var(--sc-opsz), "slnt" var(--sc-slnt),
+      "wght" var(--sc-wght);
     -webkit-tap-highlight-color: transparent;
     @apply font-body text-step-0 leading-base;
     @apply bg-surface-page text-text-default;
   }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizelegibility;
     overscroll-behavior: none;
+    overflow-x: hidden;
     scroll-snap-type: y mandatory;
+    font-feature-settings: "kern" on, "liga" on;
+    --sc-opsz: 1;
+    --sc-slnt: 0;
+    --sc-wght: 1;
   }
+  @media screen and (min-width: 40em) {
+    body,
+    input {
+      --sc-opsz: 20;
+    }
+  }
+
+  @media screen and (min-width: 45em) {
+    body,
+    input {
+      --sc-opsz: 40;
+      line-height: 147.25%;
+    }
+  }
+
+  @media screen and (min-width: 55em) {
+    body,
+    input {
+      line-height: 150%;
+    }
+  }
+
+  @media screen and (min-width: 65em) {
+    body,
+    input {
+      --sc-opsz: 80;
+    }
+  }
+
+  @media screen and (min-width: 80em) {
+    body,
+    input {
+      --sc-opsz: 160;
+      line-height: 145%;
+    }
+  }
+
   li {
     transition-delay: var(--delay, 0ms);
   }
@@ -252,6 +301,10 @@
 
   .header-main {
     pointer-events: auto;
+  }
+
+  .header-main--bordered {
+    pointer-events: auto;
     border-width: 0 0 4px;
     border-image-slice: 1;
     border-image-source: linear-gradient(
@@ -396,5 +449,14 @@
 
   html.is-ready .anim-trigger.is-active .anim-initial-state {
     @apply anim-final-state;
+  }
+
+  .mask-fade-to-black {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      black 10%
+    );
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, black 10%);
   }
 }

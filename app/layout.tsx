@@ -35,7 +35,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={cn(defaultSans.variable, "antialiased", "tracking-tight")}
+        className={cn(defaultSans.variable, "antialiased")}
       >
         <Providers nonce={nonce}>{children}</Providers>
       </body>

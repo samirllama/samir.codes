@@ -1,6 +1,6 @@
 {
   "cSpell.words": ["cinzel", "hdrs", "nmsregular"],
-  "workbench.colorTheme": "Visual Studio Light",
+  "workbench.colorTheme": "Catppuccin Frappé",
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.formatOnSave": true,

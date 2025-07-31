@@ -39,46 +39,22 @@
   --font-size-step-5-min: 39.81;
   --font-size-step-5-max: 54.93;
 
-  --font-size-step--2: calc(
-    ((var(--font-size-step--2-min) / 16) * 1rem) +
-      (var(--font-size-step--2-max) - var(--font-size-step--2-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step--1: calc(
-    ((var(--font-size-step--1-min) / 16) * 1rem) +
-      (var(--font-size-step--1-max) - var(--font-size-step--1-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step-0: calc(
+  --font-size-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
+  --font-size-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
+  /* --font-size-step-0: calc(
     ((var(--font-size-step-0-min) / 16) * 1rem) +
       (var(--font-size-step-0-max) - var(--font-size-step-0-min)) *
       var(--my-fluid-bp)
-  );
-  --font-size-step-1: calc(
-    ((var(--font-size-step-1-min) / 16) * 1rem) +
-      (var(--font-size-step-1-max) - var(--font-size-step-1-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step-2: calc(
-    ((var(--font-size-step-2-min) / 16) * 1rem) +
-      (var(--font-size-step-2-max) - var(--font-size-step-2-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step-3: calc(
-    ((var(--font-size-step-3-min) / 16) * 1rem) +
-      (var(--font-size-step-3-max) - var(--font-size-step-3-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step-4: calc(
-    ((var(--font-size-step-4-min) / 16) * 1rem) +
-      (var(--font-size-step-4-max) - var(--font-size-step-4-min)) *
-      var(--my-fluid-bp)
-  );
-  --font-size-step-5: calc(
-    ((var(--font-size-step-5-min) / 16) * 1rem) +
-      (var(--font-size-step-5-max) - var(--font-size-step-5-min)) *
-      var(--my-fluid-bp)
-  );
+  ); */
+  --font-size-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
+  --font-size-step-1: clamp(0.9338rem, 0.7592rem + 0.8727vw, 1.4138rem);
+  --font-size-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
+  --font-size-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
+
+  --font-size-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
+  --font-size-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 5.6525rem);
+
+  --tracking-wide: 0.1325rem;
 
   /* Fluid Spacing */
   --my-spacing-xs: calc(var(--font-size-step-0) * 0.5);
