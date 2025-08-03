@@ -60,6 +60,7 @@
     "rehype-pretty-code": "^0.14.1",
     "remark-gfm": "^4.0.1",
     "samir.codes": "link:",
+    "scichart": "^3.5.782",
     "server-only": "^0.0.1",
     "shiki": "^3.8.1",
     "simple-icons": "^14.15.0",
