@@ -8,16 +8,6 @@ function generateNonce(): string {
     return Buffer.from(array).toString('base64')
 }
 
-// Strict CSP for production only
-const _generateCSPV1 = (nonce: string) => [
-    "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}'`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' blob: data: https://*.vercel-storage.com",
-    "font-src 'self'",
-    "connect-src 'self'",
-].join('; ')
-
 function generateCSP(nonce: string) {
     const directives = {
         "default-src": ["'self'"],
@@ -29,7 +19,6 @@ function generateCSP(nonce: string) {
         "frame-src": ["'self'"],             //  iframe
         "object-src": ["'none'"],
         "base-uri": ["'self'"],
-        "form-action": ["'self'"],
         "worker-src": ["'self'", "blob:"],   // using web workers
     };
 
@@ -39,18 +28,40 @@ function generateCSP(nonce: string) {
 }
 
 export function middleware(_request: NextRequest) {
-    const response = NextResponse.next()
-    const nonce = generateNonce()
+    const response = NextResponse.next();
+    const nonce = generateNonce();
 
-    response.headers.set('x-nonce', nonce)
-    response.headers.set('X-Content-Type-Options', 'nosniff')
-    response.headers.set('X-Frame-Options', 'DENY')
-    response.headers.set('X-XSS-Protection', '1; mode=block')
-    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+    // Fallback headers
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    response.headers.set('X-XSS-Protection', '1; mode=block');
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    response.headers.set('X-Frame-Options', 'SAMEORIGIN') // Fallback for older browsers
 
+
+    // Lock down framing only in production
     if (process.env.NODE_ENV === 'production') {
-        response.headers.set('Content-Security-Policy', generateCSP(nonce))
+        // Build CSP
+        const directives: Record<string, string[]> = {
+            'default-src': ["'self'"],
+            'script-src': ["'self'", `'nonce-${nonce}'`],
+            "style-src": ["'self'", `'nonce-${nonce}'`],
+            "img-src": ["'self'", "blob:", "data:", "https://*.vercel-storage.com"],
+            "font-src": ["'self'"],
+            "connect-src": ["'self'"],
+            "frame-ancestors": ["'self'"],       //  iframe
+            "worker-src": ["'self'", "blob:"],   // using web workers
+            "object-src": ["'none'"],
+            "base-uri": ["'self'"],
+        };
+
+
+        const csp = Object.entries(directives)
+            .map(([k, v]) => `${k} ${v.join(' ')}`)
+            .join('; ');
+
+        response.headers.set('Content-Security-Policy', csp);
+        response.headers.set('x-nonce', nonce);
     }
 
-    return response
+    return response;
 }

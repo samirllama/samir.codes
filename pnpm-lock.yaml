@@ -143,6 +143,9 @@ dependencies:
   samir.codes:
     specifier: 'link:'
     version: 'link:'
+  scichart:
+    specifier: ^3.5.782
+    version: 3.5.782
   server-only:
     specifier: ^0.0.1
     version: 0.0.1
@@ -8322,6 +8325,10 @@ packages:
 
   /scheduler@0.26.0:
     resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
+
+  /scichart@3.5.782:
+    resolution: {integrity: sha512-FcAhQ8o0pUxiTMdCs/rufOXvb8N7q8Ce2NT+YvP2neul9PAae+j9Isq68b8z9899LmI593aa4/UHiVY6FSwTsw==}
+    dev: false
 
   /section-matter@1.0.0:
     resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
