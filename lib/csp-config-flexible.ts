@@ -1,4 +1,4 @@
-// Alternative flexible CSP configuration without strict typing
+// Flexible CSP configuration without strict typing
 export const CSP_SOURCES = {
   // Core
   SELF: "'self'",
@@ -9,7 +9,6 @@ export const CSP_SOURCES = {
   UNSAFE_EVAL: "'unsafe-eval'",
   WASM_UNSAFE_EVAL: "'wasm-unsafe-eval'",
 
-  // Data sources
   BLOB: "blob:",
   DATA: "data:",
 

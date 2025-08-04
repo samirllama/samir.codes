@@ -1,6 +1,9 @@
-// app/api/og/route.tsx
+// app/api/og/route.ts
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
+
+// This makes Next.js deploy it as an Edge Function
+export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -11,7 +14,6 @@ export async function GET(request: NextRequest) {
   const theme = searchParams.get("theme") || "gradient";
   const author = searchParams.get("author") || "Your Name";
 
-  // Different theme configurations
   const themes = {
     gradient: {
       background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
@@ -41,6 +43,7 @@ export async function GET(request: NextRequest) {
     (
       <div
         style={{
+          // full-bleed
           height: "100%",
           width: "100%",
           display: "flex",
@@ -53,12 +56,12 @@ export async function GET(request: NextRequest) {
           position: "relative",
         }}
       >
-        {/* Decorative elements */}
+        {/* Accents */}
         <div
           style={{
             position: "absolute",
-            top: "0",
-            right: "0",
+            top: 0,
+            right: 0,
             width: "300px",
             height: "300px",
             background: currentTheme.accentColor,
@@ -69,8 +72,8 @@ export async function GET(request: NextRequest) {
         <div
           style={{
             position: "absolute",
-            bottom: "0",
-            left: "0",
+            bottom: 0,
+            left: 0,
             width: "200px",
             height: "200px",
             background: currentTheme.accentColor,
@@ -79,24 +82,8 @@ export async function GET(request: NextRequest) {
           }}
         />
 
-        {/* Header with enhanced logo */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            zIndex: 1,
-          }}
-        >
-          {/* <svg
-            width="56"
-            height="56"
-            viewBox="0 0 24 24"
-            fill={currentTheme.textColor}
-            style={{ marginRight: "20px" }}
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg> */}
-
+        {/* Logo + author */}
+        <div style={{ display: "flex", alignItems: "center", zIndex: 1 }}>
           <svg
             width="70"
             height="56"
@@ -109,7 +96,6 @@ export async function GET(request: NextRequest) {
               <path d="M27.8469 4.02664C31.1111 2.51098 37.4825 0.767494 41.6308 0.255413C45.9688 -0.280443 57.0462 0.0726529 61.486 0.888504C68.7804 2.22886 75.7418 4.85491 79.2546 7.59097C81.7396 9.52715 82.4693 11.4179 82.4374 15.8393C82.4074 19.9909 81.675 22.0165 79.0374 25.2434C77.8341 26.7157 77.3627 27.0177 76.2685 27.0177C75.0577 27.0177 74.9188 26.8875 74.5667 25.4208C71.2999 11.821 65.6347 5.56571 55.2662 4.10967C46.6755 2.90347 37.4149 6.42841 34.0401 12.1894C30.783 17.7495 32.5033 24.0148 38.7469 29.3294C42.7696 32.7535 46.5805 35.0304 57.6986 40.6537C75.7476 49.7817 82.1725 54.5686 86.3898 62.0294C88.9672 66.5888 89.5076 68.6928 89.5187 74.2157C89.5302 80.042 88.8859 82.4693 86.0316 87.346C82.0779 94.1017 75.0046 99.4283 65.9774 102.448C40.2859 111.043 8.79129 103.362 1.39735 86.6987C-0.108502 83.3051 -0.454345 77.9174 0.639775 74.8978C3.49625 67.0125 11.7592 61.9691 21.8124 61.9748C27.5103 61.9776 30.5424 63.0195 31.1752 65.1913C31.4123 66.0054 31.1376 66.2605 28.6128 67.5707C21.9972 71.0038 18.5773 75.9659 18.5649 82.1492C18.5468 91.0682 26.0761 98.802 37.1341 101.223C41.4583 102.169 49.2547 102.112 53.2761 101.104C62.5483 98.781 68.8945 93.0101 70.5494 85.3974C72.8292 74.9109 65.7364 66.8003 45.623 56.8955C31.919 50.1469 26.4661 47.0825 22.5712 43.9412C16.3586 38.9304 13.3624 33.4384 12.9303 26.2714C12.634 21.3579 13.4574 18.0753 16.0149 13.9755C18.2036 10.4669 23.416 6.08419 27.8469 4.02664Z" />
             </g>
           </svg>
-
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span
               style={{
@@ -118,7 +104,7 @@ export async function GET(request: NextRequest) {
                 color: currentTheme.textColor,
               }}
             >
-              {author}'s Blog
+              {author}’s Blog
             </span>
             <span
               style={{
@@ -132,7 +118,7 @@ export async function GET(request: NextRequest) {
           </div>
         </div>
 
-        {/* Main content */}
+        {/* Title + subtitle */}
         <div
           style={{
             display: "flex",
@@ -148,7 +134,7 @@ export async function GET(request: NextRequest) {
               fontSize: "72px",
               fontWeight: "bold",
               color: currentTheme.textColor,
-              lineHeight: "1.1",
+              lineHeight: 1.1,
               marginBottom: "20px",
               textShadow:
                 theme === "light" ? "none" : "0 4px 8px rgba(0, 0, 0, 0.3)",
@@ -162,7 +148,7 @@ export async function GET(request: NextRequest) {
                 fontSize: "24px",
                 color: currentTheme.textColor,
                 opacity: 0.8,
-                lineHeight: "1.4",
+                lineHeight: 1.4,
               }}
             >
               {subtitle}
@@ -170,7 +156,7 @@ export async function GET(request: NextRequest) {
           )}
         </div>
 
-        {/* Footer with social proof */}
+        {/* Footer */}
         <div
           style={{
             display: "flex",
@@ -183,12 +169,8 @@ export async function GET(request: NextRequest) {
             zIndex: 1,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <span>📚 Personal Blog</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <span>✨ Latest Post</span>
-          </div>
+          <span>📚 Personal Blog</span>
+          <span>✨ Latest Post</span>
         </div>
       </div>
     ),
