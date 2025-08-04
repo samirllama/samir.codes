@@ -45,12 +45,25 @@ export default function Footer() {
               <AnimatedArrow />
             </a>
             <a
-              href="https://twitter.com/samirllama"
+              href="https://x.com/Baki_cakes"
               className="flex items-center hover:text-inverted transition-all duration-300 ease-in-out transform hover:scale-110"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="mr-2 text-3xl" /> Twitter
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="socials-nav--icon-svg ariaHidden"
+                aria-hidden="true"
+              >
+                <path
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
               <AnimatedArrow />
             </a>
             <a

@@ -58,6 +58,7 @@
   --my-spacing-md: calc(var(--font-size-step-0) * 1);
   --my-spacing-lg: calc(var(--font-size-step-0) * 1.5);
   --my-spacing-xl: calc(var(--font-size-step-0) * 2);
+  --my-spacing-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
 
   /* Layout & Sizing */
   --my-nav-height: 5rem;

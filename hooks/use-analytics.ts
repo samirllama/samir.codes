@@ -17,7 +17,7 @@ export const trackPageView = (page: string, category?: string) => {
     })
 }
 
-export const trackBlogPost = (title: string, category: string, readTime?: number) => {
+export const trackBlogPost = (title: string, category: string, readTime: number) => {
     track("Blog Post View", {
         title: title.substring(0, 100),
         category,

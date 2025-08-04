@@ -15,7 +15,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
-  //  nav items to match section IDs
   const navItems = useMemo(
     () => [
       { id: "about", label: "About" },
@@ -128,7 +127,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <TrackedLink
                     location="Socials-linkedin"
                     href="https://linkedin.com/in/samirlama-dev"
-                    className="self-socials-nav--link"
+                    className="socials-nav--link"
                     ariaLabel="Connect on linkedin"
                   >
                     <div className="socials-nav--icon-wrapper">
@@ -187,10 +186,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </div>
                   </TrackedLink>
                   <TrackedLink
-                    location="Socials-twitter"
-                    className="self-socials-nav--link"
-                    href="https://twitter.com/samirllama"
-                    ariaLabel="Follow me on twitter"
+                    location="Socials-x"
+                    className="socials-nav--link"
+                    href="https://x.com/Baki_cakes"
+                    ariaLabel="Follow me on X"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <svg

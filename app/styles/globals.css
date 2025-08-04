@@ -151,14 +151,7 @@
     flex-direction: column;
     margin: 0 auto;
     min-height: 100vh;
-  }
-
-  @media (min-width: 1280px) {
-    .web-app,
-    .header-main {
-      max-width: 1600px;
-      margin: 0 auto;
-    }
+    min-height: 100dvh; /* The preferred, dynamic unit */
   }
 
   .pageLayout--col4 {
@@ -166,9 +159,15 @@
     flex-direction: column;
     margin: 0 auto;
     min-height: 100vh;
+    min-height: 100dvh; /* The preferred, dynamic unit */
   }
 
-  @media screen and (min-width: 1280px) {
+  @media (min-width: 80em) {
+    .web-app,
+    .header-main {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
     .pageLayout--col4 {
       grid-gap: 48px;
       display: grid;
@@ -180,13 +179,42 @@
     .pageLayout--main {
       grid-column: 2;
     }
-
     .pageLayout--aside--right {
       align-items: center;
       display: flex;
       flex-direction: column;
       grid-column: 3;
     }
+
+    .aside-col--left {
+      height: 100vh;
+      grid-column: 1;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .aside-module--root {
+      min-width: 0;
+    }
+  }
+
+  @media screen and (min-width: 55em) {
+    .project-card {
+      grid-gap: 0 5%;
+      padding: var(--my-spacing-xl) 0;
+      grid-template-columns: 33% 62%;
+      grid-template-areas: "leftHead rightContent";
+      display: grid;
+    }
+  }
+
+  .leftHead {
+    grid-area: leftHead;
+    padding-top: var(--my-spacing-sm);
+  }
+  .rightContent {
+    padding-top: var(--my-spacing-lg);
+    grid-area: rightContent;
   }
 
   .pageLayout--main {
@@ -218,25 +246,12 @@
     grid-template-rows: 144px auto 144px;
     height: 100%;
     padding: 48px 0;
-    @media (min-width: 1280px) {
-      min-width: 0;
-    }
   }
   .aside-module--pos_top {
     grid-row: 1/2;
   }
   .aside-module--pos_center {
     grid-row: 2/3;
-  }
-
-  @media screen and (min-width: 1280px) {
-    .aside-col--left {
-      height: 100vh;
-      grid-column: 1;
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    }
   }
 
   .socials-nav--link {
