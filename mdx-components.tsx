@@ -3,7 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
 import { Gif } from "@/components/mdx/Gif";
 
-export function getMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ className, ...props }) => (
       <h1

@@ -1,5 +1,3 @@
-
-
 // app/(default)/posts/page.tsx
 import Link from "next/link";
 import { getAllPostsMeta, PostMeta } from "@/lib/posts";

@@ -152,7 +152,6 @@
 
   .pageLayout--main {
     position: relative;
-    grid-column: 2;
     min-width: 0;
   }
 

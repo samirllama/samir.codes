@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
 import { defaultMetadata } from "./metadata";
-import { Providers } from "@/components/Providers";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {

@@ -1,28 +1,10 @@
 import TechStack from "@/components/tech-stack";
 import WorkExperienceTimeline from "@/components/WorkExperienceTimeline";
 import { skillCategories } from "@/lib/data/work-exp";
-import NavList from "@/components/DemoList";
-
-/**
- *Header: “Welcome to My Lab of Rants & Reads”
-Sub‑header:
-CTAs:
-Latest Rant →
-Book Summaries →
- */
 
 export default function HomePage() {
   return (
     <article>
-      <section id="about" className="py-fluid-xl my-fluid-xl flex">
-        <NavList
-          items={[
-            { label: "item-1" },
-            { label: "item-2" },
-            { label: "item-3" },
-          ]}
-        />
-      </section>
       {/* INTRO */}
       <section id="about" className="py-fluid-xl my-fluid-xl flex">
         <p className="text-fluid-h3 mt-fluid-xl">Fullstack Developer</p>

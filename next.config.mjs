@@ -1,7 +1,9 @@
 import withBundleAnalyzer from "@next/bundle-analyzer";
+import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -207,4 +209,11 @@ const config =
       })(nextConfig)
     : nextConfig;
 
-export default config;
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+export default withMDX(config);
