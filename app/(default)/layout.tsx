@@ -98,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="pageLayout--col4">
         <main
           ref={mainRef}
-          className="pt-fluid-xl mt-fluid-xl relative min-h-screen scroll-content pageLayout--main"
+          className="pt-fluid-xl mt-fluid-xl mx-fluid-xl relative min-h-screen scroll-content pageLayout--main"
         >
           {children}
         </main>

@@ -16,11 +16,11 @@ export default function HomePage() {
       {/* INTRO */}
       <section id="about" className="py-fluid-xl my-fluid-xl">
         <p className="text-fluid-h3 mt-fluid-xl">Fullstack Developer</p>
-        <h1 className="text-fluid-h1 my-fluid-xl">
+        <h2 className="text-fluid-h2 my-fluid-xl">
           I build high-performance apps that scale
           <br />
           driven by a passion for fast, accessible web experiences.
-        </h1>
+        </h2>
       </section>
 
       <WorkExperienceTimeline />

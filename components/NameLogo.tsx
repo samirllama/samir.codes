@@ -30,7 +30,7 @@ const NameLogo = () => {
     const origBBox = letterL.getBBox();
     const targetBBox = letterS.getBBox();
     const originalX = origBBox.x;
-    const compactX = targetBBox.x + targetBBox.width + 10;
+    const compactX = targetBBox.x + targetBBox.width - 10;
 
     // Set initial states
     gsap.set(letterL, { x: 0 });
@@ -75,11 +75,7 @@ const NameLogo = () => {
   }, []);
 
   return (
-    <div
-      ref={container}
-      className="flex items-center w-28 md:w-40 top-0"
-      // className="inline-flex items-center h-6 w-[200px] sticky top-0"
-    >
+    <div ref={container} className="flex items-center w-28 md:w-40 top-0">
       <FigmaSVG />
     </div>
   );

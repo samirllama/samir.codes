@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 
 import { ScrollTrigger, gsap } from "@/lib/gsap";
 import { experience } from "@/lib/data/work-exp";
@@ -76,19 +77,17 @@ const WorkExperienceTimeline = () => {
       id="experience"
       className="my-fluid-lg py-fluid-xl text-timeline-text"
     >
-      <div className="max-w-6xl">
-        <h2 className="text-fluid-h2 my-fluid-lg">Work/Experience</h2>
-        <div ref={containerRef} className="relative">
-          <div
-            ref={timelineRef}
-            className="absolute left-[20%] transform -translate-x-1/2 top-0 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
-          ></div>
+      <div ref={containerRef} className="relative">
+        <h2 className="text-fluid-h2 my-fluid-lg">Work Overview</h2>
+        <div
+          ref={timelineRef}
+          className="sm:invisible md:visible absolute left-[20%] transform -translate-x-1/2 top-20 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
+        ></div>
 
-          <div className="relative space-y-16">
-            {experience.map((entry) => (
-              <TimelineEntry key={entry.id} entry={entry} />
-            ))}
-          </div>
+        <div className="relative space-y-16">
+          {experience.map((entry) => (
+            <TimelineEntry key={entry.id} entry={entry} />
+          ))}
         </div>
       </div>
     </section>
@@ -98,14 +97,13 @@ const WorkExperienceTimeline = () => {
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className="timeline-entry-new relative flex items-center mb-16">
-      <div className="timeline-meta w-full md:w-[20%] text-left">
+      <div className="timeline-meta basis-1/3 text-left">
         <time className="text-fluid-meta mt-fluid-sm">{entry.dateRange}</time>
       </div>
 
-      {/* Dot */}
-      <div className="timeline-dot-new absolute left-[20%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-timeline-dot z-10"></div>
+      <div className="sm:invisible md:visible timeline-dot-new absolute left-[20%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 md:w-2 md:h-2 md:rounded-full bg-timeline-dot z-10"></div>
 
-      <div className="timeline-content-new w-full md:w-[85%] pl-8 text-left">
+      <div className="timeline-content-new basis-full pl-8 text-left">
         <TimelineRightContentCard entry={entry} />
       </div>
     </div>

@@ -5,7 +5,7 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className="overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg hover:shadow-white/20 flex flex-col md:flex-row shadow-lg rounded-lg">
       {entry.projectScreenshotUrl && (
-        <div className="relative w-full md:w-1/2 pt-[60%] md:pt-0 md:h-auto flex-shrink-0 shadow-md">
+        <div className="relative basis-1/3 pt-[60%] md:pt-0 md:h-auto flex-shrink-0 shadow-md">
           <Image
             src={entry.projectScreenshotUrl}
             alt={`Screenshot of ${entry.company}`}
@@ -15,9 +15,9 @@ const TimelineRightContentCard = ({ entry }: { entry: ExperienceEntry }) => {
           />
         </div>
       )}
-      <div className="p-6 flex flex-col justify-between w-full md:w-1/2 bg-timeline-bg">
+      <div className="p-6 flex flex-col justify-between basis-2/3 bg-timeline-bg">
         <div>
-          <h3 className="text-fluid-h3 mb-fluid-xl text-timeline-text">
+          <h3 className="text-fluid-h3 mb-fluid-md text-timeline-text">
             {entry.company}
           </h3>
           <h4 className="text-fluid-h4 mb-fluid-xl text-timeline-text">
