@@ -108,22 +108,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="aside-module--root">
               <div className="aside-module--pos_center">
                 <nav className="flex flex-col space-y-4 p-6">
-                  {navItems.map(({ id, label }) => (
-                    <Link
-                      key={id}
-                      href={`#${id}`}
-                      scroll={false}
-                      onClick={(e) => handleNavClick(id, e)}
-                      className={cn(
-                        "text-left  transition-all duration-200 block",
-                        activeId === id
-                          ? "text-accent-primary underline scale-105"
-                          : "text-default hover:text-accent-primary"
-                      )}
-                    >
-                      {label}
-                    </Link>
-                  ))}
+                  {navItems.map(({ id, label }) => {
+                    return (
+                      <Link
+                        key={id}
+                        href={`#${id}`}
+                        scroll={false}
+                        onClick={(e) => handleNavClick(id, e)}
+                        className={cn(
+                          "text-left transition-all duration-200 block",
+                          activeId === id
+                            ? "text-accent-primary underline scale-105"
+                            : "text-default hover:text-accent-primary"
+                        )}
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
                 </nav>
               </div>
             </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Image from "next/image";
 
 import { ScrollTrigger, gsap } from "@/lib/gsap";
 import { experience } from "@/lib/data/work-exp";

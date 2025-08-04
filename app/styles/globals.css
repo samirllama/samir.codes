@@ -1,8 +1,36 @@
 /* app/styles/globals.css */
+* {
+  --sc-opsz: 1;
+  --sc-slnt: 0;
+  --sc-wght: 1;
+  font-synthesis: none;
 
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  font-feature-settings: normal;
+  line-height: 132.5%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Import custom stylesheets */
 @import "./theme.css";
 @import "./utility-patterns.css";
 @import "./mdx.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @font-face {
   font-family: "MonaspaceNeon";
@@ -32,38 +60,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    font-feature-settings: normal;
-    /* font-variation-settings: normal; */
-
-    line-height: 132.5%;
-    font-synthesis: none;
-    font-variation-settings: "opsz" var(--sc-opsz), "slnt" var(--sc-slnt),
-      "wght" var(--sc-wght);
-    -webkit-tap-highlight-color: transparent;
-    @apply font-body text-step-0 leading-base;
-    @apply bg-surface-page text-text-default;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
+}
 
+@layer base {
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizelegibility;
+    text-rendering: optimizeSpeed;
     overscroll-behavior: none;
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
     font-feature-settings: "kern" on, "liga" on;
-    --sc-opsz: 1;
-    --sc-slnt: 0;
-    --sc-wght: 1;
+    @apply bg-surface-page text-text-default;
   }
+
   @media screen and (min-width: 40em) {
     body,
     input {
@@ -92,8 +106,18 @@
       --sc-opsz: 80;
     }
   }
-
+  @media screen and (min-width: 70em) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      --sc-opsz: 1000;
+    }
+  }
   @media screen and (min-width: 80em) {
+    *,
     body,
     input {
       --sc-opsz: 160;
@@ -103,6 +127,21 @@
 
   li {
     transition-delay: var(--delay, 0ms);
+    margin-left: 0;
+    list-style: none;
+    --sc-wght: 200;
+    font-feature-settings: "kern" on, "liga" on;
+  }
+
+  p,
+  a {
+    font-feature-settings: "kern" on, "liga" on;
+    --sc-wght: 200;
+  }
+
+  nav ul li a {
+    -webkit-text-decoration-color: var(--color-text-default);
+    text-decoration-color: var(--color-text-default);
   }
 }
 
