@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { useIntersectionObserver } from "./hooks/useIntersectionObserver";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 interface ScrollObjectProps extends React.ComponentPropsWithoutRef<"div"> {
   threshold?: number | number[];

@@ -1,7 +1,6 @@
 // components/Highlighter.tsx
 import React, { useRef, useEffect } from "react";
-import useMousePosition from "./hooks/mouse-position";
-
+import useMousePosition from "../hooks/mouse-position";
 
 type HighlighterProps = {
   children: React.ReactNode;

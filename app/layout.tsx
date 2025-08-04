@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { getNonce } from "@/lib/nonce";
 import { defaultMetadata } from "./metadata";
 import { ThemeProvider } from "@/components/theme-provider";
+import { PageViewTracker } from "@/components/analytics/page-view-tracker";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -56,6 +58,10 @@ export default async function RootLayout({
           disableTransitionOnChange={false}
         >
           <div id="nonce-data" data-nonce={nonce} style={{ display: "none" }} />
+          <Suspense fallback={null}>
+            <PageViewTracker />
+          </Suspense>
+
           {children}
           <Analytics />
         </ThemeProvider>

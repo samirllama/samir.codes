@@ -3,7 +3,7 @@
 import { FaMastodon } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
-import Link from "next/link";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 import AppHeader from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import AppMenu from "@/components/ui/app-menu";
@@ -29,18 +29,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const sections = navItems
       .map(({ id }) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
-
-    /*
-    `root: null`: Observer’s bounding box is the browser viewport. To watch a scrollable container instead,
-    we’d pass its element here.
-    `threshold: 0.25`:  number 0 → 1 meaning “what fraction of the target’s area must be visible before we fire.”
-    0.25 → fire when 25% of the section enters view.
-    To fire at 70%, set threshold: 0.7.
-
-    `rootMargin: "0px 0px -60% 0px"`: Offsets (top, right, bottom, left) added to the root’s bounding box.
-    Here bottom is pulled up by 60% of viewport height, so the section “exits” sooner from the observer’s view.
-    If prefer pure thresholds (and no margins),  set rootMargin: "0px".
-  */
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -110,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <nav className="flex flex-col space-y-4 p-6">
                   {navItems.map(({ id, label }) => {
                     return (
-                      <Link
+                      <TrackedLink
                         key={id}
                         href={`#${id}`}
                         scroll={false}
@@ -123,7 +111,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         )}
                       >
                         {label}
-                      </Link>
+                      </TrackedLink>
                     );
                   })}
                 </nav>
