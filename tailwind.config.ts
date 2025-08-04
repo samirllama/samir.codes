@@ -168,6 +168,8 @@ const config: Config = {
                 'ease-out-2': "var(--my-ease-out-2)",
                 'ease-out-3': "var(--my-ease-out-3)",
                 'ease-bounce': "var(--my-ease-bounce)",
+                'ease-spring-5': 'cubic-bezier(0.25, 0, 0.3, 1)',
+
             },
             animation: {
                 'float': 'float 6s ease-in-out infinite',

@@ -6,6 +6,7 @@ import "./styles/globals.css";
 import { cn } from "@/lib/utils";
 import { defaultMetadata } from "./metadata";
 import { Providers } from "@/components/Providers";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -23,13 +24,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = await headers();
-  const nonce = hdrs.get("x-nonce") || "";
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
       <body className={cn(defaultSans.variable, "antialiased")}>
-        <Providers nonce={nonce}>{children}</Providers>
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <Analytics />
+
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
