@@ -3,10 +3,10 @@
 
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import NameLogo from "../NameLogo";
 import ThemeToggle from "../ThemeToggle";
 import GlassFilter from "./GlassFilter";
+import { TrackedLink } from "@/components/analytics/tracked-link";
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
@@ -50,10 +50,9 @@ export default function AppHeader({
     <div className={headerContainerStyles}>
       <header className={headerBStyles}>
         <nav className="header-nav">
-          <Link href="/">
-            {/* h-34 px */}
+          <TrackedLink href="/" location="header" className="text-xl font-bold">
             <NameLogo />
-          </Link>
+          </TrackedLink>
 
           <div className="flex items-center mr-fluid-xl">
             {/* <div

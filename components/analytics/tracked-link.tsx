@@ -12,39 +12,7 @@ interface TrackedLinkProps extends LinkProps {
   external?: boolean;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   href: string;
-}
-
-export function TrackedLink_({
-  href,
-  children,
-  location = "content",
-  className,
-  external = false,
-}: TrackedLinkProps) {
-  const handleClick = () => {
-    const text = typeof children === "string" ? children : href;
-    trackLinkClick(href, text, location);
-  };
-
-  if (external) {
-    return (
-      <a
-        href={href}
-        onClick={handleClick}
-        className={className}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={href} onClick={handleClick} className={className}>
-      {children}
-    </Link>
-  );
+  ariaLabel?: string;
 }
 
 export function TrackedLink({
@@ -53,6 +21,7 @@ export function TrackedLink({
   location = "content",
   className,
   external = false,
+  ariaLabel = "",
   onClick,
   ...props
 }: TrackedLinkProps) {
@@ -71,6 +40,7 @@ export function TrackedLink({
         className={className}
         target="_blank"
         rel="noopener noreferrer"
+        aria-label={ariaLabel}
       >
         {children}
       </a>

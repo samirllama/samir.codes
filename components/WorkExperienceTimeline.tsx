@@ -80,7 +80,7 @@ const WorkExperienceTimeline = () => {
         <h2 className="text-fluid-h2 my-fluid-lg">Work Overview</h2>
         <div
           ref={timelineRef}
-          className="sm:invisible md:visible absolute left-[20%] transform -translate-x-1/2 top-20 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
+          className="sm:invisible md:visible absolute left-[21%] transform -translate-x-1/2 top-48 w-[0.025rem] h-full bg-timeline-border timeline-line-initial"
         ></div>
 
         <div className="relative space-y-16">
@@ -96,11 +96,11 @@ const WorkExperienceTimeline = () => {
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className="timeline-entry-new relative flex items-center mb-16">
-      <div className="timeline-meta basis-1/3 text-left">
+      <div className="timeline-meta min-w-fit text-left">
         <time className="text-fluid-meta mt-fluid-sm">{entry.dateRange}</time>
       </div>
 
-      <div className="sm:invisible md:visible timeline-dot-new absolute left-[20%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 md:w-2 md:h-2 md:rounded-full bg-timeline-dot z-10"></div>
+      <div className="sm:invisible md:visible timeline-dot-new absolute left-[21%] transform -translate-x-1/2 top-1/2 -translate-y-1/2 md:w-2 md:h-2 md:rounded-full bg-timeline-dot z-10"></div>
 
       <div className="timeline-content-new basis-full pl-8 text-left">
         <TimelineRightContentCard entry={entry} />

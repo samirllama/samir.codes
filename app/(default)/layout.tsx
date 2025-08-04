@@ -100,6 +100,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     return (
                       <TrackedLink
                         key={id}
+                        location="Header"
                         href={`#${id}`}
                         scroll={false}
                         onClick={(e) => handleNavClick(id, e)}
@@ -124,12 +125,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="aside-module--root">
               <div className="aside-module--pos_center">
                 <nav className="content-nav" aria-label="Socials">
-                  <a
+                  <TrackedLink
+                    location="Socials-linkedin"
                     href="https://linkedin.com/in/samirlama-dev"
                     className="self-socials-nav--link"
-                    target="_blank"
-                    rel="noopener noreferrer me"
-                    aria-label="Follow me on github"
+                    ariaLabel="Connect on linkedin"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <svg
@@ -147,13 +147,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         ></path>
                       </svg>
                     </div>
-                  </a>
-                  <a
+                  </TrackedLink>
+                  <TrackedLink
+                    location="Socials-git"
                     href="https://github.com/samirllama"
                     className="self-socials-nav--link"
-                    target="_blank"
-                    rel="noopener noreferrer me"
-                    aria-label="Connect on linkedin"
+                    ariaLabel="Follow me on github"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <svg
@@ -175,25 +174,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         </g>
                       </svg>
                     </div>
-                  </a>
+                  </TrackedLink>
 
-                  <a
+                  <TrackedLink
+                    location="Socials-mastodon"
                     href="https://mastodon.social/@samirdev"
                     className="self-socials-nav--link"
-                    target="_blank"
-                    rel="noopener noreferrer me"
-                    aria-label="Follow me on github"
+                    ariaLabel="Follow me on github"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <FaMastodon className="socials-nav--icon-svg" />
                     </div>
-                  </a>
-                  <a
+                  </TrackedLink>
+                  <TrackedLink
+                    location="Socials-twitter"
                     className="self-socials-nav--link"
                     href="https://twitter.com/samirllama"
-                    target="_blank"
-                    rel="noopener noreferrer me"
-                    aria-label="Follow me on twitter"
+                    ariaLabel="Follow me on twitter"
                   >
                     <div className="socials-nav--icon-wrapper">
                       <svg
@@ -211,7 +208,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         ></path>
                       </svg>
                     </div>
-                  </a>
+                  </TrackedLink>
                 </nav>
               </div>
             </div>
