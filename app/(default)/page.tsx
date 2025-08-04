@@ -11,10 +11,6 @@ export default function HomePage() {
         <h1 className="text-fluid-h1 my-fluid-xl">
           I design and develop high-performance apps that scale
         </h1>
-        <p className="text-fluid-h3 mt-fluid-xl">Fullstack Developer</p>
-        <h2 className="text-fluid-h2 my-fluid-xl">
-          I design and develop high-performance apps that scale
-        </h2>
       </section>
 
       <WorkExperienceTimeline />
