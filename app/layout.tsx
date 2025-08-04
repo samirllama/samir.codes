@@ -1,9 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
-import { headers } from "next/headers";
 import { Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import "./styles/globals.css";
 import { cn } from "@/lib/utils";
+import { getNonce } from "@/lib/nonce";
 import { defaultMetadata } from "./metadata";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -23,8 +23,31 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = await getNonce();
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
+      <head>
+        {nonce && (
+          <script
+            nonce={nonce}
+            dangerouslySetInnerHTML={{
+              __html: `
+                // Set global nonce for dynamic scripts
+                window.__NONCE__ = '${nonce}';
+
+                // Helper function to create nonce-compliant scripts
+                window.createNonceScript = function(code) {
+                  const script = document.createElement('script');
+                  script.nonce = '${nonce}';
+                  script.textContent = code;
+                  return script;
+                };
+              `,
+            }}
+          />
+        )}
+      </head>
+
       <body className={cn(defaultSans.variable, "antialiased")}>
         <ThemeProvider
           attribute="class"
@@ -32,9 +55,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <Analytics />
-
+          <div id="nonce-data" data-nonce={nonce} style={{ display: "none" }} />
           {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
