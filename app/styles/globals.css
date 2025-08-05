@@ -1,4 +1,9 @@
 /* app/styles/globals.css */
+/* Import custom stylesheets */
+@import "./theme.css";
+@import "./utility-patterns.css";
+@import "./mdx.css";
+
 * {
   --sc-opsz: 1;
   --sc-slnt: 0;
@@ -24,13 +29,6 @@
     animation-iteration-count: 1 !important;
   }
 }
-
-/* Import custom stylesheets */
-@import "./theme.css";
-@import "./utility-patterns.css";
-@import "./mdx.css";
-
-@custom-variant dark (&:is(.dark *));
 
 @font-face {
   font-family: "MonaspaceNeon";

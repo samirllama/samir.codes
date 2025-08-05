@@ -35,11 +35,12 @@ export const CSP_SOURCES = {
   HTTPS_WILDCARD: "https://*",
 };
 
-export function createCSPDirectives(nonce: string, isDevelopment = false) {
+export function createCSPDirectives(nonce: string, isDev = false) {
   const nonceSrc = `'nonce-${nonce}'`;
 
   const directives = {
     "default-src": [CSP_SOURCES.SELF],
+
 
     "script-src": [
       CSP_SOURCES.SELF,
@@ -50,7 +51,7 @@ export function createCSPDirectives(nonce: string, isDevelopment = false) {
       CSP_SOURCES.VERCEL_ANALYTICS,
       CSP_SOURCES.VERCEL_LIVE,
       CSP_SOURCES.BLOB,
-      ...(isDevelopment
+      ...(isDev
         ? [CSP_SOURCES.UNSAFE_EVAL, CSP_SOURCES.UNSAFE_INLINE]
         : []),
     ],
@@ -62,7 +63,7 @@ export function createCSPDirectives(nonce: string, isDevelopment = false) {
       CSP_SOURCES.UNPKG,
       CSP_SOURCES.VERCEL_ANALYTICS,
       CSP_SOURCES.VERCEL_LIVE,
-      ...(isDevelopment ? [CSP_SOURCES.UNSAFE_INLINE] : []),
+      ...(isDev ? [CSP_SOURCES.UNSAFE_INLINE] : []),
     ],
 
     "style-src": [
@@ -81,7 +82,7 @@ export function createCSPDirectives(nonce: string, isDevelopment = false) {
       CSP_SOURCES.UNSAFE_INLINE,
     ],
 
-    "img-src": isDevelopment
+    "img-src": isDev
       ? [
         CSP_SOURCES.SELF,
         CSP_SOURCES.BLOB,
@@ -101,16 +102,20 @@ export function createCSPDirectives(nonce: string, isDevelopment = false) {
         CSP_SOURCES.VERCEL_SUBDOMAINS,
       ],
 
-    "font-src": isDevelopment
+    "font-src": isDev
       ? [CSP_SOURCES.SELF, CSP_SOURCES.HTTPS_WILDCARD]
       : [CSP_SOURCES.SELF, CSP_SOURCES.JSDELIVR, CSP_SOURCES.VERCEL_ANALYTICS],
 
-    "connect-src": isDevelopment
+    "connect-src": isDev
       ? [
         CSP_SOURCES.SELF,
         CSP_SOURCES.HTTPS_WILDCARD,
         CSP_SOURCES.BLOB,
         CSP_SOURCES.DATA,
+        // SciChart license server
+        "http://localhost:24278",
+        // HMR websocket
+        "ws://localhost:3000"
       ]
       : [
         CSP_SOURCES.SELF,
@@ -123,11 +128,14 @@ export function createCSPDirectives(nonce: string, isDevelopment = false) {
         CSP_SOURCES.VERCEL_LIVE,
         CSP_SOURCES.BLOB,
         CSP_SOURCES.DATA,
+        "https://license.scichart.com"
       ],
+    "report-uri": isDev ? ["/_csp-violation-report"] : [""],
+    "upgrade-insecure-requests": [""],
 
     "frame-ancestors": [CSP_SOURCES.SELF],
 
-    "worker-src": isDevelopment
+    "worker-src": isDev
       ? [CSP_SOURCES.SELF, CSP_SOURCES.BLOB, CSP_SOURCES.HTTPS_WILDCARD]
       : [
         CSP_SOURCES.SELF,

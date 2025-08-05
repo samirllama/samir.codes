@@ -3,7 +3,7 @@
 import { FaMastodon } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
-import { TrackedLink } from "@/components/analytics/tracked-link";
+import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import AppHeader from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
 import AppMenu from "@/components/ui/app-menu";

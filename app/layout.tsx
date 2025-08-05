@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getNonce } from "@/lib/nonce";
 import { defaultMetadata } from "./metadata";
 import { ThemeProvider } from "@/components/theme-provider";
-import { PageViewTracker } from "@/components/analytics/page-view-tracker";
+import { PageViewTracker } from "@/features/analytics/components/page-view-tracker";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {

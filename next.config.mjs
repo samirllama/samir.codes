@@ -85,11 +85,13 @@ const nextConfig = {
         path: false,
       };
     }
+    //   ...config.resolve.alias,
+    //   scichart: "scichart/index.js",
+    // };
 
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      scichart: "scichart/index.js",
-    };
+    Object.assign(config.resolve.alias, {
+      scichart: path.resolve("./node_modules/scichart"),
+    });
 
     config.module.rules.push({
       test: /\.(wasm)$/,

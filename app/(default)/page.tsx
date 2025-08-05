@@ -14,6 +14,7 @@ export default function HomePage() {
       </section>
 
       <WorkExperienceTimeline />
+
       <TechStack skillCategories={skillCategories} />
     </article>
   );

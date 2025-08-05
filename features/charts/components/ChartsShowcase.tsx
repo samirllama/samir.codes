@@ -4,8 +4,8 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/Button";
 import { TrendingUp, Activity, BarChart3 } from "lucide-react";
-import TimeSeriesChart from "./charts/time-series-chart";
-import HeatmapChart from "./charts/heatmap-chart";
+import TimeSeriesChart from "./time-series-chart";
+import HeatmapChart from "./heatmap-chart";
 
 export default function ChartsShowcase() {
   const [activeChart, setActiveChart] = useState<"timeseries" | "heatmap">(

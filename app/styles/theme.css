@@ -1,5 +1,12 @@
 /* app/styles/theme.css */
 :root {
+  /* TEST Colors */
+  --test-green: "#0C2D25";
+  --test-green-v1: "#0e2225";
+  --test-green-v2: "#001F24";
+  --test-green-v3: "#05372E";
+  --test-orange: "#F46C07";
+
   /* Base OKLCH Colors */
   --my-oklch-white: oklch(100% 0 0);
   --my-oklch-black: oklch(0% 0 0);

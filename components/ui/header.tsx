@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import NameLogo from "../NameLogo";
 import ThemeToggle from "../ThemeToggle";
 import GlassFilter from "./GlassFilter";
-import { TrackedLink } from "@/components/analytics/tracked-link";
+import { TrackedLink } from "@/features/analytics/components/tracked-link";
 
 interface AppHeaderProps {
   isMenuOpen: boolean;
