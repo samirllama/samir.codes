@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// mdx-components.tsx
+import React from "react";
 import Image from "next/image";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
-import { Gif } from "@/components/mdx/Gif";
-import { NonceScript } from "@/components/nonce-script";
-import { NonceStyle } from "@/components/nonce-style";
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return {
+/**
+ * Server-safe MDX components mapping.
+ * Do NOT import client components (Gif, etc.) here — the page will attach them.
+ */
+export function getMDXComponents(
+  components: Partial<MDXComponents> = {}
+): MDXComponents {
+  const base: MDXComponents = {
+    // Headings
     h1: ({ className, ...props }) => (
       <h1
         className={cn(
-          "mt-12 scroll-m-20 text-4xl font-bold tracking-tight text-text-default",
+          "mt-12 scroll-m-20 text-4xl font-bold tracking-tight",
           className
         )}
         {...props}
@@ -19,7 +26,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ className, ...props }) => (
       <h2
         className={cn(
-          "mt-10 scroll-m-20 border-b border-border pb-1 text-3xl font-semibold text-text-default",
+          "mt-10 scroll-m-20 border-b border-border pb-1 text-3xl font-semibold",
           className
         )}
         {...props}
@@ -27,50 +34,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     h3: ({ className, ...props }) => (
       <h3
-        className={cn(
-          "mt-8 scroll-m-20 text-2xl font-semibold text-text-default",
-          className
-        )}
+        className={cn("mt-8 scroll-m-20 text-2xl font-semibold", className)}
         {...props}
       />
     ),
     h4: ({ className, ...props }) => (
       <h4
-        className={cn(
-          "mt-6 scroll-m-20 text-xl font-semibold text-text-default",
-          className
-        )}
+        className={cn("mt-6 scroll-m-20 text-xl font-semibold", className)}
         {...props}
       />
     ),
-    h5: ({ className, ...props }) => (
-      <h5
-        className={cn(
-          "mt-4 scroll-m-20 text-lg font-semibold text-text-default",
-          className
-        )}
-        {...props}
-      />
-    ),
-    h6: ({ className, ...props }) => (
-      <h6
-        className={cn(
-          "mt-4 scroll-m-20 text-base font-semibold text-text-default",
-          className
-        )}
-        {...props}
-      />
-    ),
+
+    // Text
     p: ({ className, ...props }) => (
-      <p
-        className={cn("leading-7 mt-6 text-text-default", className)}
-        {...props}
-      />
+      <p className={cn("leading-7 mt-6", className)} {...props} />
     ),
     a: ({ className, ...props }) => (
       <a
         className={cn(
-          "font-medium underline underline-offset-4 text-text-accent hover:text-text-accent/80 transition-colors",
+          "font-medium underline underline-offset-4 hover:text-text-accent/80 transition-colors",
           className
         )}
         {...props}
@@ -85,27 +67,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+
+    // Lists
     ul: ({ className, ...props }) => (
       <ul
-        className={cn(
-          "list-disc list-inside mt-6 text-text-default space-y-2",
-          className
-        )}
+        className={cn("list-disc list-inside mt-6 space-y-2", className)}
         {...props}
       />
     ),
     ol: ({ className, ...props }) => (
       <ol
-        className={cn(
-          "list-decimal list-inside mt-6 text-text-default space-y-2",
-          className
-        )}
+        className={cn("list-decimal list-inside mt-6 space-y-2", className)}
         {...props}
       />
     ),
     li: ({ className, ...props }) => (
       <li className={cn("text-text-default", className)} {...props} />
     ),
+
+    // Code & pre
     code: ({ className, ...props }) => (
       <code
         className={cn(
@@ -124,19 +104,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+
+    // HR
     hr: ({ className, ...props }) => (
       <hr className={cn("my-10 border-border", className)} {...props} />
     ),
+
+    // Images
     img: ({ className, alt = "", src, ...props }) => (
       <Image
         className={cn("rounded-lg border border-border my-6", className)}
         alt={alt}
-        src={src || ""}
+        src={(src as string) || ""}
         width={800}
         height={450}
-        {...props}
+        {...(props as any)}
       />
     ),
+
+    // Tables
     table: ({ className, ...props }) => (
       <div className="my-6 w-full overflow-y-auto">
         <table
@@ -163,41 +149,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    // Custom components
-    gif: ({
-      className,
-      alt = "",
-      src = "",
-      width = 800,
-      height = 450,
-      ...props
-    }) => (
-      <div className="my-6 flex justify-center">
-        <Image
-          src={src || "/placeholder.svg"}
-          alt={alt}
-          className={cn("rounded-md border border-border shadow-sm", className)}
-          width={width}
-          height={height}
-          unoptimized
-          {...props}
-        />
-      </div>
-    ),
-    // Nonce-compliant script and style components
-    script: ({ children, ...props }) => (
-      <NonceScript {...props}>
-        {typeof children === "string" ? children : ""}
-      </NonceScript>
-    ),
-    style: ({ children, ...props }) => (
-      <NonceStyle {...props}>
-        {typeof children === "string" ? children : ""}
-      </NonceStyle>
-    ),
-    Gif,
-    NonceScript,
-    NonceStyle,
-    ...components,
+
+    // DO NOT add client components here.
   };
+
+  return { ...base, ...components } as MDXComponents;
 }
+
+// alias some MDX toolchains expect
+export const useMDXComponents = getMDXComponents;
+export default getMDXComponents;

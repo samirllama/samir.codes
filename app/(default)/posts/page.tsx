@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 export default function PostsIndexPage() {
   const posts: PostMeta[] = getAllPostsMeta();
-  console.log({ posts });
 
   return (
     <article className="mx-auto py-16 h-screen border border-2">

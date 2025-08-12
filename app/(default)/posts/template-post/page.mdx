@@ -1,0 +1,46 @@
+---
+title: "MDX Template — How I Build Stuff"
+date: "2025-08-12"
+description: "A sample MDX template that demonstrates best practices for your Next.js + MDX setup."
+tags:
+  - tutorial
+  - mdx
+  - guide
+author: "Baki Lama"
+image:
+  url: "/images/cakes-me-hammock.png"
+  alt: "Template OG image"
+---
+
+# MDX Template — How I Build Stuff
+
+This is a template you can copy when creating new posts for your portfolio/blog.
+**Important:** do not `import` client components inside this MDX file — the page will inject them via the components mapping. Use components by name (e.g. `<Gif />`, `<NonceScript />`) and they will work.
+
+<Gif src="/images/vibing-minion.gif" alt="Sample animated GIF" />
+
+> Tip: use short lead paragraphs and then expand into sections. Keep paragraphs readable and avoid very long single-paragraph blocks.
+
+## Quick Example: Code Snippet
+
+Here’s an example TSX snippet. Your `rehype-pretty-code` setup will handle syntax highlighting:
+
+```tsx
+// components/ui/Button.tsx
+export default function Button({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  return (
+    <button
+      className="px-4 py-2 rounded bg-primary text-white hover:opacity-95"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+```

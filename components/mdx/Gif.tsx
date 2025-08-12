@@ -1,3 +1,6 @@
+// components/mdx/Gif.tsx
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -9,13 +12,13 @@ type GifProps = {
   height?: number;
 };
 
-export const Gif = ({
+export function Gif({
   src,
   alt = "",
   className = "",
   width = 800,
   height = 450,
-}: GifProps) => {
+}: GifProps) {
   return (
     <div className="my-6 flex justify-center">
       <Image
@@ -28,4 +31,4 @@ export const Gif = ({
       />
     </div>
   );
-};
+}

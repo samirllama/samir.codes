@@ -12,14 +12,11 @@ export function NonceStyle({ children, id }: NonceStyleProps) {
     // Get nonce from the hidden div
     const nonceElement = document.getElementById("nonce-data");
     const nonce = nonceElement?.getAttribute("data-nonce");
-
     const style = document.createElement("style");
-    if (nonce) {
-      style.nonce = nonce;
-    }
-    if (id) {
-      style.id = id;
-    }
+
+    if (nonce) style.nonce = nonce;
+    if (id) style.id = id;
+
     style.textContent = children;
     document.head.appendChild(style);
 

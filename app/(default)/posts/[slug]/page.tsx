@@ -1,16 +1,21 @@
 // app/(default)/posts/[slug]/page.tsx
-import { compileMDX } from "next-mdx-remote/rsc";
-import { getMDXComponents } from "@/mdx-components";
-import rehypePrettyCode from "rehype-pretty-code";
 import fs from "fs";
 import path from "path";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { compilePostMDX, getPostPath, readMDXFileSync } from "@/lib/mdx";
+import { getAllPostsMeta } from "@/lib/posts";
+// client components (should have "use client" at top of their files)
+// client components: Gif/NonceScript/NonceStyle are named exports
+import { Gif } from "@/components/mdx/Gif";
+import { NonceScript } from "@/components/nonce-script";
+import { NonceStyle } from "@/components/nonce-style";
 
-type Params = Promise<{ slug: string }>;
+type Props = { params: { slug: string } };
 
 export const dynamic = "force-static";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   const postsDir = path.join(process.cwd(), "app", "(default)", "posts");
   const entries = await fs.promises.readdir(postsDir, { withFileTypes: true });
 
@@ -24,60 +29,47 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-export default async function PostPage({ params }: { params: Params }) {
-  const { slug } = await params;
-  const mdPath = path.join(
-    process.cwd(),
-    "app",
-    "(default)",
-    "posts",
-    slug,
-    "page.mdx"
-  );
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata | undefined> {
+  const posts = getAllPostsMeta();
+  const match = posts.find((p) => p.slug === params.slug);
+  if (!match) return undefined;
+  return { title: match.title, description: match.description };
+}
 
-  if (!fs.existsSync(mdPath)) notFound();
+export default async function PostPage({ params }: Props) {
+  const { slug } = params;
+  const mdPath = getPostPath(slug);
 
-  const source = await fs.promises.readFile(mdPath, "utf8");
+  if (!slug || !mdPath || !mdPath.endsWith(".mdx")) {
+    return notFound();
+  }
 
-  const { content, frontmatter } = await compileMDX<{
-    title: string;
-    date?: string;
-    description?: string;
-    author?: string;
-  }>({
-    source,
-    options: {
-      parseFrontmatter: true,
-      mdxOptions: {
-        rehypePlugins: [
-          [
-            rehypePrettyCode,
-            {
-              theme: {
-                light: "github-light",
-                dark: "github-dark",
-              },
-              tokensMap: {
-                fn: "entity.name.function",
-                keyword: "keyword",
-              },
-            },
-          ],
-        ],
-      },
-    },
-    components: getMDXComponents({}),
+  const source = readMDXFileSync(mdPath);
+
+  // Compile MDX with default + custom components
+  const { content: MDXContent, frontmatter } = await compilePostMDX(source, {
+    Gif,
+    NonceScript,
+    NonceStyle,
   });
 
   return (
-    <article className="prose lg:prose-xl dark:prose-invert mx-auto py-8">
-      <h1 className="mb-2">{frontmatter.title}</h1>
-      {frontmatter.date && (
-        <div className="text-sm text-muted-foreground mb-4">
-          {frontmatter.date} • {frontmatter.author}
-        </div>
-      )}
-      {content}
+    <article className="mx-auto max-w-3xl py-16 px-4">
+      <header className="mb-8">
+        <h1 className="text-fluid-h1 font-heading-transitional">
+          {frontmatter.title}
+        </h1>
+        {frontmatter.date && (
+          <time className="block text-fluid-meta mt-2">{frontmatter.date}</time>
+        )}
+        {frontmatter.description && (
+          <p className="text-fluid-body mt-4">{frontmatter.description}</p>
+        )}
+      </header>
+
+      <section className="prose mdx-prose">{MDXContent}</section>
     </article>
   );
 }
