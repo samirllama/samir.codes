@@ -56,26 +56,24 @@ export default async function PostPage({ params }: Props) {
   });
 
   return (
-    <article className="mx-auto max-w-3xl py-16 px-4">
+    <article className="py-fluid-xl">
       <h1 className="text-fluid-h3">{frontmatter.title}</h1>
       {frontmatter.date && (
         <span>
-          <time className="block text-fluid-meta mt-2">{frontmatter.date}</time>
+          <time className="block text-fluid-meta mt-fluid-lg">
+            {frontmatter.date}
+          </time>
         </span>
       )}
       {frontmatter.tags && (
-        <div>
+        <div className="text-fluid-body mt-fluid-lg">
           {frontmatter.tags.map((tag: string) => (
-            <a key={tag} href={`tag/${tag}`}>
-              {tag}
+            <a className="mr-fluid-xl post-tag" key={tag} href={`tag/${tag}`}>
+              #{tag}
             </a>
           ))}
         </div>
       )}
-      {frontmatter.description && (
-        <p className="text-fluid-body mt-4">{frontmatter.description}</p>
-      )}
-
       <section className="prose mdx-prose">{MDXContent}</section>
     </article>
   );

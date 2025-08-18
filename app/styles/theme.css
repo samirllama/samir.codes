@@ -141,7 +141,7 @@
     0 2px 4px -2px rgba(var(--my-shadow-base-rgb), 0.1);
 
   /* Font Families */
-  --font-heading: "MonaspaceXenon", monospace;
+  --font-xenon: "MonaspaceXenon", monospace;
   --font-body-libre: "Libre Baskerville", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria,

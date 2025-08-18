@@ -522,6 +522,10 @@
     box-shadow: 0 0 0.5rem rgb(0 0 0 / 0.15);
   }
 
+  .post-tag {
+    text-decoration-color: rgb(235, 72, 136);
+  }
+
   /* View Transitions */
   ::view-transition-old(root) {
     animation: exit-fade 0.25s ease-out forwards;
