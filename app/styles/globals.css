@@ -73,7 +73,7 @@
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
     font-feature-settings: "kern" on, "liga" on;
-    @apply bg-surface-page text-text-default;
+    @apply bg-surface-page text-text-default font-mona;
   }
 
   @media screen and (min-width: 40em) {
@@ -134,7 +134,7 @@
   p,
   a {
     font-feature-settings: "kern" on, "liga" on;
-    --sc-wght: 200;
+    --sc-wght: 300;
   }
 
   nav ul li a {
