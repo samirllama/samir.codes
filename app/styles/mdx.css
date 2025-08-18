@@ -2,7 +2,8 @@
 
 /* Overrides or Additions to Typography Plugin */
 pre {
-  @apply rounded-lg border border-border-subtle p-4 my-6 overflow-x-auto text-sm bg-code-bg;
+  @apply rounded-lg border border-border-subtle p-4 my-6 overflow-x-auto bg-code-bg;
+  font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
 }
 
 code {
