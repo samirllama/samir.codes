@@ -12,7 +12,7 @@ export default function PostsIndexPage() {
   const posts: PostMeta[] = getAllPostsMeta();
 
   return (
-    <article className="mx-auto py-16 h-screen border border-2">
+    <article className="mx-auto py-16 h-screen">
       <h1 className="text-4xl font-bold mb-8">Engineering Blog</h1>
       <ul className="space-y-6">
         {posts.map((p) => (
