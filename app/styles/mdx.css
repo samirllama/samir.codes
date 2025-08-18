@@ -12,7 +12,7 @@ code {
 pre code {
   display: grid;
 }
-.mdx-prose {
+.mdx-prose p {
   font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
 }
 .mdx-prose :not(header) {
