@@ -119,9 +119,6 @@ dependencies:
   react-dom:
     specifier: ^19.1.0
     version: 19.1.1(react@19.1.1)
-  react-hook-form:
-    specifier: ^7.61.1
-    version: 7.62.0(react@19.1.1)
   react-hot-toast:
     specifier: ^2.5.2
     version: 2.5.2(react-dom@19.1.1)(react@19.1.1)
@@ -202,9 +199,6 @@ devDependencies:
   '@testing-library/react':
     specifier: ^16.3.0
     version: 16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.1.7)(@types/react@19.1.9)(react-dom@19.1.1)(react@19.1.1)
-  '@types/gsap':
-    specifier: ^3.0.0
-    version: 3.0.0
   '@types/hast':
     specifier: ^3.0.4
     version: 3.0.4
@@ -2384,13 +2378,6 @@ packages:
 
   /@types/estree@1.0.8:
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
-
-  /@types/gsap@3.0.0:
-    resolution: {integrity: sha512-BbWLi4WRHGze4C8NV7U7yRevuBFiPkPZZyGa0rryanvh/9HPUFXTNBXsGQxJZJq7Ix7j4RXMYodP3s+OsqCErg==}
-    deprecated: This is a stub types definition. gsap provides its own type definitions, so you do not need this installed.
-    dependencies:
-      gsap: 3.13.0
-    dev: true
 
   /@types/hast@3.0.4:
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
@@ -4781,6 +4768,7 @@ packages:
 
   /gsap@3.13.0:
     resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
+    dev: false
 
   /gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}

@@ -58,7 +58,7 @@ export const experience: ExperienceEntry[] = [
     },
     {
         id: 'dominos-sd',
-        company: "Domino's Pizza Enterprises Limited",
+        company: "Domino's",
         title: 'Software Developer',
         dateRange: 'Jan 2014 — Dec 2018',
         description: 'Domino\'s Pizza Enterprises operates a large e-commerce platform for ordering food. As a Software Developer, I focused on optimizing A/B testing processes to increase conversion rates and improve overall site performance through targeted code refactoring.',

@@ -1,6 +1,9 @@
+import * as dotenv from 'dotenv';
 import { put } from '@vercel/blob';
-import { promises as fs } from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
+
+dotenv.config({ path: '.env.local' })
 
 async function uploadImagesToVercelBlob(imagePaths: string[]) {
   console.log('Starting image upload to Vercel Blob...');
@@ -28,11 +31,13 @@ async function uploadImagesToVercelBlob(imagePaths: string[]) {
 }
 
 // Example Usage:
-// To use this script, you would call it with an array of relative paths
+// To use this script, call it with an array of relative paths
 // to images within your 'public' directory.
 // For example: uploadImagesToVercelBlob(['/assets/my-new-image.png', '/assets/another-image.jpg']);
 
-// If you want to run this script directly from the command line with specific images,
-// you can modify the following line:
-// For now, it's commented out as it's a utility function.
-// uploadImagesToVercelBlob(['/placeholder.svg']).catch(console.error);
+const imagePaths = process.argv.slice(2)
+if (!imagePaths.length) {
+  console.error('No image paths provided. Please run the script like: ts-node scripts/uploadImage.ts <path1> <path2> ...');
+} else {
+  uploadImagesToVercelBlob(imagePaths)
+}
