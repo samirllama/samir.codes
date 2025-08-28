@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <article>
       {/* INTRO */}
-      <section id="about" className="py-fluid-xl my-fluid-xl flex flex-col">
+      <section id="about" className="py-fluid-xl flex flex-col">
         <p className="text-fluid-h3 mt-fluid-xl">Fullstack Developer</p>
         <h1 className="text-fluid-h1 my-fluid-xl">
           I design and develop high-performance apps that scale
@@ -14,7 +14,6 @@ export default function HomePage() {
       </section>
 
       <WorkExperienceTimeline />
-
       <TechStack skillCategories={skillCategories} />
     </article>
   );

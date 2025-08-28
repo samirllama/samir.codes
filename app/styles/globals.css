@@ -198,9 +198,9 @@
 
   @media screen and (min-width: 55em) {
     .project-card {
-      grid-gap: 0 5%;
+      grid-gap: 0 4%;
       padding: var(--my-spacing-xl) 0;
-      grid-template-columns: 33% 62%;
+      grid-template-columns: 43% 55%;
       grid-template-areas: "leftHead rightContent";
       display: grid;
     }

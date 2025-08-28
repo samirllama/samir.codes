@@ -49,7 +49,7 @@ interface TechStackProps {
 
 export default function TechStack({ skillCategories }: TechStackProps) {
   return (
-    <section className="py-fluid-xl mt-fluid-xl" id="tech-stack">
+    <section className="pt-fluid-xl" id="tech-stack">
       <div className="max-w-screen-xl mx-auto">
         <h2 className="text-fluid-h2 my-fluid-lg text-center "> Skills</h2>
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mt-10">

@@ -49,7 +49,7 @@ const WorkExperienceTimeline = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: entry,
-            start: "top 75%",
+            start: "top 85%",
             end: "top 30%",
             toggleActions: "play none none reverse",
           },
@@ -83,15 +83,12 @@ const WorkExperienceTimeline = () => {
   }, []);
 
   return (
-    <section
-      id="experience"
-      className="my-fluid-lg py-fluid-xl text-timeline-text w-full"
-    >
+    <section id="experience" className="py-fluid-xl text-timeline-text w-full">
       <div ref={containerRef}>
         <h2 className="text-fluid-h2 my-fluid-lg">Work Overview</h2>
 
         {/* main grid - two columns: dates and content */}
-        <div className="grid grid-cols-[auto_1fr] gap-4 md:gap-8 relative">
+        <div className="grid grid-cols-[auto_1fr] gap-2 md:gap-4 relative">
           {experience.map((entry) => (
             <TimelineEntry key={entry.id} entry={entry} />
           ))}
@@ -103,7 +100,7 @@ const WorkExperienceTimeline = () => {
 
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
-    <div className="timeline-entry col-span-full my-fluid-xl">
+    <div className="timeline-entry col-span-full py-fluid-lg">
       {/* Nested grid handles internal layout.
         Two columns: 'auto' for the date/dot and '1fr' for the content.
       */}
