@@ -6,7 +6,7 @@
   "scripts": {
     "copyWasm": "copy-files-from-to --config copy-files-from-to.json",
     "dev": "pnpm run copyWasm && next dev --turbopack",
-    "build": "pnpm run copyWasm && next build --turbopack",
+    "build": "pnpm run copyWasm && next build",
     "start": "next start",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",

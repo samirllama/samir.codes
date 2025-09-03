@@ -173,7 +173,7 @@ a:hover {
 }
 
 /* Code blocks */
-pre {
+d pre {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -194,6 +194,59 @@ code {
 pre code {
   background: none;
   padding: 0;
+}
+
+pre[data-theme] {
+  /* background: var(--color-surface) !important; */
+  background: transparent !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+  padding: var(--space-lg) !important;
+  padding-top: var(--space-xl) !important;
+  margin: var(--space-lg) 0 !important;
+  overflow-x: auto;
+  font-family: var(--font-mono) !important;
+  line-height: 1.4 !important;
+  position: relative;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+pre[data-theme] code {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-family: inherit !important;
+  display: block;
+  width: fit-content;
+  min-width: 100%;
+}
+
+.line--highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+  display: block;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.word--highlighted {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.125rem 0.25rem;
+}
+
+pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  padding-left: 0.75rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  border-bottom: 1px solid var(--color-border) !important;
+  width: 100%;
 }
 
 /* Utility Classes */

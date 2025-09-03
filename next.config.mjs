@@ -1,4 +1,5 @@
 // next.config.mjs
+import path from "path";
 import createMDX from "@next/mdx";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 import remarkGfm from "remark-gfm";
@@ -124,12 +125,8 @@ const nextConfig = {
         https: false,
         assert: false,
         os: false,
-        path: false,
       };
     }
-    //   ...config.resolve.alias,
-    //   scichart: "scichart/index.js",
-    // };
 
     Object.assign(config.resolve.alias, {
       scichart: path.resolve("./node_modules/scichart"),
@@ -242,11 +239,9 @@ const withMDX = createMDX({
           keepBackground: false,
           defaultLang: "plaintext",
           transformers: [
-            // Add line numbers (optional)
             {
               name: "add-line-numbers",
               pre(node) {
-                // Add data attribute for line numbers if needed
                 this.addClassToHast(node, "line-numbers");
               },
             },

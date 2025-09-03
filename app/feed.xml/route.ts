@@ -1,12 +1,12 @@
-import { getAllPosts } from "@/lib/posts";
+import { getAllPosts } from "@/lib/posts.server";
 
 export async function GET() {
-    const posts = getAllPosts();
-    const baseUrl = "https://samir.codes";
+  const posts = getAllPosts();
+  const baseUrl = "https://samir.codes";
 
-    const rssItems = posts
-        .map((post) => {
-            return `
+  const rssItems = posts
+    .map((post) => {
+      return `
         <item>
           <title><![CDATA[${post.title}]]></title>
           <description><![CDATA[${post.description}]]></description>
@@ -14,14 +14,14 @@ export async function GET() {
           <guid>${baseUrl}/posts/${post.slug}</guid>
           <pubDate>${new Date(post.date).toUTCString()}</pubDate>
           ${post.tags?.map((tag) => `<category>${tag}</category>`).join("") ||
-                ""
-                }
+        ""
+        }
         </item>
       `;
-        })
-        .join("");
+    })
+    .join("");
 
-    const rss = `<?xml version="1.0" encoding="UTF-8" ?>
+  const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Samir Lama - Blog</title>
@@ -36,9 +36,9 @@ export async function GET() {
   </channel>
 </rss>`;
 
-    return new Response(rss, {
-        headers: {
-            "Content-Type": "application/rss+xml; charset=utf-8",
-        },
-    });
+  return new Response(rss, {
+    headers: {
+      "Content-Type": "application/rss+xml; charset=utf-8",
+    },
+  });
 }
