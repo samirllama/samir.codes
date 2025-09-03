@@ -1,0 +1,144 @@
+.hero {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  max-width: 72ch;
+  place-self: center;
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heroText {
+  /* min, preferred, max */
+  width: clamp(320px, 86%, 600px);
+}
+
+.heroText h3 {
+  margin-bottom: var(--space-md);
+  line-height: 1.1;
+  color: var(--color-text-light);
+}
+
+.accent {
+  color: var(--color-primary);
+  position: relative;
+}
+
+.accent::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-accent, #6c63ff);
+  transform: scaleX(0);
+  animation: underlineGrow 2s ease-out 1s forwards;
+}
+
+@keyframes underlineGrow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: var(--color-text);
+  margin-bottom: var(--space-xl);
+  max-width: 36ch;
+  line-height: 1.6;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.secondaryBtn {
+  background: transparent;
+  border: 2px solid var(--color-accent, #6c63ff);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.heroVisual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarWrap {
+  position: relative;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(
+    225deg var(--color-accent),
+    var(--color-pantone-accent-1)
+  );
+  opacity: 0.8;
+}
+
+.avatarWrap :global(img) {
+  object-fit: cover;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: 1;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-pantone-accent-1)
+  );
+  opacity: 0.2;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@media (max-width: 968px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .heroVisual {
+    margin-bottom: 2rem;
+  }
+
+  .heroText {
+    width: 100%;
+  }
+}

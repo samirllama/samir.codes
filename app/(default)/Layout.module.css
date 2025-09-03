@@ -1,0 +1,166 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.main {
+  /* From previous module styles */
+  padding-top: var(--space-3xl);
+  /* margin-top: var(--space-2xl); */
+  margin-inline: var(--space-xl);
+  min-height: 100vh;
+  /* From globals.css pageLayout--main */
+  position: relative;
+  min-width: 0;
+}
+
+.leftAside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  align-items: center;
+  display: none; /* Hidden by default on smaller screens */
+  flex-direction: column;
+}
+
+.fixedContent {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.asideModule {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.1s;
+  align-content: space-between;
+  display: grid;
+  grid-template-rows: 144px auto 144px;
+  height: 100%;
+  padding: 48px 0;
+}
+
+.asideModuleCenter {
+  grid-row: 2/3;
+}
+
+.rightAside {
+  align-items: center;
+  display: none; /* Hidden by default on smaller screens */
+  flex-direction: column;
+}
+
+/*  Desktop Grid Layout (from @media (min-width: 80em)) --- */
+@media (min-width: 80em) {
+  .container {
+    display: grid;
+    gap: 48px;
+    grid-auto-flow: column;
+    grid-template-columns: 144px minmax(0, 1fr) 144px;
+    grid-template-rows: 1fr;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .main {
+    grid-column: 2; /* Takes the center column */
+  }
+
+  .leftAside,
+  .rightAside {
+    display: flex;
+  }
+
+  .leftAside {
+    grid-column: 1;
+  }
+
+  .rightAside {
+    grid-column: 3;
+  }
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  position: relative;
+  padding: 4px;
+  /* The Glass Effect */
+  background-color: color-mix(in oklch, var(--color-surface) 15%, transparent);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
+  /* Pill shape */
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px color-mix(in oklch, black 5%, transparent),
+    inset 0 1px 1px 0 color-mix(in oklch, white 10%, transparent);
+}
+
+.navLink {
+  color: var(--color-text-light);
+  font-family: var(--font-mono-argon);
+  font-weight: 500;
+  font-size: var(--font-size-step-0);
+  text-decoration: none; /* Make sure to remove the default underline here */
+  display: inline-block;
+  position: relative;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: 0%;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: bottom center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.navLink:hover {
+  text-decoration: none; /* Crucial: Remove the default underline on hover */
+  color: var(--color-accent);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.active {
+  color: var(--color-accent);
+  background-color: transparent;
+  transform: none;
+  text-decoration: none; /* Also remove the default underline for the active state */
+}
+
+.active::after {
+  transform: scaleX(1);
+}
+
+.mainParallax {
+  /* This new container enables the sticky positioning of the footer */
+  isolation: isolate; /* Creates a new stacking context */
+  position: relative; /* Establishes the positioning context */
+  background-color: var(--color-background); /* Main content background */
+}
+
+.contentScroller {
+  /* Wrapper holds the main page content */
+  position: relative;
+  z-index: 1; /* Ensures content scrolls OVER the footer */
+  background-color: inherit; /* Inherits background from parent */
+
+  /* The magic trick: Pull the footer up underneath the content */
+  margin-bottom: -60vh; /* Must match the footer's min-height */
+  margin-bottom: 5vh;
+}

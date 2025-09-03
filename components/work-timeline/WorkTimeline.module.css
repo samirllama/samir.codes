@@ -1,0 +1,272 @@
+/*
+ * Styles for the WorkExperienceTimeline component
+ */
+
+.title {
+  font-size: var(--font-size-step-3);
+  padding: var(--space-xs);
+  text-align: left;
+}
+
+@media (min-width: 45em) {
+  .section {
+    padding-bottom: var(--space-3xl);
+  }
+
+  .title {
+    padding: var(--space-lg) var(--space-sm);
+  }
+}
+
+.timelineGrid {
+  display: grid;
+  /* Mobile-first: a single column that takes up the full width */
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  position: relative;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .timelineGrid {
+    /* On larger screens, revert to the two-column layout */
+    grid-template-columns: auto 1fr;
+    gap: var(--space-md);
+  }
+}
+
+.entryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .entryGrid {
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+.dateWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-right: auto;
+  padding-top: var(--space-xs);
+  padding-bottom: var(--space-xs);
+}
+
+.date {
+  font-size: var(--font-size-step-0);
+  letter-spacing: -1px;
+  white-space: nowrap;
+  order: 1;
+  line-height: 1.6;
+  font-family: var(--font-mono-argon);
+}
+
+@media (min-width: 55em) {
+  .date {
+    order: -1;
+  }
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  order: initial;
+}
+
+@media (min-width: 55em) {
+  .dot {
+    order: -1;
+  }
+}
+
+.projectCardTwo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base),
+    transform var(--transition-base);
+  padding: var(--space-xs);
+  max-width: 85%;
+  justify-self: center;
+}
+
+@media (min-width: 55em) {
+  .projectCardTwo {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    padding: var(--space-lg);
+  }
+}
+
+.leftFrame {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 256px;
+  margin-right: 20px;
+}
+
+.cardContentFrame {
+  align-self: flex-start;
+  max-width: 30ch;
+  width: clamp(320px, 350px, 350px);
+}
+
+@media (min-width: 55em) {
+  .cardContentFrame {
+    width: clamp(350px, 400px, 400px);
+    max-width: 55ch;
+    flex-wrap: nowrap;
+  }
+  .projectCardTwo {
+    padding: var(--space-xs);
+  }
+}
+
+.cardImgFrame {
+  position: relative;
+  width: 256px;
+  height: 200px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+/* next/image (fill) inside */
+.cardImgFrame :global(img) {
+  object-fit: contain;
+}
+
+/* Project Card Styles --- */
+.projectCard {
+  max-width: 90%;
+  border-radius: 12px; /* Modern, rounded look */
+  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardImageWrapper {
+  position: relative;
+  max-width: 90%;
+  aspect-ratio: 16 / 9; /* Standard widescreen ratio for the image */
+  min-height: 200px; /* Ensures a good minimum height on mobile */
+}
+
+.cardImage {
+  object-fit: cover; /* Ensures the image fills the area without distortion */
+  object-position: left; /* Often looks better for UI screenshots */
+  max-width: 100%;
+  height: auto;
+}
+
+@media (min-width: 45em) {
+  .cardImage {
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+    height: auto;
+  }
+  .cardImageWrapper {
+    max-width: 100%;
+  }
+}
+
+.cardContentWrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  padding: var(--space-md) var(--space-xs);
+  max-width: 80%;
+}
+
+.cardCompany {
+  font-size: var(--font-size-step-1);
+  font-weight: 500;
+  color: var(--color-accent);
+  margin-bottom: 0;
+}
+
+.cardTitle {
+  font-size: var(--font-size-step-1);
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  color: var(--color-text-light);
+  line-height: var(--my-line-height-tight);
+}
+
+.cardDescription {
+  font-size: var(--font-size-step-0);
+  color: var(--color-primary); /* Softer color for the main text */
+  margin-bottom: var(--space-lg);
+  flex-grow: 1; /* This pushes the tags to the bottom of the card */
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+.tagsContainer {
+  margin-top: auto; /* Aligns to the bottom */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.tag {
+  font-size: var(--font-size-step--2);
+  color: var(--color-text);
+  background-color: color-mix(in oklch, var(--color-border) 20%, transparent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+/*  Desktop Layout for Project Card --- */
+@media (min-width: 55em) {
+  .projectCard {
+    grid-template-columns: 40% 1fr; /* The 40/60 split you requested */
+    max-width: 100%;
+  }
+
+  .cardImageWrapper {
+    aspect-ratio: initial; /* Unset aspect ratio to let grid height control it */
+    min-height: initial;
+  }
+
+  .cardContentWrapper {
+    padding: var(--space-lg); /* More padding on larger screens */
+    max-width: 100%;
+  }
+
+  .tag {
+    font-size: var(--font-size-step--1);
+  }
+  .dateWrapper {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-md);
+  }
+}

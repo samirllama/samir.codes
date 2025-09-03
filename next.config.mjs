@@ -1,9 +1,14 @@
-import withBundleAnalyzer from "@next/bundle-analyzer";
+// next.config.mjs
 import createMDX from "@next/mdx";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -43,10 +48,47 @@ const nextConfig = {
       "cdn.jsdelivr.net",
       "unpkg.com",
     ],
-    formats: ["image/webp", "image/avif"],
+    formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+  headers: async () => {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: https:",
+              "font-src 'self'",
+              "connect-src 'self'",
+              "media-src 'self'",
+            ].join("; "),
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+        ],
+      },
+    ];
   },
   experimental: {
     webVitalsAttribution: ["CLS", "LCP"],
@@ -186,9 +228,47 @@ const config =
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    development: process.env.NODE_ENV === "development",
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: "wrap" }],
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: "github-dark",
+            light: "github-light",
+          },
+          keepBackground: false,
+          defaultLang: "plaintext",
+          transformers: [
+            // Add line numbers (optional)
+            {
+              name: "add-line-numbers",
+              pre(node) {
+                // Add data attribute for line numbers if needed
+                this.addClassToHast(node, "line-numbers");
+              },
+            },
+          ],
+          // Ensure proper processing
+          onVisitLine(node) {
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node) {
+            if (!node.properties.className) {
+              node.properties.className = [];
+            }
+            node.properties.className.push("line--highlighted");
+          },
+          onVisitHighlightedChars(node) {
+            node.properties.className = ["word--highlighted"];
+          },
+        },
+      ],
+    ],
   },
 });
 

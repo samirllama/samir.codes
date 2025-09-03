@@ -1,63 +1,41 @@
+import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
-import { Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import type { Metadata } from "next";
 import "./styles/globals.css";
-import { cn } from "@/lib/utils";
-import { getNonce } from "@/lib/nonce";
 import { defaultMetadata } from "./metadata";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageViewTracker } from "@/features/analytics/components/page-view-tracker";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
 };
 
-const defaultSans = Geist_Mono({
-  weight: ["300", "500", "700", "800"],
+const monaspaceArgon = localFont({
+  src: "./MonaspaceArgonVF.woff2",
   display: "swap",
-  variable: "--font-sans",
-  subsets: ["latin"],
+  variable: "--font-mono-argon", // Define CSS variable for the font
+});
+const monaspaceNeon = localFont({
+  src: "./MonaspaceNeonVF.woff2",
+  display: "swap",
+  variable: "--font-mono",
 });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const nonce = await getNonce();
   return (
     <html lang="en" className="scrollbar-thin" suppressHydrationWarning>
-      <head>
-        {nonce && (
-          <script
-            nonce={nonce}
-            dangerouslySetInnerHTML={{
-              __html: `
-                // Set global nonce for dynamic scripts
-                window.__NONCE__ = '${nonce}';
-
-                // Helper function to create nonce-compliant scripts
-                window.createNonceScript = function(code) {
-                  const script = document.createElement('script');
-                  script.nonce = '${nonce}';
-                  script.textContent = code;
-                  return script;
-                };
-              `,
-            }}
-          />
-        )}
-      </head>
-
-      <body className={cn(defaultSans.variable, "antialiased")}>
+      <body className={`${monaspaceArgon.variable} ${monaspaceNeon.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange={false}
         >
-          <div id="nonce-data" data-nonce={nonce} style={{ display: "none" }} />
           <Suspense fallback={null}>
             <PageViewTracker />
           </Suspense>

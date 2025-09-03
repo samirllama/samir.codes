@@ -1,20 +1,18 @@
-import TechStack from "@/components/tech-stack";
-import WorkExperienceTimeline from "@/components/WorkExperienceTimeline";
-import { skillCategories } from "@/lib/data/work-exp";
+import Hero from "@/components/hero/Hero";
+import About from "@/components/about/About";
+import Projects from "@/components/projects/Projects";
+import WorkTimeline from "@/components/work-timeline/WorkTimeline";
+import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   return (
-    <article>
-      {/* INTRO */}
-      <section id="about" className="py-fluid-xl flex flex-col">
-        <p className="text-fluid-h3 mt-fluid-xl">Fullstack Developer</p>
-        <h1 className="text-fluid-h1 my-fluid-xl">
-          I design and develop high-performance apps that scale
-        </h1>
+    <>
+      <Hero />
+      <About />
+      <section className={styles.section} id="experience">
+        <WorkTimeline />
       </section>
-
-      <WorkExperienceTimeline />
-      <TechStack skillCategories={skillCategories} />
-    </article>
+      <Projects />
+    </>
   );
 }

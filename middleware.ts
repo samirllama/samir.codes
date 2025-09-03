@@ -1,17 +1,8 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
-import { createCSPDirectives, formatCSP } from "@/lib/csp-config-flexible"
-
-// Edge-safe nonce generator using Web Crypto API
-function generateNonce(): string {
-    const array = new Uint8Array(16)
-    crypto.getRandomValues(array)
-    return Buffer.from(array).toString("base64")
-}
 
 export function middleware(request: NextRequest) {
-    const response = NextResponse.next()
-    const nonce = generateNonce()
+    const response = NextResponse.next();
 
     // Set WASM content type for SciChart files
     if (request.nextUrl.pathname.endsWith(".wasm")) {
@@ -26,17 +17,16 @@ export function middleware(request: NextRequest) {
     response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
     response.headers.set("X-Frame-Options", "SAMEORIGIN")
 
-    // Build CSP directives based on environment
-    const isDevelopment = process.env.NODE_ENV === "development"
-    const cspDirectives = createCSPDirectives(nonce, isDevelopment)
-    const cspString = formatCSP(cspDirectives)
 
-    response.headers.set("Content-Security-Policy", cspString)
-    response.headers.set("x-nonce", nonce)
+    response.headers.set("X-Robots-Tag", "index, follow");
+    response.headers.set(
+        "Permissions-Policy",
+        "camera=(), microphone=(), geolocation=(), payment=()"
+    );
 
-    return response
+    return response;
 }
 
 export const config = {
     matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-}
+};

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaMastodon } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Timestamp } from "@/components/Timestamp";
 import { AnimatedArrow } from "@/components/ui/arrow";
@@ -17,7 +17,6 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-
           <div className="flex flex-wrap justify-around gap-8 text-xl">
             <a
               href="mailto:samirllama@gmail.com"
@@ -77,7 +76,7 @@ export default function Footer() {
               <AnimatedArrow />
             </a>
           </div>
-
+          Xz
           <div></div>
         </div>
 

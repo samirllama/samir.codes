@@ -1,0 +1,718 @@
+---
+title: "Python Study Guide: From Basics to Advanced"
+description: "A comprehensive guide to essential Python concepts for technical interviews, from fundamental iterations to advanced async programming."
+date: "2025-08-31"
+tags: "Python, Interview, Algorithms, Asynchronous Programming, Generators"
+image: "/images/python-interview-guide.jpg"
+---
+
+A comprehensive guide covering essential Python concepts for technical interviews, from fundamental iterations to advanced async programming.
+
+---
+
+## Beginner Topics
+
+### List Iteration with For Loops
+
+The most fundamental concept in Python - iterating through collections efficiently.
+
+```python
+# Basic iteration
+numbers = [1, 2, 3, 4, 5]
+for num in numbers:
+    print(num)
+
+# Iteration with index using enumerate
+fruits = ['apple', 'banana', 'orange']
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+
+# Iteration with range
+for i in range(len(numbers)):
+    print(f"Index {i}: {numbers[i]}")
+```
+
+**💡 Tip**: Always prefer `for item in collection` over `for i in range(len(collection))` when you don't need the index.
+
+### List Comprehensions
+
+A Pythonic way to create lists with filtering and transformation.
+
+```python
+# Basic list comprehension
+squares = [x**2 for x in range(10)]
+
+# With condition
+even_squares = [x**2 for x in range(10) if x % 2 == 0]
+
+# Nested comprehension
+matrix = [[i + j for j in range(3)] for i in range(3)]
+
+# Real-world example: processing data
+names = ['alice', 'bob', 'charlie']
+capitalized = [name.capitalize() for name in names if len(name) > 3]
+```
+
+### Dictionary Operations
+
+Essential for data manipulation and algorithm problems.
+
+```python
+# Dictionary comprehension
+word_lengths = {word: len(word) for word in ['python', 'java', 'go']}
+
+# Merging dictionaries (Python 3.9+)
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+merged = dict1 | dict2
+
+# Safe key access
+user_data = {'name': 'John', 'age': 30}
+email = user_data.get('email', 'Not provided')
+
+# Counting with defaultdict
+from collections import defaultdict
+word_count = defaultdict(int)
+text = "hello world hello"
+for word in text.split():
+    word_count[word] += 1
+```
+
+---
+
+## Intermediate Topics
+
+### String Manipulation and Regular Expressions
+
+Critical for text processing problems in interviews.
+
+```python
+import re
+
+# String methods
+text = "  Python Programming  "
+cleaned = text.strip().lower().replace(' ', '_')
+
+# Regular expressions
+email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+emails = ['user@example.com', 'invalid.email', 'test@domain.co.uk']
+valid_emails = [email for email in emails if re.match(email_pattern, email)]
+
+# Extracting data with groups
+log_pattern = r'(\d{4}-\d{2}-\d{2}) (\w+): (.+)'
+log_line = "2024-01-15 ERROR: Database connection failed"
+match = re.match(log_pattern, log_line)
+if match:
+    date, level, message = match.groups()
+```
+
+### Error Handling and Context Managers
+
+Professional Python code requires proper error handling.
+
+```python
+# Exception handling
+def divide_numbers(a, b):
+    try:
+        result = a / b
+        return result
+    except ZeroDivisionError:
+        print("Cannot divide by zero!")
+        return None
+    except TypeError:
+        print("Both arguments must be numbers!")
+        return None
+    finally:
+        print("Division operation completed")
+
+# Custom context manager
+class DatabaseConnection:
+    def __enter__(self):
+        print("Opening database connection")
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print("Closing database connection")
+        if exc_type:
+            print(f"Exception occurred: {exc_val}")
+        return False  # Don't suppress exceptions
+
+# Using context manager
+with DatabaseConnection() as db:
+    print("Performing database operations")
+```
+
+---
+
+## Advanced Topics
+
+### Generators vs Lists: Memory Efficiency
+
+Understanding when to use generators can make or break performance in large-scale applications.
+
+```python
+# Memory-hungry list approach
+def get_squares_list(n):
+    return [x**2 for x in range(n)]
+
+# Memory-efficient generator approach
+def get_squares_generator(n):
+    for x in range(n):
+        yield x**2
+
+# Generator expression
+squares_gen = (x**2 for x in range(1000000))
+
+# Real-world example: file processing
+def read_large_file(filename):
+    """Generator that yields lines one at a time"""
+    with open(filename, 'r') as file:
+        for line in file:
+            yield line.strip()
+
+# Processing without loading entire file into memory
+def process_log_file(filename):
+    error_count = 0
+    for line in read_large_file(filename):
+        if 'ERROR' in line:
+            error_count += 1
+            if error_count > 100:  # Stop early if too many errors
+                break
+    return error_count
+
+# Generator pipeline
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+def take(n, generator):
+    """Take first n items from generator"""
+    for _, value in zip(range(n), generator):
+        yield value
+
+# Usage: first 10 fibonacci numbers
+fib_10 = list(take(10, fibonacci()))
+```
+
+**Interview Key Point**: Generators use lazy evaluation - they generate values on-demand, making them memory-efficient for large datasets.
+
+### Decorators: Function Enhancement
+
+Decorators are a powerful metaprogramming feature essential for frameworks like Flask/Django.
+
+```python
+import functools
+import time
+from typing import Callable, Any
+
+# Basic decorator
+def timer(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        print(f"{func.__name__} took {end_time - start_time:.4f} seconds")
+        return result
+    return wrapper
+
+# Decorator with parameters
+def retry(max_attempts: int = 3, delay: float = 1.0):
+    def decorator(func: Callable) -> Callable:
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(max_attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if attempt == max_attempts - 1:
+                        raise e
+                    print(f"Attempt {attempt + 1} failed: {e}")
+                    time.sleep(delay)
+            return None
+        return wrapper
+    return decorator
+
+# Class-based decorator
+class RateLimiter:
+    def __init__(self, max_calls: int, window: float):
+        self.max_calls = max_calls
+        self.window = window
+        self.calls = []
+
+    def __call__(self, func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            now = time.time()
+            # Remove old calls outside the window
+            self.calls = [call_time for call_time in self.calls
+                         if now - call_time < self.window]
+
+            if len(self.calls) >= self.max_calls:
+                raise Exception("Rate limit exceeded")
+
+            self.calls.append(now)
+            return func(*args, **kwargs)
+        return wrapper
+
+# Usage examples
+@timer
+@retry(max_attempts=3, delay=0.5)
+def unreliable_api_call():
+    import random
+    if random.random() < 0.7:  # 70% chance of failure
+        raise ConnectionError("API temporarily unavailable")
+    return {"status": "success", "data": "important_data"}
+
+@RateLimiter(max_calls=5, window=60)  # 5 calls per minute
+def api_endpoint():
+    return "API response"
+```
+
+### Async Programming: Concurrency for Modern Applications
+
+Asynchronous programming is crucial for I/O-bound operations and modern web applications.
+
+```python
+import asyncio
+import aiohttp
+import time
+from typing import List
+
+# Basic async function
+async def fetch_data(url: str) -> dict:
+    """Simulate fetching data from an API"""
+    await asyncio.sleep(1)  # Simulate network delay
+    return {"url": url, "status": "success"}
+
+# Concurrent execution
+async def fetch_multiple_urls(urls: List[str]) -> List[dict]:
+    """Fetch multiple URLs concurrently"""
+    tasks = [fetch_data(url) for url in urls]
+    results = await asyncio.gather(*tasks)
+    return results
+
+# Real-world HTTP example
+async def fetch_with_session(session: aiohttp.ClientSession, url: str) -> dict:
+    try:
+        async with session.get(url) as response:
+            data = await response.json()
+            return {"url": url, "data": data, "status": response.status}
+    except Exception as e:
+        return {"url": url, "error": str(e), "status": "failed"}
+
+async def batch_api_calls(urls: List[str]) -> List[dict]:
+    """Efficiently batch multiple API calls"""
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_with_session(session, url) for url in urls]
+        return await asyncio.gather(*tasks, return_exceptions=True)
+
+# Async context managers
+class AsyncDatabaseConnection:
+    async def __aenter__(self):
+        print("Opening async database connection")
+        await asyncio.sleep(0.1)  # Simulate connection time
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        print("Closing async database connection")
+        await asyncio.sleep(0.1)  # Simulate cleanup time
+
+# Producer-Consumer pattern with async
+async def producer(queue: asyncio.Queue, items: List[str]):
+    """Produce items and put them in queue"""
+    for item in items:
+        await queue.put(item)
+        print(f"Produced: {item}")
+        await asyncio.sleep(0.1)
+
+    # Signal completion
+    await queue.put(None)
+
+async def consumer(queue: asyncio.Queue, consumer_id: int):
+    """Consume items from queue"""
+    while True:
+        item = await queue.get()
+        if item is None:
+            # Put None back for other consumers
+            await queue.put(None)
+            break
+
+        print(f"Consumer {consumer_id} processing: {item}")
+        await asyncio.sleep(0.2)  # Simulate processing time
+        queue.task_done()
+
+# Usage example
+async def main():
+    # Simple async execution
+    urls = ['[https://api1.com](https://api1.com)', '[https://api2.com](https://api2.com)', '[https://api3.com](https://api3.com)']
+
+    # Sequential vs Concurrent comparison
+    start_time = time.time()
+    sequential_results = []
+    for url in urls:
+        result = await fetch_data(url)
+        sequential_results.append(result)
+    sequential_time = time.time() - start_time
+
+    start_time = time.time()
+    concurrent_results = await fetch_multiple_urls(urls)
+    concurrent_time = time.time() - start_time
+
+    print(f"Sequential: {sequential_time:.2f}s")
+    print(f"Concurrent: {concurrent_time:.2f}s")
+
+    # Producer-Consumer example
+    queue = asyncio.Queue(maxsize=5)
+    items = [f"task_{i}" for i in range(10)]
+
+    # Start producer and multiple consumers
+    await asyncio.gather(
+        producer(queue, items),
+        consumer(queue, 1),
+        consumer(queue, 2),
+        queue.join()  # Wait for all tasks to be processed
+    )
+
+# Run the async main function
+if __name__ == "__main__":
+    asyncio.run(demonstrate_worker_pool())
+```
+
+---
+
+## Interview-Focused Code Patterns
+
+### Algorithm Implementations
+
+```python
+# Binary search with generators
+def binary_search_range(arr: List[int], target: int):
+    """Generator that yields all indices where target appears"""
+    left, right = 0, len(arr) - 1
+
+    # Find any occurrence first
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            # Found target, now find the range
+            start = mid
+            while start > 0 and arr[start - 1] == target:
+                start -= 1
+
+            end = mid
+            while end < len(arr) - 1 and arr[end + 1] == target:
+                end += 1
+
+            for i in range(start, end + 1):
+                yield i
+            return
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+# Memoization with decorators
+def memoize(func):
+    cache = {}
+    @functools.wraps(func)
+    def wrapper(*args):
+        if args in cache:
+            return cache[args]
+        result = func(*args)
+        cache[args] = result
+        return result
+    return wrapper
+
+@memoize
+def fibonacci(n: int) -> int:
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# Async data processing pipeline
+async def process_data_pipeline(data_source: AsyncGenerator):
+    """Process data through multiple async stages"""
+
+    async def validate_stage(item):
+        await asyncio.sleep(0.01)  # Simulate validation
+        return item if item > 0 else None
+
+    async def transform_stage(item):
+        await asyncio.sleep(0.01)  # Simulate transformation
+        return item * 2
+
+    async def save_stage(item):
+        await asyncio.sleep(0.01)  # Simulate saving
+        print(f"Saved: {item}")
+        return item
+
+    pipeline_tasks = []
+    async for item in data_source:
+        if validated_item := await validate_stage(item):
+            transformed_item = await transform_stage(validated_item)
+            task = asyncio.create_task(save_stage(transformed_item))
+            pipeline_tasks.append(task)
+
+    # Wait for all saves to complete
+    await asyncio.gather(*pipeline_tasks)
+```
+
+---
+
+## Common Interview Questions & Solutions
+
+### Memory Optimization
+
+```python
+# BAD: Memory inefficient for large datasets
+def process_large_dataset_bad(filename: str) -> List[int]:
+    with open(filename) as f:
+        numbers = [int(line.strip()) for line in f]  # Loads entire file
+    return [num * 2 for num in numbers if num > 100]  # Creates another large list
+
+# GOOD: Memory efficient with generators
+def process_large_dataset_good(filename: str):
+    """Generator that processes file line by line"""
+    with open(filename) as f:
+        for line in f:
+            num = int(line.strip())
+            if num > 100:
+                yield num * 2
+
+# Usage
+processed_numbers = list(process_large_dataset_good('large_file.txt'))
+```
+
+### Advanced Decorator Patterns
+
+```python
+# Decorator factory with validation
+def validate_types(**expected_types):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            # Validate positional arguments
+            func_args = func.__code__.co_varnames[:func.__code__.co_argcount]
+            for i, (arg_name, arg_value) in enumerate(zip(func_args, args)):
+                if arg_name in expected_types:
+                    expected_type = expected_types[arg_name]
+                    if not isinstance(arg_value, expected_type):
+                        raise TypeError(f"{arg_name} must be {expected_type.__name__}")
+
+            # Validate keyword arguments
+            for arg_name, arg_value in kwargs.items():
+                if arg_name in expected_types:
+                    expected_type = expected_types[arg_name]
+                    if not isinstance(arg_value, expected_type):
+                        raise TypeError(f"{arg_name} must be {expected_type.__name__}")
+
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+@validate_types(name=str, age=int, active=bool)
+def create_user(name: str, age: int, active: bool = True):
+    return {"name": name, "age": age, "active": active}
+```
+
+### Advanced Async Patterns
+
+```python
+import asyncio
+from asyncio import Queue, Event
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class Task:
+    id: str
+    data: Any
+    priority: int = 0
+
+class AsyncWorkerPool:
+    def __init__(self, num_workers: int = 3):
+        self.num_workers = num_workers
+        self.task_queue: Queue[Optional[Task]] = Queue()
+        self.results: dict = {}
+        self.shutdown_event = Event()
+
+    async def worker(self, worker_id: int):
+        """Worker coroutine that processes tasks"""
+        print(f"Worker {worker_id} started")
+        while not self.shutdown_event.is_set():
+            try:
+                # Wait for task with timeout
+                task = await asyncio.wait_for(
+                    self.task_queue.get(),
+                    timeout=1.0
+                )
+
+                if task is None:  # Shutdown signal
+                    break
+
+                # Process task
+                print(f"Worker {worker_id} processing task {task.id}")
+                result = await self.process_task(task)
+                self.results[task.id] = result
+
+                self.task_queue.task_done()
+
+            except asyncio.TimeoutError:
+                continue  # Check shutdown event
+            except Exception as e:
+                print(f"Worker {worker_id} error: {e}")
+
+    async def process_task(self, task: Task) -> str:
+        """Simulate task processing"""
+        await asyncio.sleep(0.1 * task.priority)  # Simulate work
+        return f"Processed {task.data}"
+
+    async def start(self):
+        """Start all workers"""
+        self.workers = [
+            asyncio.create_task(self.worker(i))
+            for i in range(self.num_workers)
+        ]
+
+    async def add_task(self, task: Task):
+        """Add task to queue"""
+        await self.task_queue.put(task)
+
+    async def shutdown(self):
+        """Graceful shutdown"""
+        self.shutdown_event.set()
+
+        # Add shutdown signals for each worker
+        for _ in range(self.num_workers):
+            await self.task_queue.put(None)
+
+        # Wait for workers to finish
+        await asyncio.gather(*self.workers, return_exceptions=True)
+
+# Usage example
+async def demonstrate_worker_pool():
+    pool = AsyncWorkerPool(num_workers=3)
+    await pool.start()
+
+    # Add tasks
+    tasks = [
+        Task("task_1", "important_data", priority=1),
+        Task("task_2", "normal_data", priority=2),
+        Task("task_3", "low_priority_data", priority=3),
+    ]
+
+    for task in tasks:
+        await pool.add_task(task)
+
+    # Wait for all tasks to complete
+    await pool.task_queue.join()
+
+    # Shutdown
+    await pool.shutdown()
+
+    print("Results:", pool.results)
+
+# Run the async main function
+if __name__ == "__main__":
+    asyncio.run(demonstrate_worker_pool())
+```
+
+---
+
+## Performance and Memory Considerations
+
+### When to Use Each Approach
+
+```python
+# Use lists when:
+# - You need random access to elements
+# - You need to iterate multiple times
+# - The dataset is small enough to fit in memory
+small_data = [x for x in range(100)]
+print(small_data[50])  # Random access
+
+# Use generators when:
+# - Processing large datasets
+# - You only iterate once
+# - Memory is a constraint
+def large_dataset():
+    for i in range(1_000_000):
+        yield expensive_computation(i)
+
+# Use async when:
+# - Making I/O operations (file, network, database)
+# - You have multiple independent operations
+# - You want to improve throughput, not CPU performance
+
+async def concurrent_api_calls():
+    """Good use case for async"""
+    urls = ['api1.com', 'api2.com', 'api3.com']
+    tasks = [fetch_url(url) for url in urls]
+    return await asyncio.gather(*tasks)
+
+def cpu_intensive_work():
+    """Bad use case for async - use multiprocessing instead"""
+    return sum(i**2 for i in range(1_000_000))
+```
+
+---
+
+## Interview Tips and Common Gotchas
+
+### Python-Specific Gotchas
+
+```python
+# Mutable default arguments (AVOID)
+def bad_function(items=[]):  # DON'T DO THIS
+    items.append("new_item")
+    return items
+
+# Correct approach
+def good_function(items=None):
+    if items is None:
+        items = []
+    items.append("new_item")
+    return items
+
+# Late binding in loops
+# BAD
+functions = [lambda: i for i in range(3)]
+results = [f() for f in functions]  # [2, 2, 2] - not what you want!
+
+# GOOD
+functions = [lambda x=i: x for i in range(3)]
+results = [f() for f in functions]  # [0, 1, 2] - correct!
+
+# Generator exhaustion
+gen = (x for x in range(3))
+list1 = list(gen)  # [0, 1, 2]
+list2 = list(gen)  # [] - generator is exhausted!
+
+# Async pitfalls
+async def wrong_way():
+    tasks = []
+    for i in range(3):
+        task = asyncio.create_task(some_async_function(i))
+        result = await task  # Wrong! This makes it sequential
+        tasks.append(result)
+    return tasks
+
+async def right_way():
+    tasks = [asyncio.create_task(some_async_function(i)) for i in range(3)]
+    return await asyncio.gather(*tasks)  # Truly concurrent
+```
+
+---
+
+## Study Strategy for Interviews
+
+1.  **Practice these patterns daily** - implement small versions of each concept
+2.  **Understand the why** - know when to use generators vs lists, sync vs async
+3.  **Master the fundamentals** - list comprehensions and basic iteration appear in 90% of coding interviews
+4.  **Time complexity awareness** - understand how generators affect Big O notation
+5.  **Real-world application** - be ready to explain how you'd use these in production systems
+
+> **Pro Tip**: In interviews, always ask about data size and performance requirements. This shows you understand when to optimize and demonstrates senior-level thinking about trade-offs between readability, performance, and memory usage.

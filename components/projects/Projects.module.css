@@ -1,0 +1,123 @@
+.projects {
+  padding: var(--space-xl) 0;
+  padding-bottom: 25vh;
+}
+.projects h2 {
+  color: var(--color-text-light);
+}
+
+.subtitle {
+  text-align: left;
+  color: var(--color-text);
+  font-size: 1.125rem;
+  margin-bottom: var(--space-2xl);
+  max-width: 600px;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+
+.projectCard {
+  display: flex;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.projectCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
+}
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.projectCard:hover::before {
+  transform: scaleX(1);
+}
+
+.projectContent h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.projectContent p {
+  color: var(--color-text-light);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.techTag {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+}
+
+.projectLinks {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.projectLink {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.projectLink:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectLinks {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .projectLink {
+    text-align: center;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+}

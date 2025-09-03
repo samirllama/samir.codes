@@ -1,0 +1,139 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  margin-left: 0;
+  margin-right: auto;
+  z-index: var(--my-z-index-header);
+  pointer-events: none;
+  transition: all var(--transition-base);
+}
+
+.glass {
+  max-width: 1600px;
+  width: 100%;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  height: 4.5rem;
+
+  /* Glass */
+  background-color: color-mix(in oklch, var(--color-surface) 0%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+@media screen and (min-width: 55em) {
+  .glass {
+    height: 5rem;
+    padding: var(--space-lg);
+  }
+}
+
+.nameLogo {
+  display: flex;
+  align-items: center;
+  width: 8rem;
+  top: 4;
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+@media (min-width: 45em) {
+  .nameLogo {
+    width: 11rem;
+    top: 14;
+  }
+}
+@media (min-width: 55em) {
+  .nameLogo {
+    width: 14rem;
+    top: 16;
+  }
+}
+
+.logo {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.logo:hover {
+  color: var(--color-pantone-accent-1);
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.navLink {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+  background: var(--color-surface);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+
+.navLink.active {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .navList {
+    gap: var(--space-xs);
+  }
+
+  .navLink {
+    font-size: 0.875rem;
+  }
+}
+
+.hamburgerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40px;
+  height: 40px;
+  z-index: var(--my-z-index-menu); /* Ensure it's above other header content */
+}
+
+.line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.active .line1 {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.active .line2 {
+  opacity: 0;
+}
+
+.active .line3 {
+  transform: translateY(-5px) rotate(-45deg);
+}

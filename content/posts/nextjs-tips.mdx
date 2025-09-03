@@ -1,0 +1,268 @@
+---
+title: "10 Next.js Performance Tips That Actually Matter"
+description: "Practical performance optimizations for Next.js applications that deliver measurable improvements in Core Web Vitals and user experience."
+date: "2024-02-01"
+tags: "Next.js, Performance, Web Development, Optimization"
+image: "/images/nextjs-performance.jpg"
+---
+
+Performance isn't just about fast load times—it's about creating experiences that feel instantaneous and delightful. After optimizing dozens of Next.js applications, I've identified the techniques that provide the biggest impact on Core Web Vitals and user experience.
+
+## 1. Master Image Optimization
+
+The `next/image` component is powerful, but it requires proper configuration:
+
+```tsx
+import Image from "next/image";
+
+// ✅ Optimized approach
+<Image
+  src="/hero-image.jpg"
+  alt="Descriptive alt text"
+  width={800}
+  height={400}
+  priority // For above-the-fold images
+  placeholder="blur"
+  blurDataURL="data:image/jpeg;base64,..." // Generated blur placeholder
+/>;
+```
+
+**Key optimizations:**
+
+- Use `priority` for above-the-fold images
+- Implement blur placeholders for perceived performance
+- Choose the right sizing strategy (`fill`, `responsive`, or fixed dimensions)
+- Leverage the `sizes` prop for responsive images
+
+## 2. Implement Smart Bundle Splitting
+
+Next.js automatically splits your code, but you can optimize further:
+
+```tsx
+// Dynamic imports for code splitting
+const HeavyComponent = dynamic(() => import("../components/HeavyComponent"), {
+  loading: () => <div>Loading...</div>,
+  ssr: false, // Skip SSR for client-only components
+});
+
+// Conditional loading
+const AdminPanel = dynamic(() => import("../components/AdminPanel"), {
+  ssr: false,
+});
+
+function Dashboard({ user }) {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      {user.isAdmin && <AdminPanel />}
+    </div>
+  );
+}
+```
+
+## 3. Optimize Font Loading
+
+Font optimization can significantly improve Cumulative Layout Shift (CLS):
+
+```tsx
+// In your layout or page
+import { Inter, Playfair_Display } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+});
+
+export default function RootLayout({ children }) {
+  return (
+    <html className={`${inter.variable} ${playfair.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+## 4. Leverage Static Generation Strategically
+
+Choose the right rendering strategy for each page:
+
+```tsx
+// Static Generation with ISR
+export async function getStaticProps() {
+  const posts = await fetchPosts();
+
+  return {
+    props: { posts },
+    revalidate: 3600, // Revalidate every hour
+  };
+}
+
+// Dynamic pages with static params
+export async function getStaticPaths() {
+  const posts = await fetchPosts();
+
+  return {
+    paths: posts.map((post) => ({ params: { slug: post.slug } })),
+    fallback: "blocking", // Generate missing pages on-demand
+  };
+}
+```
+
+## 5. Optimize Client-Side Navigation
+
+Preload critical routes and implement smart prefetching:
+
+```tsx
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+function Navigation() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Prefetch critical routes on component mount
+    router.prefetch("/about");
+    router.prefetch("/contact");
+  }, [router]);
+
+  return (
+    <nav>
+      {/* Prefetch on hover for better perceived performance */}
+      <Link href="/blog" prefetch>
+        Blog
+      </Link>
+    </nav>
+  );
+}
+```
+
+## 6. Implement Efficient Data Fetching
+
+Use SWR or React Query for client-side data fetching with caching:
+
+```tsx
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+function UserProfile({ userId }) {
+  const { data, error, isLoading } = useSWR(`/api/users/${userId}`, fetcher, {
+    revalidateOnFocus: false,
+    dedupingInterval: 60000, // Cache for 1 minute
+  });
+
+  if (error) return <div>Failed to load</div>;
+  if (isLoading) return <div>Loading...</div>;
+
+  return <div>Hello {data.name}!</div>;
+}
+```
+
+## 7. Optimize Third-Party Scripts
+
+Use Next.js Script component for optimal third-party loading:
+
+```tsx
+import Script from "next/script";
+
+function Analytics() {
+  return (
+    <>
+      {/* Load non-critical scripts after page load */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+      </Script>
+    </>
+  );
+}
+```
+
+## 8. Monitor and Measure Performance
+
+Implement performance monitoring to track real user metrics:
+
+```tsx
+// pages/_app.tsx
+export function reportWebVitals(metric) {
+  // Log to analytics service
+  analytics.track(metric.name, {
+    value: metric.value,
+    label: metric.label,
+    id: metric.id,
+  });
+}
+```
+
+## 9. Optimize CSS and Styling
+
+Use CSS-in-JS libraries efficiently or stick to CSS Modules:
+
+```tsx
+// Avoid runtime CSS-in-JS for static styles
+const styles = {
+  container: {
+    padding: "1rem", // This creates runtime overhead
+  },
+};
+
+// ✅ Better: Use CSS Modules or static CSS
+import styles from "./Component.module.css";
+```
+
+## 10. Implement Progressive Enhancement
+
+Build for the baseline, enhance for capabilities:
+
+```tsx
+function InteractiveChart({ data }) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Show static version during SSR
+  if (!isClient) {
+    return <StaticChart data={data} />;
+  }
+
+  // Enhance with interactivity on client
+  return <InteractiveD3Chart data={data} />;
+}
+```
+
+## Measuring Success
+
+After implementing these optimizations, monitor these key metrics:
+
+- **First Contentful Paint (FCP)**: < 1.8 seconds
+- **Largest Contentful Paint (LCP)**: < 2.5 seconds
+- **First Input Delay (FID)**: < 100 milliseconds
+- **Cumulative Layout Shift (CLS)**: < 0.1
+
+## Conclusion
+
+Performance optimization is an ongoing process, not a one-time task. Focus on measuring real user impact and prioritize optimizations that provide the biggest improvements to your specific use case.
+
+Remember: **The best performance optimization is the code you don't ship.**
+
+---
+
+_Have you implemented any of these techniques in your Next.js projects? I'd love to hear about your experiences and any additional optimizations you've discovered._

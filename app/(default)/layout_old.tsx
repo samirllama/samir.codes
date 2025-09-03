@@ -4,9 +4,9 @@ import { FaMastodon } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
-import AppHeader from "@/components/app-header/AppHeader";
-import Footer from "@/components/footer/Footer";
-import styles from "./Layout.module.css";
+import AppHeader from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
+import AppMenu from "@/components/ui/app-menu";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     () => [
       { id: "about", label: "About" },
       { id: "experience", label: "Experience" },
-      { id: "projects", label: "Projects" },
+      { id: "tech-stack", label: "Tech Stack" },
     ],
     []
   );
@@ -29,23 +29,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       .map(({ id }) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
 
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveId(e.target.id);
         });
       },
       {
         root: null,
-        rootMargin: "0px 0px -35% 0px",
-        threshold: 0.15,
+        rootMargin: "0px 0px -40% 0px",
+        threshold: 0.16,
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    sections.forEach((sec) => io.observe(sec));
+    return () => io.disconnect();
   }, [navItems]);
 
   const handleNavClick = (
@@ -53,57 +51,75 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     e: React.MouseEvent<HTMLAnchorElement>
   ) => {
     e.preventDefault();
-    const element = document.getElementById(id);
-    if (!element) return;
 
+    /*
+    ? scrollAndHash()
+      * el.scrollIntoView({ behavior: "smooth" }) animates the scroll.
+      *  history.replaceState updates the URL hash without a page reload.
+    */
     const scrollAndHash = () => {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
       window.history.replaceState(null, "", `#${id}`);
     };
 
+    /*
+    ? document.startViewTransition(fn)
+        * Before & after snapshots of the DOM are captured.
+        * fn runs (scroll + hash change).
+        * Browser animates between the two states.
+        * If unsupported, we just call fn directly.
+    */
     if (typeof document.startViewTransition === "function") {
       document.startViewTransition(scrollAndHash);
     } else {
       scrollAndHash();
     }
   };
-
   return (
     <div className={cn("web-app", { "is-active": isMenuOpen })}>
-      <AppHeader />
+      <AppHeader toggleAction={toggleMenu} isMenuOpen={isMenuOpen} />
+      <AppMenu isMenuOpen={isMenuOpen} onCloseMenuAction={closeMenu} />
 
-      <div className={styles.container}>
-        <main ref={mainRef} className={`${styles.main} ${styles.mainParallax}`}>
-          <div className={styles.contentScroller}>{children}</div>
-          <Footer />
+      <div className="pageLayout--col4">
+        <main
+          ref={mainRef}
+          className="pt-fluid-xl mt-fluid-xl mx-fluid-xl relative min-h-screen scroll-content pageLayout--main"
+        >
+          {children}
         </main>
 
-        <aside className={styles.leftAside}>
-          <div className={styles.fixedContent}>
-            <div className={styles.asideModule}>
-              <div className={styles.asideModuleCenter}>
-                <nav className={styles.sideNav}>
-                  {navItems.map(({ id, label }) => (
-                    <TrackedLink
-                      key={id}
-                      location="Side Navigation"
-                      href={`#${id}`}
-                      scroll={false}
-                      onClick={(e) => handleNavClick(id, e)}
-                      className={cn(styles.navLink, {
-                        [styles.active]: activeId === id,
-                      })}
-                    >
-                      {label}
-                    </TrackedLink>
-                  ))}
+        <aside className="aside-col--left sticky top-0 h-screen">
+          <div className="pageLayout--fixed--100vh">
+            <div className="aside-module--root">
+              <div className="aside-module--pos_center">
+                <nav className="flex flex-col space-y-4 p-6">
+                  {navItems.map(({ id, label }) => {
+                    return (
+                      <TrackedLink
+                        key={id}
+                        location="Header"
+                        href={`#${id}`}
+                        scroll={false}
+                        onClick={(e) => handleNavClick(id, e)}
+                        className={cn(
+                          "text-left transition-all duration-200 block",
+                          activeId === id
+                            ? "text-accent-primary underline scale-105"
+                            : "text-default hover:text-accent-primary"
+                        )}
+                      >
+                        {label}
+                      </TrackedLink>
+                    );
+                  })}
                 </nav>
               </div>
             </div>
           </div>
         </aside>
-
-        <aside className={styles.rightAside}>
+        <aside className="pageLayout--aside--right">
           <div className="pageLayout--fixed--100vh">
             <div className="aside-module--root">
               <div className="aside-module--pos_center">
@@ -198,6 +214,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </aside>
       </div>
+
+      <Footer />
     </div>
   );
 }

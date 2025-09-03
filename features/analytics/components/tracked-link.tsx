@@ -13,6 +13,8 @@ interface TrackedLinkProps extends LinkProps {
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   href: string;
   ariaLabel?: string;
+  target?: string;
+  rel?: string;
 }
 
 export function TrackedLink({

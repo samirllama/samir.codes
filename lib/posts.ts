@@ -1,69 +1,88 @@
-// lib/posts.ts
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 
-export interface OGImage {
-  url: string
-  alt?: string
+import fs from "fs";
+import path from "path";
+import { Post, PostFrontmatter } from "@/types/post";
+import readingTime from "reading-time";
+
+const allowedKeys: (keyof PostFrontmatter)[] = [
+  "title",
+  "description",
+  "date",
+  "image",
+  "tags",
+];
+
+const postsDirectory = path.join(process.cwd(), "content/posts");
+
+export function getPostSlugs(): string[] {
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  return fs
+    .readdirSync(postsDirectory)
+    .filter((name) => name.endsWith(".mdx"))
+    .map((name) => name.replace(/\.mdx$/, ""));
 }
 
-export interface PostMeta {
-  slug: string;
-  title: string;
-  date: string;
-  description: string;
-  tags: string[];
-  author: string | undefined;
-  image: OGImage | OGImage[] | undefined;
-}
+export function getPostBySlug(slug: string): Post | null {
+  try {
+    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
 
-function isOGImage(image: unknown): image is OGImage {
-  return (
-    typeof image === "object" &&
-    image !== null &&
-    "url" in image &&
-    typeof (image as OGImage).url === "string"
-  );
-}
+    // Extract frontmatter
+    const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
+    const match = frontmatterRegex.exec(fileContents);
 
-function isOGImageArray(images: unknown): images is OGImage[] {
-  return Array.isArray(images) && images.every(isOGImage);
-}
+    if (!match) return null;
 
-const postsPath = path.join(process.cwd(), 'app', '(default)', 'posts')
+    const frontmatterYaml = match[1];
+    const content = fileContents.replace(frontmatterRegex, "").trim();
 
-export function getAllPostsMeta(): PostMeta[] {
-  const slugs = fs
-    .readdirSync(postsPath, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
+    // Parse frontmatter (simple YAML parser)
+    const frontmatter: PostFrontmatter = {};
+    frontmatterYaml.split("\n").forEach((line) => {
+      const [key, ...valueParts] = line.split(":");
+      if (key && valueParts.length) {
 
-  const all = slugs
-    .map((slug) => {
-      const mdxFile = path.join(postsPath, slug, 'page.mdx')
-      if (!fs.existsSync(mdxFile)) return null
-      const { data } = matter(fs.readFileSync(mdxFile, 'utf8'))
-      if (!data.title || !data.date || !data.description) return null
+        const trimmedK = key.trim() as keyof PostFrontmatter;
 
-      let image: OGImage | OGImage[] | undefined = undefined;
-      if (isOGImage(data.image)) {
-        image = data.image;
-      } else if (isOGImageArray(data.image)) {
-        image = data.image;
+        if (allowedKeys.includes(trimmedK)) {
+
+          const value = valueParts
+            .join(":")
+            .trim()
+            .replace(/^["']|["']$/g, "");
+          frontmatter[trimmedK] = value;
+        }
       }
+    });
 
-      return {
-        slug,
-        title: String(data.title),
-        date: String(data.date),
-        description: String(data.description),
-        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-        author: typeof data.author === 'string' ? data.author : undefined,
-        image,
-      }
-    })
-    .filter((m): m is PostMeta => Boolean(m))
+    const stats = readingTime(content);
 
-  return all.sort((a, b) => (a.date > b.date ? -1 : 1))
+    return {
+      slug,
+      title: frontmatter.title || "",
+      description: frontmatter.description || "",
+      date: frontmatter.date || "",
+      image: frontmatter.image,
+      tags: frontmatter.tags
+        ? frontmatter.tags.split(",").map((t) => t.trim())
+        : [],
+      readingTime: stats.text,
+      content,
+    };
+  } catch (error) {
+    console.error(`Error reading post ${slug}:`, error);
+    return null;
+  }
+}
+
+export function getAllPosts(): Post[] {
+  const slugs = getPostSlugs();
+  const posts = slugs
+    .map((slug) => getPostBySlug(slug))
+    .filter((post): post is Post => post !== null)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return posts;
 }
