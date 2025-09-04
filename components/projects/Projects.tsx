@@ -41,8 +41,7 @@ const Projects = () => {
       <div className="container">
         <h2>Featured Projects</h2>
         <p className={styles.subtitle}>
-          A showcase of recent work that demonstrates my passion for creating
-          impactful digital experiences.
+          A showcase of some of my recent work projects.
         </p>
 
         <div className={`projects-grid ${styles.projectsGrid}`}>

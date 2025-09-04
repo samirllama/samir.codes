@@ -105,7 +105,7 @@
   transition: box-shadow var(--transition-base),
     transform var(--transition-base);
   padding: var(--space-xs);
-  max-width: 85%;
+  width: 100%;
   justify-self: center;
 }
 
@@ -207,14 +207,14 @@
 }
 
 .cardCompany {
-  font-size: var(--font-size-step-1);
+  font-size: var(--font-size-step-2);
   font-weight: 500;
   color: var(--color-accent);
   margin-bottom: 0;
 }
 
 .cardTitle {
-  font-size: var(--font-size-step-1);
+  font-size: var(--font-size-step-2);
   margin-top: 0;
   margin-bottom: var(--space-md);
   color: var(--color-text-light);
@@ -222,7 +222,7 @@
 }
 
 .cardDescription {
-  font-size: var(--font-size-step-0);
+  font-size: var(--font-size-step-1);
   color: var(--color-primary); /* Softer color for the main text */
   margin-bottom: var(--space-lg);
   flex-grow: 1; /* This pushes the tags to the bottom of the card */

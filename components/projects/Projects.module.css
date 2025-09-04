@@ -57,12 +57,12 @@
 }
 
 .projectContent h3 {
-  color: var(--color-primary);
+  color: var(--color-text-light);
   margin-bottom: var(--space-sm);
 }
 
 .projectContent p {
-  color: var(--color-text-light);
+  color: var(--color-primary);
   margin-bottom: var(--space-md);
   line-height: 1.6;
 }

@@ -4,14 +4,12 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { Animations } from "@/lib/animations";
 import styles from "./Hero.module.css";
-
 import avatar from "@/public/profile.jpeg";
 
 const Hero = () => {
   useEffect(() => {
     Animations.initIntroAnimation();
   }, []);
-
   return (
     <section className={styles.hero}>
       <div className={`container ${styles.heroContent}`}>
@@ -30,9 +28,8 @@ const Hero = () => {
               fill
               priority
               placeholder="blur"
-              quality={90}
-              sizes="(max-width: 968px) 220px, 300px"
-              className={styles.avatar}
+              sizes="200px"
+              style={{ objectFit: "cover", transform: "scale(1.2)" }}
             />
           </div>
         </div>
