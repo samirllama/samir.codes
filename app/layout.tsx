@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const monaspaceArgon = localFont({
   src: "./MonaspaceArgonVF.woff2",
   display: "swap",
-  variable: "--font-mono-argon", // Define CSS variable for the font
+  variable: "--font-mono-argon",
 });
 const monaspaceNeon = localFont({
   src: "./MonaspaceNeonVF.woff2",

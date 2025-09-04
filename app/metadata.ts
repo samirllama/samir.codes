@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
 
 export const defaultMetadata: Metadata = {
+  authors: [{ name: "Samir Lama", url: "https://samir.codes" }],
+  creator: "Samir Lama",
   title: {
-    default: "Samir Lama - Software Engineer based in Chicago",
+    default: "Samir Baki Lama",
     template: "%s | Samir Lama",
+  },
+  icons: {
+    icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%22100%22>🤠</text></svg>',
   },
   description:
     "Personal website and blog of Samir Lama, showcasing projects and sharing insights about web development.",
+
   keywords: [
     "web development",
     "design",
@@ -17,8 +23,7 @@ export const defaultMetadata: Metadata = {
     "typescript",
     "python"
   ],
-  authors: [{ name: "Samir Lama", url: "https://samir.codes" }],
-  creator: "Samir Lama",
+
   publisher: "Samir Lama",
   formatDetection: {
     email: false,
@@ -31,7 +36,7 @@ export const defaultMetadata: Metadata = {
     locale: "en_US",
     url: 'https://samir.codes',
     siteName: "Samir Codes",
-    title: "Samir Lama - Software Engineer based in Chicago",
+    title: "Samir Lama - Software Engineer in Chicago",
     description:
       "Personal website and blog of Samir Lama, showcasing projects and sharing insights about web development.",
     images: [
@@ -43,6 +48,7 @@ export const defaultMetadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Samir Lama - Software Engineer based in Chicago",
