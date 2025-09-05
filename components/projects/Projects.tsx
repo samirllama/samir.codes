@@ -23,7 +23,7 @@ const Projects = () => {
     {
       title: "Atlas Relocations",
       description:
-        "A full-stack e-commerce solution built with Next.js, featuring real-time inventory, secure payments, and admin dashboard.",
+        "A marketing website built with Next.js for Atlas International Relocations, a premier relocation and logistics company.",
       tech: [
         "Next.js",
         "TypeScript",
@@ -39,10 +39,9 @@ const Projects = () => {
     {
       title: "E-Commerce Platform",
       description:
-        " high-performance website built with Next.js 14 for Atlas International Relocations, a premier relocation and logistics company.",
+        "A full-stack e-commerce solution built with Next.js, featuring real-time inventory, secure payments, and admin dashboard.",
       tech: ["Next.js", "PostgreSQL", "Stripe", "Redis"],
       link: "https://github.com/samirllama/atlas-relocations-nepal",
-      demo: "https://demo.ecommerce.johndoe.dev",
     },
     {
       title: "Task Management App",
