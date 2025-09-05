@@ -10,6 +10,7 @@ const Hero = () => {
   useEffect(() => {
     Animations.initIntroAnimation();
   }, []);
+
   return (
     <section className={styles.hero}>
       <div className={`container ${styles.heroContent}`}>

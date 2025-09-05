@@ -72,7 +72,6 @@ const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
     <div className={`timeline-entry ${styles.entryGrid}`}>
       <div className={styles.dateWrapper}>
         <time className={styles.date}>{entry.dateRange}</time>
-        {/* 'timeline-dot' is also kept global for GSAP */}
         <div className={`timeline-dot ${styles.dot}`}></div>
       </div>
       <ProjectCard entry={entry} />
@@ -83,9 +82,8 @@ const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
 const ProjectCard = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className={`timeline-content ${styles.projectCardTwo}`}>
-      {/* Column 1: Image Wrapper */}
       <div className={styles.leftFrame}>
-        <h3 className={styles.cardCompany}>{entry.company}</h3>
+        <h4 className={styles.cardCompany}>{entry.company}</h4>
         <div className={styles.cardImgFrame}>
           {entry.projectScreenshotUrl && (
             <Image
@@ -98,7 +96,6 @@ const ProjectCard = ({ entry }: { entry: ExperienceEntry }) => {
         </div>
       </div>
 
-      {/* Column 2: Content Wrapper */}
       <div className={styles.cardContentFrame}>
         <h4 className={styles.cardTitle}>{entry.title}</h4>
         <p className={styles.cardDescription}>{entry.description}</p>

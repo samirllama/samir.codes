@@ -32,6 +32,7 @@
 
 .viewWorkLink {
   text-decoration: none;
+  white-space: nowrap;
 }
 .viewWorkLink:hover {
   background: var(--color-accent);
