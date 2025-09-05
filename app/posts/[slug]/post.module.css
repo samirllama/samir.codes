@@ -119,13 +119,13 @@
 }
 
 .link {
-  color: var(--color-primary);
+  color: var(--color-text-light);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .link:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
 }
 
 /* .blockquote {

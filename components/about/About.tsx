@@ -22,9 +22,9 @@ const About = () => {
         <div className="about-content">
           <div className={styles.aboutText}>
             <p>
-              Hi, I&apos;m <span className={styles.accent}>Samir</span>. Full
-              Stack Developer & Designer. I build high-performance web
-              applications that scale.
+              Hi, I&apos;m <span className={styles.accent}>Samir</span>.
+              Full-Stack Developer, based in Chicago. I build high-performance
+              web applications that scale.
             </p>
             <p>
               My journey started with a curiosity about how websites work, which

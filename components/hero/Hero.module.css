@@ -1,5 +1,5 @@
 .hero {
-  min-height: 50vh;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   position: relative;
@@ -21,7 +21,7 @@
 }
 
 .heroText h3 {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
   line-height: 1.1;
   color: var(--color-text-light);
 }
