@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts();
-  console.log("posts data from blog page", posts);
 
   return (
     <div className={styles.blogPage}>

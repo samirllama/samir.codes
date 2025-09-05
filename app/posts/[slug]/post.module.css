@@ -38,7 +38,7 @@
 
 .description {
   font-size: 1.25rem;
-  color: var(--color-pantone-gray);
+  color: var(--color-text);
   line-height: 1.8;
   margin-bottom: var(--space-lg);
 }
@@ -62,7 +62,7 @@
 }
 
 .content {
-  max-width: 65ch;
+  max-width: 70ch;
   margin: 0 auto;
   line-height: 1.8;
 }
