@@ -246,7 +246,6 @@ const withMDX = createMDX({
               },
             },
           ],
-          // Ensure proper processing
           onVisitLine(node) {
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];

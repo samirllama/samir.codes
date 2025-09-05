@@ -19,7 +19,7 @@ export default function BlogPage() {
 
   return (
     <div className={styles.blogPage}>
-      <div className="container">
+      <div className="blog-container">
         <header className={styles.header}>
           <h1>Blog</h1>
           <p className={styles.subtitle}>

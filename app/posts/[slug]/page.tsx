@@ -101,7 +101,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <PostAnimations />
       <main>
         <article className={styles.post}>
-          <div className="container">
+          <div className="blog-container">
             <header className={`post-hero ${styles.postHeader}`}>
               <h1 className={styles.title}>{post.title}</h1>
               <div className={styles.meta}>
@@ -117,7 +117,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 <div className={styles.tags}>
                   {post.tags.map((tag) => (
                     <span key={tag} className={styles.tag}>
-                      {tag}
+                      # {tag}
                     </span>
                   ))}
                 </div>
