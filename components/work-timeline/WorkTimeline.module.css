@@ -1,16 +1,15 @@
 .title {
-  font-size: var(--font-size-step-3);
-  padding: var(--space-xs);
+  /* font-size: var(--font-size-step-3); */
+  padding: var(--space-xs) 0;
   text-align: left;
+  color: var(--color-text-light);
+
+  border-bottom: 1px solid var(--color-border);
 }
 
 @media (min-width: 45em) {
   .section {
     padding-bottom: var(--space-3xl);
-  }
-
-  .title {
-    padding: var(--space-lg) var(--space-sm);
   }
 }
 
@@ -38,13 +37,26 @@
   position: relative;
   padding-top: var(--space-lg);
   padding-bottom: var(--space-lg);
+  padding-left: var(--space-md);
   grid-column: 1 / -1;
+  gap: var(--space-xs);
+  column-gap: var(--space-lg);
+  border-bottom: 1px solid
+    color-mix(in oklch, var(--color-border) 20%, transparent);
+  transition: box-shadow var(--transition-base),
+    transform var(--transition-base);
 }
 
-@media (min-width: 768px) {
+.entryGrid:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 55em) {
   .entryGrid {
-    grid-template-columns: auto 1fr;
     gap: var(--space-sm);
+    grid-template-columns: auto 1fr;
+    padding-left: 16px;
   }
 }
 
@@ -53,8 +65,7 @@
   align-items: center;
   gap: var(--space-xs);
   margin-right: auto;
-  padding-top: var(--space-xs);
-  padding-bottom: var(--space-xs);
+  /* padding-bottom: var(--space-xs); */
 }
 
 .date {
@@ -66,49 +77,36 @@
   font-family: var(--font-mono-argon);
 }
 
-@media (min-width: 55em) {
-  .date {
-    order: -1;
-  }
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  z-index: 10;
 }
 
-.dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background-color: var(--color-primary);
-  z-index: 10;
-  margin-left: auto;
-  margin-right: auto;
-  order: initial;
+.nameDateWrapper {
+  justify-self: baseline;
+}
+
+.projectCard {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  justify-self: center;
+
+  padding-bottom: var(--space-md);
 }
 
 @media (min-width: 55em) {
   .dot {
-    order: -1;
+    width: 0.5rem;
+    height: 0.5rem;
   }
-}
-
-.projectCardTwo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 12px;
-  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-base),
-    transform var(--transition-base);
-  padding: var(--space-xs);
-  width: 100%;
-  justify-self: center;
-}
-
-@media (min-width: 55em) {
-  .projectCardTwo {
+  .projectCard {
     flex-wrap: nowrap;
     max-width: 100%;
-    padding: var(--space-lg);
   }
 }
 
@@ -122,13 +120,19 @@
 
 .cardContentFrame {
   align-self: flex-start;
-  max-width: 30ch;
   width: clamp(320px, 350px, 350px);
 }
 
 .cardImgFrame {
+  justify-self: start;
+  align-self: baseline;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base),
+    transform var(--transition-base);
   position: relative;
-  width: 256px;
+  width: 300px;
   height: 200px;
   overflow: hidden;
   aspect-ratio: 16 / 9;
@@ -136,23 +140,6 @@
 /* next/image (fill) inside */
 .cardImgFrame :global(img) {
   object-fit: contain;
-}
-
-.projectCard {
-  max-width: 90%;
-  border-radius: 12px; /* Modern, rounded look */
-  border: 1px solid color-mix(in oklch, var(--color-border) 20%, transparent);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr;
-  transition: box-shadow var(--transition-base),
-    transform var(--transition-base);
-}
-
-.projectCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
 }
 
 .cardImageWrapper {
@@ -192,16 +179,18 @@
 .cardCompany {
   font-size: var(--font-size-step-2);
   font-weight: 500;
-  color: var(--color-accent);
+  color: var(--color-text-light);
   white-space: nowrap;
-  /* margin-bottom: var(--space-sm); */
+  margin: 0 auto;
 }
 
 .cardTitle {
   font-size: var(--font-size-step-2);
-  margin-top: var(--space-xs);
-  margin-bottom: var(--space-md);
-  color: var(--color-text-light);
+  align-self: end;
+  margin: 0 auto 0 0;
+
+  /* margin-top: var(--space-xs);
+  margin-bottom: var(--space-md); */
   line-height: var(--my-line-height-tight);
 }
 
@@ -243,10 +232,10 @@
   }
   .cardTitle {
     font-size: var(--font-size-step-1);
+    margin: 0 0 var(--space-xs) 0;
+    justify-self: baseline;
   }
-  .projectCardTwo {
-    padding: var(--space-xs);
-  }
+
   .cardImageWrapper {
     aspect-ratio: initial;
     min-height: initial;
@@ -262,9 +251,5 @@
 
   .tag {
     font-size: var(--font-size-step--1);
-  }
-  .dateWrapper {
-    padding-top: var(--space-md);
-    padding-bottom: var(--space-md);
   }
 }

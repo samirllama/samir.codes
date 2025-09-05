@@ -56,7 +56,7 @@ const WorkTimeline = () => {
   }, []);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="container">
       <h2 className={styles.title}>Work Overview</h2>
       <div className={styles.timelineGrid}>
         {experience.map((entry) => (
@@ -70,9 +70,23 @@ const WorkTimeline = () => {
 const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
   return (
     <div className={`timeline-entry ${styles.entryGrid}`}>
-      <div className={styles.dateWrapper}>
-        <time className={styles.date}>{entry.dateRange}</time>
-        <div className={`timeline-dot ${styles.dot}`}></div>
+      <div className={styles.nameDateWrapper}>
+        <div className={styles.dateWrapper}>
+          <div className={`timeline-dot ${styles.dot}`}></div>
+          <time className={styles.date}>{entry.dateRange}</time>
+        </div>
+        <h4 className={styles.cardCompany}>{entry.company}</h4>
+      </div>
+      <h4 className={styles.cardTitle}>{entry.title}</h4>
+      <div className={styles.cardImgFrame}>
+        {entry.projectScreenshotUrl && (
+          <Image
+            src={entry.projectScreenshotUrl}
+            alt={`Screenshot of ${entry.company}`}
+            fill
+            className={styles.cardImage}
+          />
+        )}
       </div>
       <ProjectCard entry={entry} />
     </div>
@@ -81,23 +95,10 @@ const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
 
 const ProjectCard = ({ entry }: { entry: ExperienceEntry }) => {
   return (
-    <div className={`timeline-content ${styles.projectCardTwo}`}>
-      <div className={styles.leftFrame}>
-        <h4 className={styles.cardCompany}>{entry.company}</h4>
-        <div className={styles.cardImgFrame}>
-          {entry.projectScreenshotUrl && (
-            <Image
-              src={entry.projectScreenshotUrl}
-              alt={`Screenshot of ${entry.company}`}
-              fill
-              className={styles.cardImage}
-            />
-          )}
-        </div>
-      </div>
+    <div className={`timeline-content ${styles.projectCard}`}>
+      {/* <div className={styles.leftFrame}></div> */}
 
       <div className={styles.cardContentFrame}>
-        <h4 className={styles.cardTitle}>{entry.title}</h4>
         <p className={styles.cardDescription}>{entry.description}</p>
         <div className={styles.tagsContainer}>
           {entry.techTags.map((tag) => (

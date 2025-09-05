@@ -13,6 +13,7 @@ const About = () => {
     "Docker",
     "GraphQL",
     "DataDog",
+    "Terraform",
   ];
 
   return (

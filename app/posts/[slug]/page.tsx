@@ -15,6 +15,13 @@ interface PostPageProps {
   }>;
 }
 
+interface HastElement {
+  type: string;
+  tagName: string;
+  properties: Record<string, any>;
+  children: Array<{ type: string; value: string }>;
+}
+
 export async function generateStaticParams() {
   const slugs = getPostSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -133,18 +140,18 @@ export default async function PostPage({ params }: PostPageProps) {
                           theme: "github-dark",
                           keepBackground: false,
                           defaultLang: "plaintext",
-                          onVisitLine(node) {
+                          onVisitLine(node: HastElement) {
                             if (node.children.length === 0) {
                               node.children = [{ type: "text", value: " " }];
                             }
                           },
-                          onVisitHighlightedLine(node) {
+                          onVisitHighlightedLine(node: HastElement) {
                             if (!node.properties.className) {
                               node.properties.className = [];
                             }
                             node.properties.className.push("line--highlighted");
                           },
-                          onVisitHighlightedChars(node) {
+                          onVisitHighlightedChars(node: HastElement) {
                             node.properties.className = ["word--highlighted"];
                           },
                         },
