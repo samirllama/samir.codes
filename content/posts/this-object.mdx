@@ -21,7 +21,7 @@ The value of `this` depends entirely on **how a function is invoked**. This is t
 
 There are primarily four rules that dictate the value of `this`:
 
-#### 1\. Default Binding (Global Object)
+#### 1. Default Binding (Global Object)
 
 When a function is called without any explicit context (i.e., not as a method of an object, not with `call`/`apply`/`bind`, and not as a constructor), `this` defaults to the **global object**. In browsers, this is `window`. In Node.js, it's `global` (or `undefined` in strict mode).
 
@@ -31,15 +31,11 @@ function showThis() {
 }
 
 showThis();
-{
-  /* In a browser: logs window object */
-}
-{
-  /* In strict mode: logs undefined */
-}
+// In a browser: logs window object
+// In strict mode: logs undefined
 ```
 
-#### 2\. Implicit Binding (Object Method Call)
+#### 2. Implicit Binding (Object Method Call)
 
 This is the most common scenario. When a function is called as a **method of an object**, `this` refers to the **object itself** that the method was called on.
 
@@ -51,13 +47,10 @@ const user = {
   },
 };
 
-user.greet();
-{
-  /* Logs: "Hello, my name is Alice" */
-}
+user.greet(); // Logs: "Hello, my name is Alice
 ```
 
-#### 3\. Explicit Binding (`call`, `apply`, `bind`)
+#### 3. Explicit Binding (`call`, `apply`, `bind`)
 
 You can explicitly set the value of `this` using `call()`, `apply()`, and `bind()`. These methods are available on all functions.
 
@@ -78,22 +71,16 @@ const person1 = { name: "Bob" };
 const person2 = { name: "Charlie" };
 
 introduce.call(person1, 30, "Engineer");
-{
-  /* Hi, I'm Bob, I'm 30 and I work as a Engineer. */
-}
+// Hi, I'm Bob, I'm 30 and I work as a Engineer.
+
 introduce.apply(person2, [25, "Designer"]);
-{
-  /* Hi, I'm Charlie, I'm 25 and I work as a Designer. */
-}
+// Hi, I'm Charlie, I'm 25 and I work as a Designer.
 
 const introduceBob = introduce.bind(person1, 35, "Architect");
-introduceBob();
-{
-  /* Hi, I'm Bob, I'm 35 and I work as a Architect. */
-}
+introduceBob(); // Hi, I'm Bob, I'm 35 and I work as a Architect.
 ```
 
-#### 4\. New Binding (Constructor Call)
+#### 4. New Binding (Constructor Call)
 
 When a function is called with the `new` keyword (as a constructor), a brand-new object is created, and `this` inside the constructor function refers to this **newly created object**.
 
@@ -107,10 +94,7 @@ function Car(make, model) {
 }
 
 const myCar = new Car("Honda", "Civic");
-myCar.display();
-{
-  /* Car: Honda Civic */
-}
+myCar.display(); // Car: Honda Civic
 ```
 
 ### The Arrow Function Exception
