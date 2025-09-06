@@ -219,12 +219,10 @@
 @media (min-width: 55em) {
   .projectCard {
     grid-template-columns: 40% 1fr;
-    max-width: 100%;
   }
 
   .cardContentFrame {
     width: auto;
-    max-width: 55ch;
     flex-wrap: nowrap;
   }
   .cardTitle {

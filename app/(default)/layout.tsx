@@ -43,7 +43,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         threshold: 0.15,
       }
     );
-
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [navItems]);

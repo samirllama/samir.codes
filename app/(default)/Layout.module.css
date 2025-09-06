@@ -7,7 +7,7 @@
 
 .main {
   padding-top: var(--space-5xl);
-  margin-inline: var(--space-xl);
+  margin-inline: var(--space-lg);
   min-height: 100vh;
   position: relative;
   min-width: 0;
@@ -54,7 +54,8 @@
 @media (min-width: 45em) {
   .main {
     grid-column: 2;
-    padding-top: var(--space-4xl);
+    padding-top: var(--space-xs);
+    margin-inline: var(--space-5xl);
   }
 }
 
@@ -67,10 +68,6 @@
     grid-template-rows: 1fr;
     max-width: 1600px;
     margin: 0 auto;
-  }
-  .main {
-    grid-column: 2;
-    padding-top: var(--space-3xl);
   }
 
   .leftAside,
@@ -130,7 +127,7 @@
 }
 
 .navLink:hover {
-  text-decoration: none; /* Crucial: Remove the default underline on hover */
+  text-decoration: none; /* default underline on hover */
   color: var(--color-accent);
 }
 
@@ -142,7 +139,7 @@
   color: var(--color-accent);
   background-color: transparent;
   transform: none;
-  text-decoration: none; /* Also remove the default underline for the active state */
+  text-decoration: none; /* Also default underline for the active state */
 }
 
 .active::after {

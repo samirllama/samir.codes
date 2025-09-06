@@ -6,7 +6,8 @@
   overflow: hidden;
   max-width: 72ch;
   place-self: center;
-  padding: 0 var(--space-lg);
+  padding-block: var(--space-4xl);
+  padding-inline: var(--space-lg);
 }
 
 .heroContent {

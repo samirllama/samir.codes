@@ -36,21 +36,21 @@
   display: flex;
   align-items: center;
   width: 8rem;
-  top: 1;
+  top: 1px;
   position: relative;
   transition: all var(--transition-base);
 }
 
 @media (min-width: 45em) {
   .nameLogo {
-    width: 11rem;
-    top: 14;
+    width: 12rem;
+    top: 20px;
   }
 }
 @media (min-width: 55em) {
   .nameLogo {
-    width: 14rem;
-    top: 16;
+    width: 18rem;
+    top: 30px;
   }
 }
 

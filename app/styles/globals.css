@@ -264,7 +264,7 @@ pre[data-language]::before {
 
 .container {
   width: 100%;
-  max-width: var(--container-xl);
+  max-width: var(--container-lg);
   margin: 0 auto;
   padding-block: var(--space-xl);
   padding-inline: 0;
@@ -277,7 +277,7 @@ pre[data-language]::before {
   width: 100%;
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-xl);
+  padding-inline: var(--space-md);
 }
 
 @media (min-width: 55em) {
@@ -289,7 +289,7 @@ pre[data-language]::before {
     padding-inline: var(--space-4xl);
   }
   .blog-container {
-    padding: 0 var(--space-3xl);
+    padding-inline: var(--space-3xl);
   }
 }
 

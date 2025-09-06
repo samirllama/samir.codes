@@ -37,6 +37,6 @@
 }
 
 .section {
-  padding-bottom: var(--space-3xl);
+  padding-block: var(--space-3xl);
   width: 100%;
 }
