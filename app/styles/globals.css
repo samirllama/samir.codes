@@ -45,8 +45,10 @@
   --space-md: calc(var(--font-size-step-0) * 1);
   --space-lg: calc(var(--font-size-step-0) * 1.5);
   --space-xl: calc(var(--font-size-step-0) * 2);
-  --space-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
-  --space-3xl: calc(var(--font-size-step-2) * 3);
+  --space-2xl: calc(var(--font-size-step-0) * 2.5); /* Max 40px */
+  --space-3xl: calc(var(--font-size-step-0) * 3); /* Max 48px */
+  --space-4xl: calc(var(--font-size-step-0) * 3.5); /* Max 56px */
+  --space-5xl: calc(var(--font-size-step-2) * 4); /* Max 64px */
 
   /* Line Heights */
   --my-line-height-tight: 1.1;
@@ -125,6 +127,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
   line-height: 1.6;
+  letter-spacing: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeSpeed;
@@ -161,7 +164,8 @@ h4 {
 
 p {
   margin-bottom: var(--space-sm);
-  letter-spacing: -0.02em;
+  line-height: 145%;
+  line-height: 132.5%;
 }
 
 a {
@@ -258,12 +262,15 @@ pre[data-language]::before {
   width: 100%;
 }
 
-/* Utility Classes */
 .container {
   width: 100%;
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0;
+  padding-block: var(--space-xl);
+  padding-inline: 0;
+  display: flex;
+  flex-direction: column;
+  /* gap: var(--space-md); */
 }
 
 .blog-container {
@@ -274,8 +281,12 @@ pre[data-language]::before {
 }
 
 @media (min-width: 55em) {
+  p {
+    line-height: 145%;
+  }
   .container {
-    padding: 0 var(--space-md);
+    padding-block: 0;
+    padding-inline: var(--space-4xl);
   }
   .blog-container {
     padding: 0 var(--space-3xl);
@@ -294,7 +305,6 @@ pre[data-language]::before {
   border: 0;
 }
 
-/* Button base styles */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -364,7 +374,7 @@ pre[data-language]::before {
   flex-direction: column;
   margin: 0 auto;
   min-height: 100vh;
-  min-height: 100dvh; /* The preferred, dynamic unit */
+  min-height: 100dvh;
 }
 
 .pageLayout--col4 {
@@ -372,7 +382,7 @@ pre[data-language]::before {
   flex-direction: column;
   margin: 0 auto;
   min-height: 100vh;
-  min-height: 100dvh; /* The preferred, dynamic unit */
+  min-height: 100dvh;
 }
 
 @media (min-width: 80em) {

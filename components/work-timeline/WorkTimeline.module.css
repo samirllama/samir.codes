@@ -34,9 +34,7 @@
   align-items: center;
   justify-items: center;
   position: relative;
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
-  padding-left: var(--space-md);
+  padding-block: var(--space-lg);
   grid-column: 1 / -1;
   gap: var(--space-xs);
   column-gap: var(--space-lg);
@@ -55,7 +53,6 @@
   .entryGrid {
     gap: var(--space-sm);
     grid-template-columns: auto 1fr;
-    padding-left: 16px;
   }
 }
 
@@ -226,7 +223,7 @@
   }
 
   .cardContentFrame {
-    width: clamp(350px, 480px, 500px);
+    width: auto;
     max-width: 55ch;
     flex-wrap: nowrap;
   }

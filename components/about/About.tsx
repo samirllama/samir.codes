@@ -22,8 +22,8 @@ const About = () => {
         <div className="about-content">
           <div className={styles.aboutText}>
             <p>
-              Hi, I&apos;m <span className={styles.accent}>Samir</span>.
-              Full-Stack Developer, based in Chicago. I build high-performance
+              Hi, I&apos;m <span className={styles.accent}>Samir</span>  —  a
+              software engineer and a tech enthusiast. I build high-performance
               web applications that scale.
             </p>
             <p>
@@ -33,16 +33,24 @@ const About = () => {
               technologies and enjoy the challenge of turning complex problems
               into simple, elegant solutions.{" "}
               <a
-                href="#projects"
+                href="#experience"
                 className={`${styles.viewWorkLink} ${styles.accent}`}
               >
                 View My Work
               </a>
             </p>
+
             <p>
-              You&apos;ll find me exploring new technologies, contributing to
-              open source projects, or sharing my knowledge through writing and
-              speaking.
+              When I&apos;m not coding, you&apos;ll find me exploring new
+              technologies, contributing to open source projects, or sharing my
+              knowledge through{" "}
+              <a
+                href="/blog"
+                className={`${styles.viewWorkLink} ${styles.accent}`}
+              >
+                writing
+              </a>
+              .
             </p>
           </div>
 

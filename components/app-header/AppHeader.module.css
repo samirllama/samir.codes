@@ -2,8 +2,8 @@
   position: fixed;
   width: 100%;
   top: 0;
-  margin-left: 0;
-  margin-right: auto;
+  left: 0;
+  right: 0;
   z-index: var(--my-z-index-header);
   pointer-events: none;
   transition: all var(--transition-base);
@@ -18,7 +18,7 @@
   justify-content: space-between;
   padding: var(--space-lg);
   height: 4.5rem;
-
+  margin: 0 auto;
   /* Glass */
   background-color: color-mix(in oklch, var(--color-surface) 0%, transparent);
   -webkit-backdrop-filter: blur(10px);
@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   width: 8rem;
-  top: 4;
+  top: 1;
   position: relative;
   transition: all var(--transition-base);
 }

@@ -13,7 +13,7 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
-      <div className={`container ${styles.heroContent}`}>
+      <div className={styles.heroContent}>
         <div className={styles.heroText}>
           <h3 className="hero-text">Software Engineer in Chicago</h3>
           <p className={`hero-text ${styles.subtitle}`}>
