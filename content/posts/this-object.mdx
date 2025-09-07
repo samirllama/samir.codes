@@ -130,7 +130,7 @@ This behavior of arrow functions is incredibly useful for callbacks, as it preve
 
 Misunderstanding `this` isn't just theoretical; it's a frequent source of tricky bugs that can impact user experience and be a nightmare to debug in a production environment.
 
-### 1\. Lost `this` in Callbacks (The Classic)
+### 1. Lost `this` in Callbacks (The Classic)
 
 This is perhaps the most common `this` gotcha. When you pass a method as a callback to another function (like an event listener, `setTimeout`, `fetch` promise handler, etc.), the original implicit binding is lost. The callback function is typically invoked with the **default binding**, causing `this` to point to the global object (`window`).
 
@@ -141,23 +141,16 @@ class Counter {
   constructor() {
     this.count = 0;
     this.button = document.getElementById("myButton");
-
-    {
-      /*  Problem: 'this' inside handleClick will be 'button', not 'Counter' */
-    }
+    //  Problem: 'this' inside handleClick will be 'button', not 'Counter'
     this.button.addEventListener("click", this.handleClick);
   }
 
   handleClick() {
-    {
-      /* TypeError: Cannot read properties of undefined (reading 'count') */
-    }
     this.count++;
-    {
-      /* because 'this' is the button element, which doesn't have 'count'*/
-    }
-
     console.log("Count:", this.count);
+
+    // TypeError: Cannot read properties of undefined (reading 'count')
+    // because 'this' is the button element, which doesn't have 'count'
   }
 }
 
@@ -175,9 +168,7 @@ new Counter();
   class Counter {
     // ...
     handleClick = () => {
-      {
-        /* Arrow function as a class property */
-      }
+      // Arrow function as a class property
       this.count++;
       console.log("Count:", this.count);
     };
@@ -186,7 +177,7 @@ new Counter();
 
 - **Arrow Function in Listener:** `this.button.addEventListener('click', () => this.handleClick());`
 
-### 2\. Inner Functions and `this` Scope
+### 2. Inner Functions and `this` Scope
 
 Functions defined inside other functions do _not_ automatically inherit the `this` of the outer function. They follow their own binding rules.
 
@@ -195,21 +186,15 @@ const calculator = {
   value: 10,
   add: function (num) {
     const helper = function () {
-      {
-        /*
-       Problem: 'this' here is the global object (window) if not strict mode, or undefined
-      */
-      }
       return this.value + num;
+      // Problem: 'this' here is the global object
+      // (window) if not strict mode, or undefined
     };
     return helper();
   },
 };
 
-console.log(calculator.add(5));
-{
-  /* NaN (this.value is undefined + 5) */
-}
+console.log(calculator.add(5)); // NaN (this.value is undefined + 5)
 ```
 
 **Production Bug Example:** A financial application had a data processing module with a method that fetched configuration and then processed it using an internal helper function. The helper function tried to access `this.config` from the outer method. Because the helper was a regular function, `this` inside it became the global object, and `this.config` was `undefined`, leading to incorrect calculations and displaying stale data to users.
@@ -220,16 +205,14 @@ console.log(calculator.add(5));
 
   ```javascript
   const helper = () => {
-    {
-      /* 'this' correctly refers to 'calculator' */
-    }
+    // 'this' correctly refers to 'calculator'
     return this.value + num;
   };
   ```
 
 - **Capture `this`:** `const self = this;` before the inner function, then use `self.value`.
 
-### 3\. Forgetting `new` with Constructor Functions
+### 3. Forgetting `new` with Constructor Functions
 
 Calling a constructor function without the `new` keyword will invoke it as a regular function (default binding). This means `this` will refer to the global object, and properties will be set on `window` instead of a new instance.
 
@@ -241,21 +224,15 @@ function Product(name, price) {
 
 const badProduct = Product("Laptop", 1200);
 
-console.log(badProduct);
-{
-  /* undefined */
-}
-console.log(window.name);
-{
-  /*  "Laptop" (Oops, polluting global scope!) */
-}
+console.log(badProduct); // undefined
+console.log(window.name); //  "Laptop" (Oops, polluting global scope!)
 ```
 
 **Production Bug Example:** A junior developer was tasked with integrating a legacy component that used constructor functions. They omitted the `new` keyword in several places. This caused application-wide variables (like `name`, `id`, `status`) to be overwritten on the `window` object, leading to erratic behavior, data corruption, and difficult-to-trace bugs affecting seemingly unrelated parts of the application. The issue was particularly insidious because it depended on the order of execution.
 
 **Solution:** Always use `new` when invoking a constructor function. For modern JavaScript, prefer **ES6 Classes**, which enforce `new` and provide clearer syntax.
 
-### 4\. Method Extraction/Destructuring
+### 4. Method Extraction/Destructuring
 
 When you extract a method from an object or use object destructuring, you lose the implicit binding context.
 
@@ -270,18 +247,11 @@ const game = {
 
 const increase = game.increaseScore;
 increase();
-{
-  /*  Problem: 'this' is window/global, score is NaN (or global.score) */
-}
-{
-  /*TypeError in strict mode as 'this' is undefined.*/
-}
+//  Problem: 'this' is window/global, score is NaN (or global.score)
+// *TypeError in strict mode as 'this' is undefined.
 
 const { increaseScore } = game;
-increaseScore();
-{
-  /* Same problem */
-}
+increaseScore(); // Same problem
 ```
 
 **Production Bug Example:** In a large gaming application, a common pattern was to destructure methods from a game object for cleaner code in UI components. This led to `this.score` becoming `undefined`, and instead of updating the actual game score, it silently failed. Players would earn points, but their scores wouldn't update correctly, leading to a frustrating user experience and numerous support tickets.
