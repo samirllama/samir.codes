@@ -1,13 +1,19 @@
 ---
-title: "10 Next.js Performance Tips That Actually Matter"
-description: "Practical performance optimizations for Next.js applications that deliver measurable improvements in Core Web Vitals and user experience."
-date: "2024-02-01"
-tags: "Next.js, Performance, Web Development, Optimization"
+title: 10 Next.js Performance Tips That Actually Matter
+description: Essential Python concepts, from fundamental iterations to advanced async programming.
+date: 2025-08-31
+tags:
+  - Performance
+  - Web Development
+  - UX
+  - Analytics
 ---
 
 Performance isn't just about fast load times—it's about creating experiences that feel instantaneous and delightful. After optimizing dozens of Next.js applications, I've identified the techniques that provide the biggest impact on Core Web Vitals and user experience.
 
-## 1. Master Image Optimization
+## 1.Master Image Optimization
+
+<Callout type="tip">This is a helpful tip for your readers.</Callout>
 
 The `next/image` component is powerful, but it requires proper configuration:
 
@@ -33,7 +39,7 @@ import Image from "next/image";
 - Choose the right sizing strategy (`fill`, `responsive`, or fixed dimensions)
 - Leverage the `sizes` prop for responsive images
 
-## 2. Implement Smart Bundle Splitting
+## 2.Implement Smart Bundle Splitting
 
 Next.js automatically splits your code, but you can optimize further:
 
@@ -59,7 +65,7 @@ function Dashboard({ user }) {
 }
 ```
 
-## 3. Optimize Font Loading
+## 3.Optimize Font Loading
 
 Font optimization can significantly improve Cumulative Layout Shift (CLS):
 
@@ -88,7 +94,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-## 4. Leverage Static Generation Strategically
+## 4.Leverage Static Generation Strategically
 
 Choose the right rendering strategy for each page:
 
@@ -114,7 +120,7 @@ export async function getStaticPaths() {
 }
 ```
 
-## 5. Optimize Client-Side Navigation
+## 5.Optimize Client-Side Navigation
 
 Preload critical routes and implement smart prefetching:
 
@@ -143,7 +149,7 @@ function Navigation() {
 }
 ```
 
-## 6. Implement Efficient Data Fetching
+## 6.Implement Efficient Data Fetching
 
 Use SWR or React Query for client-side data fetching with caching:
 
@@ -165,7 +171,7 @@ function UserProfile({ userId }) {
 }
 ```
 
-## 7. Optimize Third-Party Scripts
+## 7.Optimize Third-Party Scripts
 
 Use Next.js Script component for optimal third-party loading:
 
@@ -193,7 +199,7 @@ function Analytics() {
 }
 ```
 
-## 8. Monitor and Measure Performance
+## 8.Monitor and Measure Performance
 
 Implement performance monitoring to track real user metrics:
 
@@ -209,7 +215,7 @@ export function reportWebVitals(metric) {
 }
 ```
 
-## 9. Optimize CSS and Styling
+## 9.Optimize CSS and Styling
 
 Use CSS-in-JS libraries efficiently or stick to CSS Modules:
 
@@ -225,7 +231,7 @@ const styles = {
 import styles from "./Component.module.css";
 ```
 
-## 10. Implement Progressive Enhancement
+## 10.Implement Progressive Enhancement
 
 Build for the baseline, enhance for capabilities:
 

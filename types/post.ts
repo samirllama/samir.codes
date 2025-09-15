@@ -1,3 +1,6 @@
+
+import type { JSX, ReactElement } from 'react';
+
 export interface Post {
     slug: string;
     title: string;
@@ -6,7 +9,7 @@ export interface Post {
     image?: string;
     tags?: string[];
     readingTime?: string;
-    content: string;
+    content: JSX.Element | ReactElement;
 }
 
 export interface PostFrontmatter {
@@ -14,5 +17,13 @@ export interface PostFrontmatter {
     description?: string;
     date?: string;
     image?: string;
-    tags?: string;
+    tags?: string[];
+}
+
+
+export interface HastElement {
+    type: string;
+    tagName: string;
+    properties: Record<string, any>;
+    children: Array<{ type: string; value: string }>;
 }

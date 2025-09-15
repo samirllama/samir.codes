@@ -12,7 +12,6 @@ const WorkTimeline = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // GSAP context for proper cleanup
     const ctx = gsap.context(() => {
       const entries = gsap.utils.toArray<HTMLElement>(".timeline-entry");
       entries.forEach((entry) => {

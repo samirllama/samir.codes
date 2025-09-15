@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Post } from "@/types/post";
+import { formatDate } from "@/lib/utils";
 import styles from "./blog.module.css";
 
 interface BlogCardProps {
@@ -8,14 +9,6 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   return (
     <article className={styles.card}>
       <Link href={`/posts/${post.slug}`} className={styles.cardLink}>

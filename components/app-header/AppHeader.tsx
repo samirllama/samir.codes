@@ -5,11 +5,6 @@ import styles from "./AppHeader.module.css";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import NameLogo from "./NameLogo";
 
-interface AppHeaderProps {
-  toggleAction: () => void;
-  isMenuOpen: boolean;
-}
-
 const AppHeader = () => {
   const pathname = usePathname();
 
