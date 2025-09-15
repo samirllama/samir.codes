@@ -37,19 +37,28 @@ const Projects = () => {
       demo: "https://atlasrelocations.com/",
     },
     {
-      title: "E-Commerce Platform",
+      title: "Bazaar, E-Commerce Platform",
       description:
-        "A full-stack e-commerce solution built with Next.js, featuring real-time inventory, secure payments, and admin dashboard.",
-      tech: ["Next.js", "PostgreSQL", "Stripe", "Redis"],
-      link: "https://github.com/samirllama/atlas-relocations-nepal",
+        "A full-stack e-commerce demo built with GraphQL + React, featuring real-time inventory with authentication, database persistence, and a seller flow with a multi-step form.",
+      tech: [
+        "React",
+        "Vite",
+        "Typescript",
+        "Apollo Client",
+        "JWT",
+        "Node.js",
+        "Turso (SQLite)",
+        "Apollo Server",
+        "Redis",
+      ],
+      link: "https://github.com/samirllama/bazaar",
     },
     {
-      title: "Task Management App",
+      title: "Claude-like CLI Tool",
       description:
-        "Collaborative task management with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      tech: ["React", "Node.js", "Socket.io", "MongoDB"],
-      link: "https://github.com/johndoe/taskmanager",
-      demo: "https://tasks.johndoe.dev",
+        "Python-based command-line tool that demonstrates how an LLM can be used to reason about, plan, and execute a coding task by calling a set of predefined functions.",
+      tech: ["Python", "Google Genai"],
+      link: "https://github.com/samirllama/aiagent",
     },
     {
       title: "Weather Analytics Dashboard",

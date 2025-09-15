@@ -91,9 +91,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
         return null;
     }
 }
+
 export async function getAllPosts(): Promise<Post[]> {
     const slugs = getPostSlugs();
     const posts = await Promise.all(slugs.map((slug) => getPostBySlug(slug)));
+
     return posts
         .filter((post): post is Post => post !== null)
         .sort(

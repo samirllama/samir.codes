@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/posts.server";
 
 export async function GET() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   const baseUrl = "https://samir.codes";
 
   const rssItems = posts

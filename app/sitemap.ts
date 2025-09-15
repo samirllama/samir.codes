@@ -1,9 +1,11 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/posts.server";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-    const posts = getAllPosts();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const posts = await getAllPosts();
     const baseUrl = "https://samir.codes";
+
+    console.log('posts type:', Array.isArray(posts), posts);
 
     const postUrls = posts.map((post) => ({
         url: `${baseUrl}/posts/${post.slug}`,
