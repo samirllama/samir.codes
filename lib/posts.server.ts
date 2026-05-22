@@ -64,7 +64,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
                             rehypePrettyCode,
                             {
                                 theme: "github-dark",
-                                keepBackground: false,
+                                keepBackground: true,
                                 defaultLang: "plaintext",
                                 onVisitLine(node: HastElement) {
                                     if (node.children.length === 0) {
