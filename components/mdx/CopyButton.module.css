@@ -1,0 +1,26 @@
+.copyButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  z-index: 10;
+  background: rgba(110, 118, 129, 0.1);
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 0.35rem;
+  color: #8b949e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.copyButton:hover {
+  color: #c9d1d9;
+  background: rgba(110, 118, 129, 0.2);
+  border-color: #8b949e;
+}
+
+.checkIcon {
+  color: #3fb950;
+}

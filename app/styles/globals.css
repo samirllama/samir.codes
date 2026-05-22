@@ -248,7 +248,7 @@ figure[data-rehype-pretty-code-figure] pre {
 figure[data-rehype-pretty-code-figure] code {
   display: grid;
   background: transparent !important;
-  padding: 0 !important;
+  padding: 12 !important;
   width: fit-content;
   min-width: 100%;
 }

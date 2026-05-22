@@ -2,6 +2,7 @@
 import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import Image from "next/image";
 import { Callout } from "./Callout.tsx";
+import CopyButton from "./CopyButton";
 import styles from "./mdx.module.css";
 
 export const MDXComponents = {
@@ -48,6 +49,28 @@ export const MDXComponents = {
       />
     </div>
   ),
+
+  pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
+    // Extract the raw text tokens directly out of children elements for copying
+    const extractText = (node: any): string => {
+      if (!node) return "";
+      if (typeof node === "string") return node;
+      if (Array.isArray(node)) return node.map(extractText).join("");
+      if (node.props && node.props.children)
+        return extractText(node.props.children);
+      return "";
+    };
+
+    const rawCodeText = extractText(children);
+
+    return (
+      <div style={{ position: "relative" }}>
+        <CopyButton text={rawCodeText} />
+        <pre {...props}>{children}</pre>
+      </div>
+    );
+  },
+
   table: (props: ComponentPropsWithoutRef<"table">) => (
     <div className={styles.tableWrapper}>
       <table className={styles.table} {...props} />
