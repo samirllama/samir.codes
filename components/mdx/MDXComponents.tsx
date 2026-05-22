@@ -5,6 +5,12 @@ import { Callout } from "./Callout.tsx";
 import CopyButton from "./CopyButton";
 import styles from "./mdx.module.css";
 
+interface MDXTextNode {
+  props?: {
+    children?: MDXTextNode | MDXTextNode[];
+  };
+}
+
 export const MDXComponents = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1 className={styles.heading1} {...props} />
@@ -52,12 +58,18 @@ export const MDXComponents = {
 
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
     // Extract the raw text tokens directly out of children elements for copying
-    const extractText = (node: any): string => {
+    const extractText = (node: unknown): string => {
       if (!node) return "";
       if (typeof node === "string") return node;
+      if (typeof node === "number") return String(node);
       if (Array.isArray(node)) return node.map(extractText).join("");
-      if (node.props && node.props.children)
-        return extractText(node.props.children);
+
+      // Safe type-guarding to check if the node has React component properties
+      const typedNode = node as MDXTextNode;
+      if (typedNode?.props?.children) {
+        return extractText(typedNode.props.children);
+      }
+
       return "";
     };
 
