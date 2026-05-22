@@ -36,9 +36,9 @@ export default async function BlogPage() {
           </div>
         ) : (
           <div className={styles.postsGrid}>
-            {posts.map((post) => (
+            {posts.map((post, index) => (
               /* content-omitted posts map perfectly down into display cards */
-              <BlogCard key={post.slug} post={post} />
+              <BlogCard key={post.slug} post={post} priority={index < 2} />
             ))}
           </div>
         )}

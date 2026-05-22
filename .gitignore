@@ -50,3 +50,5 @@ notes*
 .env*.local
 
 /.Guides
+
+AGENTS.md

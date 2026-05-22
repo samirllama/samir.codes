@@ -6,9 +6,10 @@ import styles from "./blog.module.css";
 
 interface BlogCardProps {
   post: PostSummary;
+  priority?: boolean;
 }
 
-const BlogCard = ({ post }: BlogCardProps) => {
+const BlogCard = ({ post, priority = false }: BlogCardProps) => {
   return (
     <article className={styles.card}>
       <Link href={`/posts/${post.slug}`} className={styles.cardLink}>
@@ -17,8 +18,9 @@ const BlogCard = ({ post }: BlogCardProps) => {
             <Image
               src={post.image}
               alt={post.title}
-              width={400}
-              height={200}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={priority}
               className={styles.image}
             />
           </div>

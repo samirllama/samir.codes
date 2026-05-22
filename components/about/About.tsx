@@ -2,17 +2,19 @@ import styles from "./About.module.css";
 
 const About = () => {
   const skills = [
-    "JavaScript",
     "TypeScript",
     "React/Next.js",
     "Node.js",
+    "Go",
     "Python",
     "PostgreSQL",
+    "Kafka",
     "AWS",
     "Azure",
     "Docker",
     "GraphQL",
     "DataDog",
+    "OpenTelemetry",
     "Terraform",
   ];
 
