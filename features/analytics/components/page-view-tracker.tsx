@@ -1,15 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { trackPageView } from "@/hooks/use-analytics";
 
-export function PageViewTracker() {
+function PageViewTrackerInner() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    trackPageView(pathname);
-  }, [pathname]);
+    try {
+      const queryString = searchParams.toString();
+      const fullUrl = queryString ? `${pathname}?${queryString}` : pathname;
+      trackPageView(fullUrl);
+    } catch (err) {
+      console.error("Failed to track page view in client component:", err);
+    }
+  }, [pathname, searchParams]);
 
   return null;
+}
+
+export function PageViewTracker() {
+  return (
+    <Suspense fallback={null}>
+      <PageViewTrackerInner />
+    </Suspense>
+  );
 }

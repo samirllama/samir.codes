@@ -1,25 +1,65 @@
+// /app/api/analytics/route.ts
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";
 
+interface IncomingAnalyticsBody {
+  event?: string;
+  properties?: Record<string, unknown> & {
+    userId?: string;
+    sessionId?: string;
+  };
+}
+
+interface KafkaRecord {
+  key: string;
+  value: {
+    event: string;
+    timestamp: string;
+    location: {
+      city: string;
+      country: string;
+      region: string;
+    };
+    properties: {
+      ip: string;
+      [key: string]: unknown;
+    };
+  };
+}
+
+interface KafkaPayload {
+  records: KafkaRecord[];
+}
+
 export async function POST(request: Request) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 500);
+
   try {
-    const body = await request.json();
+    let body: IncomingAnalyticsBody;
+    const contentType = request.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      body = await request.json() as IncomingAnalyticsBody;
+    } else {
+      const rawText = await request.text();
+      body = JSON.parse(rawText || "{}") as IncomingAnalyticsBody;
+    }
+
     const { event, properties } = body;
 
     if (!event) {
       return NextResponse.json({ error: "Missing event name" }, { status: 400 });
     }
 
-    // 1. Extract geo-location and client IP headers from Vercel Edge Runtime
     let city = request.headers.get("x-vercel-ip-city");
     let country = request.headers.get("x-vercel-ip-country");
     let region = request.headers.get("x-vercel-ip-country-region");
     let ip = request.headers.get("x-forwarded-for");
 
-    // 2. Local environment mocking for production parity
     if (process.env.NODE_ENV === "development") {
-      city = city || "Austin";
+      city = city || "Gas City";
       country = country || "US";
       region = region || "TX";
       ip = ip || "127.0.0.1";
@@ -34,15 +74,13 @@ export async function POST(request: Request) {
     const brokerUrl = process.env.ANALYTICS_BROKER_URL;
     if (!brokerUrl) {
       console.warn("ANALYTICS_BROKER_URL is not configured in env variables.");
-      // We print a warning in local console but return 202 to avoid throwing frontend exceptions
       return NextResponse.json(
         { success: false, warning: "Broker URL not configured" },
         { status: 202 }
       );
     }
 
-    // 3. Format Redpanda Kafka JSON schema exactly as expected by proxy and Go consumer
-    const kafkaPayload = {
+    const kafkaPayload: KafkaPayload = {
       records: [
         {
           key: (properties && (properties.userId || properties.sessionId)) || "anonymous",
@@ -52,7 +90,7 @@ export async function POST(request: Request) {
             location: geo,
             properties: {
               ...(properties || {}),
-              ip: ip || "unknown", // Retain IP in properties where it won't break strict Go structs
+              ip: ip || "unknown",
             },
           },
         },
@@ -65,6 +103,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/vnd.kafka.json.v2+json",
       },
       body: JSON.stringify(kafkaPayload),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
@@ -77,12 +116,20 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
-    console.error("Error in custom analytics route:", error);
+  } catch (error: unknown) {
+    const err = error as Record<string, unknown> | null | undefined;
+    const isTimeout = err?.name === "AbortError" || (err?.message && String(err.message).includes("abort"));
+    const errorMessage = isTimeout
+      ? "Broker connection timed out (500ms limit reached)"
+      : error instanceof Error ? error.message : "Internal Server Error";
+
+    console.error("Gracefully caught error in custom analytics Edge route:", errorMessage);
+
     return NextResponse.json(
       { success: false, error: errorMessage },
-      { status: 500 }
+      { status: 202 }
     );
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
