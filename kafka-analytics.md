@@ -18,7 +18,7 @@ graph TD
 
 ---
 
-## 2. Why It Works the Way It Does
+## 2. The Current Approach
 
 ### Client-Side: `navigator.sendBeacon` with `fetch` Fallback
 
@@ -72,7 +72,7 @@ All payloads forwarded to the broker at `process.env.ANALYTICS_BROKER_URL` use t
         "event": "YOUR_EVENT_NAME",
         "timestamp": "ISO_8601_STRING",
         "location": {
-          "city": "Skokie",
+          "city": "Chicago",
           "country": "US",
           "region": "IL"
         },
