@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Post } from "@/types/post";
+import { PostSummary } from "@/types/post";
 import { formatDate } from "@/lib/utils";
 import styles from "./blog.module.css";
 
 interface BlogCardProps {
-  post: Post;
+  post: PostSummary;
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {

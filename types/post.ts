@@ -1,5 +1,5 @@
-
-import type { JSX, ReactElement } from 'react';
+// @/types/post.ts
+import { ReactNode } from "react";
 
 export interface Post {
     slug: string;
@@ -7,23 +7,24 @@ export interface Post {
     description: string;
     date: string;
     image?: string;
-    tags?: string[];
+    tags: string[];
     readingTime?: string;
-    content: JSX.Element | ReactElement;
+    content: ReactNode; // Maps directly to the compiled runtime tree output
 }
+
+export type PostSummary = Omit<Post, 'content'>;
 
 export interface PostFrontmatter {
     title?: string;
     description?: string;
     date?: string;
     image?: string;
-    tags?: string[];
+    tags?: string[] | string;
 }
-
 
 export interface HastElement {
     type: string;
     tagName: string;
-    properties: Record<string, any>;
+    properties: Record<string, unknown>;
     children: Array<{ type: string; value: string }>;
 }

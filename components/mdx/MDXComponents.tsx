@@ -1,5 +1,5 @@
 // components/mdx.tsx
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentProps, ComponentPropsWithoutRef } from "react";
 import Image from "next/image";
 import { Callout } from "./Callout.tsx";
 import styles from "./mdx.module.css";
@@ -14,7 +14,7 @@ export const MDXComponents = {
   h3: (props: ComponentPropsWithoutRef<"h3">) => (
     <h3 className={styles.heading3} {...props} />
   ),
-  Callout: (props: any) => <Callout {...props} />,
+  Callout: (props: ComponentProps<typeof Callout>) => <Callout {...props} />,
   p: (props: ComponentPropsWithoutRef<"p">) => (
     <p className={styles.paragraph} {...props} />
   ),

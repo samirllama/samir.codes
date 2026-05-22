@@ -56,31 +56,6 @@ export const getChartTheme = (isDark: boolean) => ({
   axisColor: isDark ? "#666666" : "#999999",
 })
 
-// Enhanced error handling for different error types
-export const handleChartError = (error: any) => {
-  const errorMessage = error?.message || error?.toString() || "Unknown error"
-
-  if (errorMessage.includes("Content Security Policy")) {
-    console.error("CSP blocked SciChart loading. Check your Content Security Policy settings.")
-    return "CSP_ERROR"
-  }
-  if (errorMessage.includes("WASM") || errorMessage.includes("WebAssembly")) {
-    console.error("WASM loading failed. This might be due to MIME type or CSP issues.")
-    return "WASM_ERROR"
-  }
-  if (errorMessage.includes("network") || errorMessage.includes("fetch")) {
-    console.error("Network error loading SciChart resources.")
-    return "NETWORK_ERROR"
-  }
-  if (errorMessage.includes("timeout")) {
-    console.error("Timeout loading SciChart resources.")
-    return "TIMEOUT_ERROR"
-  }
-
-  console.error("Unknown SciChart error:", error)
-  return "UNKNOWN_ERROR"
-}
-
 // Fallback chart data generator
 export const generateMockChartData = () => {
   const timeSeriesData = []

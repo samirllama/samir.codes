@@ -1,3 +1,5 @@
+// app/blog/[slug]/page.tsx
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { formatDate } from "@/lib/utils";
@@ -65,9 +67,12 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <>
+      {/* Retains initial GSAP/CSS animations safely */}
       <PostAnimations />
+
       <div className={styles.container}>
         <div className={styles.nav}>
+          {/* Tracked analytics routing link */}
           <TrackedLink
             href="/blog"
             location="Header Logo"
@@ -79,6 +84,7 @@ export default async function PostPage({ params }: PostPageProps) {
             <span className={styles.logoBlog}>/ BLOG</span>
           </TrackedLink>
         </div>
+
         <main>
           <article className={styles.post}>
             <div className="blog-container">

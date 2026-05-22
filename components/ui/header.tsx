@@ -13,10 +13,7 @@ interface AppHeaderProps {
   toggleAction: () => void;
 }
 
-export default function AppHeader({
-  toggleAction,
-  isMenuOpen,
-}: AppHeaderProps) {
+export default function AppHeader({ isMenuOpen }: AppHeaderProps) {
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,12 +35,6 @@ export default function AppHeader({
       "text-menu-text": isMenuOpen,
       "text-text-default": !isMenuOpen,
     },
-  ]);
-
-  const burgerStyles = cn([
-    "hamburger-button",
-    "hidden group cursor-pointer relative inline-block w-9 h-4 bg-transparent text-current",
-    { "is-active": isMenuOpen },
   ]);
 
   return (

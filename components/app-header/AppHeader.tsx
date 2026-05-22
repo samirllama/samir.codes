@@ -29,7 +29,7 @@ const AppHeader = () => {
         </TrackedLink>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <li key={item.href} className="nav-item">
                 <TrackedLink
                   href={item.href}

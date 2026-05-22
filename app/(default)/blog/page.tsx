@@ -1,3 +1,4 @@
+// app/(default)/blog/page.tsx
 import type { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import { getAllPosts } from "@/lib/posts.server";
@@ -8,13 +9,14 @@ export const metadata: Metadata = {
   description:
     "Articles about web development, design, and technology insights.",
   openGraph: {
-    title: "Blog | Samir Lama",
+    title: "Blog | Rants",
     description:
       "Articles about web development, design, and technology insights.",
   },
 };
 
 export default async function BlogPage() {
+  // Works safely now that getAllPosts returns a typed Promise!
   const posts = await getAllPosts();
 
   return (
@@ -35,6 +37,7 @@ export default async function BlogPage() {
         ) : (
           <div className={styles.postsGrid}>
             {posts.map((post) => (
+              /* content-omitted posts map perfectly down into display cards */
               <BlogCard key={post.slug} post={post} />
             ))}
           </div>

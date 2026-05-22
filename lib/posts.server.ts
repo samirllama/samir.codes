@@ -1,8 +1,8 @@
 // @/lib/posts.server.ts
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter"; // Import gray-matter for frontmatter parsing
-import { Post, PostFrontmatter } from "@/types/post";
+import matter from "gray-matter";
+import { Post } from "@/types/post";
 import readingTime from "reading-time";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
@@ -24,24 +24,37 @@ export function getPostSlugs(): string[] {
         .map((name) => name.replace(/\.mdx$/, ""));
 }
 
+/**
+ * Normalizes tags field regardless of whether YAML formatted it as a string or string[]
+ */
+function normalizeTags(tags: unknown): string[] {
+    if (!tags) return [];
+    return Array.isArray(tags)
+        ? tags.map((t) => String(t).trim())
+        : String(tags).split(",").map((t) => t.trim()).filter(Boolean);
+}
+
+/**
+ * Fetches and compiles a single post for its dedicated page view.
+ */
 export async function getPostBySlug(slug: string): Promise<Post | null> {
     try {
         const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-        const fileContents = fs.readFileSync(fullPath, "utf8");
-        const { content, data } = matter(fileContents);
-        const frontmatter = data as PostFrontmatter;
+        if (!fs.existsSync(fullPath)) return null;
 
-        const { content: compiledContent } = await compileMDX<{
-            title: string;
-            description: string;
-            date: string;
-            tags: string[];
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        const { content: compiledContent, frontmatter } = await compileMDX<{
+            title?: string;
+            description?: string;
+            date?: string;
+            tags?: string[] | string;
             image?: string;
         }>({
-            source: content,
+            source: fileContents,
             components: MDXComponents,
             options: {
-                parseFrontmatter: false,
+                parseFrontmatter: true,
                 mdxOptions: {
                     remarkPlugins: [remarkGfm],
                     rehypePlugins: [
@@ -59,10 +72,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
                                     }
                                 },
                                 onVisitHighlightedLine(node: HastElement) {
-                                    if (!node.properties.className) {
-                                        node.properties.className = [];
-                                    }
-                                    node.properties.className.push("line--highlighted");
+                                    const currentClass = node.properties.className;
+                                    const classList = Array.isArray(currentClass) ? currentClass : [];
+                                    node.properties.className = [...classList, "line--highlighted"];
                                 },
                                 onVisitHighlightedChars(node: HastElement) {
                                     node.properties.className = ["word--highlighted"];
@@ -74,15 +86,15 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
             },
         });
 
-        const stats = readingTime(content);
+        const stats = readingTime(fileContents);
 
         return {
             slug,
-            title: frontmatter.title ?? "",
-            description: frontmatter.description ?? "",
-            date: frontmatter.date ?? "",
+            title: frontmatter.title || "",
+            description: frontmatter.description || "",
+            date: frontmatter.date || "",
             image: frontmatter.image,
-            tags: frontmatter.tags || [],
+            tags: normalizeTags(frontmatter.tags),
             readingTime: stats.text,
             content: compiledContent,
         };
@@ -92,14 +104,39 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     }
 }
 
-export async function getAllPosts(): Promise<Post[]> {
-    const slugs = getPostSlugs();
-    const posts = await Promise.all(slugs.map((slug) => getPostBySlug(slug)));
+/**
+ * High-performance list grab. Avoids full MDX rendering overhead entirely.
+ * Returns Omit<Post, 'content'> to avoid hydration payloads on the listing view.
+ */
+export async function getAllPosts(): Promise<Omit<Post, "content">[]> {
+    try {
+        const slugs = getPostSlugs();
 
-    return posts
-        .filter((post): post is Post => post !== null)
-        .sort(
-            (a, b) =>
-                new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
+        // 1. Explicitly type the map array to allow either the valid Omit type OR null
+        const posts: (Omit<Post, "content"> | null)[] = slugs.map((slug) => {
+            const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+            if (!fs.existsSync(fullPath)) return null;
+
+            const fileContents = fs.readFileSync(fullPath, "utf8");
+            const { data } = matter(fileContents);
+            const stats = readingTime(fileContents);
+
+            return {
+                slug,
+                title: data.title || "",
+                description: data.description || "",
+                date: data.date || "",
+                image: data.image,
+                tags: normalizeTags(data.tags),
+                readingTime: stats.text,
+            };
+        });
+
+        return posts
+            .filter((post): post is Omit<Post, "content"> => post !== null)
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } catch (error) {
+        console.error("Error reading all posts:", error);
+        return [];
+    }
 }

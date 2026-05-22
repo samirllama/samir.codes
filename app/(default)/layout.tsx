@@ -9,19 +9,16 @@ import Footer from "@/components/footer/Footer";
 import styles from "./Layout.module.css";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("");
   const mainRef = useRef<HTMLElement>(null);
 
-  const toggleMenu = () => setIsMenuOpen((prev: boolean) => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
   const navItems = useMemo(
     () => [
       { id: "about", label: "About" },
       { id: "experience", label: "Experience" },
       { id: "projects", label: "Projects" },
     ],
-    []
+    [],
   );
 
   useEffect(() => {
@@ -41,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         root: null,
         rootMargin: "0px 0px -35% 0px",
         threshold: 0.15,
-      }
+      },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
@@ -49,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const handleNavClick = (
     id: string,
-    e: React.MouseEvent<HTMLAnchorElement>
+    e: React.MouseEvent<HTMLAnchorElement>,
   ) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -68,7 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className={cn("web-app", { "is-active": isMenuOpen })}>
+    <div className={"web-app"}>
       <AppHeader />
 
       <div className={styles.container}>
