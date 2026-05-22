@@ -69,6 +69,7 @@ describe("use-analytics hook and functions", () => {
       method: "POST",
       keepalive: true,
       headers: { "Content-Type": "application/json" },
+      body: expect.stringContaining("sessionId"),
     }));
   });
 
@@ -85,6 +86,7 @@ describe("use-analytics hook and functions", () => {
       method: "POST",
       keepalive: true,
       headers: { "Content-Type": "application/json" },
+      body: expect.stringContaining("sessionId"),
     }));
   });
 });

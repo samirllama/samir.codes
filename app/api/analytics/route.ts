@@ -29,7 +29,6 @@ export async function POST(request: Request) {
       city: city ? decodeURIComponent(city) : "unknown",
       country: country || "unknown",
       region: region || "unknown",
-      ip: ip || "unknown",
     };
 
     const brokerUrl = process.env.ANALYTICS_BROKER_URL;
@@ -46,12 +45,15 @@ export async function POST(request: Request) {
     const kafkaPayload = {
       records: [
         {
-          key: (properties && properties.userId) || "anonymous",
+          key: (properties && (properties.userId || properties.sessionId)) || "anonymous",
           value: {
             event: event,
             timestamp: new Date().toISOString(),
             location: geo,
-            properties: properties || {},
+            properties: {
+              ...(properties || {}),
+              ip: ip || "unknown", // Retain IP in properties where it won't break strict Go structs
+            },
           },
         },
       ],
@@ -75,10 +77,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
     console.error("Error in custom analytics route:", error);
     return NextResponse.json(
-      { success: false, error: error.message || "Internal Server Error" },
+      { success: false, error: errorMessage },
       { status: 500 }
     );
   }

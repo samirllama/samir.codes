@@ -2,9 +2,33 @@
 
 import { track } from "@vercel/analytics"
 
+// Helper to generate or retrieve an ephemeral browser sessionId
+const getSessionId = (): string => {
+  if (typeof window === "undefined") return "anonymous"
+  try {
+    let sid = sessionStorage.getItem("analytics_sid")
+    if (!sid) {
+      sid =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      sessionStorage.setItem("analytics_sid", sid)
+    }
+    return sid
+  } catch (e) {
+    // Handle sandboxed contexts or blocked storage (strict incognito mode)
+    return "anonymous"
+  }
+}
+
 // Helper to fire events to our custom analytics edge tunnel
 const sendCustomEvent = (event: string, properties: any) => {
-  const data = JSON.stringify({ event, properties })
+  const sessionId = getSessionId()
+  const payloadWithSession = {
+    ...properties,
+    sessionId,
+  }
+  const data = JSON.stringify({ event, properties: payloadWithSession })
   const url = "/api/analytics"
 
   if (typeof navigator !== "undefined" && navigator.sendBeacon) {
@@ -95,4 +119,5 @@ export function useAnalytics() {
     trackSocialShare,
   }
 }
+
 
