@@ -4,7 +4,7 @@ This document explains the architecture, design decisions, data routing strategy
 
 ## 1. System Architecture Overview
 
-The telemetry pipeline runs **in parallel** with your existing Vercel Analytics. It is designed to act as a zero-latency, reliable event forwarding system that streams custom browser events to a Redpanda Kafka broker proxy.
+The telemetry pipeline runs **in parallel** with the existing Vercel Analytics. It is designed to act as a zero-latency, reliable event forwarding system that streams custom browser events to a Redpanda Kafka broker proxy.
 
 ```mermaid
 graph TD
@@ -35,9 +35,9 @@ graph TD
 
 ---
 
-## 3. Partition Key Routing Strategy (Strategy B)
+## 3. Partition Key Routing Strategy
 
-To guarantee high scalability and load balancing in our Redpanda/Kafka cluster, we chose **Strategy B: Ephemeral Client-Side Session IDs**.
+To guarantee high scalability and load balancing in our Kafka cluster, we chose **Ephemeral Client-Side Session IDs**.
 
 ### The Problem of "anonymous" Keys
 
