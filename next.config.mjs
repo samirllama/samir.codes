@@ -22,32 +22,18 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
-        port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "cdn.jsdelivr.net",
-        port: "",
         pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "unpkg.com",
-        port: "",
         pathname: "/**",
       },
-      {
-        protocol: "https",
-        hostname: "placeholder.svg",
-        port: "",
-        pathname: "/**",
-      },
-    ],
-    domains: [
-      "jwdtwbbgwku6ttxc.public.blob.vercel-storage.com",
-      "cdn.jsdelivr.net",
-      "unpkg.com",
     ],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
@@ -63,11 +49,11 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self'",
-              "connect-src 'self'",
+              "connect-src 'self' https://va.vercel-scripts.com",
               "media-src 'self'",
             ].join("; "),
           },
@@ -94,8 +80,26 @@ const nextConfig = {
   experimental: {
     webVitalsAttribution: ["CLS", "LCP"],
   },
+  transpilePackages: ["scichart"],
+  async rewrites() {
+    return [
+      {
+        source: "/scichart2d.wasm",
+        destination: "/api/wasm/scichart2d.wasm",
+      },
+      {
+        source: "/scichart2d.data",
+        destination: "/api/wasm/scichart2d.data",
+      },
+    ];
+  },
+  env: {
+    ANALYZE: process.env.ANALYZE,
+  },
+  poweredByHeader: false,
+  compress: true,
+  output: process.env.ANALYZE === "true" ? "standalone" : undefined,
   webpack: (config, { isServer, dev }) => {
-    // Only enable custom WASM handling for client-side and exclude @vercel/og
     if (!isServer) {
       config.experiments = {
         ...config.experiments,
@@ -104,7 +108,7 @@ const nextConfig = {
       };
 
       config.module.rules.push({
-        test: /\.wasm$/,
+        test: /.wasm$/,
         exclude: [
           /node_modules\/@vercel\/og/,
           /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/,
@@ -133,14 +137,11 @@ const nextConfig = {
     });
 
     config.module.rules.push({
-      test: /\.(wasm)$/,
-      include: [
-        /node_modules\/@vercel\/og/,
-        /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/,
-      ],
+      test: /.(wasm)$/,
+      include: [/node_modules\/@vercel\/og/, /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/],
       type: "asset/resource",
       generator: {
-        filename: "static/wasm/[name].[hash][ext]",
+        filename: "static/wasm/[name].hash",
       },
     });
 
@@ -152,21 +153,21 @@ const nextConfig = {
           cacheGroups: {
             ...config.optimization.splitChunks?.cacheGroups,
             scichart: {
-              test: /[\\/]node_modules[\\/]scichart[\\/]/,
+              test: /[\/]node_modules[\/]scichart[\/]/,
               name: "scichart",
               chunks: "all",
               priority: 10,
               reuseExistingChunk: true,
             },
             vercelOg: {
-              test: /[\\/]node_modules[\\/]@vercel[\\/]og[\\/]/,
+              test: /[\/]node_modules[\/]@vercel[\/]og[\/]/,
               name: "vercel-og",
               chunks: "all",
               priority: 9,
               reuseExistingChunk: true,
             },
             vendor: {
-              test: /[\\/]node_modules[\\/]/,
+              test: /[\/]node_modules[\/]/,
               name: "vendors",
               chunks: "all",
               priority: 5,
@@ -194,25 +195,6 @@ const nextConfig = {
 
     return config;
   },
-  transpilePackages: ["scichart"],
-  async rewrites() {
-    return [
-      {
-        source: "/scichart2d.wasm",
-        destination: "/api/wasm/scichart2d.wasm",
-      },
-      {
-        source: "/scichart2d.data",
-        destination: "/api/wasm/scichart2d.data",
-      },
-    ];
-  },
-  env: {
-    ANALYZE: process.env.ANALYZE,
-  },
-  poweredByHeader: false,
-  compress: true,
-  output: process.env.ANALYZE === "true" ? "standalone" : undefined,
 };
 
 const config =
@@ -225,43 +207,13 @@ const config =
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm],
+    mdxRs: true,
+    remarkPlugins: ["remark-gfm"],
     rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: "wrap" }],
-      [
-        rehypePrettyCode,
-        {
-          theme: {
-            dark: "github-dark",
-            light: "github-light",
-          },
-          keepBackground: false,
-          defaultLang: "plaintext",
-          transformers: [
-            {
-              name: "add-line-numbers",
-              pre(node) {
-                this.addClassToHast(node, "line-numbers");
-              },
-            },
-          ],
-          onVisitLine(node) {
-            if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }];
-            }
-          },
-          onVisitHighlightedLine(node) {
-            if (!node.properties.className) {
-              node.properties.className = [];
-            }
-            node.properties.className.push("line--highlighted");
-          },
-          onVisitHighlightedChars(node) {
-            node.properties.className = ["word--highlighted"];
-          },
-        },
-      ],
+      "rehype-slug",
+      "rehype-highlight",
+      "rehype-pretty-code",
+      "rehype-autolink-headings",
     ],
   },
 });

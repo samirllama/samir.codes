@@ -36,7 +36,7 @@ const WorkTimeline = () => {
             scale: 1,
             autoAlpha: 1,
             ease: "power2.inOut",
-          }
+          },
         );
 
         tl.fromTo(
@@ -47,7 +47,7 @@ const WorkTimeline = () => {
             autoAlpha: 1,
             ease: "power2.out",
           },
-          "<"
+          "<",
         );
       });
     }, containerRef);
@@ -84,6 +84,7 @@ const TimelineEntry = ({ entry }: { entry: ExperienceEntry }) => {
             alt={`Screenshot of ${entry.company}`}
             fill
             className={styles.cardImage}
+            sizes="300px"
           />
         )}
       </div>

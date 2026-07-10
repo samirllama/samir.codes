@@ -31,9 +31,7 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
             <time dateTime={post.date} className={styles.date}>
               {formatDate(post.date)}
             </time>
-            {post.readingTime && (
-              <span className={styles.readingTime}>{post.readingTime}</span>
-            )}
+            {post.readingTime && <span className={styles.readingTime}>{post.readingTime}</span>}
           </div>
 
           <h3 className={styles.title}>{post.title}</h3>
@@ -41,7 +39,7 @@ const BlogCard = ({ post, priority = false }: BlogCardProps) => {
 
           {post.tags && post.tags.length > 0 && (
             <div className={styles.tags}>
-              {post.tags.slice(0, 3).map((tag) => (
+              {post.tags.slice(0, 5).map((tag) => (
                 <span key={tag} className={styles.tag}>
                   {tag}
                 </span>

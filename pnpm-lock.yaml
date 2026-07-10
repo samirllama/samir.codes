@@ -60,7 +60,7 @@ importers:
         specifier: ^1.35.0
         version: 1.38.0
       '@vercel/analytics':
-        specifier: ^1.5.0
+        specifier: ^1.6.1
         version: 1.6.1(next@15.5.18(@babel/core@7.29.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react@19.2.6)
       '@vercel/blob':
         specifier: ^1.1.1

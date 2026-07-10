@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { Animations } from "@/lib/animations";
 import styles from "./Hero.module.css";
-import avatar from "@/public/profile.jpeg";
+import avatar from "@/public/assets/profile-pic.webp";
 
 const Hero = () => {
   useEffect(() => {
@@ -25,12 +25,12 @@ const Hero = () => {
           <div className={styles.avatarWrap}>
             <Image
               src={avatar}
-              alt="Portrait of Samir Lama"
+              alt="Profile picture"
               fill
               priority
               placeholder="blur"
               sizes="200px"
-              style={{ objectFit: "cover", transform: "scale(1.2)" }}
+              style={{ objectFit: "cover", transform: "scale(1.1)" }}
             />
           </div>
         </div>

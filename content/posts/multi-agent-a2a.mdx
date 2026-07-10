@@ -1,0 +1,87 @@
+---
+title: "Deterministic Core, LLM Shell: A Trustworthy Agent Pattern with Google ADK and A2A"
+description: "A architectural guide on shipping production-grade multi-agent systems"
+date: "2026-07-10"
+tags:
+  - AI
+  - LLMs
+  - Agents
+  - GoogleADK
+  - A2A
+  - Go
+  - Python
+  - GCP
+image: https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/multi-agent-orchestration.webp
+---
+
+Most LLM demos are impressive right up until you ask them to be responsible for a number. Ask a chatbot to quote a price, approve a budget, or compute a total, and you are trusting a probabilistic text generator with something that has to be exactly right. For a demo, "usually correct" is fine. For anything near money or compliance, it is not.
+
+I built a small but production-shaped system to explore the pattern I think actually works: **keep the LLM at the language boundary, and let deterministic, tested code own every number and every decision.** This post walks through the architecture, the one design decision I am most glad I made, and how the pattern generalizes.
+
+The system is a travel pre-trip approval pipeline. A person types a plain-English travel request; the system returns a policy-checked, auditable approval decision built on a real fare quote. The travel domain is just a vehicle. Swap it for mortgages, insurance, or expense approvals and every idea below still holds.
+
+Code: the [Python orchestrator](https://github.com/yakyetilabs/travel-agent) and the [Go pricing engine](https://github.com/yakyetilabs/travel-fare-engine).
+
+## The thesis: deterministic core, LLM shell
+
+The design rule is absolute: no LLM ever computes, rounds, or transcribes a number. LLMs do three things they are genuinely good at, and nothing else:
+
+1. Turn messy human language into a structured, validated request.
+2. Decide when to call a tool.
+3. Explain an outcome in a sentence.
+
+Everything that has to be correct - pricing math, policy thresholds, the final decision record - lives in pure functions with unit tests. The model is a shell around a deterministic core. That is the whole idea, and the rest of the architecture exists to enforce it.
+
+## Two services, two languages, one contract
+
+The system is split into two independently deployable services:
+
+- An **orchestrator** in Python, built on Google's Agent Development Kit (ADK). It is a Workflow graph of specialist agents: intake (collect the trip), fare-prep (translate it into the pricing contract), the remote fare engine, policy (check the quote against corporate rules), and a finalizer.
+- A **pricing engine** in Go, exposed as an agent over the Agent-to-Agent (A2A) protocol.
+
+```
+Orchestrator (Python, ADK Workflow graph)
+   intake -> fare_prep -> fare_engine (A2A) -> policy -> finalizer
+                              |
+                              v
+   Pricing engine (Go)  ->  fare.Calculate()  (pure, tested, no LLM)
+```
+
+The two services share no code. The orchestrator discovers the engine at runtime by reading its agent card from `/.well-known/agent-card.json` and builds a remote agent from it. The only shared truth is the contract: a `FareQuoteRequest` in and a `FareQuote` out.
+
+Why go to this trouble instead of a function call? Because the split buys real properties. The pricing logic can be audited and deployed on its own cadence. It runs with least-privilege IAM, isolated from the orchestrator's secrets. And it never sees a traveler: the request contract carries only derived numerics - distance in miles, passenger counts, advance-purchase days - never names, emails, or even airport codes. Privacy is enforced by the shape of the contract, which is what makes the engine's logs safe to keep.
+
+To stop the two repos from drifting apart, the shared enum vocabularies are duplicated on purpose, and a CI tripwire test on each side fails the build the moment they diverge. Duplication is the deliberate price of independent deployability.
+
+## The decision I am most glad I made
+
+Here is the war story. The engine originally had a second LLM on the way out - a formatter agent with an output schema that transcribed the computed quote into the final structured response. It passed every schema check. It was also a latent bug.
+
+**An output schema constrains the shape of a response, not the digits.** A hallucinating model can return a perfectly schema-valid quote whose `total_fare` is simply wrong. Nothing about the schema catches it, because the schema only guarantees that a number is present and typed, not that it is the right number.
+
+So I removed that LLM. The outbound path is now a deterministic passthrough: a model-free agent that finds the exact tool output in the current invocation and re-emits it to the wire, byte for byte. A test pins the guarantee - the served payload decodes back to the exact struct the pricing function produced. The model stays where it adds value, parsing human input at the boundary, and never sits between the calculation and the response.
+
+That is the moment the "shell around a core" idea stopped being a slogan and became an enforced property.
+
+## Sequence the pipeline so decisions land on facts
+
+One more design choice is easy to miss: order. Policy runs after pricing, never before. The budget decision consumes the real quoted total, not an estimate. Generalized: arrange the workflow so every decision-maker acts on ground truth that already exists. And if the engine fails to return a quote, the budget check does not silently pass - it escalates to a human, so a missing fact degrades to review rather than to a wrong approval.
+
+## What "production-shaped" actually meant here
+
+The engineering around the agents matters as much as the agents:
+
+- **Deterministic, tested core.** Pricing and policy are pure functions with table-driven tests; the final decision record is assembled in code, never by a model.
+- **Contracts caught mechanically.** Tripwire tests on both sides fail on drift.
+- **Evals as a gate.** Eval sets pin the agents' tool trajectories, and deploys are gated on them.
+- **Security by default.** Both services run private on Cloud Run; the orchestrator authenticates to the engine with a short-lived identity token; external access is gated by Identity-Aware Proxy; CI/CD is keyless via Workload Identity Federation.
+
+None of this is exotic. It is the ordinary discipline of shipping a service, applied to a system that happens to contain an LLM.
+
+## When to reach for this pattern
+
+Use the deterministic-core, LLM-shell split whenever a wrong number or a wrong decision has a real cost: pricing, underwriting, approvals, anything regulated or financial. Let the model translate and explain; let tested code decide and compute. Put a hard, discoverable contract between components that different people will own and deploy. And be willing to remove an LLM from a path when it is adding risk instead of value - the outbound formatter is the classic example.
+
+The travel domain was incidental. The pattern is the point, and it is the part that transfers.
+
+Code and a live demo: [orchestrator](https://github.com/yakyetilabs/travel-agent), [engine](https://github.com/yakyetilabs/travel-fare-engine).

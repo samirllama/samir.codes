@@ -44,10 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return () => observer.disconnect();
   }, [navItems]);
 
-  const handleNavClick = (
-    id: string,
-    e: React.MouseEvent<HTMLAnchorElement>,
-  ) => {
+  const handleNavClick = (id: string, e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (!element) return;

@@ -21,9 +21,7 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: PostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const post = await getPostBySlug(resolvedParams.slug);
 
@@ -73,15 +71,11 @@ export default async function PostPage({ params }: PostPageProps) {
       <div className={styles.container}>
         <div className={styles.nav}>
           {/* Tracked analytics routing link */}
-          <TrackedLink
-            href="/blog"
-            location="Header Logo"
-            aria-label="Navigate to blog page"
-          >
+          <TrackedLink href="/blog" location="Header Logo" aria-label="Navigate to blog page">
             <span className={styles.logo}>
               <FigmaSVG />
             </span>
-            <span className={styles.logoBlog}>/ BLOG</span>
+            <span className={styles.logoBlog}>/ Logbook</span>
           </TrackedLink>
         </div>
 
@@ -95,9 +89,7 @@ export default async function PostPage({ params }: PostPageProps) {
                     {formatDate(post.date)}
                   </time>
                   {post.readingTime && (
-                    <span className={styles.readingTime}>
-                      {post.readingTime}
-                    </span>
+                    <span className={styles.readingTime}>{post.readingTime}</span>
                   )}
                 </div>
                 <p className={styles.description}>{post.description}</p>
@@ -112,9 +104,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 )}
               </header>
 
-              <div className={`post-content ${styles.content}`}>
-                {post.content}
-              </div>
+              <div className={`post-content ${styles.content}`}>{post.content}</div>
             </div>
           </article>
         </main>

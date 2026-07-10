@@ -6,27 +6,26 @@ import styles from "./blog.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "Articles about web development, design, and technology insights.",
+  description: "Articles about web development, design, and technology insights.",
   openGraph: {
     title: "Blog | Rants",
-    description:
-      "Articles about web development, design, and technology insights.",
+    description: "Articles about web development, design, and technology insights.",
   },
 };
 
 export default async function BlogPage() {
   // Works safely now that getAllPosts returns a typed Promise!
   const posts = await getAllPosts();
+  posts.map((p) => console.log("Post slugs:", p.slug));
 
   return (
     <div className={styles.blogPage}>
       <div className="blog-container">
         <header className={styles.header}>
-          <h1>Blog</h1>
+          <h1>The Logbook</h1>
           <p className={styles.subtitle}>
-            Sharing insights about web development, design patterns, and the
-            evolving landscape of modern technology.
+            Sharing insights about web development, design patterns, and the evolving landscape of
+            modern technology.
           </p>
         </header>
 
