@@ -6,6 +6,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import AppHeader from "@/components/app-header/AppHeader";
 import Footer from "@/components/footer/Footer";
+import { GlassFilter } from "@/components/ui/GlassFilter";
 import styles from "./Layout.module.css";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -63,6 +64,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={"web-app"}>
+      <GlassFilter />
       <AppHeader />
 
       <div className={styles.container}>

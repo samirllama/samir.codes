@@ -121,6 +121,15 @@
   padding-left: var(--space-lg);
 }
 
+/* Tailwind preflight zeroes list-style; restore it explicitly. */
+.list {
+  list-style: disc outside;
+}
+
+.orderedList {
+  list-style: decimal outside;
+}
+
 .hr {
   margin-bottom: 20px;
 }

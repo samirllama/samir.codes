@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import styles from "./AppHeader.module.css";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import NameLogo from "./NameLogo";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const AppHeader = () => {
   const pathname = usePathname();
@@ -43,6 +44,7 @@ const AppHeader = () => {
             ))}
           </ul>
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   );

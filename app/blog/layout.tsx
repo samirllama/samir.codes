@@ -1,14 +1,13 @@
 "use client";
 
 import { FaMastodon } from "react-icons/fa";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import AppHeader from "@/components/app-header/AppHeader";
 import Footer from "@/components/footer/Footer";
 import styles from "./Layout.module.css";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [activeId, setActiveId] = useState<string>("");
   const mainRef = useRef<HTMLElement>(null);
 
   return (

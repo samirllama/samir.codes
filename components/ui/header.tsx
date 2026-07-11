@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import NameLogo from "../app-header/NameLogo";
 import ThemeToggle from "../ThemeToggle";
-import GlassFilter from "./GlassFilter";
+import { GlassFilter } from "./GlassFilter";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 
 interface AppHeaderProps {

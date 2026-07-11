@@ -1,5 +1,7 @@
-const GlassFilter = () => (
-  <svg>
+export const GlassFilter = () => (
+  // Filter-definition only: zero-size (not display:none, which detaches SVG
+  // filter refs in some engines), mounted once in the (default) layout.
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
     <filter id="glassHeaderFilter" primitiveUnits="objectBoundingBox">
       <feImage
         result="map"
@@ -20,5 +22,3 @@ const GlassFilter = () => (
     </filter>
   </svg>
 );
-
-export default GlassFilter;

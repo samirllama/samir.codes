@@ -2,6 +2,9 @@ import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
+// Token source first, base styles second - globals.css aliases legacy vars
+// onto theme.css semantic tokens, so order matters.
+import "./styles/theme.css";
 import "./styles/globals.css";
 import { defaultMetadata } from "./metadata";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -29,10 +32,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-title" content="Samir Codes" />
       </head>
       <body className={`${monaspaceArgon.variable} ${monaspaceNeon.variable}`}>
+        {/* Dark is the canonical presentation; light stays available via the toggle. */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
           disableTransitionOnChange={false}
         >
           <Suspense fallback={null}>

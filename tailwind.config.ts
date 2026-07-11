@@ -96,6 +96,8 @@ const config: Config = {
     content: [
         './components/**/*.{js,ts,jsx,tsx,mdx,css}',
         './app/**/*.{js,ts,jsx,tsx,mdx,css}',
+        './features/**/*.{js,ts,jsx,tsx,mdx,css}',
+        './content/**/*.mdx',
     ],
     darkMode: 'class',
     theme: {
@@ -117,11 +119,18 @@ const config: Config = {
         extend: {
             boxShadow: {
                 'default': 'var(--my-shadow-default)',
+                'elevated': 'var(--shadow-elevated)',
+                'glow': 'var(--shadow-glow)',
+            },
+            backgroundImage: {
+                'glow-accent': 'var(--gradient-glow-accent)',
             },
             colors: {
                 'surface-page': 'var(--color-surface-page)',
                 'surface-card': 'var(--color-surface-card)',
                 'surface-muted': 'var(--color-surface-muted)',
+                'surface-raised': 'var(--color-surface-raised)',
+                'success': 'var(--color-success)',
                 'menu-bg': 'var(--color-menu-bg)',
                 'menu-text': 'var(--color-menu-text)',
                 'timeline-bg': 'var(--color-timeline-bg)',

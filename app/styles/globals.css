@@ -1,47 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Token source of truth is app/styles/theme.css (imported before this file).
+ * The legacy names below are ALIASES onto those semantic tokens so every
+ * pre-V2 rule (and module CSS) follows the .dark class toggle - never
+ * redefine palette values here.
+ */
 :root {
-  /* Pantone Colors Test */
-  --color-mocha: oklch(60.74% 0.054 47.17);
-  --color-mocha-light: oklch(94.1% 0.019 46.81);
-  --color-pantone-gray: oklch(90.16% 0.01 252.82);
-  --color-pantone-olive: oklch(40.88% 0.037 118.04);
-  --color-pantone-accent-1: oklch(54.33% 0.138 35.52);
-  --color-pantone-accent-2: oklch(48.44% 0.114 44.08);
-  --bg-000: 60 2.1% 18.4%;
-  --bg-100: 60 2.7% 14.5%;
+  /* Legacy color aliases -> semantic tokens */
+  --color-text: var(--color-text-default);
+  --color-text-light: var(--color-text-muted);
+  --color-background: var(--color-surface-page);
+  --color-surface: var(--color-surface-muted);
+  --color-border: var(--color-border-default);
+  --color-primary-dark: var(--color-accent-primary);
 
-  /* Colors */
-  --color-primary: oklch(25.075% 0.0251 261.091);
-  --color-text: oklch(25.075% 0.0251 261.091);
-  --color-text-light: oklch(58% 0.03 260);
-  --color-background: oklch(100% 0 0);
-  --color-surface: oklch(90.16% 0.01 252.82);
-  --color-border: oklch(76.973% 0.00313 264.73);
-
-  --color-accent: oklch(0.646 0.222 41.116);
+  --color-accent: var(--color-accent-primary);
   --color-accent-blue: rgb(51, 140, 171);
   --color-accent-gold: rgb(236, 154, 29);
   --color-accent-green: rgb(97, 199, 101);
   --color-accent-red: rgb(234, 75, 76);
-  /* --color-accent-red: rgb(var(--category-rgb, 255, 151, 1)); */
-
-  /* Fluid Type Scale */
-  --font-size-step--2: clamp(0.5rem, 0.8665rem + -0.4886vw, 0.7688rem);
-  --font-size-step--1: clamp(0.7075rem, 0.8609rem + -0.2045vw, 0.82rem);
-  --font-size-step-0: clamp(0.875rem, 0.8295rem + 0.2273vw, 1rem);
-  --font-size-step-1: clamp(0.9338rem, 0.7592rem + 0.8727vw, 1.4138rem);
-  --font-size-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
-  --font-size-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
-  --font-size-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
-  --font-size-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 5.6525rem);
+  --color-pantone-accent-1: var(--color-accent-primary);
+  --color-pantone-olive: var(--color-text-inverted);
 
   /* Typography */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono:
-    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
 
-  /* Fluid Spacing */
+  /* Fluid Spacing (legacy names; theme.css carries --my-spacing-*) */
   --space-xs: calc(var(--font-size-step-0) * 0.5);
   --space-sm: calc(var(--font-size-step-0) * 0.75);
   --space-md: calc(var(--font-size-step-0) * 1);
@@ -51,19 +39,6 @@
   --space-3xl: calc(var(--font-size-step-0) * 3); /* Max 48px */
   --space-4xl: calc(var(--font-size-step-0) * 3.5); /* Max 56px */
   --space-5xl: calc(var(--font-size-step-2) * 4); /* Max 64px */
-
-  /* Line Heights */
-  --my-line-height-tight: 1.1;
-  --my-line-height-normal: 1.5;
-  --my-line-height-base: var(--my-line-height-normal);
-  --my-line-height-heading: var(--my-line-height-tight);
-
-  /* Z-Indexes */
-  --my-z-index-background: -1;
-  --my-z-index-content: 1;
-  --my-z-index-header: 50;
-  --my-z-index-menu: 60;
-  --my-z-index-loader: 9999;
 
   /* Layout */
   --container-sm: 640px;
@@ -80,18 +55,6 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 350ms ease;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text: var(--color-pantone-gray);
-    --color-text-light: oklch(67.042% 0.02325 259.239);
-    --color-background: hsl(var(--bg-100) / 1);
-    --color-surface: hsl(var(--bg-000) / 1);
-    --color-border: oklch(90.16% 0.01 252.82);
-    --color-primary: oklch(98.8% 0.007 260);
-    --color-primary-dark: oklch(20.38% 0.042 135.52);
-  }
 }
 
 *,
@@ -125,6 +88,16 @@ html {
 }
 
 body {
+  /*
+   * Font aliases resolve HERE (not :root) on purpose: next/font/local defines
+   * --font-mono / --font-mono-argon via classes on <body>, so :root-level
+   * aliases would resolve before those exist. theme.css's literal family
+   * names ("MonaspaceNeon") never match next/font's hashed families.
+   */
+  --font-mona: var(--font-mono);
+  --font-xenon: var(--font-mono-argon);
+  --font-geist-mono: var(--font-mono);
+
   font-family: var(--font-mono);
   color: var(--color-text);
   background-color: var(--color-background);
@@ -135,7 +108,6 @@ body {
   text-rendering: optimizeSpeed;
   overscroll-behavior: none;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
   font-feature-settings:
     "kern" on,
     "liga" on;
