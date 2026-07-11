@@ -1,0 +1,160 @@
+/* components/hero-pipeline/AgentPipeline.module.css */
+
+.container {
+  width: 100%;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Aspect ratios pinned per layout: zero CLS while fonts/JS arrive. */
+.desktopOnly {
+  aspect-ratio: 760 / 440;
+  display: none;
+}
+
+.mobileOnly {
+  aspect-ratio: 360 / 600;
+  display: block;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .desktopOnly {
+    display: block;
+  }
+  .mobileOnly {
+    display: none;
+  }
+}
+
+/* --- Edges --- */
+
+.edge {
+  fill: none;
+  stroke: var(--pipeline-edge);
+  stroke-width: 1.5;
+}
+
+.edgeEscalation {
+  fill: none;
+  stroke: var(--pipeline-escalation);
+  stroke-width: 1.5;
+  opacity: 0.75;
+}
+
+/* --- Nodes --- */
+
+.nodeDefault,
+.nodeAgent,
+.nodeGuard,
+.nodeTool,
+.nodeHuman {
+  fill: var(--pipeline-node-fill);
+  stroke: var(--pipeline-node-stroke);
+  stroke-width: 1.5;
+}
+
+.nodeGuard {
+  stroke: var(--color-accent-primary);
+}
+
+.nodeAgent {
+  stroke: var(--color-accent-secondary);
+  filter: drop-shadow(0 0 14px var(--color-accent-glow));
+}
+
+.nodeTool {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-subtle);
+}
+
+.nodeHuman {
+  stroke: var(--color-success);
+}
+
+.nodeLabel {
+  fill: var(--color-text-default);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+[data-node="tool"] .nodeLabel {
+  font-size: 11px;
+  font-weight: 500;
+  fill: var(--color-text-muted);
+}
+
+.nodeSublabel {
+  fill: var(--color-text-muted);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+/* --- Status chips (transient; hidden unless the animation shows them) --- */
+
+.chip {
+  opacity: 0;
+}
+
+.chipSuccess {
+  fill: color-mix(in oklab, var(--color-success) 14%, transparent);
+  stroke: var(--color-success);
+  stroke-width: 1;
+}
+
+.chipDanger {
+  fill: color-mix(in oklab, var(--pipeline-escalation) 14%, transparent);
+  stroke: var(--pipeline-escalation);
+  stroke-width: 1;
+}
+
+.chipTextSuccess {
+  fill: var(--color-success);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chipTextDanger {
+  fill: var(--pipeline-escalation);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* --- Terminal --- */
+
+.terminal {
+  fill: var(--color-code-bg);
+  stroke: var(--color-border-subtle);
+  stroke-width: 1;
+}
+
+.terminalText {
+  fill: var(--color-code-text);
+  font-size: 11px;
+}
+
+.terminalPrompt {
+  fill: var(--color-accent-primary);
+  font-weight: 700;
+}
+
+/* --- Pulses (hidden until the loop drives them) --- */
+
+.pulse {
+  fill: var(--pipeline-pulse);
+  filter: drop-shadow(0 0 6px var(--pipeline-pulse));
+  opacity: 0;
+}
+
+.pulseEscalation {
+  fill: var(--pipeline-escalation);
+  filter: drop-shadow(0 0 6px var(--pipeline-escalation));
+  opacity: 0;
+}

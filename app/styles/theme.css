@@ -161,12 +161,12 @@
   /* V2 Depth Layer */
   --color-surface-raised: oklch(97% 0.008 260);
   --color-success: #16a34a;
-  --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 22%, transparent);
+  --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 14%, transparent);
   /* --glow-x/--glow-y are runtime knobs: cursor-tracking card glows + scroll-linked section glow */
   --gradient-glow-accent: radial-gradient(
-    600px circle at var(--glow-x, 50%) var(--glow-y, 20%),
+    640px circle at var(--glow-x, 50%) var(--glow-y, 20%),
     var(--color-accent-glow),
-    transparent 70%
+    transparent 72%
   );
   --shadow-elevated: 0 1px 2px rgba(var(--my-shadow-base-rgb), 0.06),
     0 8px 24px rgba(var(--my-shadow-base-rgb), 0.1),
@@ -256,8 +256,8 @@
   /* V2 Depth Layer (Dark) */
   --color-surface-raised: oklch(16% 0.018 260);
   --color-success: #4ade80;
-  --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 28%, transparent);
-  --color-line-grid: oklch(100% 0 0 / 0.06);
+  --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 17%, transparent);
+  --color-line-grid: oklch(100% 0 0 / 0.05);
 
   /* Agent Pipeline (Dark) */
   --pipeline-edge: oklch(70% 0.01 260 / 0.4);

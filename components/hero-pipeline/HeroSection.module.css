@@ -1,0 +1,165 @@
+/* components/hero-pipeline/HeroSection.module.css */
+
+.hero {
+  position: relative;
+  min-height: calc(100dvh - var(--my-nav-height));
+  display: flex;
+  align-items: center;
+  padding: calc(var(--my-nav-height) + var(--my-spacing-lg)) var(--my-spacing-lg)
+    var(--my-spacing-2xl);
+  overflow: hidden;
+}
+
+/* Faint engineering-grid backdrop with a soft accent glow, faded at edges. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  --glow-x: 32%;
+  --glow-y: 4%;
+  background-image:
+    var(--gradient-glow-accent),
+    linear-gradient(var(--color-line-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line-grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    48px 48px,
+    48px 48px;
+  mask-image: radial-gradient(
+    ellipse 110% 95% at 50% 35%,
+    black 45%,
+    transparent 98%
+  );
+}
+
+/*
+ * Single column on purpose: the (default) layout is a centered ~790px
+ * content column between side rails, so a two-column hero would starve
+ * both halves. Statement first, diagram below.
+ */
+.inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-2xl);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-lg);
+}
+
+.kicker {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin: 0;
+}
+
+.headline {
+  font-size: var(--font-size-step-4);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+  color: var(--color-text-default);
+  margin: 0;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.sub {
+  font-size: var(--font-size-step-1);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 52ch;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md) var(--my-spacing-xl);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statValue {
+  font-size: var(--font-size-step-2);
+  font-weight: 700;
+  color: var(--color-text-default);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md);
+  align-items: center;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  background: var(--color-accent-primary);
+  color: oklch(15% 0.02 60);
+  font-weight: 600;
+  font-size: var(--font-size-step-0);
+  text-decoration: none;
+  box-shadow: var(--shadow-glow);
+  transition:
+    transform 0.25s var(--my-ease-out-3),
+    box-shadow 0.25s var(--my-ease-out-3);
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  color: oklch(15% 0.02 60);
+  text-decoration: none;
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-default);
+  font-weight: 500;
+  font-size: var(--font-size-step-0);
+  text-decoration: none;
+  transition:
+    border-color 0.25s var(--my-ease-out-3),
+    color 0.25s var(--my-ease-out-3);
+}
+
+.ctaSecondary:hover {
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+.visual {
+  min-width: 0;
+  max-width: 860px;
+}
