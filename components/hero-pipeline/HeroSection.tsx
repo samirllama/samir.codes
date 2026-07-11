@@ -41,7 +41,7 @@ export const HeroSection = () => (
         </ul>
         <div className={styles.ctas} data-hero-ctas>
           <TrackedLink
-            href="/#projects"
+            href="/#work"
             location="Hero CTA"
             className={styles.ctaPrimary}
           >

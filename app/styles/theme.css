@@ -99,17 +99,19 @@
   --my-z-index-menu: 60;
   --my-z-index-loader: 9999;
 
-  /* Semantic Color Palette (Light Theme) */
-  --color-surface-page: oklch(98.8% 0.007 260);
+  /* Semantic Color Palette (Light Theme)
+     Warm paper neutrals (hue ~65-85) mirror the dark theme's charcoal so the
+     theme toggle changes lightness, never temperature. */
+  --color-surface-page: oklch(98.6% 0.006 85);
   --color-surface-card: oklch(100% 0 0);
-  --color-surface-muted: oklch(94% 0.01 260);
-  --color-text-default: oklch(12% 0.015 260);
-  --color-text-muted: oklch(58% 0.03 260);
+  --color-surface-muted: oklch(94% 0.009 80);
+  --color-text-default: oklch(13% 0.008 65);
+  --color-text-muted: oklch(52% 0.015 70);
   --color-text-inverted: oklch(100% 0 0);
-  --color-border-default: oklch(90% 0.01 260);
-  --color-border-subtle: oklch(95% 0.005 260);
-  --color-primary: oklch(12% 0.015 260);
-  --color-secondary: oklch(58% 0.03 260);
+  --color-border-default: oklch(90% 0.009 80);
+  --color-border-subtle: oklch(95% 0.006 80);
+  --color-primary: oklch(13% 0.008 65);
+  --color-secondary: oklch(52% 0.015 70);
   --color-accent-primary: #f97316;
   --color-accent-secondary: #fb923c;
   --sc-red-1: #ff4d4d;
@@ -159,7 +161,7 @@
   --glass-reflex-dark: 0;
 
   /* V2 Depth Layer */
-  --color-surface-raised: oklch(97% 0.008 260);
+  --color-surface-raised: oklch(97% 0.007 80);
   --color-success: #16a34a;
   --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 14%, transparent);
   /* --glow-x/--glow-y are runtime knobs: cursor-tracking card glows + scroll-linked section glow */
@@ -177,7 +179,7 @@
   /* Agent Pipeline (hero SVG recolors via these alone) */
   --pipeline-node-fill: var(--color-surface-card);
   --pipeline-node-stroke: var(--color-border-default);
-  --pipeline-edge: oklch(58% 0.03 260 / 0.55);
+  --pipeline-edge: oklch(55% 0.02 70 / 0.55);
   --pipeline-pulse: var(--color-accent-primary);
   --pipeline-escalation: var(--color-danger);
   --pipeline-approved: var(--color-success);
@@ -217,29 +219,31 @@
 
 /* Dark Theme Overrides */
 .dark {
-  --color-surface-page: oklch(8% 0.02 260);
-  --color-surface-card: oklch(12% 0.015 260);
-  --color-surface-muted: #161b22;
-  --color-text-default: oklch(98.8% 0.007 260);
-  --color-text-muted: oklch(70% 0.01 260);
-  --color-text-inverted: oklch(12% 0.015 260);
-  --color-border-default: #30363d;
-  --color-border-subtle: #21262d;
-  --color-primary: oklch(98.8% 0.007 260);
-  --color-secondary: oklch(70% 0.01 260);
+  /* Warm-charcoal neutral ramp (hue ~65-80): the dark theme shares the
+     accent's temperature - amber-phosphor terminal, not blue-slate. */
+  --color-surface-page: oklch(8% 0.008 65);
+  --color-surface-card: oklch(12% 0.009 65);
+  --color-surface-muted: oklch(19% 0.01 65);
+  --color-text-default: oklch(98.5% 0.005 80);
+  --color-text-muted: oklch(71% 0.012 75);
+  --color-text-inverted: oklch(12% 0.009 65);
+  --color-border-default: oklch(27% 0.012 65);
+  --color-border-subtle: oklch(21% 0.01 65);
+  --color-primary: oklch(98.5% 0.005 80);
+  --color-secondary: oklch(71% 0.012 75);
   --color-accent-primary: #f97316;
   --color-accent-secondary: #fb923c;
   --color-danger: #f87171;
-  --color-code-bg: #1e293b;
+  --color-code-bg: oklch(17% 0.01 65);
   --color-code-text: #f3f4f6;
-  --color-highlight: #1e293b;
+  --color-highlight: oklch(17% 0.01 65);
   --color-menu-bg: var(--my-oklch-white);
   --color-menu-text: var(--my-oklch-black);
   --color-timeline-bg: var(--color-surface-card);
   --color-timeline-border: var(--color-text-default);
   --color-timeline-dot: var(--color-text-default);
   --sc-surface-header: var(--color-surface-page);
-  --gray-lightest: #21262d;
+  --gray-lightest: oklch(21% 0.01 65);
 
   /* RGB versions for alpha transparency */
   --color-primary-rgb: 96, 165, 250;
@@ -254,13 +258,13 @@
   --glass-reflex-dark: 1;
 
   /* V2 Depth Layer (Dark) */
-  --color-surface-raised: oklch(16% 0.018 260);
+  --color-surface-raised: oklch(16% 0.011 65);
   --color-success: #4ade80;
   --color-accent-glow: color-mix(in oklab, var(--color-accent-primary) 17%, transparent);
   --color-line-grid: oklch(100% 0 0 / 0.05);
 
   /* Agent Pipeline (Dark) */
-  --pipeline-edge: oklch(70% 0.01 260 / 0.4);
+  --pipeline-edge: oklch(71% 0.012 75 / 0.4);
 
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);

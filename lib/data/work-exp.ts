@@ -7,7 +7,14 @@ export const experience: ExperienceEntry[] = [
     title: "AI/ML Engineer",
     dateRange: "Feb 2025 — Present",
     description:
-      "AI engineer on an inetrnal serverless Agentic system that automated freight quoting and customer communication for a logistics operator: a large language model (LLM) parsed inbound shipping requests, deterministic tested code computed every quote, a retrieval-augmented generation (RAG) agent cross-checked the quote against local compliance documentation, the LLM drafted the customer email, and a human reviewer approved every output through a human-in-the-loop (HITL) console before it was sent.",
+      "AI engineer on an internal serverless agentic system that automated freight quoting and customer communication for a logistics operator: a large language model (LLM) parsed inbound shipping requests, deterministic tested code computed every quote, a retrieval-augmented generation (RAG) agent cross-checked the quote against local compliance documentation, the LLM drafted the customer email, and a human reviewer approved every output through a human-in-the-loop (HITL) console before it was sent.",
+    highlight: "4 production agents",
+    caseStudySlug: "atlas-freight-agents",
+    achievements: [
+      "4-agent freight-quoting pipeline on Bedrock",
+      "RAG compliance cross-checks before any quote ships",
+      "Human approval console - nothing sends itself",
+    ],
     techTags: [
       "AWS Lambda",
       "DynamoDB",
@@ -21,7 +28,7 @@ export const experience: ExperienceEntry[] = [
     ],
     projectScreenshotUrl: "https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/atlas.webp",
     projectUrl: "",
-    companyLogoUrl: "https://logo.clearbit.com/bp.com",
+    companyLogoUrl: null,
   },
   {
     id: "bp-sse",
@@ -30,6 +37,13 @@ export const experience: ExperienceEntry[] = [
     dateRange: "Jun 2022 — Jan 2025",
     description:
       "At bp, I developed and maintained a supply chain platform that automated data processing and transactional logic, directly resulting in $5M in annual operational efficiencies. My work focused on leveraging AWS microservices to drive cost savings and empower data-driven decision-making.",
+    highlight: "$5M/yr in efficiencies",
+    caseStudySlug: "bp-supply-chain",
+    achievements: [
+      "Supply-chain platform automating transactional data",
+      "AWS microservices driving cost savings at scale",
+      "D3 analytics dashboards for ops decisions",
+    ],
     techTags: [
       "Python",
       "TypeScript",
@@ -85,7 +99,7 @@ export const experience: ExperienceEntry[] = [
     techTags: ["TypeScript", "Ruby", "Web Performance", "React", "SEO"],
     projectScreenshotUrl:
       "https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/expedia-img.webp",
-    projectUrl: "https://www.wellsfargo.com/",
+    projectUrl: "https://www.expediagroup.com/",
     companyLogoUrl: "https://logo.clearbit.com/expediagroup.com",
   },
   {

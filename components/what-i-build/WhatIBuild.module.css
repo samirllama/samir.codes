@@ -1,4 +1,4 @@
-/* components/more-projects/MoreProjects.module.css */
+/* components/what-i-build/WhatIBuild.module.css */
 
 .section {
   padding-block: var(--my-spacing-2xl);
@@ -20,7 +20,7 @@
 }
 
 .heading {
-  font-size: var(--font-size-step-2);
+  font-size: var(--font-size-step-3);
   line-height: 1.1;
   letter-spacing: -0.015em;
   font-weight: 650;
@@ -28,15 +28,28 @@
   margin: 0;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--my-spacing-md);
+.lede {
+  font-size: var(--font-size-step-1);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--my-spacing-md);
+  max-width: 56ch;
 }
 
-@media (min-width: 640px) {
+/* --- Capability cards --------------------------------------------------- */
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-lg);
+}
+
+@media (min-width: 768px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -44,72 +57,49 @@
   display: flex;
   flex-direction: column;
   gap: var(--my-spacing-sm);
-  padding: var(--my-spacing-lg);
-  border-radius: 14px;
+  padding: var(--my-spacing-xl);
+  border-radius: 16px;
   border: 1px solid var(--color-border-subtle);
   background: var(--color-surface-raised);
-  transition: border-color 0.25s var(--my-ease-out-3);
+  transition:
+    border-color 0.25s var(--my-ease-out-3),
+    transform 0.25s var(--my-ease-out-3);
 }
 
 .card:hover {
   border-color: var(--color-border-default);
+  transform: translateY(-2px);
 }
 
-.title {
+.cardTitle {
   font-size: var(--font-size-step-1);
-  font-weight: 650;
   line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -0.01em;
   color: var(--color-text-default);
   margin: 0;
+  text-wrap: balance;
 }
 
-.description {
+.cardBody {
   font-size: var(--font-size-step-0);
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--color-text-muted);
   margin: 0;
 }
 
-.tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--my-spacing-xs);
-}
-
-.techTag {
-  font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
-  padding: 0.15rem 0.5rem;
-  letter-spacing: 0.03em;
-}
-
-.links {
-  display: flex;
-  gap: var(--my-spacing-md);
+/* Provenance line: the terminal-mono caption tying the claim to a system. */
+.seenIn {
   margin-top: auto;
   padding-top: var(--my-spacing-xs);
-}
-
-.link {
   font-family: var(--font-xenon), monospace;
   font-size: var(--font-size-step--1);
   letter-spacing: 0.06em;
   color: var(--color-accent-primary);
-  text-decoration: none;
-  transition: color 0.2s var(--my-ease-out-3);
-}
-
-.link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card,
-  .link {
+  .card {
     transition: none;
   }
 }

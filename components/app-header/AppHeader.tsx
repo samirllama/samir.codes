@@ -10,11 +10,11 @@ const AppHeader = () => {
   const pathname = usePathname();
 
   const navItems = [
-    // { href: "/", label: "Home" },
-    // { href: "/blog", label: "Blog" },
-    { href: "/#about", label: "About" },
-    { href: "/#experience", label: "Work" },
-    { href: "/#projects", label: "Projects" },
+    // The left side rail is the desktop section nav; this header nav is the
+    // only nav on mobile (rails are display:none there), so it stays to two
+    // items that fit 375px without clipping.
+    { href: "/#work", label: "Work" },
+    { href: "/#experience", label: "Experience" },
   ];
 
   return (

@@ -1,0 +1,156 @@
+/* components/system-map/SystemMap.module.css */
+
+.section {
+  padding-block: var(--my-spacing-2xl);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-lg);
+}
+
+.kicker {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin: 0;
+}
+
+.heading {
+  font-size: var(--font-size-step-3);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 650;
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.lede {
+  font-size: var(--font-size-step-1);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--my-spacing-md);
+  max-width: 56ch;
+}
+
+/* --- Layer stack -------------------------------------------------------- */
+
+.stack {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-md);
+}
+
+/* Spine: language at the accent top, determinism at the muted bottom. Sits in
+   the left gutter so the opaque layer cards never paint over it. */
+.stack::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 1.6rem;
+  bottom: 1.6rem;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-accent-primary),
+    var(--color-border-default)
+  );
+  opacity: 0.55;
+}
+
+.layer {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-sm);
+  padding: var(--my-spacing-lg);
+  border-radius: 14px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-raised);
+}
+
+@media (min-width: 720px) {
+  .layer {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: var(--my-spacing-xl);
+    align-items: start;
+  }
+}
+
+/* Diamond node riding the spine, in the HUD language of the other sections. */
+.node {
+  position: absolute;
+  left: -1.55rem;
+  top: 1.55rem;
+  width: 11px;
+  height: 11px;
+  transform: rotate(45deg);
+  background: var(--color-surface-page);
+  border: 2px solid var(--color-accent-primary);
+  box-shadow: 0 0 8px var(--color-accent-glow);
+}
+
+.layerHead {
+  display: flex;
+  align-items: baseline;
+}
+
+.layerLabel {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step-0);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-default);
+}
+
+.layerBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-md);
+}
+
+.layerRole {
+  font-size: var(--font-size-step-0);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 60ch;
+}
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-sm);
+}
+
+.tech {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-card);
+}
+
+.techName {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.02em;
+  color: var(--color-text-default);
+}
+
+.techProv {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--2);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}

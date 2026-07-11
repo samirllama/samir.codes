@@ -1,4 +1,4 @@
-/* components/case-studies/CaseStudies.module.css */
+/* components/selected-work/SelectedWork.module.css */
 
 .section {
   padding-block: var(--my-spacing-2xl);
@@ -57,7 +57,8 @@
 /* --- Cards ------------------------------------------------------------- */
 
 .flagshipCard,
-.professionalCard {
+.professionalCard,
+.sideCard {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -169,7 +170,9 @@
 .flagshipCard:hover .bracket,
 .flagshipCard:focus-visible .bracket,
 .professionalCard:hover .bracket,
-.professionalCard:focus-visible .bracket {
+.professionalCard:focus-visible .bracket,
+.sideCard:hover .bracket,
+.sideCard:focus-within .bracket {
   transform: translate(0, 0);
   opacity: 1;
 }
@@ -233,7 +236,9 @@
 .flagshipCard:hover .readout,
 .flagshipCard:focus-visible .readout,
 .professionalCard:hover .readout,
-.professionalCard:focus-visible .readout {
+.professionalCard:focus-visible .readout,
+.sideCard:hover .readout,
+.sideCard:focus-within .readout {
   opacity: 1;
   transform: translateY(0);
 }
@@ -318,10 +323,105 @@
   margin-top: auto;
 }
 
+/* --- Side quests (compact tier) ----------------------------------------- */
+
+.sideQuests {
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-sm);
+  margin-top: var(--my-spacing-md);
+}
+
+.subheading {
+  font-size: var(--font-size-step-2);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-weight: 650;
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.subLede {
+  font-size: var(--font-size-step-0);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--my-spacing-sm);
+}
+
+.sideGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-md);
+}
+
+@media (min-width: 768px) {
+  .sideGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sideCard {
+  gap: var(--my-spacing-sm);
+  padding: var(--my-spacing-lg);
+  border-radius: 14px;
+}
+
+.sideCard:hover,
+.sideCard:focus-within {
+  border-color: var(--color-border-default);
+}
+
+.sideTop {
+  display: flex;
+  align-items: baseline;
+  gap: var(--my-spacing-md);
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+}
+
+.sideTitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: var(--font-size-step-1);
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.sideDescription {
+  font-size: var(--font-size-step-0);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.sideLinks {
+  display: flex;
+  gap: var(--my-spacing-md);
+  margin-top: auto;
+  padding-top: var(--my-spacing-xs);
+}
+
+.sideLink {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.06em;
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: color 0.2s var(--my-ease-out-3);
+}
+
+.sideLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 /* Motion parity: hover states still appear, instantly, with no travel. */
 @media (prefers-reduced-motion: reduce) {
   .flagshipCard,
   .professionalCard,
+  .sideCard,
+  .sideLink,
   .bracket,
   .readout,
   .glow {

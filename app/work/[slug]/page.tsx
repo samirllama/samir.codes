@@ -69,7 +69,7 @@ export default async function WorkStudyPage({ params }: WorkPageProps) {
     <div className={styles.container}>
       <div className={styles.nav}>
         <TrackedLink
-          href="/#projects"
+          href="/#work"
           location="Work Study Header"
           aria-label="Back to the case studies section"
         >

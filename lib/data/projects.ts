@@ -1,6 +1,7 @@
 // lib/data/projects.ts
-// The compact "more projects" grid: real side projects only (the seeded
-// template entries died with the old Projects section).
+// The "side quests" tier of the merged Selected work section: real side
+// projects only (the seeded template entries died with the old Projects
+// section; Atlas Relocations was dropped as off-message in the restructure).
 
 export interface SideProject {
   title: string;
@@ -17,14 +18,6 @@ export const sideProjects: SideProject[] = [
       "High-performance dashboard for visualizing historical and live market data.",
     tech: ["TypeScript", "React", "Vite", "PostgreSQL", "Polygon.io", "Redis"],
     repoUrl: "https://github.com/samirllama/quasar",
-  },
-  {
-    title: "Atlas Relocations",
-    description:
-      "Marketing site for a premier relocation and logistics company, built on Next.js and Contentful.",
-    tech: ["Next.js", "TypeScript", "Contentful", "PostgreSQL", "Tailwind CSS"],
-    repoUrl: "https://github.com/samirllama/atlas-relocations-nepal",
-    demoUrl: "https://atlasrelocations.com/",
   },
   {
     title: "Bazaar, e-commerce platform",
