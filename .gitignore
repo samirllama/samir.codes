@@ -54,3 +54,6 @@ notes*
 AGENTS.md
 
 .antigravitycli/
+
+# Claude session checkpoint (machine-local)
+CLAUDE.local.md
