@@ -1,7 +1,8 @@
 import { HeroSection } from "@/components/hero-pipeline/HeroSection";
 import About from "@/components/about/About";
-import Projects from "@/components/projects/Projects";
 import WorkTimeline from "@/components/work-timeline/WorkTimeline";
+import { CaseStudies } from "@/components/case-studies/CaseStudies";
+import { MoreProjects } from "@/components/more-projects/MoreProjects";
 import styles from "./HomePage.module.css";
 
 export default function HomePage() {
@@ -12,7 +13,8 @@ export default function HomePage() {
       <section className={styles.section} id="experience">
         <WorkTimeline />
       </section>
-      <Projects />
+      <CaseStudies />
+      <MoreProjects />
     </>
   );
 }

@@ -1,0 +1,220 @@
+/* app/work/[slug]/work.module.css */
+/* Reading-room layout with V2 tokens: the study header is the only "instrument
+   panel" moment; the body stays quiet for reading. */
+
+.container {
+  z-index: 1;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  position: relative;
+}
+
+.nav {
+  padding: 4rem 0 2rem;
+}
+
+.nav > a {
+  view-transition-name: site-logo;
+  white-space: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  max-inline-size: 450px;
+  display: flex;
+}
+
+.logo {
+  aspect-ratio: 905 / 145;
+  background-repeat: no-repeat;
+  inline-size: 300px;
+  display: inline-block;
+}
+
+.logoSuffix {
+  font-size: 1.75rem;
+  font-weight: 700;
+  position: relative;
+}
+
+.study {
+  min-height: 100vh;
+  max-width: 75ch;
+  margin: 0 auto;
+  padding: var(--my-spacing-xl) 0 var(--my-spacing-2xl);
+  font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+}
+
+.header {
+  margin-bottom: var(--my-spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-lg);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md);
+  margin: 0;
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.metaItem::before {
+  content: "·";
+  margin-right: var(--my-spacing-md);
+  opacity: 0.6;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-default);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.badge[data-status="live"] {
+  color: var(--color-success);
+  border-color: color-mix(in oklab, var(--color-success) 55%, transparent);
+  background: color-mix(in oklab, var(--color-success) 10%, transparent);
+}
+
+.badge[data-status="production"] {
+  color: var(--color-accent-primary);
+  border-color: color-mix(in oklab, var(--color-accent-primary) 55%, transparent);
+  background: color-mix(in oklab, var(--color-accent-primary) 10%, transparent);
+}
+
+.badge[data-status="nda"] {
+  color: var(--color-text-muted);
+  border-color: var(--color-border-default);
+  background: var(--color-surface-muted);
+}
+
+.title {
+  font-size: var(--font-size-step-3);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 650;
+  color: var(--color-text-default);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.summary {
+  font-size: var(--font-size-step-1);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 58ch;
+}
+
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.metricItem {
+  display: inline-flex;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md);
+  align-items: center;
+}
+
+.linkPrimary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  background: var(--color-accent-primary);
+  color: oklch(15% 0.02 60);
+  font-weight: 600;
+  font-size: var(--font-size-step-0);
+  text-decoration: none;
+  box-shadow: var(--shadow-glow);
+  transition:
+    transform 0.25s var(--my-ease-out-3),
+    box-shadow 0.25s var(--my-ease-out-3);
+}
+
+.linkPrimary:hover {
+  transform: translateY(-2px);
+  color: oklch(15% 0.02 60);
+  text-decoration: none;
+}
+
+.linkPrimary:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.linkSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-default);
+  color: var(--color-text-default);
+  font-weight: 500;
+  font-size: var(--font-size-step-0);
+  text-decoration: none;
+  transition:
+    border-color 0.25s var(--my-ease-out-3),
+    color 0.25s var(--my-ease-out-3);
+}
+
+.linkSecondary:hover {
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-xs);
+}
+
+.stackTag {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 0.25rem 0.6rem;
+  letter-spacing: 0.03em;
+}
+
+.content {
+  max-width: 70ch;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding-top: 2.5rem;
+  }
+
+  .logo {
+    inline-size: 210px;
+  }
+
+  .logoSuffix {
+    font-size: 1.25rem;
+  }
+}

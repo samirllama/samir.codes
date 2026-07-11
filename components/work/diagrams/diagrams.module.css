@@ -1,0 +1,215 @@
+/* components/work/diagrams/diagrams.module.css */
+/* Shared vocabulary for the static case-study SVGs. Same token set as the
+   hero pipeline, so diagrams recolor with the theme via CSS vars alone. */
+
+.figure {
+  margin: var(--my-spacing-xl) 0;
+}
+
+.caption {
+  margin-top: var(--my-spacing-sm);
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 14px;
+  background:
+    linear-gradient(var(--color-line-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  padding: 8px;
+}
+
+/* Aspect ratios pinned per diagram: zero CLS while fonts arrive. */
+.tradeAgent {
+  aspect-ratio: 720 / 360;
+}
+
+.travel {
+  aspect-ratio: 720 / 340;
+}
+
+/* --- Containers (service boundaries) --- */
+
+.zone {
+  fill: transparent;
+  stroke: var(--color-border-default);
+  stroke-width: 1;
+  stroke-dasharray: 5 4;
+}
+
+.zoneSolid {
+  fill: color-mix(in oklab, var(--color-surface-card) 55%, transparent);
+  stroke: var(--color-border-default);
+  stroke-width: 1.5;
+}
+
+.zoneLabel {
+  fill: var(--color-text-default);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.zoneSub {
+  fill: var(--color-text-muted);
+  font-size: 9.5px;
+  letter-spacing: 0.03em;
+}
+
+/* --- Nodes --- */
+
+.node,
+.nodeAccent,
+.nodeGlow,
+.nodeSuccess {
+  fill: var(--pipeline-node-fill);
+  stroke: var(--pipeline-node-stroke);
+  stroke-width: 1.5;
+}
+
+.nodeAccent {
+  stroke: var(--color-accent-primary);
+}
+
+.nodeGlow {
+  stroke: var(--color-accent-secondary);
+  filter: drop-shadow(0 0 14px var(--color-accent-glow));
+}
+
+.nodeSuccess {
+  stroke: var(--color-success);
+}
+
+.nodeChip {
+  fill: var(--color-surface-muted);
+  stroke: var(--color-border-subtle);
+  stroke-width: 1;
+}
+
+.nodeDanger {
+  fill: color-mix(in oklab, var(--pipeline-escalation) 12%, transparent);
+  stroke: var(--pipeline-escalation);
+  stroke-width: 1;
+}
+
+.label {
+  fill: var(--color-text-default);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.labelChip {
+  fill: var(--color-text-default);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.labelDanger {
+  fill: var(--pipeline-escalation);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.sublabel {
+  fill: var(--color-text-muted);
+  font-size: 9.5px;
+  letter-spacing: 0.03em;
+}
+
+.note {
+  fill: var(--color-text-muted);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+}
+
+/* --- Edges --- */
+
+.edge {
+  fill: none;
+  stroke: var(--pipeline-edge);
+  stroke-width: 1.5;
+}
+
+.edgeEscalation {
+  fill: none;
+  stroke: var(--pipeline-escalation);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  opacity: 0.8;
+}
+
+.edgeLabel {
+  fill: var(--color-text-muted);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+}
+
+.edgeLabelDanger {
+  fill: var(--pipeline-escalation);
+  font-size: 9.5px;
+  letter-spacing: 0.02em;
+}
+
+.arrowFlow {
+  fill: var(--pipeline-edge);
+}
+
+.arrowDanger {
+  fill: var(--pipeline-escalation);
+}
+
+/* --- Audit floor + connectors (trade-agent) --- */
+
+.audit {
+  fill: var(--color-code-bg);
+  stroke: var(--color-border-subtle);
+  stroke-width: 1;
+}
+
+.auditText {
+  fill: var(--color-code-text);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+.dropline {
+  fill: none;
+  stroke: var(--pipeline-edge);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+  opacity: 0.7;
+}
+
+/* --- A2A seam (travel) --- */
+
+.seam {
+  fill: none;
+  stroke: var(--color-accent-primary);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.65;
+}
+
+.seamChip {
+  fill: color-mix(in oklab, var(--color-accent-primary) 14%, transparent);
+  stroke: var(--color-accent-primary);
+  stroke-width: 1;
+}
+
+.seamLabel {
+  fill: var(--color-accent-primary);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}

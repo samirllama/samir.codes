@@ -1,0 +1,67 @@
+---
+title: "Travel pre-trip approval: a deterministic core with an LLM shell"
+summary: "Two services in two languages - a Python ADK orchestrator and a Go pricing engine - joined by an A2A contract designed so no model can ever touch a number that matters."
+role: "Solo: design, build, deploy"
+timeline: "2026"
+status: "production"
+repoUrl: "https://github.com/yakyetilabs/travel-agent"
+relatedPost: "multi-agent-a2a"
+stack:
+  - "Python"
+  - "Go"
+  - "Google ADK"
+  - "A2A protocol"
+  - "Cloud Run"
+  - "IAP"
+  - "Workload Identity Federation"
+metrics:
+  - label: "numbers computed by an LLM"
+    value: "0"
+  - label: "services, independently deployed"
+    value: "2"
+  - label: "contract between them"
+    value: "1"
+order: 2
+featured: true
+---
+
+## The problem
+
+A person types a plain-English travel request; the business needs a policy-checked, auditable approval decision built on a real fare quote.
+The trap is obvious once you name it: a language model asked to produce a number will happily produce a plausible one.
+"Usually correct" is fine for a demo and unacceptable near money.
+
+So the design rule is absolute: the LLM turns messy language into a validated request, decides when to call a tool, and explains outcomes.
+Every number and every decision belongs to deterministic, tested code.
+
+<Diagram name="travel-pretrip-flow" caption="Two services, one contract: the model stays on the language side of the seam." />
+
+## Architecture
+
+The orchestrator is a Python workflow graph on Google's Agent Development Kit: intake collects the trip, fare prep translates it into the pricing contract, a policy agent checks the quote against corporate rules, and a finalizer assembles the decision record.
+Pricing lives in a separate Go service exposed as an agent over the A2A protocol, discovered at runtime from its agent card.
+
+The two services share no code - only the contract: a `FareQuoteRequest` in, a `FareQuote` out.
+That split buys real properties.
+The engine deploys and gets audited on its own cadence, runs with least-privilege IAM, and never sees a traveler: the contract carries derived numerics like distance and passenger counts, never names, emails, or even airport codes.
+Privacy is enforced by the shape of the data, which is what makes the engine's logs safe to keep.
+Shared enum vocabularies are duplicated on purpose, and tripwire tests on both sides fail CI the moment they drift.
+
+## Safeguards
+
+The decision I would defend in any review: removing an LLM from the output path.
+The engine originally had a formatter model transcribing the computed quote into the final response, and it passed every schema check - but a schema constrains the shape of an answer, not the digits.
+A hallucinated total can be perfectly schema-valid.
+The outbound path is now a model-free passthrough that re-emits the priced quote byte for byte, pinned by a test that decodes the served payload back to the exact struct the pricing function produced.
+
+Sequencing is a safeguard too.
+Policy runs after pricing, so the budget decision lands on the real quoted total instead of an estimate.
+And when the engine cannot produce a quote, the pipeline does not silently approve - it degrades to human review.
+
+Around the agents sits ordinary production discipline: eval sets pin each agent's tool trajectory and gate deploys, both services run private on Cloud Run behind short-lived identity tokens with IAP at the perimeter, and CI/CD is keyless via Workload Identity Federation.
+
+## Impact
+
+The travel domain was a vehicle.
+Swap in mortgages, insurance, or expense approvals and every property above still holds, because the guarantees come from the architecture, not the prompt.
+The orchestrator is open source, and the design story continues in the engineering log entry linked on this page.

@@ -1,0 +1,335 @@
+/* components/case-studies/CaseStudies.module.css */
+
+.section {
+  padding-block: var(--my-spacing-2xl);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-lg);
+}
+
+.kicker {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-primary);
+  margin: 0;
+}
+
+.heading {
+  font-size: var(--font-size-step-3);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  font-weight: 650;
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.lede {
+  font-size: var(--font-size-step-1);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--my-spacing-md);
+  max-width: 56ch;
+}
+
+.flagshipGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-lg);
+}
+
+.professionalGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--my-spacing-lg);
+}
+
+@media (min-width: 640px) {
+  .professionalGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Cards ------------------------------------------------------------- */
+
+.flagshipCard,
+.professionalCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--my-spacing-md);
+  padding: var(--my-spacing-xl);
+  border-radius: 16px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-raised);
+  text-decoration: none;
+  color: var(--color-text-default);
+  overflow: hidden;
+  transition:
+    border-color 0.25s var(--my-ease-out-3),
+    transform 0.25s var(--my-ease-out-3),
+    box-shadow 0.25s var(--my-ease-out-3);
+}
+
+.professionalCard {
+  padding: var(--my-spacing-lg);
+}
+
+.flagshipCard:hover,
+.flagshipCard:focus-visible,
+.professionalCard:hover,
+.professionalCard:focus-visible {
+  border-color: var(--color-border-default);
+  box-shadow: var(--shadow-elevated);
+  text-decoration: none;
+  color: var(--color-text-default);
+}
+
+/* Press feedback: the card answers the click like a physical control. */
+.flagshipCard:active,
+.professionalCard:active {
+  transform: scale(0.988);
+}
+
+.flagshipCard:focus-visible,
+.professionalCard:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 3px;
+}
+
+/* Glow hook: static accent wash for now; P5 drives --glow-x/--glow-y from
+   the cursor via gsap.quickSetter on this same element. */
+.glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--gradient-glow-accent);
+  transition: opacity 0.35s var(--my-ease-out-3);
+}
+
+.flagshipCard:hover .glow,
+.flagshipCard:focus-visible .glow {
+  opacity: 1;
+}
+
+/* --- Target-lock brackets ---------------------------------------------- */
+
+.bracket {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--color-accent-primary);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.28s cubic-bezier(0.3, 1.9, 0.5, 1),
+    opacity 0.16s var(--my-ease-out-3);
+}
+
+.bracketTl {
+  top: 9px;
+  left: 9px;
+  border-right: none;
+  border-bottom: none;
+  transform: translate(-11px, -11px);
+}
+
+.bracketTr {
+  top: 9px;
+  right: 9px;
+  border-left: none;
+  border-bottom: none;
+  transform: translate(11px, -11px);
+  transition-delay: 0.04s;
+}
+
+.bracketBl {
+  bottom: 9px;
+  left: 9px;
+  border-right: none;
+  border-top: none;
+  transform: translate(-11px, 11px);
+  transition-delay: 0.08s;
+}
+
+.bracketBr {
+  bottom: 9px;
+  right: 9px;
+  border-left: none;
+  border-top: none;
+  transform: translate(11px, 11px);
+  transition-delay: 0.12s;
+}
+
+.flagshipCard:hover .bracket,
+.flagshipCard:focus-visible .bracket,
+.professionalCard:hover .bracket,
+.professionalCard:focus-visible .bracket {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+/* --- Card content ------------------------------------------------------- */
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: var(--my-spacing-md);
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-default);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.badge[data-status="live"] {
+  color: var(--color-success);
+  border-color: color-mix(in oklab, var(--color-success) 55%, transparent);
+  background: color-mix(in oklab, var(--color-success) 10%, transparent);
+}
+
+.badge[data-status="production"] {
+  color: var(--color-accent-primary);
+  border-color: color-mix(in oklab, var(--color-accent-primary) 55%, transparent);
+  background: color-mix(in oklab, var(--color-accent-primary) 10%, transparent);
+}
+
+.badge[data-status="nda"] {
+  color: var(--color-text-muted);
+  border-color: var(--color-border-default);
+  background: var(--color-surface-muted);
+}
+
+.timeline {
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* HUD readout: appears on lock. Static for now; P5 scramble-decodes it. */
+.readout {
+  margin-left: auto;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 0.25s var(--my-ease-out-3) 0.1s,
+    transform 0.25s var(--my-ease-out-3) 0.1s;
+}
+
+.flagshipCard:hover .readout,
+.flagshipCard:focus-visible .readout,
+.professionalCard:hover .readout,
+.professionalCard:focus-visible .readout {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardTitle {
+  font-size: var(--font-size-step-2);
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.cardTitleSmall {
+  font-size: var(--font-size-step-1);
+  line-height: 1.25;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.cardSummary {
+  font-size: var(--font-size-step-0);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  max-width: 62ch;
+}
+
+.cardSummarySmall {
+  font-size: var(--font-size-step-0);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.cardMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-md) var(--my-spacing-xl);
+}
+
+.cardMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cardMetricValue {
+  font-size: var(--font-size-step-1);
+  font-weight: 700;
+  color: var(--color-text-default);
+  font-variant-numeric: tabular-nums;
+}
+
+.cardMetricLabel {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.cardStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--my-spacing-xs);
+}
+
+.stackTag {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 0.2rem 0.55rem;
+  letter-spacing: 0.03em;
+}
+
+.cardCta {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  letter-spacing: 0.06em;
+  color: var(--color-accent-primary);
+  margin-top: auto;
+}
+
+/* Motion parity: hover states still appear, instantly, with no travel. */
+@media (prefers-reduced-motion: reduce) {
+  .flagshipCard,
+  .professionalCard,
+  .bracket,
+  .readout,
+  .glow {
+    transition: none;
+  }
+
+  .flagshipCard:active,
+  .professionalCard:active {
+    transform: none;
+  }
+}

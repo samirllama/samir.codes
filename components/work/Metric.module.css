@@ -1,0 +1,31 @@
+/* components/work/Metric.module.css */
+
+/* span-based so a Metric is valid inside MDX paragraphs as well as lists */
+.metric {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.7rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-subtle);
+  background: color-mix(in oklab, var(--color-surface-raised) 78%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(var(--saturation));
+  backdrop-filter: blur(10px) saturate(var(--saturation));
+  box-shadow: var(--shadow-elevated);
+}
+
+.value {
+  font-size: var(--font-size-step-2);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-accent-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  font-family: var(--font-xenon), monospace;
+  font-size: var(--font-size-step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
