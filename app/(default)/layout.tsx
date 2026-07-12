@@ -19,6 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       { id: "approach", label: "Approach" },
       { id: "work", label: "Work" },
       { id: "experience", label: "Experience" },
+      { id: "contact", label: "Contact" },
     ],
     [],
   );

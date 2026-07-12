@@ -4,6 +4,7 @@ import { Approach } from "@/components/approach/Approach";
 import { SystemMap } from "@/components/system-map/SystemMap";
 import { SelectedWork } from "@/components/selected-work/SelectedWork";
 import { CareerJourney } from "@/components/career-journey/CareerJourney";
+import { ContactCta } from "@/components/contact-cta/ContactCta";
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <SystemMap />
       <SelectedWork />
       <CareerJourney />
+      <ContactCta />
     </>
   );
 }

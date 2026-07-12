@@ -1,11 +1,6 @@
 // next.config.mjs
-import path from "path";
 import createMDX from "@next/mdx";
 import withBundleAnalyzer from "@next/bundle-analyzer";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrettyCode from "rehype-pretty-code";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -80,65 +75,21 @@ const nextConfig = {
   experimental: {
     webVitalsAttribution: ["CLS", "LCP"],
   },
-  transpilePackages: ["scichart"],
-  async rewrites() {
-    return [
-      {
-        source: "/scichart2d.wasm",
-        destination: "/api/wasm/scichart2d.wasm",
-      },
-      {
-        source: "/scichart2d.data",
-        destination: "/api/wasm/scichart2d.data",
-      },
-    ];
-  },
   env: {
     ANALYZE: process.env.ANALYZE,
   },
   poweredByHeader: false,
   compress: true,
   output: process.env.ANALYZE === "true" ? "standalone" : undefined,
-  webpack: (config, { isServer, dev }) => {
-    if (!isServer) {
-      config.experiments = {
-        ...config.experiments,
-        asyncWebAssembly: true,
-        layers: true,
-      };
-
-      config.module.rules.push({
-        test: /.wasm$/,
-        exclude: [
-          /node_modules\/@vercel\/og/,
-          /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/,
-        ],
-        type: "webassembly/async",
-      });
-
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-        crypto: false,
-        stream: false,
-        url: false,
-        zlib: false,
-        http: false,
-        https: false,
-        assert: false,
-        os: false,
-      };
-    }
-
-    Object.assign(config.resolve.alias, {
-      scichart: path.resolve("./node_modules/scichart"),
-    });
-
+  webpack: (config, { dev }) => {
+    // @vercel/og ships its wasm as an asset so the OG image routes
+    // (opengraph-image.tsx) can load it. Everything else is Next's defaults.
     config.module.rules.push({
       test: /.(wasm)$/,
-      include: [/node_modules\/@vercel\/og/, /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/],
+      include: [
+        /node_modules\/@vercel\/og/,
+        /node_modules\/.*\/next\/dist\/compiled\/@vercel\/og/,
+      ],
       type: "asset/resource",
       generator: {
         filename: "static/wasm/[name].hash",
@@ -152,13 +103,6 @@ const nextConfig = {
           ...config.optimization.splitChunks,
           cacheGroups: {
             ...config.optimization.splitChunks?.cacheGroups,
-            scichart: {
-              test: /[\/]node_modules[\/]scichart[\/]/,
-              name: "scichart",
-              chunks: "all",
-              priority: 10,
-              reuseExistingChunk: true,
-            },
             vercelOg: {
               test: /[\/]node_modules[\/]@vercel[\/]og[\/]/,
               name: "vercel-og",

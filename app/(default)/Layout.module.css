@@ -156,7 +156,5 @@
   position: relative;
   z-index: 1;
   background-color: inherit;
-
-  margin-bottom: -60vh; /* Must match the footer's min-height */
   margin-bottom: 5vh;
 }
