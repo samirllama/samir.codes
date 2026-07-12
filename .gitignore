@@ -39,21 +39,20 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Gemini CLI context
-/.gemini/
-GEMINI.md
 
-# AI documentation and notes
 /ai-docs/
 notes.md
 notes*
 .env*.local
 
 /.Guides
-
 AGENTS.md
 
 .antigravitycli/
 
+# editor
+.vscode/
+
 # Claude session checkpoint (machine-local)
 CLAUDE.local.md
+/.claude
