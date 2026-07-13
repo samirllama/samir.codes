@@ -45,6 +45,9 @@
   font-size: 1.75rem;
   font-weight: 700;
   position: relative;
+  padding-top: 32px;
+  padding-left: var(--space-xl);
+  border-color: var(--color-accent-primary);
 }
 
 .postHeader {
@@ -97,11 +100,7 @@
 
 .tag {
   font-family: var(--font-xenon), monospace;
-  background-color: color-mix(
-    in oklch,
-    var(--color-surface-raised) 70%,
-    transparent
-  );
+  background-color: color-mix(in oklch, var(--color-surface-raised) 70%, transparent);
   border: 1px solid var(--color-border-subtle);
   color: var(--color-accent-primary);
   padding: 0.3rem 0.75rem;
@@ -123,5 +122,38 @@
 
   .tags {
     justify-content: flex-start;
+  }
+
+  .logoBlog {
+    padding-top: 20px;
+    font-size: var(--font-size-step-1);
+    padding-left: var(--space-md);
+  }
+}
+
+.logoBlog:hover {
+  border-color: var(--color-accent-primary);
+  text-decoration: none;
+}
+
+.ctaArrow {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  color: var(--color-accent-primary);
+  transition: transform 0.25s var(--my-ease-out-3);
+}
+
+.logoBlog:hover .ctaArrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaArrow {
+    transition-property: background-color, color, box-shadow, border-color;
+  }
+
+  .logoBlog:hover .ctaArrow {
+    transform: none;
   }
 }

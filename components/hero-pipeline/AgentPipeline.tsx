@@ -372,10 +372,54 @@ export const AgentPipeline = () => {
             },
           });
 
+          // --- Pin + scrub expand (desktop only) ---
+          // As the pipeline scrolls to center it pins for one beat and scales
+          // out to the Layout's content-column edge, then releases. The scroll
+          // stays 1:1 outside the pinned beat; the scale target is measured at
+          // refresh so it tracks the responsive column width.
+          let expandST: ScrollTrigger | undefined;
+          const visual = containerRef.current?.closest<HTMLElement>(
+            "[data-hero-visual]",
+          );
+          if (conditions.desktop && visual) {
+            // Grow the 860px pipeline to the full content-column width. The SVG
+            // is centered (margin auto) inside the full-width visual, so scaling
+            // from its own centre keeps it centered and inside the hero box -
+            // no clipped end nodes. Measured from the container (never scaled)
+            // so the ratio is stable on refresh.
+            const targetScale = (): number => {
+              const container = containerRef.current;
+              if (!container) return 1;
+              const cw = container.getBoundingClientRect().width;
+              const restW = parseFloat(getComputedStyle(svg).maxWidth) || cw;
+              return Math.max(1, cw / Math.min(restW, cw));
+            };
+
+            const expand = gsap.fromTo(
+              svg,
+              { scale: 1 },
+              { scale: targetScale, ease: "none", transformOrigin: "50% 50%" },
+            );
+
+            expandST = ScrollTrigger.create({
+              trigger: visual,
+              start: "center center",
+              end: () => "+=" + Math.round(window.innerHeight * 0.9),
+              pin: visual,
+              pinSpacing: true,
+              scrub: 0.5,
+              invalidateOnRefresh: true,
+              animation: expand,
+            });
+          }
+
           return () => {
             trigger.kill();
+            expandST?.kill();
             master.kill();
             intro.kill();
+            if (visual) gsap.set(visual, { clearProps: "all" });
+            gsap.set(svg, { clearProps: "transform" });
           };
         },
       );

@@ -132,11 +132,13 @@
     opacity 0.16s var(--my-ease-out-3);
 }
 
+/* Corner radii concentric with the card's 16px corner (bracket inset 10px). */
 .bracketTl {
   top: 9px;
   left: 9px;
   border-right: none;
   border-bottom: none;
+  border-top-left-radius: 6px;
   transform: translate(-11px, -11px);
 }
 
@@ -145,6 +147,7 @@
   right: 9px;
   border-left: none;
   border-bottom: none;
+  border-top-right-radius: 6px;
   transform: translate(11px, -11px);
   transition-delay: 0.04s;
 }
@@ -154,6 +157,7 @@
   left: 9px;
   border-right: none;
   border-top: none;
+  border-bottom-left-radius: 6px;
   transform: translate(-11px, 11px);
   transition-delay: 0.08s;
 }
@@ -163,6 +167,7 @@
   right: 9px;
   border-left: none;
   border-top: none;
+  border-bottom-right-radius: 6px;
   transform: translate(11px, 11px);
   transition-delay: 0.12s;
 }

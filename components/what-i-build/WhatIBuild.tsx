@@ -1,10 +1,11 @@
 "use client";
 
 // components/what-i-build/WhatIBuild.tsx
-// Narrative beat 2: what the work actually is, before the principles (Approach)
-// and the stack (SystemMap) that follow. Three system categories, each grounded
-// in a shipped system so the claim reads as evidence. Reveal choreography comes
-// from the shared hook; the SSR markup is the finished section.
+// Narrative beat 2: what the work actually is, before the stack (SystemMap) that
+// follows. Three system categories, each grounded in a shipped system so the
+// claim reads as evidence. The principles behind this work live in the
+// "Deterministic by Default" post rather than on the homepage. Reveal
+// choreography comes from the shared hook; the SSR markup is the finished section.
 import { useRef } from "react";
 import { useSectionReveal } from "@/hooks/useSectionReveal";
 import styles from "./WhatIBuild.module.css";

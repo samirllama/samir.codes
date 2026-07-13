@@ -4,6 +4,7 @@
   position: relative;
   min-height: calc(100dvh - var(--my-nav-height));
   display: flex;
+  flex-flow: column;
   align-items: center;
   padding: calc(var(--my-nav-height) + var(--my-spacing-lg)) var(--my-spacing-lg)
     var(--my-spacing-2xl);
@@ -19,18 +20,25 @@
   --glow-x: 32%;
   --glow-y: 4%;
   background-image:
-    var(--gradient-glow-accent),
-    linear-gradient(var(--color-line-grid) 1px, transparent 1px),
+    var(--gradient-glow-accent), linear-gradient(var(--color-line-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--color-line-grid) 1px, transparent 1px);
   background-size:
     100% 100%,
     48px 48px,
     48px 48px;
-  mask-image: radial-gradient(
-    ellipse 110% 95% at 50% 35%,
-    black 45%,
-    transparent 98%
-  );
+  mask-image: radial-gradient(ellipse 110% 95% at 50% 35%, black 45%, transparent 98%);
+}
+
+.heroTopSpace {
+  display: block;
+  height: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .heroTopSpace {
+    height: var(--my-spacing-3xl);
+  }
 }
 
 /*
@@ -53,11 +61,17 @@
 
 .kicker {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-primary);
   margin: 0;
+}
+
+.heroContentGrid {
+  display: flex;
+  flex-flow: column;
+  row-gap: var(--my-gutter);
 }
 
 .headline {
@@ -67,8 +81,12 @@
   font-weight: 650;
   color: var(--color-text-default);
   margin: 0;
-  max-width: 15ch;
+  max-width: 18ch;
   text-wrap: balance;
+}
+
+.line {
+  display: block;
 }
 
 .sub {
@@ -77,15 +95,49 @@
   color: var(--color-text-muted);
   margin: 0;
   max-width: 52ch;
+  grid-column: auto / span 5;
 }
 
 .stats {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: var(--my-spacing-md) var(--my-spacing-xl);
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: calc(var(--my-nav-height) + var(--my-spacing-lg)) var(--my-spacing-sm)
+      var(--my-spacing-md);
+  }
+
+  .heroContentGrid {
+    column-gap: var(--my-gutter);
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-columns: minmax(0px, 1fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .kicker {
+    padding-bottom: var(--my-spacing-3xl);
+  }
+
+  .headline {
+    grid-column: auto / span 7;
+    max-width: 26ch;
+    word-spacing: -0.25em;
+  }
+
+  .stats {
+    flex-direction: row;
+    padding-top: var(--my-spacing-4xl);
+    gap: var(--my-spacing-md) var(--my-spacing-2xl);
+  }
 }
 
 .stat {
@@ -116,31 +168,41 @@
   align-items: center;
 }
 
+/* Ghost-primary: the accent is the outline at rest and floods the button on
+   hover. Same #f97316 as the rail/logo - as an outline it reads at the same
+   weight as the rest of the homepage instead of shouting as a solid slab. */
 .ctaPrimary {
   display: inline-flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
-  background: var(--color-accent-primary);
-  color: oklch(15% 0.02 60);
+  background: transparent;
+  border: 1px solid var(--color-accent-primary);
+  color: var(--color-accent-primary);
   font-weight: 600;
   font-size: var(--font-size-step-0);
   text-decoration: none;
-  box-shadow: var(--shadow-glow);
   transition:
-    transform 0.25s var(--my-ease-out-3),
-    box-shadow 0.25s var(--my-ease-out-3);
+    background-color 0.25s var(--my-ease-out-3),
+    color 0.25s var(--my-ease-out-3),
+    box-shadow 0.25s var(--my-ease-out-3),
+    transform 0.25s var(--my-ease-out-3);
 }
 
 .ctaPrimary:hover {
-  transform: translateY(-2px);
+  background: var(--color-accent-primary);
   color: oklch(15% 0.02 60);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
+/* Secondary: neutral bordered button whose only accent is a directional
+   arrow in the shared orange; the arrow tracks right on hover. */
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
+  gap: var(--my-spacing-sm);
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
   border: 1px solid var(--color-border-default);
@@ -148,18 +210,45 @@
   font-weight: 500;
   font-size: var(--font-size-step-0);
   text-decoration: none;
-  transition:
-    border-color 0.25s var(--my-ease-out-3),
-    color 0.25s var(--my-ease-out-3);
+  transition: border-color 0.25s var(--my-ease-out-3);
 }
 
 .ctaSecondary:hover {
   border-color: var(--color-accent-primary);
-  color: var(--color-accent-primary);
   text-decoration: none;
 }
 
+.ctaArrow {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  color: var(--color-accent-primary);
+  transition: transform 0.25s var(--my-ease-out-3);
+}
+
+.ctaSecondary:hover .ctaArrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctaPrimary,
+  .ctaArrow {
+    transition-property: background-color, color, box-shadow, border-color;
+  }
+
+  .ctaPrimary:hover {
+    transform: none;
+  }
+
+  .ctaSecondary:hover .ctaArrow {
+    transform: none;
+  }
+}
+
+/* Full-width pin target: the scroll-scrub pins this and scales the pipeline
+   SVG inside it. Keeping this element full width (not max-width capped) makes
+   GSAP's pin-spacer full width too, so the centered pipeline stays centered
+   instead of collapsing to the spacer's width. */
 .visual {
   min-width: 0;
-  max-width: 860px;
 }

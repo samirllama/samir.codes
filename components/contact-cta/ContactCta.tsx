@@ -2,7 +2,7 @@
 
 // components/contact-cta/ContactCta.tsx
 // Closing beat: the conversion panel. The narrative has made the case (build ->
-// approach -> proof -> experience); this is where the reader acts. The portrait
+// proof -> experience); this is where the reader acts. The portrait
 // relocated here from the hero (lazy, below the fold) so a face lands next to
 // the ask. HUD vocabulary - glow + target-lock brackets - matches the work
 // cards. Reveal choreography comes from the shared hook; SSR markup is final.

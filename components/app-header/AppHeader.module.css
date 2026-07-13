@@ -32,29 +32,42 @@
   }
 }
 
+/* Fixed height, auto width, clipped: the collapse animates this box's width
+   so the wordmark "slides inward" to the SL monogram. Flexbox centers it in
+   the glass - no more top-offset hacks pushing it out of the header. */
 .nameLogo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  width: 8rem;
-  top: 1px;
-  position: relative;
-  transition: all var(--transition-base);
+  /* Compact on mobile: the header nav (Work/Experience) shares the row below
+     45em, so the wordmark stays small enough to keep the toggle on-screen. */
+  height: 1.7rem;
+  overflow: hidden;
+  will-change: width;
 }
 
+.nameLogo svg {
+  height: 100%;
+  width: auto;
+  display: block;
+  flex: none;
+}
+
+/* Nav is hidden at >=45em, so the logo has the left of the header to itself. */
 @media (min-width: 45em) {
   .nameLogo {
-    width: 12rem;
-    top: 20px;
+    height: 2.35rem;
   }
 }
+
 @media (min-width: 55em) {
   .nameLogo {
-    width: 18rem;
-    top: 30px;
+    height: 2.6rem;
   }
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
   color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);

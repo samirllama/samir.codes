@@ -1,81 +1,91 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
+import { useRef } from "react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { MOTION_DUR, MOTION_EASE } from "@/lib/motion";
 import styles from "./AppHeader.module.css";
 
-function getSVGElement(
-  container: React.RefObject<HTMLDivElement | null>,
-  selector: string
-): SVGGraphicsElement | null {
-  const el = gsap.utils.selector(container)(selector)[0];
-  return el instanceof SVGGraphicsElement ? el : null;
-}
+// Compact "SL" lockup geometry, in the SVG's own user units (viewBox is
+// 0 0 1743 417). Derived once from the glyph bounding boxes so the slide is
+// deterministic - no runtime getBBox, no magic pixel offsets to drift.
+const S_RIGHT = 269.7; //  letter-s right edge
+const L_LEFT = 874; //     letter-L left edge
+const L_WIDTH = 439.2;
+const SL_GAP = 26; //      breathing room between S and L in the monogram
+const L_SLIDE_X = S_RIGHT + SL_GAP - L_LEFT; // negative: L travels left to meet S
+const COMPACT_RIGHT = S_RIGHT + SL_GAP + L_WIDTH + 20; // clip edge (+ trailing pad)
+const COMPACT_RATIO = COMPACT_RIGHT / 1743; // wrapper width as a fraction of full
+
+// Scroll distance before the wordmark collapses to the monogram.
+const COLLAPSE_THRESHOLD = 44;
 
 const NameLogo = () => {
-  const container = useRef<HTMLDivElement>(null);
-  const letterLTl = useRef<GSAPTimeline | null>(null);
-  const fadeOutTl = useRef<GSAPTimeline | null>(null);
-  const hasTriggered = useRef(false); // Prevent repeated triggers
+  const root = useRef<HTMLSpanElement>(null);
+  const dotBounce = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
-    const q = gsap.utils.selector(container);
+  useGSAP(
+    () => {
+      const el = root.current;
+      if (!el) return;
+      const q = gsap.utils.selector(el);
+      const svg = el.querySelector("svg");
+      if (!svg) return;
+      const letterL = q("#letter-L");
+      const dot = q("#dot-shape-letter-i");
+      // Everything that isn't the S or L monogram fades on collapse.
+      const fades = q("#letters-a-m-i-r, #dot-shape-letter-i, #wavey-line, #letters-a-m-a");
 
-    const fades = q(
-      "#wavey-line, #letters-a-m-i-r, #dot-shape-letter-i, #letters-a-m-a"
-    );
+      const mm = gsap.matchMedia();
 
-    const letterS = getSVGElement(container, "#letter-s");
-    const letterL = getSVGElement(container, "#letter-L");
-    if (!letterS || !letterL) return;
+      // Reduced motion keeps the full wordmark (the SSR default) - no collapse,
+      // no hover spring.
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const fullW = svg.getBoundingClientRect().width;
+        const compactW = fullW * COMPACT_RATIO;
 
-    const origBBox = letterL.getBBox();
-    const targetBBox = letterS.getBBox();
-    const originalX = origBBox.x;
-    const compactX = targetBBox.x + targetBBox.width - 10;
+        // One timeline: clip the wrapper inward, slide L up to S, fade the rest.
+        const collapse = gsap
+          .timeline({ paused: true, defaults: { ease: MOTION_EASE.inOut } })
+          .to(el, { width: compactW, duration: MOTION_DUR.fast }, 0)
+          .to(letterL, { x: L_SLIDE_X, duration: MOTION_DUR.fast }, 0)
+          .to(fades, { opacity: 0, duration: 0.3, stagger: 0.02 }, 0);
 
-    gsap.set(letterL, { x: 0 });
-    gsap.set(fades, { xPercent: 0, opacity: 1 });
+        // Loaded already scrolled: present the monogram with no animation.
+        if (window.scrollY > COLLAPSE_THRESHOLD) collapse.progress(1);
 
-    letterLTl.current = gsap.timeline({ paused: true }).to(letterL, {
-      x: compactX - originalX,
-      duration: 0.5,
-      ease: "expo.out",
-    });
+        const st = ScrollTrigger.create({
+          start: COLLAPSE_THRESHOLD,
+          end: "max",
+          onEnter: () => collapse.play(),
+          onLeaveBack: () => collapse.reverse(),
+        });
 
-    fadeOutTl.current = gsap.timeline({ paused: true }).to(fades, {
-      xPercent: -20,
-      opacity: 0,
-      duration: 0.4,
-      stagger: 0.03,
-      ease: "power2.out",
-    });
+        // The tittle is its own path, so it can spring independently on hover.
+        dotBounce.current = gsap
+          .timeline({ paused: true })
+          .to(dot, { y: -46, duration: 0.16, ease: "power2.out" })
+          .to(dot, { y: 0, duration: 0.62, ease: "elastic.out(1, 0.4)" });
 
-    const onScroll = () => {
-      const y = window.scrollY;
-      const threshold = 150;
+        return () => {
+          st.kill();
+          collapse.kill();
+          dotBounce.current?.kill();
+          dotBounce.current = null;
+          gsap.set(el, { clearProps: "width" });
+          gsap.set(letterL, { clearProps: "all" });
+          gsap.set(fades, { clearProps: "all" });
+        };
+      });
+    },
+    { scope: root },
+  );
 
-      if (y > threshold && !hasTriggered.current) {
-        // Compact mode — animate out
-        letterLTl.current?.play();
-        fadeOutTl.current?.play();
-        hasTriggered.current = true;
-      } else if (y <= 0 && hasTriggered.current) {
-        // Expanded mode — animate in
-        letterLTl.current?.reverse();
-        fadeOutTl.current?.reverse();
-        hasTriggered.current = false;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const handleEnter = () => dotBounce.current?.restart();
 
   return (
-    <div ref={container} className={styles.nameLogo}>
+    <span ref={root} className={styles.nameLogo} onMouseEnter={handleEnter}>
       <FigmaSVG />
-    </div>
+    </span>
   );
 };
 

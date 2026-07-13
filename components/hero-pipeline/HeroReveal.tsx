@@ -63,19 +63,35 @@ export const HeroReveal = () => {
         0.65,
       );
 
-      // Stat values decode into place - the terminal texture, not a gimmick:
-      // it reads as "computed", which is the brand.
+      // Stat values tick up like a counter settling into place. Each value is
+      // seeded to 0 immediately (before first paint, while the stat is still
+      // opacity 0) so the SSR final number never flashes, then counts to its
+      // target as the stat fades in. Non-numeric or prefixed values ($0) are
+      // parsed so the "$" is preserved and only the digits animate.
+      //
+      // The target is read from the data-stat-value attribute, never from
+      // textContent: this tween writes to textContent, and on GSAP's
+      // revert-on-unmount that write is a "0". A soft-nav re-mount reuses the
+      // same DOM node, so reading textContent back would parse a target of 0
+      // and the counter would stall at zero.
       gsap.utils.toArray<HTMLElement>("[data-stat-value]").forEach((el, i) => {
+        const source = el.dataset.statValue ?? el.textContent ?? "";
+        const parts = source.match(/^(\D*)(\d[\d,]*)(\D*)$/);
+        if (!parts) return;
+        const [, prefix, digits, suffix] = parts;
+        const target = Number(digits.replace(/,/g, ""));
+        const counter = { v: 0 };
+        const render = () => {
+          el.textContent = `${prefix}${Math.round(counter.v)}${suffix}`;
+        };
+        render();
         tl.to(
-          el,
+          counter,
           {
-            scrambleText: {
-              text: el.textContent ?? "",
-              chars: "0123456789",
-              speed: 0.4,
-            },
-            duration: 0.7,
-            ease: "none",
+            v: target,
+            duration: MOTION_DUR.base,
+            ease: MOTION_EASE.out,
+            onUpdate: render,
           },
           0.7 + i * MOTION_STAGGER.base,
         );

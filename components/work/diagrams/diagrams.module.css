@@ -3,7 +3,15 @@
    hero pipeline, so diagrams recolor with the theme via CSS vars alone. */
 
 .figure {
-  margin: var(--my-spacing-xl) 0;
+  /* Break the diagram out of the ~70ch prose column to the container width so
+     the SVG renders large enough for its arrows and labels to read cleanly.
+     Centered on the viewport with margin-left:50% + translateX(-50%); the page
+     body's overflow-x:hidden absorbs the pre-transform layout overflow. On
+     narrow screens min() collapses this back to the column width. */
+  width: min(calc(100vw - 2rem), 1108px);
+  margin-block: var(--my-spacing-xl);
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 .caption {
@@ -123,8 +131,8 @@
 
 .sublabel {
   fill: var(--color-text-muted);
-  font-size: 9.5px;
-  letter-spacing: 0.03em;
+  font-size: 8px;
+  letter-spacing: 0.02em;
 }
 
 .note {

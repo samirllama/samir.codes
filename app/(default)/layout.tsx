@@ -16,7 +16,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const navItems = useMemo(
     () => [
       { id: "build", label: "Build" },
-      { id: "approach", label: "Approach" },
       { id: "work", label: "Work" },
       { id: "experience", label: "Experience" },
       { id: "contact", label: "Contact" },

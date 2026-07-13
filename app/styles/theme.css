@@ -47,7 +47,8 @@
   --font-size-step-2: clamp(0.9963rem, 0.6315rem + 1.8239vw, 1.9994rem);
   --font-size-step-3: clamp(1.0631rem, 0.4218rem + 3.2068vw, 2.8269rem);
 
-  --font-size-step-4: clamp(1.1344rem, 0.0932rem + 5.2057vw, 3.9975rem);
+  --font-size-step-4: clamp(2.5rem, 2.0408163265306123rem + 1.9591836734693877vw, 4rem);
+
   --font-size-step-5: clamp(1.21rem, -0.4055rem + 8.0773vw, 5.6525rem);
 
   --tracking-wide: 0.1325rem;
@@ -59,6 +60,10 @@
   --my-spacing-lg: calc(var(--font-size-step-0) * 1.5);
   --my-spacing-xl: calc(var(--font-size-step-0) * 2);
   --my-spacing-2xl: clamp(3.5rem, calc(3.28rem + 1.08vw), 4.5rem);
+  --my-spacing-3xl: calc(var(--font-size-step-0) * 3); /* 300% */
+  --my-spacing-4xl: calc(var(--font-size-step-1) * 4); /* 400% */
+  --my-spacing-5xl: calc(var(--font-size-step-1) * 5); /* 500% */
+  --my-spacing-6xl: calc(var(--font-size-step-1) * 6); /* 600% */
 
   /* Layout & Sizing */
   --my-nav-height: 5rem;
@@ -84,6 +89,8 @@
   --my-line-height-normal: 1.5;
   --my-line-height-base: var(--my-line-height-normal);
   --my-line-height-heading: var(--my-line-height-tight);
+
+  --my-gutter: clamp(3rem, 1.67347rem + 0.326531vw, 1.8rem);
 
   /* Z-Indexes */
   --my-z-index-background: -1;
@@ -132,15 +139,17 @@
   --my-shadow-base-rgb: 0, 0, 0;
   --my-shadow-highlight-rgb: 255, 255, 255;
   --my-shadow-outer-rgb: 0, 0, 0;
-  --my-shadow-default: 0 4px 6px -1px rgba(var(--my-shadow-base-rgb), 0.1),
+  --my-shadow-default:
+    0 4px 6px -1px rgba(var(--my-shadow-base-rgb), 0.1),
     0 2px 4px -2px rgba(var(--my-shadow-base-rgb), 0.1);
 
   /* Font Families */
   --font-xenon: "MonaspaceXenon", monospace;
   --font-body-libre: "Libre Baskerville", sans-serif;
   --font-body: "Inter", sans-serif;
-  --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria,
-    Merriweather, Georgia, "Liberation Serif", serif;
+  --font-display:
+    Charter, "Bitstream Charter", "Sitka Text", Cambria, Merriweather, Georgia, "Liberation Serif",
+    serif;
   /* Long-form reading (blog "reading room"): a warm serif that contrasts the
      mono terminal UI. System stack - no webfont request. Code stays mono. */
   --font-reading: var(--font-display);
@@ -166,7 +175,8 @@
     var(--color-accent-glow),
     transparent 72%
   );
-  --shadow-elevated: 0 1px 2px rgba(var(--my-shadow-base-rgb), 0.06),
+  --shadow-elevated:
+    0 1px 2px rgba(var(--my-shadow-base-rgb), 0.06),
     0 8px 24px rgba(var(--my-shadow-base-rgb), 0.1),
     0 24px 48px rgba(var(--my-shadow-base-rgb), 0.12);
   --shadow-glow: 0 0 40px var(--color-accent-glow);

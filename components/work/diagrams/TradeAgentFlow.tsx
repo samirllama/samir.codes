@@ -75,7 +75,7 @@ export const TradeAgentFlow = () => (
       d="M 304 216 C 304 292, 657 292, 657 228"
       markerEnd="url(#ta-arrow-danger)"
     />
-    <text className={styles.edgeLabelDanger} x="410" y="280">
+    <text className={styles.edgeLabelDanger} x="480" y="308" textAnchor="middle">
       escalation · guard match routes around the model · 0 tokens
     </text>
 

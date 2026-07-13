@@ -1,4 +1,4 @@
-// app/(default)/blog/page.tsx
+// app/blog/page.tsx
 import type { Metadata } from "next";
 import BlogCard from "@/components/blog/BlogCard";
 import { getAllPosts } from "@/lib/posts.server";
@@ -6,7 +6,8 @@ import styles from "./blog.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Articles about web development, design, and technology insights.",
+  description:
+    "A running journal of software engineering, AI systems, projects I'm building, and lessons I'm still learning.",
   openGraph: {
     title: "Blog | Rants",
     description: "Articles about web development, design, and technology insights.",
@@ -16,7 +17,6 @@ export const metadata: Metadata = {
 export default async function BlogPage() {
   // Works safely now that getAllPosts returns a typed Promise!
   const posts = await getAllPosts();
-  posts.map((p) => console.log("Post slugs:", p.slug));
 
   return (
     <div className={styles.blogPage}>
@@ -24,8 +24,8 @@ export default async function BlogPage() {
         <header className={styles.header}>
           <h1>The Logbook</h1>
           <p className={styles.subtitle}>
-            Sharing insights about web development, design patterns, and the evolving landscape of
-            modern technology.
+            A running journal of software engineering, AI systems, projects I&apos;m building, and
+            lessons I&apos;m still learning.
           </p>
         </header>
 

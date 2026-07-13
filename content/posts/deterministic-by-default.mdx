@@ -1,0 +1,103 @@
+---
+title: "Deterministic by Default"
+description: "Five rules for building agents you can put in front of a real customer - the constraints that turn a demo into something safe to ship."
+date: "2026-07-12"
+tags:
+  - AI
+  - Agents
+  - LLMs
+  - Production
+  - Architecture
+image: https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/deterministic-core.webp
+---
+
+Most agent demos fall apart the moment something has to be exactly right.
+A model that usually quotes the correct price is fine on stage and a liability in production.
+The gap between the two is not a sharper prompt or a bigger model.
+It is architecture.
+
+Autonomy is easy to demo and hard to trust.
+Across four production systems, the same five constraints are what let me put a model in front of a real customer without losing sleep.
+They are deliberately boring.
+That is the point: the interesting part of an agent is the model, and the trustworthy part is everything I build around it.
+
+## 01 - Guards run before the model
+
+Deterministic checks validate every request before the LLM ever sees it.
+Anything that fails a guard never reaches the model at all.
+
+The instinct is to let the agent handle bad input gracefully.
+The problem is that "gracefully" is a probabilistic promise, and a malformed or out-of-policy request is exactly the kind of edge case a model will improvise around.
+So I put the cheap, certain checks first: schema validation, auth and entitlements, rate and budget limits, obvious policy violations.
+A request that cannot possibly be valid is rejected in tested code, before it costs a model call or a chance at a wrong answer.
+
+The failure this prevents is the model being asked to reason about something it should never have received.
+Guards shrink the surface the model is trusted with down to the cases that genuinely need judgment.
+
+## 02 - The model stays at the language boundary
+
+LLMs are genuinely good at three things: turning messy human language into a structured request, deciding when to call a tool, and explaining an outcome in a sentence.
+Every decision that has to be correct - pricing, compliance, math, the final record - lives in pure functions with tests.
+
+This is the rule the whole approach is named after, and it is the one I have the best war story for.
+In the travel pricing pipeline I wrote about in [Deterministic Core, LLM Shell](/posts/multi-agent-a2a), the engine originally had a second model on the way out: a formatter that transcribed the computed quote into the final response.
+It passed every schema check.
+It was also a latent bug, because an output schema constrains the shape of a response, not its digits.
+A hallucinating model can return a perfectly schema-valid quote whose total is simply wrong, and nothing about the schema catches it.
+
+So I removed that model and made the outbound path a deterministic passthrough that re-emits the exact tool output, byte for byte.
+The model translates and explains at the edges; tested code owns every number in the middle.
+That is the moment the "shell around a core" idea stops being a slogan and becomes an enforced property.
+
+## 03 - Nothing ships itself
+
+Agents draft; humans approve.
+A person signs off on every outbound action before it leaves the system.
+
+Not every action needs a human, and the skill is knowing which ones do.
+The line I draw is irreversibility: anything that spends money, sends a message to a customer, or writes to a system of record pauses for approval.
+Read-only steps and internal drafts run free.
+The agent does the tedious ninety percent - gathering context, drafting the decision, assembling the record - and a person makes the call that carries consequences.
+
+The failure this prevents is the one that ends up in a postmortem: an agent that was right ninety-nine times and shipped something irreversible on the hundredth.
+A human approval step is not a lack of confidence in the model.
+It is the difference between a mistake that is a wrong draft and a mistake that is a wrong invoice.
+
+## 04 - If it isn't logged, it didn't happen
+
+Every step emits a trace.
+When an agent acts, there is a record of what it saw, which tools it called, and why it decided what it did.
+
+Agents fail in ways that are invisible without this.
+A model that quietly took a different path, a tool that returned a subtly wrong value, a decision that was technically defensible but wrong for the case - none of these throw an exception.
+The only way to find them is to be able to replay exactly what happened.
+So each agent logs its inputs, its tool trajectory, and its reasoning, and those traces double as the eval sets that gate the next deploy.
+
+This is also what makes the human approval in rule three meaningful.
+A person can only sign off on an action if they can see what the agent saw.
+The trace is the audit trail and the debugger and the regression suite, all from the same discipline of writing down what happened.
+
+## 05 - It costs nothing while it sleeps
+
+Serverless by default.
+The systems scale to zero and bill nothing between requests.
+
+An agent that is idle most of the day should not cost anything while it waits.
+Building on serverless runtimes - Cloud Run and functions rather than always-on instances - means a system that handles real load during business hours costs nothing overnight.
+It also forces a healthier shape on the architecture: stateless handlers, explicit contracts between services, and startup fast enough that cold starts are a non-issue.
+
+The constraint that keeps the bill near zero is the same one that keeps the design clean.
+A system that can scale to zero is a system whose pieces are independent enough to deploy, audit, and reason about on their own.
+
+## When these apply
+
+Reach for these the moment a wrong number or a wrong decision has a real cost: pricing, underwriting, approvals, anything regulated or financial.
+Let the model translate and explain.
+Let tested code decide and compute.
+Put a hard contract between the parts that different people will own.
+And be willing to remove a model from a path when it is adding risk instead of value.
+
+None of this is exotic.
+It is the ordinary discipline of shipping a service, applied to a system that happens to contain an LLM.
+The model is what makes the agent interesting.
+These five rules are what make it safe to ship.

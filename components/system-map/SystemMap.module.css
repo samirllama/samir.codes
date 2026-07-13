@@ -88,7 +88,8 @@
 /* Diamond node riding the spine, in the HUD language of the other sections. */
 .node {
   position: absolute;
-  left: -1.55rem;
+  /* Center the diamond on the spine (spine sits at stack padding-box left + 12px). */
+  left: -1.91rem;
   top: 1.55rem;
   width: 11px;
   height: 11px;

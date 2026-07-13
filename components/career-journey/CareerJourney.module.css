@@ -111,7 +111,8 @@
 
 .node {
   position: absolute;
-  left: -34px;
+  /* Center on the rail: rail center sits 2px right of the node's old center. */
+  left: -32px;
   top: 26px;
   width: 12px;
   height: 12px;
@@ -179,11 +180,15 @@
   opacity: 0.7;
 }
 
+/* Corner radii are concentric with the card's 16px corner: each bracket is
+   inset 10px (1px card border + 9px offset), so 16 - 10 = 6px follows the
+   same arc instead of reading as a sharp right angle inside a rounded card. */
 .bracketTl {
   top: 9px;
   left: 9px;
   border-right: none;
   border-bottom: none;
+  border-top-left-radius: 6px;
 }
 
 .bracketTr {
@@ -191,6 +196,7 @@
   right: 9px;
   border-left: none;
   border-bottom: none;
+  border-top-right-radius: 6px;
   transition-delay: 0.04s;
 }
 
@@ -199,6 +205,7 @@
   left: 9px;
   border-right: none;
   border-top: none;
+  border-bottom-left-radius: 6px;
   transition-delay: 0.08s;
 }
 
@@ -207,6 +214,7 @@
   right: 9px;
   border-left: none;
   border-top: none;
+  border-bottom-right-radius: 6px;
   transition-delay: 0.12s;
 }
 
@@ -372,7 +380,8 @@
 
 .nodeSmall {
   position: absolute;
-  left: -32px;
+  /* Center on the rail (matches the diamond node's 2px shift). */
+  left: -30px;
   top: 0.45em;
   width: 8px;
   height: 8px;

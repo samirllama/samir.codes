@@ -15,6 +15,10 @@
 .desktopOnly {
   aspect-ratio: 760 / 440;
   display: none;
+  /* Rest at 860px, centered in the full-width visual; the scroll-scrub scales
+     this SVG from its own centre out to the content-column edge. */
+  max-width: 860px;
+  margin-inline: auto;
 }
 
 .mobileOnly {
