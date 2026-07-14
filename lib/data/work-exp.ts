@@ -37,21 +37,22 @@ export const experience: ExperienceEntry[] = [
     dateRange: "Jun 2022 — Jan 2025",
     description:
       "At bp, I developed and maintained a supply chain platform that automated data processing and transactional logic, directly resulting in $5M in annual operational efficiencies. My work focused on leveraging AWS microservices to drive cost savings and empower data-driven decision-making.",
-    highlight: "$5M/yr in efficiencies",
+    highlight: "AI-assisted auditing for enterprise supply-chain systems.",
     caseStudySlug: "bp-supply-chain",
     achievements: [
+      "AI-assisted auditing for enterprise supply-chain systems.",
       "Supply-chain platform automating transactional data",
       "AWS microservices driving cost savings at scale",
-      "D3 analytics dashboards for ops decisions",
     ],
     techTags: [
       "Python",
       "TypeScript",
+      "AWS",
+      "Amazon Bedrock",
       "React",
       "D3.js",
-      "AWS",
-      "Azure",
       "GraphQL",
+      "Azure",
       "Apollo Client",
     ],
     projectScreenshotUrl: "https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/bp-img.webp",
@@ -129,7 +130,7 @@ export const experience: ExperienceEntry[] = [
     id: "dominos-sd",
     company: "Domino's",
     title: "Software Developer",
-    dateRange: "Jan 2014 — Dec 2018",
+    dateRange: "Jan 2015 — Dec 2018",
     description:
       "Domino's Pizza Enterprises operates a large e-commerce platform for ordering food. As a Software Developer, I focused on optimizing A/B testing processes to increase conversion rates and improve overall site performance through targeted code refactoring.",
     techTags: [

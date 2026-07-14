@@ -1,42 +1,62 @@
 ---
 title: "Supply-chain automation at enterprise energy scale"
-summary: "Platform engineering and agentic automation on bp's supply-chain systems - data processing and transactional logic that returned about $5M a year in operational efficiencies."
+summary: "Building reliable automation, operator tooling, and AI-assisted auditing for enterprise supply-chain systems."
 role: "Senior Software Engineer · bp"
 timeline: "2022 - 2025"
 status:
   - "proprietary"
 stack:
+  - "AWS Lambda"
+  - "Amazon Bedrock"
+  - "S3"
+  - "CloudWatch"
+  - "PostgreSQL/RDS"
+  - "GraphQL"
   - "Python"
   - "TypeScript"
-  - "Amazon Bedrock"
-  - "AWS"
   - "React"
-  - "GraphQL"
   - "D3.js"
 metrics:
-  - label: "annual operational efficiencies"
-    value: "$5M"
   - label: "sub-agents in production"
     value: "4"
+  - label: "annual operational efficiencies"
+    value: "$10M"
 order: 3
 featured: false
 ---
 
 ## What I can share
 
-Enterprise work behind an NDA: outcomes and architecture altitude only.
+This project was built on proprietary enterprise software, so the implementation details remain private. What I can share is the engineering approach, the system architecture at a high level, and the lessons that continue to influence how I build AI systems today.
+
+---
 
 ## The work
 
-bp's supply-chain platform moves the data and transactions behind physical energy logistics.
-I built and maintained the automation layer: pipelines that processed operational data and services that executed transactional logic that people previously pushed through by hand.
+I joined the project during its initial production rollout, helping build an allocation engine for renewable fuel shipments across the United States. The platform proved successful enough to be adopted globally, evolving from a focused operational system into a broader supply-chain platform.
 
-The automation program I contributed to returned roughly $5M per year in operational efficiencies - the kind of number that only survives when the underlying system is boring in the best sense: typed contracts between services, idempotent processing, observability from day one, and careful rollout behind flags.
+As a Senior Full-Stack Engineer, I worked across the entire stack. My work ranged from ingesting operational documents such as invoices and Bills of Lading from Amazon S3, to building Lambda functions, APIs, database queries, and backend services responsible for deterministic allocation logic. Those services matched incoming product volumes to outgoing shipments moving through tanks, pipelines, vessels, and other transportation assets.
 
-Later in the engagement, that platform work extended into four production sub-agents automating slices of the supply-chain workflow.
-Working at that scale set the bar I still design against: an automation is only done when the people accountable for the process can see what it did and why.
+On the frontend, I built dashboards that gave operators visibility into allocation workflows while integrating CloudWatch monitoring and operational telemetry to help engineers understand system health in production. Every layer of the platform was designed around the same objective: make complex operational processes predictable, observable, and reliable.
+
+The platform ultimately delivered approximately $5 million in annual operational efficiencies by replacing repetitive manual work with deterministic software. That outcome mattered because the underlying system earned the trust of the people responsible for operating it every day.
+
+As the platform matured, our focus expanded beyond automation to accountability.
+
+One of the final capabilities I contributed to was a production agentic workflow that supported auditors reviewing shipment allocations. Rather than simply flagging potential issues, the system allowed auditors to ask natural language questions about individual shipments, compare decisions against company policies, and receive explanations grounded in the governing policy documents. Each response included references to the relevant policy so auditors could independently verify the reasoning before making a decision.
+
+The AI accelerated investigation, but it never replaced human judgment. It existed to help experts understand the system, not to become the system.
+
+---
 
 ## Why it matters
 
-Enterprise supply chains are unforgiving hosts for automation - the data is messy, the stakes are financial, and trust is earned in production, not in demos.
-This is where I learned to treat auditability and human accountability as load-bearing features, which is exactly the philosophy the public case studies on this site demonstrate in the open.
+Enterprise supply chains are unforgiving hosts for automation - the data is messy, the stakes are financial, and trust is earned in production, not in demos. That world taught me to treat auditability and human accountability not as compliance constraints, but as load-bearing features.
+
+I build agentic AI systems with that exact same baseline.
+
+Reliable automation is never defined by the sophistication of an algorithm; it is defined by predictability. Language models should provide reasoning where they add value, but deterministic software must remain entirely responsible for orchestration, validation, and policy enforcement.
+
+Human oversight is never an afterthought. It is a core architectural requirement.
+
+Trustworthy AI begins long before a model is ever called. It starts with building systems that people can confidently understand, verify, and control

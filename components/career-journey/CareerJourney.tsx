@@ -18,7 +18,7 @@ import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import { cn } from "@/lib/utils";
 import styles from "./CareerJourney.module.css";
 
-const STACK_LIMIT = 5;
+const STACK_LIMIT = 7;
 const SCRAMBLE_CHARS = "▮▯01";
 
 const isActiveRole = (entry: ExperienceEntry): boolean => entry.dateRange.includes("Present");
@@ -262,7 +262,6 @@ export const CareerJourney = () => {
     <section id="experience" ref={sectionRef} className={styles.section}>
       <div className={styles.inner}>
         <p className={styles.kicker}>Career log</p>
-        {/* Alt headings: "Mission history" / "Experience" */}
         <h2 className={styles.heading}>Career journey</h2>
 
         <div className={styles.timeline} data-timeline>

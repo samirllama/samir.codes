@@ -31,7 +31,7 @@ export const SelectedWork = async () => {
       <div className={styles.inner}>
         <p className={styles.kicker}>Work overview</p>
         {/* Alt headings: "Some of my projects" / "Systems + side quests" */}
-        <h2 className={styles.heading}>Selected work</h2>
+        <h2 className={styles.heading}>Recent work</h2>
         <p className={styles.lede}>
           Production AI systems built around deterministic software, explicit service boundaries,
           and observable execution. Rather than giving models authority over business logic, these
