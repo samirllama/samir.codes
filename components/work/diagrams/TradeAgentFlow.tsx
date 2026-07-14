@@ -1,5 +1,5 @@
 // components/work/diagrams/TradeAgentFlow.tsx
-// Static architecture diagram for the trade-agent case study. Deliberately a
+// Static architecture diagram for the tradeops-ai case study. Deliberately a
 // different altitude than the animated hero pipeline: this one shows the
 // production request path, the escalation bypass, and the audit floor.
 import styles from "./diagrams.module.css";
@@ -13,10 +13,9 @@ export const TradeAgentFlow = () => (
     aria-labelledby="ta-flow-title"
   >
     <title id="ta-flow-title">
-      Request path of the trade compliance agent: an inquiry passes edge
-      validation and a deterministic guard before the LangGraph agent loop;
-      drafts stop at an analyst, escalations bypass the model entirely, and
-      every step lands in the audit log.
+      Request path of the trade compliance agent: an inquiry passes edge validation and a
+      deterministic guard before the LangGraph agent loop; drafts stop at an analyst, escalations
+      bypass the model entirely, and every step lands in the audit log.
     </title>
     <defs>
       <marker
@@ -177,8 +176,8 @@ export const TradeAgentFlow = () => (
     <g>
       <rect className={styles.audit} x="20" y="316" width="680" height="30" rx="8" />
       <text className={styles.auditText} x="360" y="335" textAnchor="middle">
-        AgentTraces audit floor · inputs, outputs, tokens and latency for every
-        step, surfaced on /traces
+        AgentTraces audit floor · inputs, outputs, tokens and latency for every step, surfaced on
+        /traces
       </text>
     </g>
   </svg>

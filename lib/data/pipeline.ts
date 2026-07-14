@@ -1,17 +1,11 @@
 // lib/data/pipeline.ts
 // Layout config for the hero AgentPipeline SVG. The graph mirrors the real
-// trade-agent architecture: a vendor-scoped inquiry passes a deterministic
+// tradeops-ai architecture: a vendor-scoped inquiry passes a deterministic
 // guard BEFORE any model call, the agent loops over four tools, and the
 // draft always stops at a human. Edges are computed from node geometry so
 // the two layouts stay structurally identical.
 
-export type PipelineNodeKind =
-  | "input"
-  | "guard"
-  | "agent"
-  | "tool"
-  | "output"
-  | "human";
+export type PipelineNodeKind = "input" | "guard" | "agent" | "tool" | "output" | "human";
 
 export interface PipelineNode {
   id: string;
@@ -72,11 +66,7 @@ const columnEdge = (a: PipelineNode, b: PipelineNode): string =>
   `M ${cx(a)} ${a.y + a.h} L ${cx(b)} ${b.y}`;
 
 /** Curved edge from a spread point on the agent's top edge up to a tool. */
-const toolEdgeUp = (
-  agent: PipelineNode,
-  tool: PipelineNode,
-  spread: number,
-): string => {
+const toolEdgeUp = (agent: PipelineNode, tool: PipelineNode, spread: number): string => {
   const sx = agent.x + agent.w * spread;
   const sy = agent.y;
   const ex = cx(tool);
@@ -85,11 +75,7 @@ const toolEdgeUp = (
 };
 
 /** Curved edge from a spread point on the agent's bottom edge down to a tool. */
-const toolEdgeDown = (
-  agent: PipelineNode,
-  tool: PipelineNode,
-  spread: number,
-): string => {
+const toolEdgeDown = (agent: PipelineNode, tool: PipelineNode, spread: number): string => {
   const sx = agent.x + agent.w * spread;
   const sy = agent.y + agent.h;
   const ex = cx(tool);
@@ -99,11 +85,56 @@ const toolEdgeDown = (
 
 // --- Desktop: left-to-right, tools fanned above the agent -------------------
 
-const dInquiry: PipelineNode = { id: "inquiry", kind: "input", label: "Inquiry", sublabel: "scoped request", x: 24, y: 220, w: 112, h: 64 };
-const dGuard: PipelineNode = { id: "guard", kind: "guard", label: "Guard", sublabel: "pre-model rules", x: 180, y: 220, w: 116, h: 64 };
-const dAgent: PipelineNode = { id: "agent", kind: "agent", label: "Agent", sublabel: "reasoning loop", x: 340, y: 210, w: 136, h: 84 };
-const dDraft: PipelineNode = { id: "draft", kind: "output", label: "Draft", sublabel: "never auto-sent", x: 520, y: 220, w: 104, h: 64 };
-const dHuman: PipelineNode = { id: "human", kind: "human", label: "Human", sublabel: "sign-off", x: 656, y: 210, w: 88, h: 84 };
+const dInquiry: PipelineNode = {
+  id: "inquiry",
+  kind: "input",
+  label: "Inquiry",
+  sublabel: "scoped request",
+  x: 24,
+  y: 220,
+  w: 112,
+  h: 64,
+};
+const dGuard: PipelineNode = {
+  id: "guard",
+  kind: "guard",
+  label: "Guard",
+  sublabel: "pre-model rules",
+  x: 180,
+  y: 220,
+  w: 116,
+  h: 64,
+};
+const dAgent: PipelineNode = {
+  id: "agent",
+  kind: "agent",
+  label: "Agent",
+  sublabel: "reasoning loop",
+  x: 340,
+  y: 210,
+  w: 136,
+  h: 84,
+};
+const dDraft: PipelineNode = {
+  id: "draft",
+  kind: "output",
+  label: "Draft",
+  sublabel: "never auto-sent",
+  x: 520,
+  y: 220,
+  w: 104,
+  h: 64,
+};
+const dHuman: PipelineNode = {
+  id: "human",
+  kind: "human",
+  label: "Human",
+  sublabel: "sign-off",
+  x: 656,
+  y: 210,
+  w: 88,
+  h: 84,
+};
 
 const dTools: PipelineNode[] = [
   { id: "tool-classify", kind: "tool", label: "classify", x: 300, y: 40, w: 120, h: 32 },
@@ -142,11 +173,56 @@ export const desktopPipeline: PipelineLayout = {
 
 // --- Mobile: top-to-bottom, tools in a 2x2 grid below the agent -------------
 
-const mInquiry: PipelineNode = { id: "inquiry", kind: "input", label: "Inquiry", sublabel: "scoped request", x: 110, y: 16, w: 140, h: 56 };
-const mGuard: PipelineNode = { id: "guard", kind: "guard", label: "Guard", sublabel: "pre-model rules", x: 110, y: 112, w: 140, h: 56 };
-const mAgent: PipelineNode = { id: "agent", kind: "agent", label: "Agent", sublabel: "reasoning loop", x: 100, y: 208, w: 160, h: 72 };
-const mDraft: PipelineNode = { id: "draft", kind: "output", label: "Draft", sublabel: "never auto-sent", x: 110, y: 428, w: 140, h: 56 };
-const mHuman: PipelineNode = { id: "human", kind: "human", label: "Human", sublabel: "sign-off", x: 110, y: 522, w: 140, h: 60 };
+const mInquiry: PipelineNode = {
+  id: "inquiry",
+  kind: "input",
+  label: "Inquiry",
+  sublabel: "scoped request",
+  x: 110,
+  y: 16,
+  w: 140,
+  h: 56,
+};
+const mGuard: PipelineNode = {
+  id: "guard",
+  kind: "guard",
+  label: "Guard",
+  sublabel: "pre-model rules",
+  x: 110,
+  y: 112,
+  w: 140,
+  h: 56,
+};
+const mAgent: PipelineNode = {
+  id: "agent",
+  kind: "agent",
+  label: "Agent",
+  sublabel: "reasoning loop",
+  x: 100,
+  y: 208,
+  w: 160,
+  h: 72,
+};
+const mDraft: PipelineNode = {
+  id: "draft",
+  kind: "output",
+  label: "Draft",
+  sublabel: "never auto-sent",
+  x: 110,
+  y: 428,
+  w: 140,
+  h: 56,
+};
+const mHuman: PipelineNode = {
+  id: "human",
+  kind: "human",
+  label: "Human",
+  sublabel: "sign-off",
+  x: 110,
+  y: 522,
+  w: 140,
+  h: 60,
+};
 
 const mTools: PipelineNode[] = [
   { id: "tool-classify", kind: "tool", label: "classify", x: 28, y: 322, w: 140, h: 30 },

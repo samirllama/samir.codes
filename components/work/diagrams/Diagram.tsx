@@ -7,7 +7,7 @@ import { TravelPretripFlow } from "./TravelPretripFlow";
 import styles from "./diagrams.module.css";
 
 const DIAGRAMS: Record<string, ComponentType> = {
-  "trade-agent-flow": TradeAgentFlow,
+  "tradeops-ai-flow": TradeAgentFlow,
   "travel-pretrip-flow": TravelPretripFlow,
 };
 

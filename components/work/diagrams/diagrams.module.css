@@ -177,7 +177,7 @@
   fill: var(--pipeline-escalation);
 }
 
-/* --- Audit floor + connectors (trade-agent) --- */
+/* --- Audit floor + connectors (tradeops-ai) --- */
 
 .audit {
   fill: var(--color-code-bg);

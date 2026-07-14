@@ -23,7 +23,7 @@ export const systemLayers: SystemLayer[] = [
     label: "Interface",
     role: "Where people hand work to the agent and approve what comes back.",
     tech: [
-      { name: "Next.js / React", provenance: "Atlas console · trade-agent" },
+      { name: "Next.js / React", provenance: "Atlas console · Tradeops-AI" },
       { name: "TypeScript", provenance: "Atlas · bp" },
       { name: "HITL approval console", provenance: "Atlas" },
     ],
@@ -34,7 +34,7 @@ export const systemLayers: SystemLayer[] = [
     role: "The LLM reasons and drafts - the only place natural language is allowed to decide anything.",
     tech: [
       { name: "Claude on Bedrock", provenance: "Atlas" },
-      { name: "LangGraph", provenance: "trade-agent" },
+      { name: "LangGraph", provenance: "TradeOps-AI" },
       { name: "LangChain", provenance: "Atlas" },
       { name: "Python orchestrator", provenance: "Travel A2A" },
     ],
@@ -44,7 +44,7 @@ export const systemLayers: SystemLayer[] = [
     label: "Retrieval",
     role: "Grounds the model in real documents before it is allowed to answer.",
     tech: [
-      { name: "Pinecone", provenance: "Atlas · trade-agent" },
+      { name: "Pinecone", provenance: "Atlas · TradeOps-AI" },
       { name: "Bedrock Knowledge Base", provenance: "Atlas" },
     ],
   },
@@ -54,7 +54,7 @@ export const systemLayers: SystemLayer[] = [
     role: "Everything that has to be right - pricing, compliance, math - lives in tested code with no model in the loop.",
     tech: [
       { name: "Go pricing engine", provenance: "Travel A2A" },
-      { name: "Pre-model guard", provenance: "trade-agent" },
+      { name: "Pre-model guard", provenance: "TradeOps-AI" },
       { name: "Tested quote logic", provenance: "Atlas" },
     ],
   },

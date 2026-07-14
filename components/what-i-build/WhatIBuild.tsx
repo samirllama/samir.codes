@@ -23,12 +23,12 @@ const CAPABILITIES: readonly {
   {
     title: "Language-boundary orchestration",
     body: "The model parses inbound requests and writes the reply. Pricing, compliance, and math stay in deterministic code I can test and trust.",
-    seenIn: "trade-agent · Atlas",
+    seenIn: "TradeOps-AI · Atlas",
   },
   {
     title: "Human-in-the-loop review",
     body: "Every outbound action lands in an approval console first. Agents propose, a person decides, and the whole exchange is logged end to end.",
-    seenIn: "Atlas · trade-agent",
+    seenIn: "Atlas · TradeOps-AI",
   },
 ];
 

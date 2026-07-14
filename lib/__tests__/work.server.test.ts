@@ -27,7 +27,7 @@ describe("work collection", () => {
     expect(orders).toEqual([...orders].sort((a, b) => a - b));
 
     const featured = studies.filter((study) => study.featured).map((study) => study.slug);
-    expect(featured).toEqual(["trade-agent", "travel-pretrip-approval"]);
+    expect(featured).toEqual(["tradeops-ai", "travel-pretrip-approval"]);
   });
 
   it("normalizes metric values to strings for YAML-number frontmatter", () => {
