@@ -15,7 +15,7 @@
   margin: 0 auto;
   /* Reading room: serif body for long-form prose (code stays mono). */
   font-family: var(--font-reading);
-  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.3rem);
   color: var(--color-text-default);
 }
 

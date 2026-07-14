@@ -1,6 +1,6 @@
 ---
 title: "Deterministic Core, LLM Shell: A Trustworthy Agent Pattern with Google ADK and A2A"
-description: "A architectural guide on shipping production-grade multi-agent systems"
+description: "My thoughts on shipping production-grade multi-agent systems"
 date: "2026-07-10"
 tags:
   - AI
@@ -11,7 +11,7 @@ tags:
   - Go
   - Python
   - GCP
-image: https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/multi-agent-orchestration.webp
+image: https://jwdtwbbgwku6ttxc.public.blob.vercel-storage.com/A2A.webp
 ---
 
 Most LLM demos are impressive right up until you ask them to be responsible for a number. Ask a chatbot to quote a price, approve a budget, or compute a total, and you are trusting a probabilistic text generator with something that has to be exactly right. For a demo, "usually correct" is fine. For anything near money or compliance, it is not.
@@ -33,6 +33,11 @@ The design rule is absolute: no LLM ever computes, rounds, or transcribes a numb
 Everything that has to be correct - pricing math, policy thresholds, the final decision record - lives in pure functions with unit tests. The model is a shell around a deterministic core. That is the whole idea, and the rest of the architecture exists to enforce it.
 
 ## Two services, two languages, one contract
+
+<Diagram
+  name="travel-pretrip-flow"
+  caption="Two services, one contract: the model stays on the language side of the seam."
+/>
 
 The system is split into two independently deployable services:
 

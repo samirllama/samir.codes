@@ -6,8 +6,7 @@ import styles from "./blog.module.css";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "A running journal of software engineering, AI systems, projects I'm building, and lessons I'm still learning.",
+  description: "Notes on software engineering, AI systems, ongoing projects and lessons learned.",
   openGraph: {
     title: "Blog | Rants",
     description: "Articles about web development, design, and technology insights.",
@@ -24,8 +23,7 @@ export default async function BlogPage() {
         <header className={styles.header}>
           <h1>The Logbook</h1>
           <p className={styles.subtitle}>
-            A running journal of software engineering, AI systems, projects I&apos;m building, and
-            lessons I&apos;m still learning.
+            Notes on software engineering, AI systems, ongoing projects and lessons learned.
           </p>
         </header>
 
