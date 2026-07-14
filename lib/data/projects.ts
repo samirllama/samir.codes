@@ -14,8 +14,7 @@ export interface SideProject {
 export const sideProjects: SideProject[] = [
   {
     title: "Real-time stock dashboard",
-    description:
-      "High-performance dashboard for visualizing historical and live market data.",
+    description: "High-performance dashboard for visualizing historical and live market data.",
     tech: ["TypeScript", "React", "Vite", "PostgreSQL", "Polygon.io", "Redis"],
     repoUrl: "https://github.com/samirllama/quasar",
   },

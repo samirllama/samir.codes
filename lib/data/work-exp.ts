@@ -61,7 +61,7 @@ export const experience: ExperienceEntry[] = [
   {
     id: "wf-lse",
     company: "Wells Fargo",
-    title: "Lead Software Engineer",
+    title: "Senior Software Engineer",
     dateRange: "Dec 2021 — Jun 2022",
     description:
       "My primary focus was on enhancing real-time data processing and optimizing core database performance for high-volume financial transactions.",

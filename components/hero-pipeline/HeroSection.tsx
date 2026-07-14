@@ -18,7 +18,7 @@ export const HeroSection = () => (
     <div className={styles.inner}>
       <div className={styles.copy}>
         <p className={styles.kicker} data-hero-kicker>
-          ai engineer · Chicago
+          ai engineer · chicago
         </p>
         <div className={styles.heroContentGrid}>
           <h1 className={styles.headline} data-hero-headline>

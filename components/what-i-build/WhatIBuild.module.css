@@ -12,7 +12,7 @@
 
 .kicker {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-primary);

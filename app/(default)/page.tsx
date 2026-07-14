@@ -15,7 +15,6 @@ export default function HomePage() {
       <div className={styles.curtain}>
         <HeroSection />
         <WhatIBuild />
-        <SystemMap />
         <SelectedWork />
         <CareerJourney />
       </div>

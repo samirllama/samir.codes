@@ -3,7 +3,7 @@
 // Choreographs the hero copy entrance. Renders nothing itself; the SSR
 // default state is fully visible, so no-JS and reduced-motion visitors
 // simply see the finished hero.
-import { gsap, useGSAP, SplitText } from "@/lib/gsap";
+import { gsap, useGSAP, SplitText, ScrollTrigger } from "@/lib/gsap";
 import { MOTION_DUR, MOTION_EASE, MOTION_STAGGER } from "@/lib/motion";
 
 export const HeroReveal = () => {
@@ -11,18 +11,23 @@ export const HeroReveal = () => {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const headline = document.querySelector<HTMLElement>(
-        "[data-hero-headline]",
-      );
+      const headline = document.querySelector<HTMLElement>("[data-hero-headline]");
       if (!headline) return;
 
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({ paused: true });
+
+      ScrollTrigger.create({
+        trigger: "#hero",
+        start: "top 75%",
+        once: true,
+        onEnter: () => tl.play(),
+      });
 
       tl.from("[data-hero-kicker]", {
         opacity: 0,
-        y: 16,
+        y: 12,
         duration: MOTION_DUR.fast,
-        ease: MOTION_EASE.out,
+        ease: MOTION_EASE.out3,
       });
 
       // Masked line reveal; autoSplit re-splits when Monaspace finishes
@@ -35,33 +40,39 @@ export const HeroReveal = () => {
           gsap.from(self.lines, {
             yPercent: 110,
             duration: MOTION_DUR.slow,
-            ease: MOTION_EASE.emphasis,
+            ease: MOTION_EASE.out3,
             stagger: MOTION_STAGGER.base,
           }),
       });
+
+      tl.add("headline", "start+=0.15");
 
       tl.from(
         "[data-hero-sub]",
         {
           opacity: 0,
-          y: 24,
+          y: 20,
           duration: MOTION_DUR.base,
           ease: MOTION_EASE.out,
         },
-        0.5,
+        "headline+=0.45",
       );
 
       tl.from(
         "[data-hero-stat]",
         {
           opacity: 0,
-          y: 18,
+          y: 16,
           duration: MOTION_DUR.base,
           ease: MOTION_EASE.out,
-          stagger: MOTION_STAGGER.base,
+          stagger: MOTION_STAGGER.loose,
         },
         0.65,
       );
+
+      tl.add("statsIn", "headline+=0.75");
+
+      tl.add("countStart", "statsIn+=0.35");
 
       // Stat values tick up like a counter settling into place. Each value is
       // seeded to 0 immediately (before first paint, while the stat is still
@@ -78,22 +89,26 @@ export const HeroReveal = () => {
         const source = el.dataset.statValue ?? el.textContent ?? "";
         const parts = source.match(/^(\D*)(\d[\d,]*)(\D*)$/);
         if (!parts) return;
+
         const [, prefix, digits, suffix] = parts;
         const target = Number(digits.replace(/,/g, ""));
         const counter = { v: 0 };
+
         const render = () => {
           el.textContent = `${prefix}${Math.round(counter.v)}${suffix}`;
         };
-        render();
+
+        gsap.set(el, { textContent: `${prefix}0${suffix}` });
+
         tl.to(
           counter,
           {
             v: target,
-            duration: MOTION_DUR.base,
+            duration: MOTION_DUR.slow,
             ease: MOTION_EASE.out,
             onUpdate: render,
           },
-          0.7 + i * MOTION_STAGGER.base,
+          `countStart+=${i * 0.12}`,
         );
       });
 
@@ -101,11 +116,11 @@ export const HeroReveal = () => {
         "[data-hero-ctas]",
         {
           opacity: 0,
-          y: 18,
-          duration: MOTION_DUR.base,
+          y: 16,
+          duration: MOTION_DUR.slow,
           ease: MOTION_EASE.out,
         },
-        1,
+        "countStart+=0.6",
       );
 
       return () => {

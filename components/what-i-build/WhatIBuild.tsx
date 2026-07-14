@@ -44,9 +44,8 @@ export const WhatIBuild = () => {
           Agentic systems with a deterministic core
         </h2>
         <p className={styles.lede}>
-          Fifteen agents across four production systems. The pattern repeats: a
-          model handles language, tested code makes the decisions, and a human
-          signs off before anything ships.
+          A model handles language, tested code makes the decisions, and a human signs off before
+          anything ships.
         </p>
 
         <ul className={styles.grid}>

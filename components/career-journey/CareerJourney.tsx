@@ -21,8 +21,7 @@ import styles from "./CareerJourney.module.css";
 const STACK_LIMIT = 5;
 const SCRAMBLE_CHARS = "▮▯01";
 
-const isActiveRole = (entry: ExperienceEntry): boolean =>
-  entry.dateRange.includes("Present");
+const isActiveRole = (entry: ExperienceEntry): boolean => entry.dateRange.includes("Present");
 
 /** "Dec 2021 — Jun 2022" -> "2021-2022"; "Feb 2020 — Oct 2020" -> "2020". */
 const yearRange = (dateRange: string): string => {
@@ -43,27 +42,15 @@ const Brackets = () => (
 );
 
 const Tick = () => (
-  <svg
-    className={styles.tick}
-    viewBox="0 0 14 14"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path
-      className={styles.tickPath}
-      data-tick-path
-      d="M2.5 7.5 5.5 10.5 11.5 3.5"
-    />
+  <svg className={styles.tick} viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+    <path className={styles.tickPath} data-tick-path d="M2.5 7.5 5.5 10.5 11.5 3.5" />
   </svg>
 );
 
 const QuestCard = ({ entry }: { entry: ExperienceEntry }) => {
   const active = isActiveRole(entry);
   return (
-    <li
-      className={cn(styles.quest, { [styles.questActive]: active })}
-      data-quest
-    >
+    <li className={cn(styles.quest, { [styles.questActive]: active })} data-quest>
       <span className={styles.node} aria-hidden="true">
         {active && <span className={styles.nodeRing} data-node-ring />}
       </span>
@@ -71,9 +58,7 @@ const QuestCard = ({ entry }: { entry: ExperienceEntry }) => {
         <span className={styles.flash} data-flash aria-hidden="true" />
         <Brackets />
         <div className={styles.cardTop}>
-          <span
-            className={cn(styles.status, { [styles.statusActive]: active })}
-          >
+          <span className={cn(styles.status, { [styles.statusActive]: active })}>
             {active ? "Active" : "Cleared"}
           </span>
           <span className={styles.date} data-decode>
@@ -223,10 +208,7 @@ export const CareerJourney = () => {
         ScrollTrigger.batch(quests, {
           start: "top 82%",
           once: true,
-          onEnter: (batch) =>
-            batch.forEach((el, index) =>
-              revealQuest(el as HTMLElement, index),
-            ),
+          onEnter: (batch) => batch.forEach((el, index) => revealQuest(el as HTMLElement, index)),
         });
 
         ScrollTrigger.batch(rows, {
@@ -263,8 +245,7 @@ export const CareerJourney = () => {
             trigger: section,
             start: "top bottom",
             end: "bottom top",
-            onToggle: (self) =>
-              self.isActive ? pulse?.play() : pulse?.pause(),
+            onToggle: (self) => (self.isActive ? pulse?.play() : pulse?.pause()),
           });
         }
 
@@ -283,10 +264,6 @@ export const CareerJourney = () => {
         <p className={styles.kicker}>Career log</p>
         {/* Alt headings: "Mission history" / "Experience" */}
         <h2 className={styles.heading}>Career journey</h2>
-        <p className={styles.lede}>
-          Twelve years shipping production software. Current quest: agentic
-          systems that hold up in production.
-        </p>
 
         <div className={styles.timeline} data-timeline>
           <div className={styles.rail} aria-hidden="true">

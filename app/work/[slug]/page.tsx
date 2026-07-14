@@ -84,9 +84,15 @@ export default async function WorkStudyPage({ params }: WorkPageProps) {
         <article className={styles.study}>
           <header className={styles.header}>
             <p className={styles.meta}>
-              <span className={styles.badge} data-status={study.status}>
-                {WORK_STATUS_LABELS[study.status]}
-              </span>
+              {study.status?.length > 0 && (
+                <>
+                  {study.status.map((s) => (
+                    <span key={s} className={styles.badge} data-status={study.status}>
+                      {WORK_STATUS_LABELS[s]}
+                    </span>
+                  ))}
+                </>
+              )}
               {study.timeline && <span className={styles.metaItem}>{study.timeline}</span>}
               {study.role && <span className={styles.metaItem}>{study.role}</span>}
             </p>

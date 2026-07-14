@@ -12,7 +12,7 @@
 
 .kicker {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-primary);
@@ -33,7 +33,7 @@
   line-height: 1.55;
   color: var(--color-text-muted);
   margin: 0 0 var(--my-spacing-md);
-  max-width: 56ch;
+  max-width: 70ch;
 }
 
 .flagshipGrid {
@@ -215,7 +215,7 @@
   background: color-mix(in oklab, var(--color-accent-primary) 10%, transparent);
 }
 
-.badge[data-status="nda"] {
+.badge[data-status="proprietary"] {
   color: var(--color-text-muted);
   border-color: var(--color-border-default);
   background: var(--color-surface-muted);
@@ -268,7 +268,13 @@
   font-size: var(--font-size-step-0);
   line-height: 1.55;
   color: var(--color-text-muted);
-  max-width: 62ch;
+  max-width: 85ch;
+}
+.cardNote {
+  font-size: var(--font-size-step-0);
+  line-height: 1.55;
+  color: var(--color-accent-primary);
+  max-width: 85ch;
 }
 
 .cardSummarySmall {

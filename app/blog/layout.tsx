@@ -58,7 +58,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </TrackedLink>
                   <TrackedLink
                     location="Socials-git"
-                    href="https://github.com/samirllama"
+                    href="https://github.com/yakyetilabs"
                     className="self-socials-nav--link"
                     ariaLabel="Follow me on github"
                   >

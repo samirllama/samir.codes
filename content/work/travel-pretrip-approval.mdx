@@ -1,9 +1,13 @@
 ---
-title: "Travel pre-trip approval: a deterministic core with an LLM shell"
-summary: "Two services in two languages - a Python ADK orchestrator and a Go pricing engine - joined by an A2A contract designed so no model can ever touch a number that matters."
+title: "Travel pre-trip approval: AI orchestration over deterministic services"
+summary: "An enterprise travel approval platform where the AI coordinates workflow while independent Go services perform pricing, validation, and policy enforcement. Every business decision flows through explicit service contracts, ensuring calculations remain deterministic, auditable, and isolated from the model."
+note: "Running in production behind an Identity-Aware Proxy (IAP) zero-trust boundary. Live demo access is available upon request."
 role: "Solo: design, build, deploy"
 timeline: "2026"
-status: "production"
+status:
+  - "production"
+  - "live"
+demoUrl: "mailto:samirlama.dev@proton.me?subject=Demo%20Access%20Request:%20Travel%20Agent"
 repoUrl: "https://github.com/yakyetilabs/travel-agent"
 relatedPost: "multi-agent-a2a"
 stack:
@@ -34,7 +38,10 @@ The trap is obvious once you name it: a language model asked to produce a number
 So the design rule is absolute: the LLM turns messy language into a validated request, decides when to call a tool, and explains outcomes.
 Every number and every decision belongs to deterministic, tested code.
 
-<Diagram name="travel-pretrip-flow" caption="Two services, one contract: the model stays on the language side of the seam." />
+<Diagram
+  name="travel-pretrip-flow"
+  caption="Two services, one contract: the model stays on the language side of the seam."
+/>
 
 ## Architecture
 

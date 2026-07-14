@@ -1,5 +1,6 @@
 // app/work/[slug]/opengraph-image.tsx
 import { ImageResponse } from "next/og";
+import React from "react";
 import { getWorkSummaryBySlug } from "@/lib/work.server";
 import { WORK_STATUS_LABELS, WorkStatus } from "@/types/work";
 
@@ -21,7 +22,7 @@ interface Props {
 const STATUS_COLORS: Record<WorkStatus, string> = {
   live: "#4ade80",
   production: "#f97316",
-  nda: "#9aa4b2",
+  proprietary: "#9aa4b2",
 };
 
 export default async function Image({ params }: Props) {
@@ -48,9 +49,7 @@ export default async function Image({ params }: Props) {
     );
   }
 
-  const statusColor = STATUS_COLORS[study.status];
-  const summary =
-    study.summary.length > 160 ? `${study.summary.slice(0, 157)}...` : study.summary;
+  const summary = study.summary.length > 160 ? `${study.summary.slice(0, 157)}...` : study.summary;
 
   return new ImageResponse(
     <div
@@ -85,8 +84,7 @@ export default async function Image({ params }: Props) {
           width: "640px",
           height: "640px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(249,115,22,0.22) 0%, rgba(249,115,22,0) 70%)",
+          background: "radial-gradient(circle, rgba(249,115,22,0.22) 0%, rgba(249,115,22,0) 70%)",
         }}
       />
 
@@ -116,25 +114,31 @@ export default async function Image({ params }: Props) {
 
       <div style={{ display: "flex", flexDirection: "column", gap: 28, maxWidth: 980 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              display: "flex",
-              width: 14,
-              height: 14,
-              borderRadius: 999,
-              background: statusColor,
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              color: statusColor,
-              fontSize: 24,
-              letterSpacing: "0.12em",
-            }}
-          >
-            {WORK_STATUS_LABELS[study.status].toUpperCase()}
-          </div>
+          {study.status.map((s) => (
+            <React.Fragment key={s}>
+              <div
+                style={{
+                  display: "flex",
+                  width: 14,
+                  height: 14,
+                  borderRadius: 999,
+                  background: STATUS_COLORS[s],
+                }}
+              />
+              <div
+                key={s}
+                style={{
+                  display: "flex",
+                  color: STATUS_COLORS[s],
+                  fontSize: 24,
+                  letterSpacing: "0.12em",
+                }}
+              >
+                {WORK_STATUS_LABELS[s]?.toUpperCase() || s?.toUpperCase()}
+              </div>
+            </React.Fragment>
+          ))}
+
           {study.timeline ? (
             <div style={{ display: "flex", color: "#9aa4b2", fontSize: 24 }}>
               · {study.timeline}

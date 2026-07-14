@@ -13,10 +13,16 @@
     position: sticky;
     bottom: 0;
     z-index: 0;
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
   }
 }
 
@@ -28,7 +34,7 @@
 
 .kicker {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-primary);
@@ -42,7 +48,7 @@
   font-weight: 650;
   color: var(--color-text-default);
   margin: 0;
-  max-width: 20ch;
+  max-width: 32ch;
 }
 
 .lede {
@@ -141,11 +147,7 @@
   height: 128px;
   border-radius: 50%;
   padding: 4px;
-  background: linear-gradient(
-    150deg,
-    var(--color-accent-primary),
-    transparent 60%
-  );
+  background: linear-gradient(150deg, var(--color-accent-primary), transparent 60%);
 }
 
 @media (min-width: 640px) {
@@ -218,6 +220,8 @@
 
 .primary:hover {
   transform: translateY(-2px);
+  color: var(--color-text-inverted);
+  text-decoration: none;
   background: var(--color-accent-secondary);
   box-shadow: 0 0 56px var(--color-accent-glow);
 }
@@ -257,7 +261,7 @@
   border: 1px solid var(--color-border-default);
   background: color-mix(in oklab, var(--color-surface-card) 60%, transparent);
   color: var(--color-text-default);
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   font-weight: 550;
   text-decoration: none;
   transition:

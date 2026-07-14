@@ -1,7 +1,7 @@
 // @/types/work.ts
 import { ReactNode } from "react";
 
-export type WorkStatus = "live" | "production" | "nda";
+export type WorkStatus = "live" | "production" | "proprietary";
 
 export interface WorkMetric {
   label: string;
@@ -12,6 +12,7 @@ export interface WorkMetric {
 export interface WorkFrontmatter {
   title?: string;
   summary?: string;
+  note?: string;
   role?: string;
   timeline?: string;
   status?: WorkStatus;
@@ -28,9 +29,10 @@ export interface WorkStudy {
   slug: string;
   title: string;
   summary: string;
+  note?: string;
   role: string;
   timeline: string;
-  status: WorkStatus;
+  status: WorkStatus[];
   demoUrl?: string;
   repoUrl?: string;
   stack: string[];
@@ -48,5 +50,5 @@ export type WorkSummary = Omit<WorkStudy, "content">;
 export const WORK_STATUS_LABELS: Record<WorkStatus, string> = {
   live: "Live demo",
   production: "In production",
-  nda: "Under NDA",
+  proprietary: "Proprietary",
 };

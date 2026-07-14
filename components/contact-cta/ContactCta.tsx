@@ -14,7 +14,7 @@ import { useSectionReveal } from "@/hooks/useSectionReveal";
 import { TrackedLink } from "@/features/analytics/components/tracked-link";
 import styles from "./ContactCta.module.css";
 
-const EMAIL = "samirllama@gmail.com";
+const EMAIL = "samirlama.dev@proton.me";
 
 export const ContactCta = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,14 +23,13 @@ export const ContactCta = () => {
   return (
     <section id="contact" ref={sectionRef} className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.kicker}>Let&apos;s build</p>
+        <p className={styles.kicker}>LET&apos;S CONNECT</p>
         <h2 className={styles.heading} data-reveal-heading>
-          Building an agent that has to be right?
+          Have an idea worth building?
         </h2>
         <p className={styles.lede}>
-          If you&apos;re putting a model somewhere it has to be correct - pricing,
-          compliance, anything a customer sees - I build the guards, the human
-          approval step, and the audit trail that make it safe to ship.
+          Whether it&apos;s AI systems, modern web applications, or solving difficult engineering
+          problems, I&apos;d love to hear what you&apos;re working on.
         </p>
 
         <div className={styles.panel} data-reveal>
@@ -53,7 +52,7 @@ export const ContactCta = () => {
 
           <div className={styles.panelBody}>
             <p className={styles.panelLede}>
-              Send a line about what you&apos;re building. I read every message.
+              Tell me what you&apos;re building. I&apos;d love to hear about it.
             </p>
             <div className={styles.actions}>
               <TrackedLink
@@ -64,7 +63,7 @@ export const ContactCta = () => {
                 ariaLabel={`Email ${EMAIL}`}
               >
                 <MdEmail aria-hidden="true" className={styles.primaryIcon} />
-                Start a conversation
+                Let&apos;s build something →
               </TrackedLink>
 
               <div className={styles.secondaryRow}>
@@ -79,7 +78,7 @@ export const ContactCta = () => {
                   LinkedIn
                 </TrackedLink>
                 <TrackedLink
-                  href="https://github.com/samirllama"
+                  href="https://github.com/yakyetilabs"
                   location="Contact CTA"
                   external
                   className={styles.secondary}
@@ -89,18 +88,6 @@ export const ContactCta = () => {
                   GitHub
                 </TrackedLink>
               </div>
-
-              <TrackedLink
-                href="/blog"
-                location="Contact CTA"
-                className={styles.logLink}
-              >
-                Read the engineering log
-                <span aria-hidden="true" className={styles.arrow}>
-                  {" "}
-                  &rarr;
-                </span>
-              </TrackedLink>
             </div>
           </div>
         </div>

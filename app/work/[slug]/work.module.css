@@ -92,7 +92,7 @@
   background: color-mix(in oklab, var(--color-accent-primary) 10%, transparent);
 }
 
-.badge[data-status="nda"] {
+.badge[data-status="proprietary"] {
   color: var(--color-text-muted);
   border-color: var(--color-border-default);
   background: var(--color-surface-muted);
@@ -191,7 +191,7 @@
 
 .stackTag {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   color: var(--color-text-muted);
   border: 1px solid var(--color-border-subtle);
   border-radius: 8px;

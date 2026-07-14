@@ -1,26 +1,22 @@
 // @/lib/work.server.ts
 import path from "path";
-import {
-  WorkFrontmatter,
-  WorkMetric,
-  WorkStatus,
-  WorkStudy,
-  WorkSummary,
-} from "@/types/work";
+import { WorkFrontmatter, WorkMetric, WorkStatus, WorkStudy, WorkSummary } from "@/types/work";
 import { compileMdxEntry, getCollectionSlugs, readFrontmatter } from "@/lib/mdx.server";
 
 const workDirectory = path.join(process.cwd(), "content/work");
 
-const WORK_STATUSES: readonly WorkStatus[] = ["live", "production", "nda"];
+const WORK_STATUSES: readonly WorkStatus[] = ["live", "production", "proprietary"];
 
 export function getWorkSlugs(): string[] {
   return getCollectionSlugs(workDirectory);
 }
 
-function normalizeStatus(status: unknown): WorkStatus {
-  return WORK_STATUSES.includes(status as WorkStatus)
-    ? (status as WorkStatus)
-    : "production";
+function normalizeStatus(statuses: unknown): WorkStatus[] {
+  if (!Array.isArray(statuses)) return [];
+
+  return statuses.map((status) => {
+    return WORK_STATUSES.includes(status as WorkStatus) ? (status as WorkStatus) : "production";
+  });
 }
 
 function normalizeStack(stack: unknown): string[] {
@@ -39,16 +35,13 @@ function normalizeMetrics(metrics: unknown): WorkMetric[] {
     .map((metric) => ({ label: String(metric.label), value: String(metric.value) }));
 }
 
-function normalizeStudy(
-  slug: string,
-  data: WorkFrontmatter,
-  readingTime: string,
-): WorkSummary {
+function normalizeStudy(slug: string, data: WorkFrontmatter, readingTime: string): WorkSummary {
   return {
     slug,
     title: data.title || "",
     summary: data.summary || "",
     role: data.role || "",
+    note: data.note || "",
     timeline: data.timeline || "",
     status: normalizeStatus(data.status),
     demoUrl: data.demoUrl,

@@ -4,7 +4,7 @@
 
 export const MOTION_DUR = {
   /** micro-interactions: hovers, toggles */
-  fast: 0.4,
+  fast: 0.5,
   /** standard entrances and reveals */
   base: 0.8,
   /** hero moments and large-surface transitions */
@@ -13,7 +13,8 @@ export const MOTION_DUR = {
 
 export const MOTION_EASE = {
   /** default entrance */
-  out: "power4.out",
+  out: "power2.out",
+  out3: "power3.out",
   /** emphasis moments (hero headline, flagship cards) */
   emphasis: "expo.out",
   /** anything that both enters and exits in view */

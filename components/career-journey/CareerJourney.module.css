@@ -15,16 +15,8 @@
     linear-gradient(var(--color-line-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--color-line-grid) 1px, transparent 1px);
   background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 90% 75% at 50% 32%,
-    #000 25%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    ellipse 90% 75% at 50% 32%,
-    #000 25%,
-    transparent 78%
-  );
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 32%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 32%, #000 25%, transparent 78%);
 }
 
 .inner {
@@ -36,7 +28,7 @@
 
 .kicker {
   font-family: var(--font-xenon), monospace;
-  font-size: var(--font-size-step--1);
+  font-size: var(--font-size-step-0);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-accent-primary);
